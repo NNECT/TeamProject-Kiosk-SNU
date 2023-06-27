@@ -5,8 +5,8 @@ use kiosk;
 create table account (
     id              int unsigned    primary key auto_increment,
     username        varchar(100)    not null unique,
-    phoneNumber     varchar(13)     not null,
     password        varchar(100)    not null,
+    phoneNumber     varchar(13)     not null,
     point           int             not null default 0,
     remainTime      int             not null default 0
 );

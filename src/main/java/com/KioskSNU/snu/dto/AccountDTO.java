@@ -3,8 +3,8 @@ package com.KioskSNU.snu.dto;
 public class AccountDTO {
     private int id;
     private String username;
-    private String phoneNumber;
     private String password;
+    private String phoneNumber;
     private int point;
     private int remainTime;
 
@@ -24,20 +24,20 @@ public class AccountDTO {
         this.username = username;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public int getPoint() {
