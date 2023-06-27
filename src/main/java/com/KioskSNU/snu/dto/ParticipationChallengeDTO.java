@@ -2,7 +2,7 @@ package com.KioskSNU.snu.dto;
 
 import java.time.LocalDate;
 
-public class ParticipationChallenge {
+public class ParticipationChallengeDTO {
     private int id;
     private AccountDTO account;
     private ChallengeDTO challenge;
