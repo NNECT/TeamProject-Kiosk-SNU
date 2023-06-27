@@ -26,7 +26,7 @@ create table timeTicket (
     id              int unsigned    primary key auto_increment,
     time            int             not null,
     price           int             not null,
-    activated       boolean         not null default true
+    active          boolean         not null default true
 );
 
 # 정기권 데이터
@@ -34,7 +34,7 @@ create table commutationTicket (
     id              int unsigned    primary key auto_increment,
     day             int             not null,
     price           int             not null,
-    activated       boolean         not null default true
+    active          boolean         not null default true
 );
 
 # 자리 데이터
@@ -48,8 +48,8 @@ create table usageSeat (
     id              int unsigned    primary key auto_increment,
     seat_id         int unsigned    not null,
     account_id      int unsigned    not null,
-    startDatetime   datetime        not null default now(),
-    endDatetime     datetime        null,
+    startDateTime   datetime        not null default now(),
+    endDateTime     datetime        null,
     foreign key (seat_id) references seat(id),
     foreign key (account_id) references account(id)
 );
@@ -71,12 +71,12 @@ create table room (
 );
 
 # 룸 사용 데이터
-create table bookingRoom (
+create table UsageRoom (
     id              int unsigned    primary key auto_increment,
     room_id         int unsigned    not null,
     account_id      int unsigned    not null,
-    startDatetime   datetime        not null default now(),
-    endDatetime     datetime        not null,
+    startDateTime   datetime        not null default now(),
+    endDateTime     datetime        not null,
     foreign key (room_id) references room(id),
     foreign key (account_id) references account(id)
 );
@@ -87,7 +87,7 @@ create table lockerTicket (
     id              int unsigned    primary key auto_increment,
     day             int             not null,
     price           int             not null,
-    activated       boolean         not null default true
+    active          boolean         not null default true
 );
 
 # 사물함 데이터
@@ -112,7 +112,17 @@ create table usageLocker (
 create table payment (
     id              int unsigned    primary key auto_increment,
     account_id      int unsigned    not null,
-    datetime        datetime        not null default now(),
+    dateTime        datetime        not null default now(),
+    amount          int             not null,
+    log             varchar(200)    not null,
+    foreign key (account_id) references account(id)
+);
+
+# 포인트 내역
+create table pointHistory (
+    id              int unsigned    primary key auto_increment,
+    account_id      int unsigned    not null,
+    dateTime        datetime        not null default now(),
     amount          int             not null,
     log             varchar(200)    not null,
     foreign key (account_id) references account(id)
@@ -124,14 +134,14 @@ create table challenge (
     id              int unsigned    primary key auto_increment,
     title           varchar(100)    not null,
     description     text            not null,
-    allowStartTime  time            not null default time '00:00:00',
-    allowEndTime    time            not null default time '23:59:59',
-    periodHours     int             not null,
+    activeStartTime time            not null default '00:00:00',
+    activeEndTime   time            not null default '23:59:59',
     periodDays      int             not null,
+    periodHours     int             not null,
     goalDay         int             not null default 0,
     goalHour        int             not null default 0,
     rewardPoint     int             not null,
-    activated       boolean         not null default true,
+    active          boolean         not null default true,
     visible         boolean         not null default true
 );
 
@@ -141,7 +151,7 @@ create table participationChallenge (
     account_id      int unsigned    not null,
     challenge_id    int unsigned    not null,
     startDate       date            not null default (current_date),
-    activated       boolean         not null default true,
+    active          boolean         not null default true,
     result          boolean         null,
     foreign key (account_id) references account(id),
     foreign key (challenge_id) references challenge(id)
@@ -159,6 +169,7 @@ create table admin (
 create table notice (
     id              int unsigned    primary key auto_increment,
     content         text            not null,
-    datetime        datetime        not null default now(),
-    activated       boolean         not null default true
+    dateTime        datetime        not null default now(),
+    outside         boolean         not null default false,
+    active          boolean         not null default true
 );
