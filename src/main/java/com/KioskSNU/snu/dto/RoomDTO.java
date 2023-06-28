@@ -2,6 +2,7 @@ package com.KioskSNU.snu.dto;
 
 public class RoomDTO {
     private int id;
+    private int roomNumber;
     private int roomType_id;
     private String roomType_name;
     private int roomType_price;
@@ -13,6 +14,14 @@ public class RoomDTO {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getRoomNumber() {
+        return roomNumber;
+    }
+
+    public void setRoomNumber(int roomNumber) {
+        this.roomNumber = roomNumber;
     }
 
     public int getRoomType_id() {

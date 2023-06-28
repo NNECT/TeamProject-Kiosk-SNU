@@ -5,6 +5,7 @@ import java.time.LocalDate;
 public class UsageLockerDTO {
     private int id;
     private int locker_id;
+    private int locker_lockerNumber;
     private boolean locker_usable;
     private int account_id;
     private String account_username;
@@ -29,6 +30,14 @@ public class UsageLockerDTO {
 
     public void setLocker_id(int locker_id) {
         this.locker_id = locker_id;
+    }
+
+    public int getLocker_lockerNumber() {
+        return locker_lockerNumber;
+    }
+
+    public void setLocker_lockerNumber(int locker_lockerNumber) {
+        this.locker_lockerNumber = locker_lockerNumber;
     }
 
     public boolean isLocker_usable() {

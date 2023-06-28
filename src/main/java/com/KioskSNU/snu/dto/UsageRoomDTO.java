@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 public class UsageRoomDTO {
     private int id;
     private int room_id;
+    private int room_roomNumber;
     private int room_roomType_id;
     private String room_roomType_name;
     private int room_roomType_price;
@@ -32,6 +33,14 @@ public class UsageRoomDTO {
 
     public void setRoom_id(int room_id) {
         this.room_id = room_id;
+    }
+
+    public int getRoom_roomNumber() {
+        return room_roomNumber;
+    }
+
+    public void setRoom_roomNumber(int room_roomNumber) {
+        this.room_roomNumber = room_roomNumber;
     }
 
     public int getRoom_roomType_id() {

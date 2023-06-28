@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 public class UsageSeatDTO {
     private int id;
     private int seat_id;
+    private int seat_seatNumber;
     private boolean seat_usable;
     private int account_id;
     private String account_username;
@@ -29,6 +30,14 @@ public class UsageSeatDTO {
 
     public void setSeat_id(int seat_id) {
         this.seat_id = seat_id;
+    }
+
+    public int getSeat_seatNumber() {
+        return seat_seatNumber;
+    }
+
+    public void setSeat_seatNumber(int seat_seatNumber) {
+        this.seat_seatNumber = seat_seatNumber;
     }
 
     public boolean isSeat_usable() {

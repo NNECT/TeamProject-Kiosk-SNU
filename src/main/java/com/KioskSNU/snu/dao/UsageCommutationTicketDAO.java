@@ -4,6 +4,7 @@ import com.KioskSNU.snu.dto.AccountDTO;
 import com.KioskSNU.snu.dto.UsageCommutationTicketDTO;
 import com.KioskSNU.snu.mapper.UsageCommutationTicketMapper;
 import com.KioskSNU.snu.service.UsageCommutationTicketService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,16 +14,17 @@ import java.util.List;
 @Repository
 @Transactional
 public class UsageCommutationTicketDAO extends DAOTemplate implements UsageCommutationTicketService {
-    protected UsageCommutationTicketDAO(JdbcTemplate jdbcTemplate) {
+    @Autowired
+    public UsageCommutationTicketDAO(JdbcTemplate jdbcTemplate) {
         super(jdbcTemplate);
     }
 
     private static final String INSERT = "insert into usageCommutationTicket(account_id, endDate) values(?, ?)";
     private static final String UPDATE = "update usageCommutationTicket set endDate=? where id=?";
     private static final String DELETE = "delete from usageCommutationTicket where id=?";
-    private static final String GET_BY_ID = "select (usageCommutationTicket.id, account.id, account.username, account.phoneNumber, account.password, account.point, account.remainTime, usageCommutationTicket.startDate, usageCommutationTicket.endDate) from usageCommutationTicket inner join account on usageCommutationTicket.account_id = account.id where usageCommutationTicket.id=?";
-    private static final String GET_ALL = "select (usageCommutationTicket.id, account.id, account.username, account.phoneNumber, account.password, account.point, account.remainTime, usageCommutationTicket.startDate, usageCommutationTicket.endDate) from usageCommutationTicket inner join account on usageCommutationTicket.account_id = account.id";
-    private static final String GET_ALL_BY_ACCOUNT = "select (usageCommutationTicket.id, account.id, account.username, account.phoneNumber, account.password, account.point, account.remainTime, usageCommutationTicket.startDate, usageCommutationTicket.endDate) from usageCommutationTicket inner join account on usageCommutationTicket.account_id = account.id where account.id=?";
+    private static final String GET_BY_ID = "select (usageCommutationTicket.id, account.id, account.username, account.phoneNumber, account.password, account.point, account.remainTime, usageCommutationTicket.startDate, usageCommutationTicket.endDate) from usageCommutationTicket left join account on usageCommutationTicket.account_id = account.id where usageCommutationTicket.id=?";
+    private static final String GET_ALL = "select (usageCommutationTicket.id, account.id, account.username, account.phoneNumber, account.password, account.point, account.remainTime, usageCommutationTicket.startDate, usageCommutationTicket.endDate) from usageCommutationTicket left join account on usageCommutationTicket.account_id = account.id order by usageCommutationTicket.endDate desc";
+    private static final String GET_ALL_BY_ACCOUNT = "select (usageCommutationTicket.id, account.id, account.username, account.phoneNumber, account.password, account.point, account.remainTime, usageCommutationTicket.startDate, usageCommutationTicket.endDate) from usageCommutationTicket left join account on usageCommutationTicket.account_id = account.id where account.id=? order by usageCommutationTicket.endDate desc";
 
     @Override
     public UsageCommutationTicketDTO insert(UsageCommutationTicketDTO usageCommutationTicketDTO) {

@@ -40,6 +40,7 @@ create table commutationTicket (
 # 자리 데이터
 create table seat (
     id              int unsigned    primary key auto_increment,
+    seatNumber      int             not null unique,
     usable          boolean         not null default true
 );
 
@@ -65,6 +66,7 @@ create table roomType (
 # 룸 데이터
 create table room (
     id              int unsigned    primary key auto_increment,
+    roomNumber      int             not null unique,
     roomType_id     int unsigned    not null,
     usable          boolean         not null default true,
     foreign key (roomType_id) references roomType(id)
@@ -93,6 +95,7 @@ create table lockerTicket (
 # 사물함 데이터
 create table locker (
     id              int unsigned    primary key auto_increment,
+    lockerNumber    int             not null unique,
     usable          boolean         not null default true
 );
 
