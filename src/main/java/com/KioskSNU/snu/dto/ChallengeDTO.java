@@ -6,6 +6,10 @@ public class ChallengeDTO {
     private int id;
     private String title;
     private String description;
+    private String titleColor;
+    private String descriptionColor;
+    private String backgroundColor;
+    private String imageSrc;
     private LocalTime activeStartTime;
     private LocalTime activeEndTime;
     private int periodHours;
@@ -38,6 +42,38 @@ public class ChallengeDTO {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getTitleColor() {
+        return titleColor;
+    }
+
+    public void setTitleColor(String titleColor) {
+        this.titleColor = titleColor;
+    }
+
+    public String getDescriptionColor() {
+        return descriptionColor;
+    }
+
+    public void setDescriptionColor(String descriptionColor) {
+        this.descriptionColor = descriptionColor;
+    }
+
+    public String getBackgroundColor() {
+        return backgroundColor;
+    }
+
+    public void setBackgroundColor(String backgroundColor) {
+        this.backgroundColor = backgroundColor;
+    }
+
+    public String getImageSrc() {
+        return imageSrc;
+    }
+
+    public void setImageSrc(String imageSrc) {
+        this.imageSrc = imageSrc;
     }
 
     public LocalTime getActiveStartTime() {

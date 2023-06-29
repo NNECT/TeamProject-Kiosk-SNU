@@ -136,7 +136,11 @@ create table pointHistory (
 create table challenge (
     id              int unsigned    primary key auto_increment,
     title           varchar(100)    not null,
-    description     text            not null,
+    description     varchar(200)    not null,
+    titleColor      char(6)         not null,
+    descriptionColor char(6)        not null,
+    backgroundColor char(6)         not null,
+    imageSrc        varchar(200)    not null,
     activeStartTime time            not null default '00:00:00',
     activeEndTime   time            not null default '23:59:59',
     periodDays      int             not null default 0,

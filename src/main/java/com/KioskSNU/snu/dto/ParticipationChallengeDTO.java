@@ -14,6 +14,10 @@ public class ParticipationChallengeDTO {
     private int challenge_id;
     private String challenge_title;
     private String challenge_description;
+    private String challenge_titleColor;
+    private String challenge_descriptionColor;
+    private String challenge_backgroundColor;
+    private String challenge_imageSrc;
     private LocalTime challenge_activeStartTime;
     private LocalTime challenge_activeEndTime;
     private int challenge_periodHours;
@@ -110,6 +114,38 @@ public class ParticipationChallengeDTO {
 
     public void setChallenge_description(String challenge_description) {
         this.challenge_description = challenge_description;
+    }
+
+    public String getChallenge_titleColor() {
+        return challenge_titleColor;
+    }
+
+    public void setChallenge_titleColor(String challenge_titleColor) {
+        this.challenge_titleColor = challenge_titleColor;
+    }
+
+    public String getChallenge_descriptionColor() {
+        return challenge_descriptionColor;
+    }
+
+    public void setChallenge_descriptionColor(String challenge_descriptionColor) {
+        this.challenge_descriptionColor = challenge_descriptionColor;
+    }
+
+    public String getChallenge_backgroundColor() {
+        return challenge_backgroundColor;
+    }
+
+    public void setChallenge_backgroundColor(String challenge_backgroundColor) {
+        this.challenge_backgroundColor = challenge_backgroundColor;
+    }
+
+    public String getChallenge_imageSrc() {
+        return challenge_imageSrc;
+    }
+
+    public void setChallenge_imageSrc(String challenge_imageSrc) {
+        this.challenge_imageSrc = challenge_imageSrc;
     }
 
     public LocalTime getChallenge_activeStartTime() {
