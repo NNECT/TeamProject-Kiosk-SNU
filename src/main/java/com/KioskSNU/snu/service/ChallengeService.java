@@ -1,13 +1,15 @@
 package com.KioskSNU.snu.service;
 
 import com.KioskSNU.snu.dto.ChallengeDTO;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
+@Mapper
 public interface ChallengeService {
-    ChallengeDTO insert(ChallengeDTO challengeDTO);
-    ChallengeDTO update(ChallengeDTO challengeDTO);
-    boolean delete(ChallengeDTO challengeDTO);
+    int insert(ChallengeDTO challengeDTO);
+    int update(ChallengeDTO challengeDTO);
+    int delete(ChallengeDTO challengeDTO);
     ChallengeDTO getById(int id);
     ChallengeDTO getByTitle(String title);
     List<ChallengeDTO> getAll();

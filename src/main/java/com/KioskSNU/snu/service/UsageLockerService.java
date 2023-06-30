@@ -3,13 +3,15 @@ package com.KioskSNU.snu.service;
 import com.KioskSNU.snu.dto.AccountDTO;
 import com.KioskSNU.snu.dto.LockerDTO;
 import com.KioskSNU.snu.dto.UsageLockerDTO;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
+@Mapper
 public interface UsageLockerService {
-    UsageLockerDTO insert(UsageLockerDTO usageLockerDTO);
-    UsageLockerDTO update(UsageLockerDTO usageLockerDTO);
-    boolean delete(UsageLockerDTO usageLockerDTO);
+    int insert(UsageLockerDTO usageLockerDTO);
+    int update(UsageLockerDTO usageLockerDTO);
+    int delete(UsageLockerDTO usageLockerDTO);
     UsageLockerDTO getById(int id);
     List<UsageLockerDTO> getAll();
     List<UsageLockerDTO> getAllByLocker(LockerDTO lockerDTO);

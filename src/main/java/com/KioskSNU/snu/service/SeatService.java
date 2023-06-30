@@ -1,13 +1,15 @@
 package com.KioskSNU.snu.service;
 
 import com.KioskSNU.snu.dto.SeatDTO;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
+@Mapper
 public interface SeatService {
-    SeatDTO insert(SeatDTO seatDTO);
-    SeatDTO update(SeatDTO seatDTO);
-    boolean delete(SeatDTO seatDTO);
+    int insert(SeatDTO seatDTO);
+    int update(SeatDTO seatDTO);
+    int delete(SeatDTO seatDTO);
     SeatDTO getById(int id);
     List<SeatDTO> getAll();
     List<SeatDTO> getAllByUsable(boolean usable);
