@@ -1,35 +1,52 @@
 package com.KioskSNU.view;
 
-import com.KioskSNU.secure.RSA;
-import com.KioskSNU.secure.SHA;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.HttpSession;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
 @Controller
 public class IndexController {
-    Map<Integer, HttpSession> seatMap;
-    Map<Integer, HttpSession> roomMap;
-    RSA rsa;
-    SHA sha;
-
-    @Autowired
-    public IndexController(@Qualifier("seatMap") ConcurrentHashMap<Integer, HttpSession> seatMap,
-                           @Qualifier("roomMap") ConcurrentHashMap<Integer, HttpSession> roomMap,
-                           RSA rsa, SHA sha) {
-        this.seatMap = seatMap;
-        this.roomMap = roomMap;
-        this.rsa = rsa;
-        this.sha = sha;
-    }
-
     @RequestMapping("/")
     public String index() {
-        return "index";
+        return "admin/admin_main";
     }
+    
+    @RequestMapping("/adminlogin")
+    public String adminLogin() {
+        return "admin/admin_login";
+    }
+    
+    @RequestMapping("/adminlocker")
+    public String adminLocker() {
+        return "admin/admin_locker";
+    }
+    
+    @RequestMapping("/adminmember")
+    public String adminMember() {
+        return "admin/admin_member";
+    }
+    
+    @RequestMapping("/adminnotification")
+    public String adminNotification() {
+        return "admin/admin_notification";
+    }
+    
+    @RequestMapping("/adminsales")
+    public String adminSales() {
+        return "admin/admin_sales";
+    }
+    
+    @RequestMapping("/adminseat")
+    public String adminSeat() {
+        return "admin/admin_seat";
+    }
+    
+    @RequestMapping("/adminchallenge")
+    public String adminChallenge() {
+        return "admin/admin_challenge";
+    }
+    @RequestMapping("/adminnotificationWrite")
+    public String adminNotificationWrite() {
+    	return "admin/admin_notificationWrite";
+    }
+
 }
