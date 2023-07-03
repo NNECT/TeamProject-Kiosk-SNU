@@ -13,13 +13,13 @@
                     <h2 class="card-title">스터디카페 관리자 페이지</h2>
                     <hr>
                     <ul class="list-group">
-                        <li class="list-group-item"><a href="<c:url value='/adminseat' />"><span class="h3">좌석 관리</span></a></li>
-                        <li class="list-group-item"><a href="<c:url value='/adminmember' />"><span class="h3">회원 관리</span></a></li>
-                        <li class="list-group-item"><a href="<c:url value='/adminlocker' />"><span class="h3">사물함 관리</span></a></li>
-                        <li class="list-group-item"><a href="<c:url value='/adminsales' />"><span class="h3">요금 설정</span></a></li>  
-                        <li class="list-group-item"><a href="<c:url value='/adminnotification' />"><span class="h3">공지기록</span></a></li>
-                        <li class="list-group-item"><a href="<c:url value='/adminchat' />"><span class="h3">챌린지</span></a></li>
-                        <li class="list-group-item"><a href="<c:url value='/adminsales' />"><span class="h3">매출현황</span></a></li>  
+                        <li class="list-group-item"><a href="<c:url value='/admin/adminseat' />"><span class="h3">좌석 관리</span></a></li>
+                        <li class="list-group-item"><a href="<c:url value='/admin/adminmember' />"><span class="h3">회원 관리</span></a></li>
+                        <li class="list-group-item"><a href="<c:url value='/admin/adminlocker' />"><span class="h3">사물함 관리</span></a></li>
+                        <li class="list-group-item"><a href="<c:url value='/admin/adminsales' />"><span class="h3">요금 설정</span></a></li>
+                        <li class="list-group-item"><a href="<c:url value='/admin/adminnotification' />"><span class="h3">공지기록</span></a></li>
+                        <li class="list-group-item"><a href="<c:url value='/admin/adminchat' />"><span class="h3">챌린지</span></a></li>
+                        <li class="list-group-item"><a href="<c:url value='/admin/adminsales' />"><span class="h3">매출현황</span></a></li>
                     </ul>
                 </div>
             </div>
