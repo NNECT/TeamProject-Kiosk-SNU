@@ -34,51 +34,51 @@
     </delete>
 
     <select id="getById" parameterType="int" resultMap="usageCommutationTicketResultMap">
-        select      u.id                    as id,
-                    a.id                    as account_id,
-                    a.username              as account_username,
-                    a.password              as account_password,
-                    a.phoneNumber           as account_phoneNumber,
-                    a.point                 as account_point,
-                    a.remainTime            as account_remainTime,
-                    u.startDate             as startDate,
-                    u.endDate               as endDate
-        from        usageCommutationTicket as u
-        join        account as a
-        on          u.account_id = a.id
-        where       u.id = #{id};
+        select      usageCommutationTicket.id               as id,
+                    account.id                              as account_id,
+                    account.username                        as account_username,
+                    account.password                        as account_password,
+                    account.phoneNumber                     as account_phoneNumber,
+                    account.point                           as account_point,
+                    account.remainTime                      as account_remainTime,
+                    usageCommutationTicket.startDate        as startDate,
+                    usageCommutationTicket.endDate          as endDate
+        from        usageCommutationTicket
+        join        account
+        on          usageCommutationTicket.account_id = account.id
+        where       usageCommutationTicket.id = #{id};
     </select>
 
     <select id="getAll" resultMap="usageCommutationTicketResultMap">
-        select      u.id                    as id,
-                    a.id                    as account_id,
-                    a.username              as account_username,
-                    a.password              as account_password,
-                    a.phoneNumber           as account_phoneNumber,
-                    a.point                 as account_point,
-                    a.remainTime            as account_remainTime,
-                    u.startDate             as startDate,
-                    u.endDate               as endDate
-        from        usageCommutationTicket as u
-        join        account as a
-        on          u.account_id = a.id
-        order by    u.endDate desc;
+        select      usageCommutationTicket.id               as id,
+                    account.id                              as account_id,
+                    account.username                        as account_username,
+                    account.password                        as account_password,
+                    account.phoneNumber                     as account_phoneNumber,
+                    account.point                           as account_point,
+                    account.remainTime                      as account_remainTime,
+                    usageCommutationTicket.startDate        as startDate,
+                    usageCommutationTicket.endDate          as endDate
+        from        usageCommutationTicket
+        join        account
+        on          usageCommutationTicket.account_id = account.id
+        order by    usageCommutationTicket.endDate desc;
     </select>
 
     <select id="getAllByAccount" parameterType="accountAlias" resultMap="usageCommutationTicketResultMap">
-        select      u.id                    as id,
-                    a.id                    as account_id,
-                    a.username              as account_username,
-                    a.password              as account_password,
-                    a.phoneNumber           as account_phoneNumber,
-                    a.point                 as account_point,
-                    a.remainTime            as account_remainTime,
-                    u.startDate             as startDate,
-                    u.endDate               as endDate
-        from        usageCommutationTicket as u
-        join        account as a
-        on          u.account_id = a.id
-        where       a.id = #{id}
-        order by    u.endDate desc;
+        select      usageCommutationTicket.id               as id,
+                    account.id                              as account_id,
+                    account.username                        as account_username,
+                    account.password                        as account_password,
+                    account.phoneNumber                     as account_phoneNumber,
+                    account.point                           as account_point,
+                    account.remainTime                      as account_remainTime,
+                    usageCommutationTicket.startDate        as startDate,
+                    usageCommutationTicket.endDate          as endDate
+        from        usageCommutationTicket
+        join        account
+        on          usageCommutationTicket.account_id = account.id
+        where       account.id = #{id}
+        order by    usageCommutationTicket.endDate desc;
     </select>
 </mapper>

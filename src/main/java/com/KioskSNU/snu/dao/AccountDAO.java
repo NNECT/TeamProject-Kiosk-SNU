@@ -2,9 +2,7 @@ package com.KioskSNU.snu.dao;
 
 import com.KioskSNU.snu.dto.AccountDTO;
 import com.KioskSNU.snu.service.AccountService;
-import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
