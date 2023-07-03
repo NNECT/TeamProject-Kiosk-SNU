@@ -3,13 +3,15 @@ package com.KioskSNU.snu.service;
 import com.KioskSNU.snu.dto.AccountDTO;
 import com.KioskSNU.snu.dto.ChallengeDTO;
 import com.KioskSNU.snu.dto.ParticipationChallengeDTO;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
+
 public interface ParticipationChallengeService {
-    ParticipationChallengeDTO insert(ParticipationChallengeDTO participationChallengeDTO);
-    ParticipationChallengeDTO update(ParticipationChallengeDTO participationChallengeDTO);
-    boolean delete(ParticipationChallengeDTO participationChallengeDTO);
+    int insert(ParticipationChallengeDTO participationChallengeDTO);
+    int update(ParticipationChallengeDTO participationChallengeDTO);
+    int delete(ParticipationChallengeDTO participationChallengeDTO);
     ParticipationChallengeDTO getById(int id);
     List<ParticipationChallengeDTO> getAll();
     List<ParticipationChallengeDTO> getAllByAccount(AccountDTO accountDTO);

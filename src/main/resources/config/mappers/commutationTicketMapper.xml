@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.KioskSNU.snu.service.CommutationTicketService">
+    <resultMap id="commutationTicketResultMap" type="commutationTicketAlias">
+        <id     column="id"                     property="id"/>
+        <result column="day"                    property="day"/>
+        <result column="price"                  property="price"/>
+        <result column="active"                 property="active"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="commutationTicketAlias">
+        insert
+        into        commutationTicket (day, price, active)
+        values      (#{day}, #{price}, #{active});
+    </insert>
+
+    <update id="update" parameterType="commutationTicketAlias">
+        update      commutationTicket
+        set         day = #{day},
+                    price = #{price},
+                    active = #{active}
+        where       id = #{id};
+    </update>
+
+    <delete id="delete" parameterType="commutationTicketAlias">
+        delete
+        from        commutationTicket
+        where       id = #{id};
+    </delete>
+
+    <select id="getById" parameterType="int" resultMap="commutationTicketResultMap">
+        select      *
+        from        commutationTicket
+        where       id = #{id};
+    </select>
+
+    <select id="getAll" resultMap="commutationTicketResultMap">
+        select      *
+        from        commutationTicket
+        order by    id;
+    </select>
+
+    <select id="getAllByActive" parameterType="boolean" resultMap="commutationTicketResultMap">
+        select      *
+        from        commutationTicket
+        where       active = #{active}
+        order by    id;
+    </select>
+</mapper>
