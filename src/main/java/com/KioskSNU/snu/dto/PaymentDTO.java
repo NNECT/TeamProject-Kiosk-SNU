@@ -12,6 +12,7 @@ public class PaymentDTO {
     private int account_remainTime;
     private LocalDateTime dateTime;
     private int amount;
+    private int usedPoint;
     private String log;
 
     public int getId() {
@@ -84,6 +85,14 @@ public class PaymentDTO {
 
     public void setAmount(int amount) {
         this.amount = amount;
+    }
+
+    public int getUsedPoint() {
+        return usedPoint;
+    }
+
+    public void setUsedPoint(int usedPoint) {
+        this.usedPoint = usedPoint;
     }
 
     public String getLog() {

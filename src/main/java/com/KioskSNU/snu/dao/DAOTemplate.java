@@ -1,10 +1,10 @@
 package com.KioskSNU.snu.dao;
 
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.apache.ibatis.session.SqlSessionFactory;
 
 public abstract class DAOTemplate {
-    protected JdbcTemplate jdbcTemplate;
-    public DAOTemplate(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
+    protected SqlSessionFactory sqlSessionFactory;
+    public DAOTemplate(SqlSessionFactory sqlSessionFactory) {
+        this.sqlSessionFactory = sqlSessionFactory;
     }
 }

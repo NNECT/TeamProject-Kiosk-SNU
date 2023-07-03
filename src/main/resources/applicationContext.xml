@@ -2,7 +2,8 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+       xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
 
 <!--    어노테이션 활성화-->
     <context:annotation-config/>
@@ -16,9 +17,6 @@
     </bean>
 
 <!--    데이터베이스 연결-->
-    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
     <context:property-placeholder location="classpath:config/database.properties"/>
     <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
         <property name="driverClassName"    value="${jdbc.driverClassName}"/>
@@ -27,6 +25,14 @@
         <property name="password"           value="${jdbc.password}"/>
         <property name="initialSize"        value="${jdbc.initialSize}"/>
         <property name="maxTotal"           value="${jdbc.maxTotal}"/>
+    </bean>
+
+    <!-- mybatis: Mapper 어노테이션이 있는 클래스를 Mapper로 등록 -->
+    <mybatis:scan base-package="com.KioskSNU.snu.service" annotation="org.apache.ibatis.annotations.Mapper"/>
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:config/mybatis-config.xml"/>
+        <property name="mapperLocations" value="classpath:config/mappers/*.xml"/>
     </bean>
 
 <!--    자리 세션 관리-->

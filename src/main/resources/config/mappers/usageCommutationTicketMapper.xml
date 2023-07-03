@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.KioskSNU.snu.service.UsageCommutationTicketService">
+    <insert id="insert" parameterType="usageCommutationTicketAlias">
+        insert
+        into        usageCommutationTicket (account_id, startDate, endDate)
+        values      (#{account_id}, #{startDate}, #{endDate});
+    </insert>
+
+    <update id="update" parameterType="usageCommutationTicketAlias">
+        update      usageCommutationTicket
+        set         endDate = #{endDate}
+        where       id = #{id};
+    </update>
+
+    <delete id="delete" parameterType="usageCommutationTicketAlias">
+        delete
+        from        usageCommutationTicket
+        where       id = #{id};
+    </delete>
+
+    <select id="getById" parameterType="int" resultMap="usageCommutationTicketResultMap">
+        select      u.id, a.id, a.username, a.password, a.phoneNumber, a.point, a.remainTime, u.startDate, u.endDate
+        from        usageCommutationTicket as u
+        left join   account as a
+        on          u.account_id = a.id
+        where       u.id = #{id};
+    </select>
+
+    <select id="getAll" resultMap="usageCommutationTicketResultMap">
+        select      u.id, a.id, a.username, a.password, a.phoneNumber, a.point, a.remainTime, u.startDate, u.endDate
+        from        usageCommutationTicket as u
+        left join   account as a
+        on          u.account_id = a.id
+        order by    u.endDate desc;
+    </select>
+
+    <select id="getAllByAccount" parameterType="accountAlias" resultMap="usageCommutationTicketResultMap">
+        select      u.id, a.id, a.username, a.password, a.phoneNumber, a.point, a.remainTime, u.startDate, u.endDate
+        from        usageCommutationTicket as u
+        left join   account as a
+        on          u.account_id = a.id
+        where       a.id = #{id}
+        order by    u.endDate desc;
+    </select>
+
+    <resultMap id="usageCommutationTicketResultMap" type="usageCommutationTicketAlias">
+        <id     column="u.id"               property="id"/>
+        <result column="a.id"               property="account_id"/>
+        <result column="a.username"         property="account_username"/>
+        <result column="a.password"         property="account_password"/>
+        <result column="a.phoneNumber"      property="account_phoneNumber"/>
+        <result column="a.point"            property="account_point"/>
+        <result column="a.remainTime"       property="account_remainTime"/>
+        <result column="u.startDate"        property="startDate"                typeHandler="org.apache.ibatis.type.LocalDateTypeHandler"/>
+        <result column="u.endDate"          property="endDate"                  typeHandler="org.apache.ibatis.type.LocalDateTypeHandler"/>
+    </resultMap>
+</mapper>

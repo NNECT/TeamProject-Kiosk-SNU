@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeAliases>
+        <typeAlias type="com.KioskSNU.snu.dto.AccountDTO" alias="accountAlias"/>
+        <typeAlias type="com.KioskSNU.snu.dto.UsageCommutationTicketDTO" alias="usageCommutationTicketAlias"/>
+
+        <typeAlias type="com.KioskSNU.snu.dto.TimeTicketDTO" alias="timeTicketAlias"/>
+        <typeAlias type="com.KioskSNU.snu.dto.CommutationTicketDTO" alias="commutationTicketAlias"/>
+        <typeAlias type="com.KioskSNU.snu.dto.SeatDTO" alias="seatAlias"/>
+        <typeAlias type="com.KioskSNU.snu.dto.UsageSeatDTO" alias="usageSeatAlias"/>
+
+        <typeAlias type="com.KioskSNU.snu.dto.RoomTypeDTO" alias="roomTypeAlias"/>
+        <typeAlias type="com.KioskSNU.snu.dto.RoomDTO" alias="roomAlias"/>
+        <typeAlias type="com.KioskSNU.snu.dto.UsageRoomDTO" alias="usageRoomAlias"/>
+
+        <typeAlias type="com.KioskSNU.snu.dto.LockerTicketDTO" alias="lockerTicketAlias"/>
+        <typeAlias type="com.KioskSNU.snu.dto.LockerDTO" alias="lockerAlias"/>
+        <typeAlias type="com.KioskSNU.snu.dto.UsageLockerDTO" alias="usageLockerAlias"/>
+
+        <typeAlias type="com.KioskSNU.snu.dto.PaymentDTO" alias="paymentAlias"/>
+
+        <typeAlias type="com.KioskSNU.snu.dto.ChallengeDTO" alias="challengeAlias"/>
+        <typeAlias type="com.KioskSNU.snu.dto.ParticipationChallengeDTO" alias="participationChallengeAlias"/>
+
+        <typeAlias type="com.KioskSNU.snu.dto.AdminDTO" alias="adminAlias"/>
+        <typeAlias type="com.KioskSNU.snu.dto.NoticeDTO" alias="noticeAlias"/>
+    </typeAliases>
+</configuration>
