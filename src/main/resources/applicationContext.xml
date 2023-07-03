@@ -34,9 +34,6 @@
         <property name="configLocation" value="classpath:config/mybatis-config.xml"/>
         <property name="mapperLocations" value="classpath:config/mappers/*.xml"/>
     </bean>
-    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
-        <constructor-arg index="0" ref="sqlSessionFactory"/>
-    </bean>
 
 <!--    자리 세션 관리-->
     <bean id="seatMap" class="java.util.concurrent.ConcurrentHashMap">

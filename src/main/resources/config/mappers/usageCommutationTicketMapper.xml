@@ -3,6 +3,18 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.KioskSNU.snu.service.UsageCommutationTicketService">
+    <resultMap id="usageCommutationTicketResultMap" type="usageCommutationTicketAlias">
+        <id     column="id"                     property="id"/>
+        <result column="account_id"             property="account_id"/>
+        <result column="account_username"       property="account_username"/>
+        <result column="account_password"       property="account_password"/>
+        <result column="account_phoneNumber"    property="account_phoneNumber"/>
+        <result column="account_point"          property="account_point"/>
+        <result column="account_remainTime"     property="account_remainTime"/>
+        <result column="startDate"              property="startDate"/>
+        <result column="endDate"                property="endDate"/>
+    </resultMap>
+
     <insert id="insert" parameterType="usageCommutationTicketAlias">
         insert
         into        usageCommutationTicket (account_id, startDate, endDate)
@@ -69,16 +81,4 @@
         where       a.id = #{id}
         order by    u.endDate desc;
     </select>
-
-    <resultMap id="usageCommutationTicketResultMap" type="usageCommutationTicketAlias">
-        <id     column="id"                     property="id"/>
-        <result column="account_id"             property="account_id"/>
-        <result column="account_username"       property="account_username"/>
-        <result column="account_password"       property="account_password"/>
-        <result column="account_phoneNumber"    property="account_phoneNumber"/>
-        <result column="account_point"          property="account_point"/>
-        <result column="account_remainTime"     property="account_remainTime"/>
-        <result column="startDate"              property="startDate"/>
-        <result column="endDate"                property="endDate"/>
-    </resultMap>
 </mapper>

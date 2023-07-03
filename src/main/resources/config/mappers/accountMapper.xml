@@ -3,6 +3,15 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.KioskSNU.snu.service.AccountService">
+    <resultMap id="accountResultMap" type="accountAlias">
+        <id     column="id"                     property="id"/>
+        <result column="username"               property="username"/>
+        <result column="password"               property="password"/>
+        <result column="phoneNumber"            property="phoneNumber"/>
+        <result column="point"                  property="point"/>
+        <result column="remainTime"             property="remainTime"/>
+    </resultMap>
+
     <insert id="insert" parameterType="accountAlias">
         insert
         into        account (username, password, phoneNumber, point, remainTime)
@@ -42,13 +51,4 @@
         from        account
         order by    id;
     </select>
-
-    <resultMap id="accountResultMap" type="accountAlias">
-        <id     column="id"                     property="id"/>
-        <result column="username"               property="username"/>
-        <result column="password"               property="password"/>
-        <result column="phoneNumber"            property="phoneNumber"/>
-        <result column="point"                  property="point"/>
-        <result column="remainTime"             property="remainTime"/>
-    </resultMap>
 </mapper>
