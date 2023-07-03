@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
-@Mapper
+
 public interface RoomTypeService {
     int insert(RoomTypeDTO roomTypeDTO);
     int update(RoomTypeDTO roomTypeDTO);

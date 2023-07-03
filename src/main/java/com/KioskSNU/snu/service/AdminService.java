@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
-@Mapper
+
 public interface AdminService {
     int insert(AdminDTO adminDTO);
     int update(AdminDTO adminDTO);

@@ -5,6 +5,6 @@
 <configuration>
     <typeAliases>
         <typeAlias type="com.KioskSNU.snu.dto.AccountDTO" alias="accountAlias"/>
-        <typeAlias type="com.KioskSNU.snu.dto.UsageCommutationTicketDTO" alias="usageCommutationTicketAlias"/>
+<!--        <typeAlias type="com.KioskSNU.snu.dto.UsageCommutationTicketDTO" alias="usageCommutationTicketAlias"/>-->
     </typeAliases>
 </configuration>
