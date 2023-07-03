@@ -3,6 +3,7 @@ package com.KioskSNU.view;
 import com.KioskSNU.secure.RSA;
 import com.KioskSNU.secure.SHA;
 import com.KioskSNU.snu.service.AccountService;
+import com.KioskSNU.snu.service.UsageCommutationTicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -20,17 +21,20 @@ public class IndexController {
     RSA rsa;
     SHA sha;
     AccountService accountService;
+    UsageCommutationTicketService usageCommutationTicketService;
 
     @Autowired
     public IndexController(@Qualifier("seatMap") ConcurrentHashMap<Integer, HttpSession> seatMap,
                            @Qualifier("roomMap") ConcurrentHashMap<Integer, HttpSession> roomMap,
                            RSA rsa, SHA sha,
-                           AccountService accountService) {
+                           AccountService accountService,
+                           UsageCommutationTicketService usageCommutationTicketService) {
         this.seatMap = seatMap;
         this.roomMap = roomMap;
         this.rsa = rsa;
         this.sha = sha;
         this.accountService = accountService;
+        this.usageCommutationTicketService = usageCommutationTicketService;
     }
 
     @RequestMapping("/")
@@ -38,6 +42,9 @@ public class IndexController {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("index");
         mav.addObject("user1", accountService.getById(1));
+        var usage = usageCommutationTicketService.getAll();
+        System.out.println(usage + " " + usage.size());
+        mav.addObject("usage", usage);
         return mav;
     }
 }

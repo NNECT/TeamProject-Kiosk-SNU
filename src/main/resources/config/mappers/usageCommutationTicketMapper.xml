@@ -22,39 +22,63 @@
     </delete>
 
     <select id="getById" parameterType="int" resultMap="usageCommutationTicketResultMap">
-        select      u.id, a.id, a.username, a.password, a.phoneNumber, a.point, a.remainTime, u.startDate, u.endDate
+        select      u.id                    as id,
+                    a.id                    as account_id,
+                    a.username              as account_username,
+                    a.password              as account_password,
+                    a.phoneNumber           as account_phoneNumber,
+                    a.point                 as account_point,
+                    a.remainTime            as account_remainTime,
+                    u.startDate             as startDate,
+                    u.endDate               as endDate
         from        usageCommutationTicket as u
-        left join   account as a
+        join        account as a
         on          u.account_id = a.id
         where       u.id = #{id};
     </select>
 
     <select id="getAll" resultMap="usageCommutationTicketResultMap">
-        select      u.id, a.id, a.username, a.password, a.phoneNumber, a.point, a.remainTime, u.startDate, u.endDate
+        select      u.id                    as id,
+                    a.id                    as account_id,
+                    a.username              as account_username,
+                    a.password              as account_password,
+                    a.phoneNumber           as account_phoneNumber,
+                    a.point                 as account_point,
+                    a.remainTime            as account_remainTime,
+                    u.startDate             as startDate,
+                    u.endDate               as endDate
         from        usageCommutationTicket as u
-        left join   account as a
+        join        account as a
         on          u.account_id = a.id
         order by    u.endDate desc;
     </select>
 
     <select id="getAllByAccount" parameterType="accountAlias" resultMap="usageCommutationTicketResultMap">
-        select      u.id, a.id, a.username, a.password, a.phoneNumber, a.point, a.remainTime, u.startDate, u.endDate
+        select      u.id                    as id,
+                    a.id                    as account_id,
+                    a.username              as account_username,
+                    a.password              as account_password,
+                    a.phoneNumber           as account_phoneNumber,
+                    a.point                 as account_point,
+                    a.remainTime            as account_remainTime,
+                    u.startDate             as startDate,
+                    u.endDate               as endDate
         from        usageCommutationTicket as u
-        left join   account as a
+        join        account as a
         on          u.account_id = a.id
         where       a.id = #{id}
         order by    u.endDate desc;
     </select>
 
     <resultMap id="usageCommutationTicketResultMap" type="usageCommutationTicketAlias">
-        <id     column="u.id"               property="id"/>
-        <result column="a.id"               property="account_id"/>
-        <result column="a.username"         property="account_username"/>
-        <result column="a.password"         property="account_password"/>
-        <result column="a.phoneNumber"      property="account_phoneNumber"/>
-        <result column="a.point"            property="account_point"/>
-        <result column="a.remainTime"       property="account_remainTime"/>
-        <result column="u.startDate"        property="startDate"                typeHandler="org.apache.ibatis.type.LocalDateTypeHandler"/>
-        <result column="u.endDate"          property="endDate"                  typeHandler="org.apache.ibatis.type.LocalDateTypeHandler"/>
+        <id     column="id"                     property="id"/>
+        <result column="account_id"             property="account_id"/>
+        <result column="account_username"       property="account_username"/>
+        <result column="account_password"       property="account_password"/>
+        <result column="account_phoneNumber"    property="account_phoneNumber"/>
+        <result column="account_point"          property="account_point"/>
+        <result column="account_remainTime"     property="account_remainTime"/>
+        <result column="startDate"              property="startDate"/>
+        <result column="endDate"                property="endDate"/>
     </resultMap>
 </mapper>

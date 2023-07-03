@@ -15,5 +15,6 @@
     ${user1.username}<br>
     ${user1.password}<br>
     ${user1.phoneNumber}<br>
+    ${usage.get(0).endDate}<br>
 </body>
 </html>

@@ -44,11 +44,11 @@
     </select>
 
     <resultMap id="accountResultMap" type="accountAlias">
-        <id     column="id"                 property="id"/>
-        <result column="username"           property="username"/>
-        <result column="password"           property="password"/>
-        <result column="phoneNumber"        property="phoneNumber"/>
-        <result column="point"              property="point"/>
-        <result column="remainTime"         property="remainTime"/>
+        <id     column="id"                     property="id"/>
+        <result column="username"               property="username"/>
+        <result column="password"               property="password"/>
+        <result column="phoneNumber"            property="phoneNumber"/>
+        <result column="point"                  property="point"/>
+        <result column="remainTime"             property="remainTime"/>
     </resultMap>
 </mapper>
