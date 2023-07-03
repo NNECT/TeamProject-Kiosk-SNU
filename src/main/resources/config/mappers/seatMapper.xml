@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.KioskSNU.snu.service.SeatService">
+    <resultMap id="seatResultMap" type="seatAlias">
+        <id     column="id"                     property="id"/>
+        <result column="seatNumber"             property="seatNumber"/>
+        <result column="usable"                 property="usable"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="seatAlias">
+        insert
+        into        seat (seatNumber, usable)
+        values      (#{seatNumber}, #{usable});
+    </insert>
+
+    <update id="update" parameterType="seatAlias">
+        update      seat
+        set         seatNumber = #{seatNumber},
+                    usable = #{usable}
+        where       id = #{id};
+    </update>
+
+    <delete id="delete" parameterType="seatAlias">
+        delete
+        from        seat
+        where       id = #{id};
+    </delete>
+
+    <select id="getById" parameterType="int" resultMap="seatResultMap">
+        select      *
+        from        seat
+        where       id = #{id};
+    </select>
+
+    <select id="getAll" resultMap="seatResultMap">
+        select      *
+        from        seat
+        order by    id;
+    </select>
+
+    <select id="getAllByUsable" parameterType="boolean" resultMap="seatResultMap">
+        select      *
+        from        seat
+        where       usable = #{usable}
+        order by    id;
+    </select>
+</mapper>

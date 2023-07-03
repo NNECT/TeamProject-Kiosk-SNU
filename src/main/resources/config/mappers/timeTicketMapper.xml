@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.KioskSNU.snu.service.TimeTicketService">
+    <resultMap id="timeTicketResultMap" type="timeTicketAlias">
+        <id     column="id"                     property="id"/>
+        <result column="time"                   property="time"/>
+        <result column="price"                  property="price"/>
+        <result column="active"                 property="active"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="timeTicketAlias">
+        insert
+        into        timeTicket (time, price, active)
+        values      (#{time}, #{price}, #{active});
+    </insert>
+
+    <update id="update" parameterType="timeTicketAlias">
+        update      timeTicket
+        set         time = #{time},
+                    price = #{price},
+                    active = #{active}
+        where       id = #{id};
+    </update>
+
+    <delete id="delete" parameterType="timeTicketAlias">
+        delete
+        from        timeTicket
+        where       id = #{id};
+    </delete>
+
+    <select id="getById" parameterType="int" resultMap="timeTicketResultMap">
+        select      *
+        from        timeTicket
+        where       id = #{id};
+    </select>
+
+    <select id="getAll" resultMap="timeTicketResultMap">
+        select      *
+        from        timeTicket
+        order by    id;
+    </select>
+
+    <select id="getAllByActive" parameterType="boolean" resultMap="timeTicketResultMap">
+        select      *
+        from        timeTicket
+        where       active = #{active}
+        order by    id;
+    </select>
+</mapper>

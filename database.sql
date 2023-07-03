@@ -163,16 +163,16 @@ create table participationChallenge (
 
 # 관리자 데이터
 create table admin (
-    id              int unsigned    primary key auto_increment,
-    username        varchar(100)    not null unique,
-    password        varchar(100)    not null
+    id                  int unsigned    primary key auto_increment,
+    username            varchar(100)    not null unique,
+    password            varchar(100)    not null
 );
 
 # 공지사항 데이터
 create table notice (
-    id              int unsigned    primary key auto_increment,
-    content         text            not null,
-    dateTime        datetime        not null default now(),
-    outside         boolean         not null default false,
-    active          boolean         not null default true
+    id                  int unsigned    primary key auto_increment,
+    content             text            not null,
+    dateTime            datetime        not null default now(),
+    outside             boolean         not null default false,
+    active              boolean         not null default true
 );

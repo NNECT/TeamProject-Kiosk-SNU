@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
-
+@Mapper
 public interface SeatService {
     int insert(SeatDTO seatDTO);
     int update(SeatDTO seatDTO);

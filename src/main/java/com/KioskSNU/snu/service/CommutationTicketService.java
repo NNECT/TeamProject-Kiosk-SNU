@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
-
+@Mapper
 public interface CommutationTicketService {
     int insert(CommutationTicketDTO commutationTicketDTO);
     int update(CommutationTicketDTO commutationTicketDTO);

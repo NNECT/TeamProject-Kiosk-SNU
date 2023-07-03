@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.KioskSNU.snu.service.UsageSeatService">
+    <resultMap id="usageSeatResultMap" type="usageSeatAlias">
+        <id     column="id"                     property="id"/>
+        <result column="seat_id"                property="seat_id"/>
+        <result column="seat_seatNumber"        property="seat_seatNumber"/>
+        <result column="seat_usable"            property="seat_usable"/>
+        <result column="account_id"             property="account_id"/>
+        <result column="account_username"       property="account_username"/>
+        <result column="account_password"       property="account_password"/>
+        <result column="account_phoneNumber"    property="account_phoneNumber"/>
+        <result column="account_point"          property="account_point"/>
+        <result column="account_remainTime"     property="account_remainTime"/>
+        <result column="startDateTime"          property="startDateTime"/>
+        <result column="endDateTime"            property="endDateTime"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="usageSeatAlias">
+        insert
+        into        usageSeat (seat_id, account_id, startDateTime, endDateTime)
+        values      (#{seat_id}, #{account_id}, #{startDateTime}, #{endDateTime});
+    </insert>
+
+    <update id="update" parameterType="usageSeatAlias">
+        update      usageSeat
+        set         seat_id = #{seat_id},
+                    account_id = #{account_id},
+                    startDateTime = #{startDateTime},
+                    endDateTime = #{endDateTime}
+        where       id = #{id};
+    </update>
+
+    <delete id="delete" parameterType="usageSeatAlias">
+        delete
+        from        usageSeat
+        where       id = #{id};
+    </delete>
+
+    <select id="getById" parameterType="int" resultMap="usageSeatResultMap">
+        select      usageSeat.id                            as id,
+                    seat.id                                 as seat_id,
+                    seat.seatNumber                         as seat_seatNumber,
+                    seat.usable                             as seat_usable,
+                    account.id                              as account_id,
+                    account.username                        as account_username,
+                    account.password                        as account_password,
+                    account.phoneNumber                     as account_phoneNumber,
+                    account.point                           as account_point,
+                    account.remainTime                      as account_remainTime,
+                    usageSeat.startDateTime                 as startDateTime,
+                    usageSeat.endDateTime                   as endDateTime
+        from        usageSeat
+        join        seat
+        on          usageSeat.seat_id = seat.id
+        join        account
+        on          usageSeat.account_id = account.id
+        where       usageSeat.id = #{id};
+    </select>
+
+    <select id="getAll" resultMap="usageSeatResultMap">
+        select      usageSeat.id                            as id,
+                    seat.id                                 as seat_id,
+                    seat.seatNumber                         as seat_seatNumber,
+                    seat.usable                             as seat_usable,
+                    account.id                              as account_id,
+                    account.username                        as account_username,
+                    account.password                        as account_password,
+                    account.phoneNumber                     as account_phoneNumber,
+                    account.point                           as account_point,
+                    account.remainTime                      as account_remainTime,
+                    usageSeat.startDateTime                 as startDateTime,
+                    usageSeat.endDateTime                   as endDateTime
+        from        usageSeat
+        join        seat
+        on          usageSeat.seat_id = seat.id
+        join        account
+        on          usageSeat.account_id = account.id;
+    </select>
+
+    <select id="getAllBySeat" parameterType="seatAlias" resultMap="usageSeatResultMap">
+        select      usageSeat.id                            as id,
+                    seat.id                                 as seat_id,
+                    seat.seatNumber                         as seat_seatNumber,
+                    seat.usable                             as seat_usable,
+                    account.id                              as account_id,
+                    account.username                        as account_username,
+                    account.password                        as account_password,
+                    account.phoneNumber                     as account_phoneNumber,
+                    account.point                           as account_point,
+                    account.remainTime                      as account_remainTime,
+                    usageSeat.startDateTime                 as startDateTime,
+                    usageSeat.endDateTime                   as endDateTime
+        from        usageSeat
+        join        seat
+        on          usageSeat.seat_id = seat.id
+        join        account
+        on          usageSeat.account_id = account.id
+        where       seat.id = #{id};
+    </select>
+
+    <select id="getAllByAccount" parameterType="accountAlias" resultMap="usageSeatResultMap">
+        select      usageSeat.id                            as id,
+                    seat.id                                 as seat_id,
+                    seat.seatNumber                         as seat_seatNumber,
+                    seat.usable                             as seat_usable,
+                    account.id                              as account_id,
+                    account.username                        as account_username,
+                    account.password                        as account_password,
+                    account.phoneNumber                     as account_phoneNumber,
+                    account.point                           as account_point,
+                    account.remainTime                      as account_remainTime,
+                    usageSeat.startDateTime                 as startDateTime,
+                    usageSeat.endDateTime                   as endDateTime
+        from        usageSeat
+        join        seat
+        on          usageSeat.seat_id = seat.id
+        join        account
+        on          usageSeat.account_id = account.id
+        where       account.id = #{id};
+    </select>
+</mapper>
