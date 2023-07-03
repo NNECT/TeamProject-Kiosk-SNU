@@ -5,6 +5,7 @@ import com.KioskSNU.snu.dto.UsageCommutationTicketDTO;
 import com.KioskSNU.snu.service.UsageCommutationTicketService;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,50 +15,37 @@ import java.util.List;
 @Repository
 @Transactional
 public class UsageCommutationTicketDAO extends DAOTemplate implements UsageCommutationTicketService {
-    @Autowired
-    public UsageCommutationTicketDAO(SqlSessionFactory sqlSessionFactory) {
-        super(sqlSessionFactory);
+    public UsageCommutationTicketDAO(SqlSessionTemplate sqlSessionTemplate) {
+        super(sqlSessionTemplate);
     }
 
     @Override
     public int insert(UsageCommutationTicketDTO usageCommutationTicketDTO) {
-        try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
-            return sqlSession.insert("UsageCommutationTicketDAO.insert", usageCommutationTicketDTO);
-        }
+        return sqlSessionTemplate.insert("usageCommutationTicket.insert", usageCommutationTicketDTO);
     }
 
     @Override
     public int update(UsageCommutationTicketDTO usageCommutationTicketDTO) {
-        try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
-            return sqlSession.update("UsageCommutationTicketDAO.update", usageCommutationTicketDTO);
-        }
+        return sqlSessionTemplate.update("usageCommutationTicket.update", usageCommutationTicketDTO);
     }
 
     @Override
     public int delete(UsageCommutationTicketDTO usageCommutationTicketDTO) {
-        try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
-            return sqlSession.delete("UsageCommutationTicketDAO.delete", usageCommutationTicketDTO);
-        }
+        return sqlSessionTemplate.delete("usageCommutationTicket.delete", usageCommutationTicketDTO);
     }
 
     @Override
     public UsageCommutationTicketDTO getById(int id) {
-        try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
-            return sqlSession.selectOne("UsageCommutationTicketDAO.getById", id);
-        }
+        return sqlSessionTemplate.selectOne("usageCommutationTicket.getById", id);
     }
 
     @Override
     public List<UsageCommutationTicketDTO> getAll() {
-        try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
-            return sqlSession.selectList("UsageCommutationTicketDAO.getAll");
-        }
+        return sqlSessionTemplate.selectList("usageCommutationTicket.getAll");
     }
 
     @Override
     public List<UsageCommutationTicketDTO> getAllByAccount(AccountDTO accountDTO) {
-        try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
-            return sqlSession.selectList("UsageCommutationTicketDAO.getAllByAccount", accountDTO);
-        }
+        return sqlSessionTemplate.selectList("usageCommutationTicket.getAllByAccount", accountDTO);
     }
 }

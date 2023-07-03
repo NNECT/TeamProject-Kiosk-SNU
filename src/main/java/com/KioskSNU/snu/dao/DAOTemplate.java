@@ -1,10 +1,10 @@
 package com.KioskSNU.snu.dao;
 
-import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.SqlSessionTemplate;
 
 public abstract class DAOTemplate {
-    protected SqlSessionFactory sqlSessionFactory;
-    public DAOTemplate(SqlSessionFactory sqlSessionFactory) {
-        this.sqlSessionFactory = sqlSessionFactory;
+    protected SqlSessionTemplate sqlSessionTemplate;
+    public DAOTemplate(SqlSessionTemplate sqlSessionTemplate) {
+        this.sqlSessionTemplate = sqlSessionTemplate;
     }
 }
