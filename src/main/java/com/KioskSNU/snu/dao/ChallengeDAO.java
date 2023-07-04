@@ -42,12 +42,6 @@ public class ChallengeDAO extends SqlSessionDaoSupport implements ChallengeServi
 
     @Transactional(readOnly = true)
     @Override
-    public ChallengeDTO getByTitle(String title) {
-        return getSqlSession().selectOne("challenge.getByTitle", title);
-    }
-
-    @Transactional(readOnly = true)
-    @Override
     public List<ChallengeDTO> getAll() {
         return getSqlSession().selectList("challenge.getAll");
     }

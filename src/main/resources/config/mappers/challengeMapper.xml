@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.KioskSNU.snu.service.ChallengeService">
+    <resultMap id="challengeResultMap" type="challengeAlias">
+        <id     column="id"                     property="id"/>
+        <result column="title"                  property="title"/>
+        <result column="description"            property="description"/>
+        <result column="titleColor"             property="titleColor"/>
+        <result column="descriptionColor"       property="descriptionColor"/>
+        <result column="backgroundColor"        property="backgroundColor"/>
+        <result column="imageSrc"               property="imageSrc"/>
+        <result column="activeStartTime"        property="activeStartTime"/>
+        <result column="activeEndTime"          property="activeEndTime"/>
+        <result column="periodHours"            property="periodHours"/>
+        <result column="periodDays"             property="periodDays"/>
+        <result column="goalDay"                property="goalDay"/>
+        <result column="goalHour"               property="goalHour"/>
+        <result column="rewardPoint"            property="rewardPoint"/>
+        <result column="active"                 property="active"/>
+        <result column="visible"                property="visible"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="challengeAlias">
+        insert
+        into        challenge (title, description, titleColor, descriptionColor, backgroundColor, imageSrc, activeStartTime, activeEndTime, periodHours, periodDays, goalDay, goalHour, rewardPoint, active, visible)
+        values      (#{title}, #{description}, #{titleColor}, #{descriptionColor}, #{backgroundColor}, #{imageSrc}, #{activeStartTime}, #{activeEndTime}, #{periodHours}, #{periodDays}, #{goalDay}, #{goalHour}, #{rewardPoint}, #{active}, #{visible});
+    </insert>
+
+    <update id="update" parameterType="challengeAlias">
+        update      challenge
+        set         title = #{title},
+                    description = #{description},
+                    titleColor = #{titleColor},
+                    descriptionColor = #{descriptionColor},
+                    backgroundColor = #{backgroundColor},
+                    imageSrc = #{imageSrc},
+                    activeStartTime = #{activeStartTime},
+                    activeEndTime = #{activeEndTime},
+                    periodHours = #{periodHours},
+                    periodDays = #{periodDays},
+                    goalDay = #{goalDay},
+                    goalHour = #{goalHour},
+                    rewardPoint = #{rewardPoint},
+                    active = #{active},
+                    visible = #{visible}
+        where       id = #{id};
+    </update>
+
+    <delete id="delete" parameterType="challengeAlias">
+        delete
+        from        challenge
+        where       id = #{id};
+    </delete>
+
+    <select id="getById" parameterType="challengeAlias" resultMap="challengeResultMap">
+        select      *
+        from        challenge
+        where       id = #{id};
+    </select>
+
+    <select id="getAll" resultMap="challengeResultMap">
+        select      *
+        from        challenge;
+    </select>
+
+    <select id="getAllByActive" parameterType="boolean" resultMap="challengeResultMap">
+        select      *
+        from        challenge
+        where       active = #{active};
+    </select>
+
+    <select id="getAllByVisible" parameterType="boolean" resultMap="challengeResultMap">
+        select      *
+        from        challenge
+        where       visible = #{visible};
+    </select>
+</mapper>
