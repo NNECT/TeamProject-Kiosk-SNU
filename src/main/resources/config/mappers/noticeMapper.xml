@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.KioskSNU.snu.service.NoticeService">
+    <resultMap id="noticeResultMap" type="noticeAlias">
+        <id     column="id"                     property="id"/>
+        <result column="title"                  property="title"/>
+        <result column="content"                property="content"/>
+        <result column="dateTime"               property="dateTime"/>
+        <result column="outside"                property="outside"/>
+        <result column="active"                 property="active"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="noticeAlias">
+        insert
+        into        notice (title, content, dateTime, outside, active)
+        values      (#{title}, #{content}, #{dateTime}, #{outside}, #{active});
+    </insert>
+
+    <update id="update" parameterType="noticeAlias">
+        update      notice
+        set         title = #{title},
+                    content = #{content},
+                    dateTime = #{dateTime},
+                    outside = #{outside},
+                    active = #{active}
+        where       id = #{id};
+    </update>
+
+    <delete id="delete" parameterType="noticeAlias">
+        delete
+        from        notice
+        where       id = #{id};
+    </delete>
+
+    <select id="getById" parameterType="int" resultMap="noticeResultMap">
+        select      *
+        from        notice
+        where       id = #{id};
+    </select>
+
+    <select id="getAll" resultMap="noticeResultMap">
+        select      *
+        from        notice;
+    </select>
+
+    <select id="getAllByOutside" parameterType="boolean" resultMap="noticeResultMap">
+        select      *
+        from        notice
+        where       outside = #{outside};
+    </select>
+
+    <select id="getAllByActive" parameterType="boolean" resultMap="noticeResultMap">
+        select      *
+        from        notice
+        where       active = #{active};
+    </select>
+</mapper>

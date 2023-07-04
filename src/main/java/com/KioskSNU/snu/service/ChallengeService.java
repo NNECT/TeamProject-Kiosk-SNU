@@ -11,7 +11,6 @@ public interface ChallengeService {
     int update(ChallengeDTO challengeDTO);
     int delete(ChallengeDTO challengeDTO);
     ChallengeDTO getById(int id);
-    ChallengeDTO getByTitle(String title);
     List<ChallengeDTO> getAll();
     List<ChallengeDTO> getAllByActive(boolean active);
     List<ChallengeDTO> getAllByVisible(boolean visible);
