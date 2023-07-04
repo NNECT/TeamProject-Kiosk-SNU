@@ -43,7 +43,7 @@ public class IndexController {
         mav.setViewName("index");
         mav.addObject("user1", accountService.getById(1));
         var usage = usageCommutationTicketService.getAll();
-        System.out.println(usage + " " + usage.size());
+        System.out.println("서버 프린트 테스트");
         mav.addObject("usage", usage);
         return mav;
     }
