@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.KioskSNU.snu.service.UsageLockerService">
+    <resultMap id="usageLockerResultMap" type="usageLockerAlias">
+        <id     column="id"                     property="id"/>
+        <result column="locker_id"              property="locker_id"/>
+        <result column="locker_lockerNumber"    property="locker_lockerNumber"/>
+        <result column="locker_usable"          property="locker_usable"/>
+        <result column="account_id"             property="account_id"/>
+        <result column="account_username"       property="account_username"/>
+        <result column="account_password"       property="account_password"/>
+        <result column="account_phoneNumber"    property="account_phoneNumber"/>
+        <result column="account_point"          property="account_point"/>
+        <result column="account_remainTime"     property="account_remainTime"/>
+        <result column="startDate"              property="startDate"/>
+        <result column="endDate"                property="endDate"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="usageLockerAlias">
+        insert
+        into        usageLocker (locker_id, account_id, startDate, endDate)
+        values      (#{locker_id}, #{account_id}, #{startDate}, #{endDate});
+    </insert>
+
+    <update id="update" parameterType="usageLockerAlias">
+        update      usageLocker
+        set         locker_id = #{locker_id},
+                    account_id = #{account_id},
+                    startDate = #{startDate},
+                    endDate = #{endDate}
+        where       id = #{id};
+    </update>
+
+    <delete id="delete" parameterType="usageLockerAlias">
+        delete
+        from        usageLocker
+        where       id = #{id};
+    </delete>
+
+    <select id="getById" parameterType="int" resultMap="usageLockerResultMap">
+        select      usageLocker.id                          as id,
+                    locker.id                               as locker_id,
+                    locker.lockerNumber                     as locker_lockerNumber,
+                    locker.usable                           as locker_usable,
+                    account.id                              as account_id,
+                    account.username                        as account_username,
+                    account.password                        as account_password,
+                    account.phoneNumber                     as account_phoneNumber,
+                    account.point                           as account_point,
+                    account.remainTime                      as account_remainTime,
+                    usageLocker.startDate                   as startDate,
+                    usageLocker.endDate                     as endDate
+        from        usageLocker
+        join        locker
+        on          usageLocker.locker_id = locker.id
+        join        account
+        on          usageLocker.account_id = account.id
+        where       usageLocker.id = #{id};
+    </select>
+
+    <select id="getAll" resultMap="usageLockerResultMap">
+        select      usageLocker.id                          as id,
+                    locker.id                               as locker_id,
+                    locker.lockerNumber                     as locker_lockerNumber,
+                    locker.usable                           as locker_usable,
+                    account.id                              as account_id,
+                    account.username                        as account_username,
+                    account.password                        as account_password,
+                    account.phoneNumber                     as account_phoneNumber,
+                    account.point                           as account_point,
+                    account.remainTime                      as account_remainTime,
+                    usageLocker.startDate                   as startDate,
+                    usageLocker.endDate                     as endDate
+        from        usageLocker
+        join        locker
+        on          usageLocker.locker_id = locker.id
+        join        account
+        on          usageLocker.account_id = account.id;
+    </select>
+
+    <select id="getAllByLocker" parameterType="lockerAlias" resultMap="usageLockerResultMap">
+        select      usageLocker.id                          as id,
+                    locker.id                               as locker_id,
+                    locker.lockerNumber                     as locker_lockerNumber,
+                    locker.usable                           as locker_usable,
+                    account.id                              as account_id,
+                    account.username                        as account_username,
+                    account.password                        as account_password,
+                    account.phoneNumber                     as account_phoneNumber,
+                    account.point                           as account_point,
+                    account.remainTime                      as account_remainTime,
+                    usageLocker.startDate                   as startDate,
+                    usageLocker.endDate                     as endDate
+        from        usageLocker
+        join        locker
+        on          usageLocker.locker_id = locker.id
+        join        account
+        on          usageLocker.account_id = account.id
+        where       locker.id = #{id};
+    </select>
+
+    <select id="getAllByAccount" parameterType="accountAlias" resultMap="usageLockerResultMap">
+        select      usageLocker.id                          as id,
+                    locker.id                               as locker_id,
+                    locker.lockerNumber                     as locker_lockerNumber,
+                    locker.usable                           as locker_usable,
+                    account.id                              as account_id,
+                    account.username                        as account_username,
+                    account.password                        as account_password,
+                    account.phoneNumber                     as account_phoneNumber,
+                    account.point                           as account_point,
+                    account.remainTime                      as account_remainTime,
+                    usageLocker.startDate                   as startDate,
+                    usageLocker.endDate                     as endDate
+        from        usageLocker
+        join        locker
+        on          usageLocker.locker_id = locker.id
+        join        account
+        on          usageLocker.account_id = account.id
+        where       account.id = #{id};
+    </select>
+</mapper>

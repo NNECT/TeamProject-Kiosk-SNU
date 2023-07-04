@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.KioskSNU.snu.service.LockerService">
+    <resultMap id="lockerResultMap" type="lockerAlias">
+        <id     column="id"                     property="id"/>
+        <result column="lockerNumber"           property="lockerNumber"/>
+        <result column="usable"                 property="usable"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="lockerAlias">
+        insert
+        into        locker (lockerNumber, usable)
+        values      (#{lockerNumber}, #{usable});
+    </insert>
+
+    <update id="update" parameterType="lockerAlias">
+        update      locker
+        set         lockerNumber = #{lockerNumber},
+                    usable = #{usable}
+        where       id = #{id};
+    </update>
+
+    <delete id="delete" parameterType="lockerAlias">
+        delete
+        from        locker
+        where       id = #{id};
+    </delete>
+
+    <select id="getById" parameterType="int" resultMap="lockerResultMap">
+        select      *
+        from        locker
+        where       id = #{id};
+    </select>
+
+    <select id="getAll" resultMap="lockerResultMap">
+        select      *
+        from        locker;
+    </select>
+
+    <select id="getAllByUsable" parameterType="boolean" resultMap="lockerResultMap">
+        select      *
+        from        locker
+        where       usable = #{usable};
+    </select>
+</mapper>

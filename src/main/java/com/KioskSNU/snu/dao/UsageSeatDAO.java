@@ -36,21 +36,25 @@ public class UsageSeatDAO extends SqlSessionDaoSupport implements UsageSeatServi
         return getSqlSession().delete("usageSeat.delete", usageSeatDTO);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public UsageSeatDTO getById(int id) {
         return getSqlSession().selectOne("usageSeat.getById", id);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<UsageSeatDTO> getAll() {
         return getSqlSession().selectList("usageSeat.getAll");
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<UsageSeatDTO> getAllBySeat(SeatDTO seatDTO) {
         return getSqlSession().selectList("usageSeat.getAllBySeat", seatDTO);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<UsageSeatDTO> getAllByAccount(AccountDTO accountDTO) {
         return getSqlSession().selectList("usageSeat.getAllByAccount", accountDTO);

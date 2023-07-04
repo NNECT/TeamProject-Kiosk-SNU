@@ -34,16 +34,19 @@ public class CommutationTicketDAO extends SqlSessionDaoSupport implements Commut
         return getSqlSession().delete("commutationTicket.delete", commutationTicketDTO);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public CommutationTicketDTO getById(int id) {
         return getSqlSession().selectOne("commutationTicket.getById", id);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<CommutationTicketDTO> getAll() {
         return getSqlSession().selectList("commutationTicket.getAll");
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<CommutationTicketDTO> getAllByActive(boolean active) {
         return getSqlSession().selectList("commutationTicket.getAllByActive", active);

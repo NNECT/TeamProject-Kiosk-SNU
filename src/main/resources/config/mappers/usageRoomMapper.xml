@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.KioskSNU.snu.service.UsageRoomService">
+    <resultMap id="usageRoomResultMap" type="usageRoomAlias">
+        <id     column="id"                     property="id"/>
+        <result column="room_id"                property="room_id"/>
+        <result column="room_roomNumber"        property="room_roomNumber"/>
+        <result column="room_roomType_id"       property="room_roomType_id"/>
+        <result column="room_roomType_name"     property="room_roomType_name"/>
+        <result column="room_roomType_price"    property="room_roomType_price"/>
+        <result column="room_usable"            property="room_usable"/>
+        <result column="account_id"             property="account_id"/>
+        <result column="account_username"       property="account_username"/>
+        <result column="account_password"       property="account_password"/>
+        <result column="account_phoneNumber"    property="account_phoneNumber"/>
+        <result column="account_point"          property="account_point"/>
+        <result column="account_remainTime"     property="account_remainTime"/>
+        <result column="startDateTime"          property="startDateTime"/>
+        <result column="endDateTime"            property="endDateTime"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="usageRoomAlias">
+        insert
+        into        usageRoom (room_id, account_id, startDateTime, endDateTime)
+        values      (#{room_id}, #{account_id}, #{startDateTime}, #{endDateTime});
+    </insert>
+
+    <update id="update" parameterType="usageRoomAlias">
+        update      usageRoom
+        set         room_id = #{room_id},
+                    account_id = #{account_id},
+                    startDateTime = #{startDateTime},
+                    endDateTime = #{endDateTime}
+        where       id = #{id};
+    </update>
+
+    <delete id="delete" parameterType="usageRoomAlias">
+        delete
+        from        usageRoom
+        where       id = #{id};
+    </delete>
+
+    <select id="getById" parameterType="int" resultMap="usageRoomResultMap">
+        select      usageRoom.id                            as id,
+                    room.id                                 as room_id,
+                    room.roomNumber                         as room_roomNumber,
+                    roomType.id                             as room_roomType_id,
+                    roomType.name                           as room_roomType_name,
+                    roomType.price                          as room_roomType_price,
+                    room.usable                             as room_usable,
+                    account.id                              as account_id,
+                    account.username                        as account_username,
+                    account.password                        as account_password,
+                    account.phoneNumber                     as account_phoneNumber,
+                    account.point                           as account_point,
+                    account.remainTime                      as account_remainTime,
+                    usageRoom.startDateTime                 as startDateTime,
+                    usageRoom.endDateTime                   as endDateTime
+        from        usageRoom
+        join        room
+        on          usageRoom.room_id = room.id
+        join        roomType
+        on          room.roomType_id = roomType.id
+        join        account
+        on          usageRoom.account_id = account.id
+        where       usageRoom.id = #{id};
+    </select>
+
+    <select id="getAll" resultMap="usageRoomResultMap">
+        select      usageRoom.id                            as id,
+                    room.id                                 as room_id,
+                    room.roomNumber                         as room_roomNumber,
+                    roomType.id                             as room_roomType_id,
+                    roomType.name                           as room_roomType_name,
+                    roomType.price                          as room_roomType_price,
+                    room.usable                             as room_usable,
+                    account.id                              as account_id,
+                    account.username                        as account_username,
+                    account.password                        as account_password,
+                    account.phoneNumber                     as account_phoneNumber,
+                    account.point                           as account_point,
+                    account.remainTime                      as account_remainTime,
+                    usageRoom.startDateTime                 as startDateTime,
+                    usageRoom.endDateTime                   as endDateTime
+        from        usageRoom
+        join        room
+        on          usageRoom.room_id = room.id
+        join        roomType
+        on          room.roomType_id = roomType.id
+        join        account
+        on          usageRoom.account_id = account.id;
+    </select>
+
+    <select id="getAllByRoom" parameterType="roomAlias" resultMap="usageRoomResultMap">
+        select      usageRoom.id                            as id,
+                    room.id                                 as room_id,
+                    room.roomNumber                         as room_roomNumber,
+                    roomType.id                             as room_roomType_id,
+                    roomType.name                           as room_roomType_name,
+                    roomType.price                          as room_roomType_price,
+                    room.usable                             as room_usable,
+                    account.id                              as account_id,
+                    account.username                        as account_username,
+                    account.password                        as account_password,
+                    account.phoneNumber                     as account_phoneNumber,
+                    account.point                           as account_point,
+                    account.remainTime                      as account_remainTime,
+                    usageRoom.startDateTime                 as startDateTime,
+                    usageRoom.endDateTime                   as endDateTime
+        from        usageRoom
+        join        room
+        on          usageRoom.room_id = room.id
+        join        roomType
+        on          room.roomType_id = roomType.id
+        join        account
+        on          usageRoom.account_id = account.id
+        where       room.id = #{id};
+    </select>
+
+    <select id="getAllByAccount" parameterType="accountAlias" resultMap="usageRoomResultMap">
+        select      usageRoom.id                            as id,
+                    room.id                                 as room_id,
+                    room.roomNumber                         as room_roomNumber,
+                    roomType.id                             as room_roomType_id,
+                    roomType.name                           as room_roomType_name,
+                    roomType.price                          as room_roomType_price,
+                    room.usable                             as room_usable,
+                    account.id                              as account_id,
+                    account.username                        as account_username,
+                    account.password                        as account_password,
+                    account.phoneNumber                     as account_phoneNumber,
+                    account.point                           as account_point,
+                    account.remainTime                      as account_remainTime,
+                    usageRoom.startDateTime                 as startDateTime,
+                    usageRoom.endDateTime                   as endDateTime
+        from        usageRoom
+        join        room
+        on          usageRoom.room_id = room.id
+        join        roomType
+        on          room.roomType_id = roomType.id
+        join        account
+        on          usageRoom.account_id = account.id
+        where       account.id = #{id};
+    </select>
+</mapper>

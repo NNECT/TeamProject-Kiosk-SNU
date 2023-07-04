@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.KioskSNU.snu.service.RoomService">
+    <resultMap id="roomResultMap" type="roomAlias">
+        <id     column="id"                     property="id"/>
+        <result column="roomNumber"             property="roomNumber"/>
+        <result column="roomType_id"            property="roomType_id"/>
+        <result column="roomType_name"          property="roomType_name"/>
+        <result column="roomType_price"         property="roomType_price"/>
+        <result column="usable"                 property="usable"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="roomAlias">
+        insert
+        into        room (roomNumber, roomType_id, usable)
+        values      (#{roomNumber}, #{roomType_id}, #{usable});
+    </insert>
+
+    <update id="update" parameterType="roomAlias">
+        update      room
+        set         roomNumber = #{roomNumber},
+                    roomType_id = #{roomType_id},
+                    usable = #{usable}
+        where       id = #{id};
+    </update>
+
+    <delete id="delete" parameterType="roomAlias">
+        delete
+        from        room
+        where       id = #{id};
+    </delete>
+
+    <select id="getById" parameterType="int" resultMap="roomResultMap">
+        select      room.id                                 as id,
+                    room.roomNumber                         as roomNumber,
+                    roomType.id                             as roomType_id,
+                    roomType.name                           as roomType_name,
+                    roomType.price                          as roomType_price,
+                    room.usable                             as usable
+        from        room
+        join        roomType
+        on          roomType.id = room.roomType_id
+        where       room.id = #{id};
+    </select>
+
+    <select id="getByRoomNumber" parameterType="int" resultMap="roomResultMap">
+        select      room.id                                 as id,
+                    room.roomNumber                         as roomNumber,
+                    roomType.id                             as roomType_id,
+                    roomType.name                           as roomType_name,
+                    roomType.price                          as roomType_price,
+                    room.usable                             as usable
+        from        room
+        join        roomType
+        on          roomType.id = room.roomType_id
+        where       room.roomNumber = #{roomNumber};
+    </select>
+
+    <select id="getAll" resultMap="roomResultMap">
+        select      room.id                                 as id,
+                    room.roomNumber                         as roomNumber,
+                    roomType.id                             as roomType_id,
+                    roomType.name                           as roomType_name,
+                    roomType.price                          as roomType_price,
+                    room.usable                             as usable
+        from        room
+        join        roomType
+        on          roomType.id = room.roomType_id;
+    </select>
+
+    <select id="getAllByRoomType" parameterType="roomTypeAlias" resultMap="roomResultMap">
+        select      room.id                                 as id,
+                    room.roomNumber                         as roomNumber,
+                    roomType.id                             as roomType_id,
+                    roomType.name                           as roomType_name,
+                    roomType.price                          as roomType_price,
+                    room.usable                             as usable
+        from        room
+        join        roomType
+        on          roomType.id = room.roomType_id
+        where       roomType.id = #{id};
+    </select>
+
+    <select id="getAllByUsable" parameterType="boolean" resultMap="roomResultMap">
+        select      room.id                                 as id,
+                    room.roomNumber                         as roomNumber,
+                    roomType.id                             as roomType_id,
+                    roomType.name                           as roomType_name,
+                    roomType.price                          as roomType_price,
+                    room.usable                             as usable
+        from        room
+        join        roomType
+        on          roomType.id = room.roomType_id
+        where       room.usable = #{usable};
+    </select>
+</mapper>

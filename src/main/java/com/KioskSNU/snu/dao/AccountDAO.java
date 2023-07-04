@@ -34,16 +34,19 @@ public class AccountDAO extends SqlSessionDaoSupport implements AccountService {
         return getSqlSession().delete("account.delete", accountDTO);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public AccountDTO getById(int id) {
         return getSqlSession().selectOne("account.getById", id);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public AccountDTO getByUsername(String username) {
         return getSqlSession().selectOne("account.getByUsername", username);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<AccountDTO> getAll() {
         return getSqlSession().selectList("account.getAll");
