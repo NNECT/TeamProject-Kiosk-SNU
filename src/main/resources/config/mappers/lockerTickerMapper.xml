@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.KioskSNU.snu.service.LockerTicketService">
+    <resultMap id="lockerTicketResultMap" type="lockerTicketAlias">
+        <id     column="id"                     property="id"/>
+        <result column="day"                    property="day"/>
+        <result column="price"                  property="price"/>
+        <result column="active"                 property="active"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="lockerTicketAlias">
+        insert
+        into        lockerTicket (day, price, active)
+        values      (#{day}, #{price}, #{active});
+    </insert>
+
+    <update id="update" parameterType="lockerTicketAlias">
+        update      lockerTicket
+        set         day = #{day},
+                    price = #{price},
+                    active = #{active}
+        where       id = #{id};
+    </update>
+
+    <delete id="delete" parameterType="lockerTicketAlias">
+        delete
+        from        lockerTicket
+        where       id = #{id};
+    </delete>
+
+    <select id="getById" parameterType="int" resultMap="lockerTicketResultMap">
+        select      *
+        from        lockerTicket
+        where       id = #{id};
+    </select>
+
+    <select id="getAll" resultMap="lockerTicketResultMap">
+        select      *
+        from        lockerTicket;
+    </select>
+
+    <select id="getAllByActive" parameterType="boolean" resultMap="lockerTicketResultMap">
+        select      *
+        from        lockerTicket
+        where       active = #{active};
+    </select>
+</mapper>

@@ -11,6 +11,7 @@ public interface SeatService {
     int update(SeatDTO seatDTO);
     int delete(SeatDTO seatDTO);
     SeatDTO getById(int id);
+    SeatDTO getBySeatNumber(int seatNumber);
     List<SeatDTO> getAll();
     List<SeatDTO> getAllByUsable(boolean usable);
 }

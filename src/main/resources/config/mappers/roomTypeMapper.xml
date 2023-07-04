@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.KioskSNU.snu.service.RoomTypeService">
+    <resultMap id="roomTypeResultMap" type="roomTypeAlias">
+        <id     column="id"                     property="id"/>
+        <result column="name"                   property="name"/>
+        <result column="price"                  property="price"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="roomTypeAlias">
+        insert
+        into        roomType (name, price)
+        values      (#{name}, #{price});
+    </insert>
+
+    <update id="update" parameterType="roomTypeAlias">
+        update      roomType
+        set         name = #{name},
+                    price = #{price}
+        where       id = #{id};
+    </update>
+
+    <delete id="delete" parameterType="roomTypeAlias">
+        delete
+        from        roomType
+        where       id = #{id};
+    </delete>
+
+    <select id="getById" parameterType="int" resultMap="roomTypeResultMap">
+        select      *
+        from        roomType
+        where       id = #{id};
+    </select>
+
+    <select id="getAll" resultMap="roomTypeResultMap">
+        select      *
+        from        roomType;
+    </select>
+</mapper>

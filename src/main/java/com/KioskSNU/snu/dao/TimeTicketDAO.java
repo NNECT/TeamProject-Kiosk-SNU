@@ -34,16 +34,19 @@ public class TimeTicketDAO extends SqlSessionDaoSupport implements TimeTicketSer
         return getSqlSession().delete("timeTicket.delete", timeTicketDTO);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public TimeTicketDTO getById(int id) {
         return getSqlSession().selectOne("timeTicket.getById", id);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<TimeTicketDTO> getAll() {
         return getSqlSession().selectList("timeTicket.getAll");
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<TimeTicketDTO> getAllByActive(boolean active) {
         return getSqlSession().selectList("timeTicket.getAllByActive", active);

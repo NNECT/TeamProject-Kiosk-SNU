@@ -73,7 +73,7 @@ create table room (
 );
 
 # 룸 사용 데이터
-create table UsageRoom (
+create table usageRoom (
     id                  int unsigned    primary key auto_increment,
     room_id             int unsigned    not null,
     account_id          int unsigned    not null,
@@ -171,6 +171,7 @@ create table admin (
 # 공지사항 데이터
 create table notice (
     id                  int unsigned    primary key auto_increment,
+    title               varchar(100)    not null,
     content             text            not null,
     dateTime            datetime        not null default now(),
     outside             boolean         not null default false,

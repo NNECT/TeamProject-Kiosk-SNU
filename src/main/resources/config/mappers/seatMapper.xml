@@ -34,6 +34,12 @@
         where       id = #{id};
     </select>
 
+    <select id="getBySeatNumber" parameterType="int" resultMap="seatResultMap">
+        select      *
+        from        seat
+        where       seatNumber = #{seatNumber};
+    </select>
+
     <select id="getAll" resultMap="seatResultMap">
         select      *
         from        seat

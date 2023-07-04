@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.KioskSNU.snu.service.AdminService">
+    <resultMap id="adminResultMap" type="adminAlias">
+        <id     column="id"                     property="id"/>
+        <result column="username"               property="username"/>
+        <result column="password"               property="password"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="adminAlias">
+        insert
+        into        admin (username, password)
+        values      (#{username}, #{password});
+    </insert>
+
+    <update id="update" parameterType="adminAlias">
+        update      admin
+        set         username = #{username},
+                    password = #{password}
+        where       id = #{id};
+    </update>
+
+    <delete id="delete" parameterType="adminAlias">
+        delete
+        from        admin
+        where       id = #{id};
+    </delete>
+
+    <select id="getById" parameterType="int" resultMap="adminResultMap">
+        select      *
+        from        admin
+        where       id = #{id};
+    </select>
+
+    <select id="getByUsername" parameterType="String" resultMap="adminResultMap">
+        select      *
+        from        admin
+        where       username = #{username};
+    </select>
+
+    <select id="getAll" resultMap="adminResultMap">
+        select      *
+        from        admin;
+    </select>
+</mapper>

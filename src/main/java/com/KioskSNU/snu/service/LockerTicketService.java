@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
-
+@Mapper
 public interface LockerTicketService {
     int insert(LockerTicketDTO lockerTicketDTO);
     int update(LockerTicketDTO lockerTicketDTO);
