@@ -28,8 +28,7 @@ public class ParticipationChallengeDTO {
     private boolean challenge_active;
     private boolean challenge_visible;
     private LocalDateTime startDateTime;
-    private int periodHours;
-    private int periodDays;
+    private LocalDateTime endDateTime;
     private int goalDay;
     private int goalHour;
     private int rewardPoint;
@@ -228,20 +227,12 @@ public class ParticipationChallengeDTO {
         this.startDateTime = startDateTime;
     }
 
-    public int getPeriodHours() {
-        return periodHours;
+    public LocalDateTime getEndDateTime() {
+        return endDateTime;
     }
 
-    public void setPeriodHours(int periodHours) {
-        this.periodHours = periodHours;
-    }
-
-    public int getPeriodDays() {
-        return periodDays;
-    }
-
-    public void setPeriodDays(int periodDays) {
-        this.periodDays = periodDays;
+    public void setEndDateTime(LocalDateTime endDateTime) {
+        this.endDateTime = endDateTime;
     }
 
     public int getGoalDay() {
