@@ -8,13 +8,22 @@
 
     <context:annotation-config/>
     <context:component-scan base-package="com.KioskSNU.view"/>
-    <context:component-scan base-package="com.KioskSNU.view.*"/>
+    <context:component-scan base-package="com.KioskSNU.common"/>
     <aop:aspectj-autoproxy/>
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/views/" />
         <property name="suffix" value=".jsp" />
     </bean>
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/admin/**"/>
+            <mvc:exclude-mapping path="/**/*.js"/>
+            <mvc:exclude-mapping path="/**/*.css"/>
+            <bean class="com.KioskSNU.interceptor.AdminLoginInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
     <mvc:annotation-driven/>
     <mvc:default-servlet-handler/>

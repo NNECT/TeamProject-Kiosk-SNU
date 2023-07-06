@@ -12,17 +12,18 @@ public class SeatStatusDTO {
         return seatNumber;
     }
 
-    public SeatStatusDTO setSeatNumber(int seatNumber) {
+    public void setSeatNumber(int seatNumber) {
         this.seatNumber = seatNumber;
-        return this;
     }
 
     public String getStatus() {
         return status;
     }
 
-    public SeatStatusDTO setStatus(String status) {
+    /**
+     * @param status -1: cannot use, 0: using, 1: can use
+     */
+    public void setStatus(String status) {
         this.status = status;
-        return this;
     }
 }
