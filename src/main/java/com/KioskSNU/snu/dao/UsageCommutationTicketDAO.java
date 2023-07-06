@@ -22,34 +22,34 @@ public class UsageCommutationTicketDAO extends SqlSessionDaoSupport implements U
 
     @Override
     public int insert(UsageCommutationTicketDTO usageCommutationTicketDTO) {
-        return getSqlSession().insert("usageCommutationTicket.insert", usageCommutationTicketDTO);
+        return getSqlSession().insert("com.KioskSNU.snu.service.UsageCommutationTicketService.insert", usageCommutationTicketDTO);
     }
 
     @Override
     public int update(UsageCommutationTicketDTO usageCommutationTicketDTO) {
-        return getSqlSession().update("usageCommutationTicket.update", usageCommutationTicketDTO);
+        return getSqlSession().update("com.KioskSNU.snu.service.UsageCommutationTicketService.update", usageCommutationTicketDTO);
     }
 
     @Override
     public int delete(UsageCommutationTicketDTO usageCommutationTicketDTO) {
-        return getSqlSession().delete("usageCommutationTicket.delete", usageCommutationTicketDTO);
+        return getSqlSession().delete("com.KioskSNU.snu.service.UsageCommutationTicketService.delete", usageCommutationTicketDTO);
     }
 
     @Transactional(readOnly = true)
     @Override
     public UsageCommutationTicketDTO getById(int id) {
-        return getSqlSession().selectOne("usageCommutationTicket.getById", id);
+        return getSqlSession().selectOne("com.KioskSNU.snu.service.UsageCommutationTicketService.getById", id);
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<UsageCommutationTicketDTO> getAll() {
-        return getSqlSession().selectList("usageCommutationTicket.getAll");
+        return getSqlSession().selectList("com.KioskSNU.snu.service.UsageCommutationTicketService.getAll");
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<UsageCommutationTicketDTO> getAllByAccount(AccountDTO accountDTO) {
-        return getSqlSession().selectList("usageCommutationTicket.getAllByAccount", accountDTO);
+        return getSqlSession().selectList("com.KioskSNU.snu.service.UsageCommutationTicketService.getAllByAccount", accountDTO);
     }
 }

@@ -77,7 +77,8 @@
         join        seat
         on          usageSeat.seat_id = seat.id
         join        account
-        on          usageSeat.account_id = account.id;
+        on          usageSeat.account_id = account.id
+        order by    usageSeat.endDateTime desc;
     </select>
 
     <select id="getAllBySeat" parameterType="seatAlias" resultMap="usageSeatResultMap">
@@ -98,7 +99,8 @@
         on          usageSeat.seat_id = seat.id
         join        account
         on          usageSeat.account_id = account.id
-        where       seat.id = #{id};
+        where       seat.id = #{id}
+        order by    usageSeat.endDateTime desc;
     </select>
 
     <select id="getAllByAccount" parameterType="accountAlias" resultMap="usageSeatResultMap">
@@ -119,6 +121,7 @@
         on          usageSeat.seat_id = seat.id
         join        account
         on          usageSeat.account_id = account.id
-        where       account.id = #{id};
+        where       account.id = #{id}
+        order by    usageSeat.endDateTime desc;
     </select>
 </mapper>

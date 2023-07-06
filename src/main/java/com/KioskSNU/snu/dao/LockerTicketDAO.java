@@ -21,34 +21,34 @@ public class LockerTicketDAO extends SqlSessionDaoSupport implements LockerTicke
 
     @Override
     public int insert(LockerTicketDTO lockerTicketDTO) {
-        return getSqlSession().insert("lockerTicket.insert", lockerTicketDTO);
+        return getSqlSession().insert("com.KioskSNU.snu.service.LockerTicketService.insert", lockerTicketDTO);
     }
 
     @Override
     public int update(LockerTicketDTO lockerTicketDTO) {
-        return getSqlSession().update("lockerTicket.update", lockerTicketDTO);
+        return getSqlSession().update("com.KioskSNU.snu.service.LockerTicketService.update", lockerTicketDTO);
     }
 
     @Override
     public int delete(LockerTicketDTO lockerTicketDTO) {
-        return getSqlSession().delete("lockerTicket.delete", lockerTicketDTO);
+        return getSqlSession().delete("com.KioskSNU.snu.service.LockerTicketService.delete", lockerTicketDTO);
     }
 
     @Transactional(readOnly = true)
     @Override
     public LockerTicketDTO getById(int id) {
-        return getSqlSession().selectOne("lockerTicket.getById", id);
+        return getSqlSession().selectOne("com.KioskSNU.snu.service.LockerTicketService.getById", id);
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<LockerTicketDTO> getAll() {
-        return getSqlSession().selectList("lockerTicket.getAll");
+        return getSqlSession().selectList("com.KioskSNU.snu.service.LockerTicketService.getAll");
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<LockerTicketDTO> getAllByActive(boolean active) {
-        return getSqlSession().selectList("lockerTicket.getAllByActive", active);
+        return getSqlSession().selectList("com.KioskSNU.snu.service.LockerTicketService.getAllByActive", active);
     }
 }

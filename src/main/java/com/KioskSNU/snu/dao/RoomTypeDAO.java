@@ -21,28 +21,28 @@ public class RoomTypeDAO extends SqlSessionDaoSupport implements RoomTypeService
 
     @Override
     public int insert(RoomTypeDTO roomTypeDTO) {
-        return getSqlSession().insert("roomType.insert", roomTypeDTO);
+        return getSqlSession().insert("com.KioskSNU.snu.service.RoomTypeService.insert", roomTypeDTO);
     }
 
     @Override
     public int update(RoomTypeDTO roomTypeDTO) {
-        return getSqlSession().update("roomType.update", roomTypeDTO);
+        return getSqlSession().update("com.KioskSNU.snu.service.RoomTypeService.update", roomTypeDTO);
     }
 
     @Override
     public int delete(RoomTypeDTO roomTypeDTO) {
-        return getSqlSession().delete("roomType.delete", roomTypeDTO);
+        return getSqlSession().delete("com.KioskSNU.snu.service.RoomTypeService.delete", roomTypeDTO);
     }
 
     @Transactional(readOnly = true)
     @Override
     public RoomTypeDTO getById(int id) {
-        return getSqlSession().selectOne("roomType.getById", id);
+        return getSqlSession().selectOne("com.KioskSNU.snu.service.RoomTypeService.getById", id);
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<RoomTypeDTO> getAll() {
-        return getSqlSession().selectList("roomType.getAll");
+        return getSqlSession().selectList("com.KioskSNU.snu.service.RoomTypeService.getAll");
     }
 }

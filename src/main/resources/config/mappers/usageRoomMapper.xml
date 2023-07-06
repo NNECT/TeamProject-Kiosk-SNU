@@ -90,7 +90,8 @@
         join        roomType
         on          room.roomType_id = roomType.id
         join        account
-        on          usageRoom.account_id = account.id;
+        on          usageRoom.account_id = account.id
+        order by    usageRoom.endDateTime desc;
     </select>
 
     <select id="getAllByRoom" parameterType="roomAlias" resultMap="usageRoomResultMap">
@@ -116,7 +117,8 @@
         on          room.roomType_id = roomType.id
         join        account
         on          usageRoom.account_id = account.id
-        where       room.id = #{id};
+        where       room.id = #{id}
+        order by    usageRoom.endDateTime desc;
     </select>
 
     <select id="getAllByAccount" parameterType="accountAlias" resultMap="usageRoomResultMap">
@@ -142,6 +144,7 @@
         on          room.roomType_id = roomType.id
         join        account
         on          usageRoom.account_id = account.id
-        where       account.id = #{id};
+        where       account.id = #{id}
+        order by    usageRoom.endDateTime desc;
     </select>
 </mapper>

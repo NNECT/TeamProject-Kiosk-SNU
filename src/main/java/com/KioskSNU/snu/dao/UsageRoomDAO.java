@@ -23,40 +23,40 @@ public class UsageRoomDAO extends SqlSessionDaoSupport implements UsageRoomServi
 
     @Override
     public int insert(UsageRoomDTO usageRoomDTO) {
-        return getSqlSession().insert("usageRoom.insert", usageRoomDTO);
+        return getSqlSession().insert("com.KioskSNU.snu.service.UsageRoomService.insert", usageRoomDTO);
     }
 
     @Override
     public int update(UsageRoomDTO usageRoomDTO) {
-        return getSqlSession().update("usageRoom.update", usageRoomDTO);
+        return getSqlSession().update("com.KioskSNU.snu.service.UsageRoomService.update", usageRoomDTO);
     }
 
     @Override
     public int delete(UsageRoomDTO usageRoomDTO) {
-        return getSqlSession().delete("usageRoom.delete", usageRoomDTO);
+        return getSqlSession().delete("com.KioskSNU.snu.service.UsageRoomService.delete", usageRoomDTO);
     }
 
     @Transactional(readOnly = true)
     @Override
     public UsageRoomDTO getById(int id) {
-        return getSqlSession().selectOne("usageRoom.getById", id);
+        return getSqlSession().selectOne("com.KioskSNU.snu.service.UsageRoomService.getById", id);
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<UsageRoomDTO> getAll() {
-        return getSqlSession().selectList("usageRoom.getAll");
+        return getSqlSession().selectList("com.KioskSNU.snu.service.UsageRoomService.getAll");
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<UsageRoomDTO> getAllByRoom(RoomDTO roomDTO) {
-        return getSqlSession().selectList("usageRoom.getAllByRoom", roomDTO);
+        return getSqlSession().selectList("com.KioskSNU.snu.service.UsageRoomService.getAllByRoom", roomDTO);
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<UsageRoomDTO> getAllByAccount(AccountDTO accountDTO) {
-        return getSqlSession().selectList("usageRoom.getAllByAccount", accountDTO);
+        return getSqlSession().selectList("com.KioskSNU.snu.service.UsageRoomService.getAllByAccount", accountDTO);
     }
 }

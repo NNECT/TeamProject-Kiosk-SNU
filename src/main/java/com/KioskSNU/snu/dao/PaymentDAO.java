@@ -22,34 +22,34 @@ public class PaymentDAO extends SqlSessionDaoSupport implements PaymentService {
 
     @Override
     public int insert(PaymentDTO paymentDTO) {
-        return getSqlSession().insert("payment.insert", paymentDTO);
+        return getSqlSession().insert("com.KioskSNU.snu.service.PaymentService.insert", paymentDTO);
     }
 
     @Override
     public int update(PaymentDTO paymentDTO) {
-        return getSqlSession().update("payment.update", paymentDTO);
+        return getSqlSession().update("com.KioskSNU.snu.service.PaymentService.update", paymentDTO);
     }
 
     @Override
     public int delete(PaymentDTO paymentDTO) {
-        return getSqlSession().delete("payment.delete", paymentDTO);
+        return getSqlSession().delete("com.KioskSNU.snu.service.PaymentService.delete", paymentDTO);
     }
 
     @Transactional(readOnly = true)
     @Override
     public PaymentDTO getById(int id) {
-        return getSqlSession().selectOne("payment.getById", id);
+        return getSqlSession().selectOne("com.KioskSNU.snu.service.PaymentService.getById", id);
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<PaymentDTO> getAll() {
-        return getSqlSession().selectList("payment.getAll");
+        return getSqlSession().selectList("com.KioskSNU.snu.service.PaymentService.getAll");
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<PaymentDTO> getAllByAccount(AccountDTO accountDTO) {
-        return getSqlSession().selectList("payment.getAllByAccount", accountDTO);
+        return getSqlSession().selectList("com.KioskSNU.snu.service.PaymentService.getAllByAccount", accountDTO);
     }
 }

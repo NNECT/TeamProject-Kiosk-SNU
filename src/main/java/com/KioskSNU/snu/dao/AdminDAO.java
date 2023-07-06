@@ -21,34 +21,34 @@ public class AdminDAO extends SqlSessionDaoSupport implements AdminService {
 
     @Override
     public int insert(AdminDTO adminDTO) {
-        return getSqlSession().insert("admin.insert", adminDTO);
+        return getSqlSession().insert("com.KioskSNU.snu.service.AdminService.insert", adminDTO);
     }
 
     @Override
     public int update(AdminDTO adminDTO) {
-        return getSqlSession().update("admin.update", adminDTO);
+        return getSqlSession().update("com.KioskSNU.snu.service.AdminService.update", adminDTO);
     }
 
     @Override
     public int delete(AdminDTO adminDTO) {
-        return getSqlSession().delete("admin.delete", adminDTO);
+        return getSqlSession().delete("com.KioskSNU.snu.service.AdminService.delete", adminDTO);
     }
 
     @Transactional(readOnly = true)
     @Override
     public AdminDTO getById(int id) {
-        return getSqlSession().selectOne("admin.getById", id);
+        return getSqlSession().selectOne("com.KioskSNU.snu.service.AdminService.getById", id);
     }
 
     @Transactional(readOnly = true)
     @Override
     public AdminDTO getByUsername(String username) {
-        return getSqlSession().selectOne("admin.getByUsername", username);
+        return getSqlSession().selectOne("com.KioskSNU.snu.service.AdminService.getByUsername", username);
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<AdminDTO> getAll() {
-        return getSqlSession().selectList("admin.getAll");
+        return getSqlSession().selectList("com.KioskSNU.snu.service.AdminService.getAll");
     }
 }

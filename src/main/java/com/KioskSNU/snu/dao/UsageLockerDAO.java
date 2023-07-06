@@ -23,40 +23,40 @@ public class UsageLockerDAO extends SqlSessionDaoSupport implements UsageLockerS
 
     @Override
     public int insert(UsageLockerDTO usageLockerDTO) {
-        return getSqlSession().insert("usageLocker.insert", usageLockerDTO);
+        return getSqlSession().insert("com.KioskSNU.snu.service.UsageLockerService.insert", usageLockerDTO);
     }
 
     @Override
     public int update(UsageLockerDTO usageLockerDTO) {
-        return getSqlSession().update("usageLocker.update", usageLockerDTO);
+        return getSqlSession().update("com.KioskSNU.snu.service.UsageLockerService.update", usageLockerDTO);
     }
 
     @Override
     public int delete(UsageLockerDTO usageLockerDTO) {
-        return getSqlSession().delete("usageLocker.delete", usageLockerDTO);
+        return getSqlSession().delete("com.KioskSNU.snu.service.UsageLockerService.delete", usageLockerDTO);
     }
 
     @Transactional(readOnly = true)
     @Override
     public UsageLockerDTO getById(int id) {
-        return getSqlSession().selectOne("usageLocker.getById", id);
+        return getSqlSession().selectOne("com.KioskSNU.snu.service.UsageLockerService.getById", id);
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<UsageLockerDTO> getAll() {
-        return getSqlSession().selectList("usageLocker.getAll");
+        return getSqlSession().selectList("com.KioskSNU.snu.service.UsageLockerService.getAll");
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<UsageLockerDTO> getAllByLocker(LockerDTO lockerDTO) {
-        return getSqlSession().selectList("usageLocker.getAllByLocker", lockerDTO);
+        return getSqlSession().selectList("com.KioskSNU.snu.service.UsageLockerService.getAllByLocker", lockerDTO);
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<UsageLockerDTO> getAllByAccount(AccountDTO accountDTO) {
-        return getSqlSession().selectList("usageLocker.getAllByAccount", accountDTO);
+        return getSqlSession().selectList("com.KioskSNU.snu.service.UsageLockerService.getAllByAccount", accountDTO);
     }
 }

@@ -21,40 +21,40 @@ public class SeatDAO extends SqlSessionDaoSupport implements SeatService {
 
     @Override
     public int insert(SeatDTO seatDTO) {
-        return getSqlSession().insert("seat.insert", seatDTO);
+        return getSqlSession().insert("com.KioskSNU.snu.service.SeatService.insert", seatDTO);
     }
 
     @Override
     public int update(SeatDTO seatDTO) {
-        return getSqlSession().update("seat.update", seatDTO);
+        return getSqlSession().update("com.KioskSNU.snu.service.SeatService.update", seatDTO);
     }
 
     @Override
     public int delete(SeatDTO seatDTO) {
-        return getSqlSession().delete("seat.delete", seatDTO);
+        return getSqlSession().delete("com.KioskSNU.snu.service.SeatService.delete", seatDTO);
     }
 
     @Transactional(readOnly = true)
     @Override
     public SeatDTO getById(int id) {
-        return getSqlSession().selectOne("seat.getById", id);
+        return getSqlSession().selectOne("com.KioskSNU.snu.service.SeatService.getById", id);
     }
 
     @Transactional(readOnly = true)
     @Override
     public SeatDTO getBySeatNumber(int seatNumber) {
-        return getSqlSession().selectOne("seat.getBySeatNumber", seatNumber);
+        return getSqlSession().selectOne("com.KioskSNU.snu.service.SeatService.getBySeatNumber", seatNumber);
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<SeatDTO> getAll() {
-        return getSqlSession().selectList("seat.getAll");
+        return getSqlSession().selectList("com.KioskSNU.snu.service.SeatService.getAll");
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<SeatDTO> getAllByUsable(boolean usable) {
-        return getSqlSession().selectList("seat.getAllByUsable", usable);
+        return getSqlSession().selectList("com.KioskSNU.snu.service.SeatService.getAllByUsable", usable);
     }
 }
