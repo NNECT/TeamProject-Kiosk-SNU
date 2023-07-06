@@ -21,34 +21,34 @@ public class CommutationTicketDAO extends SqlSessionDaoSupport implements Commut
 
     @Override
     public int insert(CommutationTicketDTO commutationTicketDTO) {
-        return getSqlSession().insert("commutationTicket.insert", commutationTicketDTO);
+        return getSqlSession().insert("com.KioskSNU.snu.service.CommutationTicketService.insert", commutationTicketDTO);
     }
 
     @Override
     public int update(CommutationTicketDTO commutationTicketDTO) {
-        return getSqlSession().update("commutationTicket.update", commutationTicketDTO);
+        return getSqlSession().update("com.KioskSNU.snu.service.CommutationTicketService.update", commutationTicketDTO);
     }
 
     @Override
     public int delete(CommutationTicketDTO commutationTicketDTO) {
-        return getSqlSession().delete("commutationTicket.delete", commutationTicketDTO);
+        return getSqlSession().delete("com.KioskSNU.snu.service.CommutationTicketService.delete", commutationTicketDTO);
     }
 
     @Transactional(readOnly = true)
     @Override
     public CommutationTicketDTO getById(int id) {
-        return getSqlSession().selectOne("commutationTicket.getById", id);
+        return getSqlSession().selectOne("com.KioskSNU.snu.service.CommutationTicketService.getById", id);
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<CommutationTicketDTO> getAll() {
-        return getSqlSession().selectList("commutationTicket.getAll");
+        return getSqlSession().selectList("com.KioskSNU.snu.service.CommutationTicketService.getAll");
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<CommutationTicketDTO> getAllByActive(boolean active) {
-        return getSqlSession().selectList("commutationTicket.getAllByActive", active);
+        return getSqlSession().selectList("com.KioskSNU.snu.service.CommutationTicketService.getAllByActive", active);
     }
 }

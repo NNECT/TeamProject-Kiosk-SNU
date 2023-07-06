@@ -23,46 +23,46 @@ public class ParticipationChallengeDAO extends SqlSessionDaoSupport implements P
 
     @Override
     public int insert(ParticipationChallengeDTO participationChallengeDTO) {
-        return getSqlSession().insert("participationChallenge.insert", participationChallengeDTO);
+        return getSqlSession().insert("com.KioskSNU.snu.service.ParticipationChallengeService.insert", participationChallengeDTO);
     }
 
     @Override
     public int update(ParticipationChallengeDTO participationChallengeDTO) {
-        return getSqlSession().update("participationChallenge.update", participationChallengeDTO);
+        return getSqlSession().update("com.KioskSNU.snu.service.ParticipationChallengeService.update", participationChallengeDTO);
     }
 
     @Override
     public int delete(ParticipationChallengeDTO participationChallengeDTO) {
-        return getSqlSession().delete("participationChallenge.delete", participationChallengeDTO);
+        return getSqlSession().delete("com.KioskSNU.snu.service.ParticipationChallengeService.delete", participationChallengeDTO);
     }
 
     @Transactional(readOnly = true)
     @Override
     public ParticipationChallengeDTO getById(int id) {
-        return getSqlSession().selectOne("participationChallenge.getById", id);
+        return getSqlSession().selectOne("com.KioskSNU.snu.service.ParticipationChallengeService.getById", id);
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<ParticipationChallengeDTO> getAll() {
-        return getSqlSession().selectList("participationChallenge.getAll");
+        return getSqlSession().selectList("com.KioskSNU.snu.service.ParticipationChallengeService.getAll");
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<ParticipationChallengeDTO> getAllByAccount(AccountDTO accountDTO) {
-        return getSqlSession().selectList("participationChallenge.getAllByAccount", accountDTO);
+        return getSqlSession().selectList("com.KioskSNU.snu.service.ParticipationChallengeService.getAllByAccount", accountDTO);
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<ParticipationChallengeDTO> getAllByChallenge(ChallengeDTO challengeDTO) {
-        return getSqlSession().selectList("participationChallenge.getAllByChallenge", challengeDTO);
+        return getSqlSession().selectList("com.KioskSNU.snu.service.ParticipationChallengeService.getAllByChallenge", challengeDTO);
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<ParticipationChallengeDTO> getAllByActive(boolean active) {
-        return getSqlSession().selectList("participationChallenge.getAllByActive", active);
+        return getSqlSession().selectList("com.KioskSNU.snu.service.ParticipationChallengeService.getAllByActive", active);
     }
 }

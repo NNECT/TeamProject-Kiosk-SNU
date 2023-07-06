@@ -20,6 +20,12 @@ create table usageCommutationTicket (
     foreign key (account_id) references account(id)
 );
 
+create index account_endDate_idx
+on usageCommutationTicket (account_id, endDate desc);
+
+create index endDate_idx
+on usageCommutationTicket (endDate desc);
+
 
 # 시간권 데이터
 create table timeTicket (
@@ -55,6 +61,12 @@ create table usageSeat (
     foreign key (account_id) references account(id)
 );
 
+create index seat_endDateTime_idx
+on usageSeat (seat_id, endDateTime desc);
+
+create index account_endDateTime_idx
+on usageSeat (account_id, endDateTime desc);
+
 
 # 룸 종류 데이터
 create table roomType (
@@ -72,6 +84,9 @@ create table room (
     foreign key (roomType_id) references roomType(id)
 );
 
+create index usable_room_idx
+on room (usable);
+
 # 룸 사용 데이터
 create table usageRoom (
     id                  int unsigned    primary key auto_increment,
@@ -82,6 +97,12 @@ create table usageRoom (
     foreign key (room_id) references room(id),
     foreign key (account_id) references account(id)
 );
+
+create index room_endDateTime_idx
+on usageRoom (room_id, endDateTime desc);
+
+create index account_endDateTime_idx
+on usageRoom (account_id, endDateTime desc);
 
 
 # 사물함 사용권 데이터
@@ -110,6 +131,12 @@ create table usageLocker (
     foreign key (account_id) references account(id)
 );
 
+create index locker_endDate_idx
+on usageLocker (locker_id, endDate desc);
+
+create index account_endDate_idx
+on usageLocker (account_id, endDate desc);
+
 
 # 결제 데이터
 create table payment (
@@ -121,6 +148,12 @@ create table payment (
     log                 varchar(200)    not null,
     foreign key (account_id) references account(id)
 );
+
+create index dateTime_idx
+on payment (dateTime desc);
+
+create index account_dateTime_idx
+on payment (account_id, dateTime desc);
 
 
 # 챌린지 데이터
@@ -143,14 +176,19 @@ create table challenge (
     visible             boolean         not null default true
 );
 
+create index active_idx
+on challenge (active);
+
+create index visible_active_idx
+on challenge (visible, active);
+
 # 챌린지 참여 데이터
 create table participationChallenge (
     id                  int unsigned    primary key auto_increment,
     account_id          int unsigned    not null,
     challenge_id        int unsigned    not null,
     startDateTime       datetime        not null default now(),
-    periodDays          int             not null,
-    periodHours         int             not null,
+    endDateTime         datetime        not null,
     goalDay             int             not null,
     goalHour            int             not null,
     rewardPoint         int             not null,
@@ -159,6 +197,9 @@ create table participationChallenge (
     foreign key (account_id) references account(id),
     foreign key (challenge_id) references challenge(id)
 );
+
+create index account_endDateTime_idx
+on participationChallenge (account_id, endDateTime desc);
 
 
 # 관리자 데이터
@@ -177,3 +218,20 @@ create table notice (
     outside             boolean         not null default false,
     active              boolean         not null default true
 );
+
+create index dateTime_idx
+on notice (dateTime desc);
+
+
+# 자리 출력용 뷰
+create view seatStatus as
+    select      seat.seatNumber                 as seatNumber,
+                case
+                    when seat.usable = false then -1
+                    when usageSeat.endDateTime is null then 0
+                    else 1
+                end                             as status
+    from        seat
+    left join   usageSeat
+    on          seat.id = usageSeat.seat_id and usageSeat.endDateTime is null
+    order by    seat.seatNumber;

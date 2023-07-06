@@ -22,46 +22,46 @@ public class RoomDAO extends SqlSessionDaoSupport implements RoomService {
 
     @Override
     public int insert(RoomDTO roomDTO) {
-        return getSqlSession().insert("room.insert", roomDTO);
+        return getSqlSession().insert("com.KioskSNU.snu.service.RoomService.insert", roomDTO);
     }
 
     @Override
     public int update(RoomDTO roomDTO) {
-        return getSqlSession().update("room.update", roomDTO);
+        return getSqlSession().update("com.KioskSNU.snu.service.RoomService.update", roomDTO);
     }
 
     @Override
     public int delete(RoomDTO roomDTO) {
-        return getSqlSession().delete("room.delete", roomDTO);
+        return getSqlSession().delete("com.KioskSNU.snu.service.RoomService.delete", roomDTO);
     }
 
     @Transactional(readOnly = true)
     @Override
     public RoomDTO getById(int id) {
-        return getSqlSession().selectOne("room.getById", id);
+        return getSqlSession().selectOne("com.KioskSNU.snu.service.RoomService.getById", id);
     }
 
     @Transactional(readOnly = true)
     @Override
     public RoomDTO getByRoomNumber(int roomNumber) {
-        return getSqlSession().selectOne("room.getByRoomNumber", roomNumber);
+        return getSqlSession().selectOne("com.KioskSNU.snu.service.RoomService.getByRoomNumber", roomNumber);
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<RoomDTO> getAll() {
-        return getSqlSession().selectList("room.getAll");
+        return getSqlSession().selectList("com.KioskSNU.snu.service.RoomService.getAll");
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<RoomDTO> getAllByRoomType(RoomTypeDTO roomTypeDTO) {
-        return getSqlSession().selectList("room.getAllByRoomType", roomTypeDTO);
+        return getSqlSession().selectList("com.KioskSNU.snu.service.RoomService.getAllByRoomType", roomTypeDTO);
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<RoomDTO> getAllByUsable(boolean usable) {
-        return getSqlSession().selectList("room.getAllByUsable", usable);
+        return getSqlSession().selectList("com.KioskSNU.snu.service.RoomService.getAllByUsable", usable);
     }
 }

@@ -77,7 +77,8 @@
         join        locker
         on          usageLocker.locker_id = locker.id
         join        account
-        on          usageLocker.account_id = account.id;
+        on          usageLocker.account_id = account.id
+        order by    usageLocker.endDate desc;
     </select>
 
     <select id="getAllByLocker" parameterType="lockerAlias" resultMap="usageLockerResultMap">
@@ -98,7 +99,8 @@
         on          usageLocker.locker_id = locker.id
         join        account
         on          usageLocker.account_id = account.id
-        where       locker.id = #{id};
+        where       locker.id = #{id}
+        order by    usageLocker.endDate desc;
     </select>
 
     <select id="getAllByAccount" parameterType="accountAlias" resultMap="usageLockerResultMap">
@@ -119,6 +121,7 @@
         on          usageLocker.locker_id = locker.id
         join        account
         on          usageLocker.account_id = account.id
-        where       account.id = #{id};
+        where       account.id = #{id}
+        order by    usageLocker.endDate desc;
     </select>
 </mapper>

@@ -21,34 +21,34 @@ public class AccountDAO extends SqlSessionDaoSupport implements AccountService {
 
     @Override
     public int insert(AccountDTO accountDTO) {
-        return getSqlSession().insert("account.insert", accountDTO);
+        return getSqlSession().insert("com.KioskSNU.snu.service.AccountService.insert", accountDTO);
     }
 
     @Override
     public int update(AccountDTO accountDTO) {
-        return getSqlSession().update("account.update", accountDTO);
+        return getSqlSession().update("com.KioskSNU.snu.service.AccountService.update", accountDTO);
     }
 
     @Override
     public int delete(AccountDTO accountDTO) {
-        return getSqlSession().delete("account.delete", accountDTO);
+        return getSqlSession().delete("com.KioskSNU.snu.service.AccountService.delete", accountDTO);
     }
 
     @Transactional(readOnly = true)
     @Override
     public AccountDTO getById(int id) {
-        return getSqlSession().selectOne("account.getById", id);
+        return getSqlSession().selectOne("com.KioskSNU.snu.service.AccountService.getById", id);
     }
 
     @Transactional(readOnly = true)
     @Override
     public AccountDTO getByUsername(String username) {
-        return getSqlSession().selectOne("account.getByUsername", username);
+        return getSqlSession().selectOne("com.KioskSNU.snu.service.AccountService.getByUsername", username);
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<AccountDTO> getAll() {
-        return getSqlSession().selectList("account.getAll");
+        return getSqlSession().selectList("com.KioskSNU.snu.service.AccountService.getAll");
     }
 }

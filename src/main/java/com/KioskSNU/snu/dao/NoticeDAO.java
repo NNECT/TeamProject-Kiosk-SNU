@@ -21,40 +21,40 @@ public class NoticeDAO extends SqlSessionDaoSupport implements NoticeService {
 
     @Override
     public int insert(NoticeDTO noticeDTO) {
-        return getSqlSession().insert("notice.insert", noticeDTO);
+        return getSqlSession().insert("com.KioskSNU.snu.service.NoticeService.insert", noticeDTO);
     }
 
     @Override
     public int update(NoticeDTO noticeDTO) {
-        return getSqlSession().update("notice.update", noticeDTO);
+        return getSqlSession().update("com.KioskSNU.snu.service.NoticeService.update", noticeDTO);
     }
 
     @Override
     public int delete(NoticeDTO noticeDTO) {
-        return getSqlSession().delete("notice.delete", noticeDTO);
+        return getSqlSession().delete("com.KioskSNU.snu.service.NoticeService.delete", noticeDTO);
     }
 
     @Transactional(readOnly = true)
     @Override
     public NoticeDTO getById(int id) {
-        return getSqlSession().selectOne("notice.getById", id);
+        return getSqlSession().selectOne("com.KioskSNU.snu.service.NoticeService.getById", id);
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<NoticeDTO> getAll() {
-        return getSqlSession().selectList("notice.getAll");
+        return getSqlSession().selectList("com.KioskSNU.snu.service.NoticeService.getAll");
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<NoticeDTO> getAllByOutside(boolean outside) {
-        return getSqlSession().selectList("notice.getAllByOutside", outside);
+        return getSqlSession().selectList("com.KioskSNU.snu.service.NoticeService.getAllByOutside", outside);
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<NoticeDTO> getAllByActive(boolean active) {
-        return getSqlSession().selectList("notice.getAllByActive", active);
+        return getSqlSession().selectList("com.KioskSNU.snu.service.NoticeService.getAllByActive", active);
     }
 }

@@ -28,8 +28,7 @@
         <result column="challenge_active"           property="challenge_active"/>
         <result column="challenge_visible"          property="challenge_visible"/>
         <result column="startDateTime"              property="startDateTime"/>
-        <result column="periodHours"                property="periodHours"/>
-        <result column="periodDays"                 property="periodDays"/>
+        <result column="endDateTime"                property="endDateTime"/>
         <result column="goalDay"                    property="goalDay"/>
         <result column="goalHour"                   property="goalHour"/>
         <result column="rewardPoint"                property="rewardPoint"/>
@@ -43,8 +42,7 @@
                         account_id,
                         challenge_id,
                         startDateTime,
-                        periodHours,
-                        periodDays,
+                        endDateTime,
                         goalDay,
                         goalHour,
                         rewardPoint,
@@ -55,8 +53,7 @@
                         #{account_id},
                         #{challenge_id},
                         #{startDateTime},
-                        #{periodHours},
-                        #{periodDays},
+                        #{endDateTime},
                         #{goalDay},
                         #{goalHour},
                         #{rewardPoint},
@@ -70,8 +67,7 @@
         set         account_id = #{account_id},
                     challenge_id = #{challenge_id},
                     startDateTime = #{startDateTime},
-                    periodHours = #{periodHours},
-                    periodDays = #{periodDays},
+                    endDateTime = #{endDateTime},
                     goalDay = #{goalDay},
                     goalHour = #{goalHour},
                     rewardPoint = #{rewardPoint},
@@ -111,8 +107,7 @@
                     challenge.active                        as challenge_active,
                     challenge.visible                       as challenge_visible,
                     participationChallenge.startDateTime    as startDateTime,
-                    participationChallenge.periodHours      as periodHours,
-                    participationChallenge.periodDays       as periodDays,
+                    participationChallenge.endDateTime      as endDateTime,
                     participationChallenge.goalDay          as goalDay,
                     participationChallenge.goalHour         as goalHour,
                     participationChallenge.rewardPoint      as rewardPoint,
@@ -151,8 +146,7 @@
                     challenge.active                        as challenge_active,
                     challenge.visible                       as challenge_visible,
                     participationChallenge.startDateTime    as startDateTime,
-                    participationChallenge.periodHours      as periodHours,
-                    participationChallenge.periodDays       as periodDays,
+                    participationChallenge.endDateTime      as endDateTime,
                     participationChallenge.goalDay          as goalDay,
                     participationChallenge.goalHour         as goalHour,
                     participationChallenge.rewardPoint      as rewardPoint,
@@ -190,8 +184,7 @@
                     challenge.active                        as challenge_active,
                     challenge.visible                       as challenge_visible,
                     participationChallenge.startDateTime    as startDateTime,
-                    participationChallenge.periodHours      as periodHours,
-                    participationChallenge.periodDays       as periodDays,
+                    participationChallenge.endDateTime      as endDateTime,
                     participationChallenge.goalDay          as goalDay,
                     participationChallenge.goalHour         as goalHour,
                     participationChallenge.rewardPoint      as rewardPoint,
@@ -230,8 +223,7 @@
                     challenge.active                        as challenge_active,
                     challenge.visible                       as challenge_visible,
                     participationChallenge.startDateTime    as startDateTime,
-                    participationChallenge.periodHours      as periodHours,
-                    participationChallenge.periodDays       as periodDays,
+                    participationChallenge.endDateTime      as endDateTime,
                     participationChallenge.goalDay          as goalDay,
                     participationChallenge.goalHour         as goalHour,
                     participationChallenge.rewardPoint      as rewardPoint,
@@ -270,8 +262,7 @@
                     challenge.active                        as challenge_active,
                     challenge.visible                       as challenge_visible,
                     participationChallenge.startDateTime    as startDateTime,
-                    participationChallenge.periodHours      as periodHours,
-                    participationChallenge.periodDays       as periodDays,
+                    participationChallenge.endDateTime      as endDateTime,
                     participationChallenge.goalDay          as goalDay,
                     participationChallenge.goalHour         as goalHour,
                     participationChallenge.rewardPoint      as rewardPoint,
