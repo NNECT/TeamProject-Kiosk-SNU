@@ -18,7 +18,6 @@
                     <table class="table">
                         <thead>
                             <tr style ="background-color: lightblue;">
-                                <th>이름</th>
                                 <th>전화번호</th>
                                 <th>아이디</th>
                                 <th>등록일</th>
@@ -26,10 +25,9 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>홍길동</td>
                                 <td>010-1234-5678</td>
-                                <td>25</td>
-                                <td>등록일</td>
+                                <td>abc123</td>
+                                <td>2023-07-01</td>
                             </tr>
                         </tbody>
                     </table>
