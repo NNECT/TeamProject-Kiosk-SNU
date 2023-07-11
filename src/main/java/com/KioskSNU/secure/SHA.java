@@ -7,15 +7,10 @@ import java.security.NoSuchAlgorithmException;
 
 @Component
 public class SHA {
-    public String encrypt(String text) {
-        try {
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-            md.update(text.getBytes());
-
-            return bytesToHex(md.digest());
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
+    public String encrypt(String text) throws NoSuchAlgorithmException {
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
+        md.update(text.getBytes());
+        return bytesToHex(md.digest());
     }
 
     private String bytesToHex(byte[] bytes) {

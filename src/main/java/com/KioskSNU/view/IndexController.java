@@ -4,6 +4,8 @@ import com.KioskSNU.secure.RSA;
 import com.KioskSNU.secure.SHA;
 import com.KioskSNU.snu.dto.AccountDTO;
 import com.KioskSNU.snu.dto.UsageCommutationTicketDTO;
+import com.KioskSNU.snu.dto.UsageRoomDTO;
+import com.KioskSNU.snu.dto.UsageSeatDTO;
 import com.KioskSNU.snu.service.AccountService;
 import com.KioskSNU.snu.service.UsageCommutationTicketService;
 import com.google.gson.Gson;
@@ -20,16 +22,16 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Controller
 public class IndexController {
-    Map<Integer, HttpSession> seatMap;
-    Map<Integer, HttpSession> roomMap;
+    Map<Integer, UsageSeatDTO> seatMap;
+    Map<Integer, UsageRoomDTO> roomMap;
     RSA rsa;
     SHA sha;
     AccountService accountService;
     UsageCommutationTicketService usageCommutationTicketService;
 
     @Autowired
-    public IndexController(@Qualifier("seatMap") ConcurrentHashMap<Integer, HttpSession> seatMap,
-                           @Qualifier("roomMap") ConcurrentHashMap<Integer, HttpSession> roomMap,
+    public IndexController(@Qualifier("seatMap") ConcurrentHashMap<Integer, UsageSeatDTO> seatMap,
+                           @Qualifier("roomMap") ConcurrentHashMap<Integer, UsageRoomDTO> roomMap,
                            RSA rsa, SHA sha,
                            AccountService accountService,
                            UsageCommutationTicketService usageCommutationTicketService) {

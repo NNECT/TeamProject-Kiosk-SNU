@@ -27,7 +27,5 @@
 
         <typeAlias type="com.KioskSNU.snu.dto.AdminDTO" alias="adminAlias"/>
         <typeAlias type="com.KioskSNU.snu.dto.NoticeDTO" alias="noticeAlias"/>
-
-        <typeAlias type="com.KioskSNU.snu.viewdto.SeatStatusDTO" alias="seatStatusAlias"/>
     </typeAliases>
 </configuration>

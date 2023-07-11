@@ -38,14 +38,14 @@
 <!--    자리 세션 관리-->
     <bean id="seatMap" class="java.util.concurrent.ConcurrentHashMap">
         <constructor-arg>
-            <map key-type="java.lang.Integer" value-type="javax.servlet.http.HttpSession"/>
+            <map key-type="java.lang.Integer" value-type="com.KioskSNU.snu.dto.UsageSeatDTO"/>
         </constructor-arg>
     </bean>
 
 <!--    방 세션 관리-->
     <bean id="roomMap" class="java.util.concurrent.ConcurrentHashMap">
         <constructor-arg>
-            <map key-type="java.lang.Integer" value-type="javax.servlet.http.HttpSession"/>
+            <map key-type="java.lang.Integer" value-type="com.KioskSNU.snu.dto.UsageRoomDTO"/>
         </constructor-arg>
     </bean>
 </beans>

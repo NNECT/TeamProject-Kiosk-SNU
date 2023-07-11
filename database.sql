@@ -221,17 +221,3 @@ create table notice (
 
 create index dateTime_idx
 on notice (dateTime desc);
-
-
-# 자리 출력용 뷰
-create view seatStatus as
-    select      seat.seatNumber                 as seatNumber,
-                case
-                    when seat.usable = false then -1
-                    when usageSeat.endDateTime is null then 0
-                    else 1
-                end                             as status
-    from        seat
-    left join   usageSeat
-    on          seat.id = usageSeat.seat_id and usageSeat.endDateTime is null
-    order by    seat.seatNumber;
