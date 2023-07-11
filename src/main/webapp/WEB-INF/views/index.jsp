@@ -17,9 +17,9 @@
     <a href="void:javascript(0)"><h1>내부 키오스크 페이지</h1></a>
     <a href="<c:url value="/admin"/>"><h1>관리자 페이지</h1></a>
     테스트용 파일<br>
-    ${user1.username}<br>
-    ${user1.password}<br>
-    ${user1.phoneNumber}<br>
-    ${usage.get(0).endDate}<br>
+<%--    ${user1.username}<br>--%>
+<%--    ${user1.password}<br>--%>
+<%--    ${user1.phoneNumber}<br>--%>
+<%--    ${usage.get(0).endDate}<br>--%>
 </body>
 </html>
