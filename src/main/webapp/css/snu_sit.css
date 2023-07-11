@@ -9,20 +9,20 @@ body{
     color: #383838;
 }
 #info{
-    width: 200px;
+    width: 270px;
     height: 15px;
     border: 0px solid blue;
-    position: absolute;
-    top: 65px;
-    left: 20%;
+    float: left;
 }
 .box{
     display: inline-block;
     width: 15px;
     height: 15px;
+    margin: 0 5px;
 }
 .b{background-color: #285FF5;}
 .g{background-color: #C3C3C3;}
+.r{background-color: #f52828;}
 .blue{
     color: #285FF5;
     font-size: 15px;
@@ -31,16 +31,28 @@ body{
     color:#707070;
     font-size: 15px;
 }
-
+.red{
+    color: #f52828;
+    font-size: 15px;
+}
+/* 자리선택 */
+#seatWrap{
+    width: 1000px;
+    height: 700px;
+    border: 0px solid red;
+    position: absolute;
+    top: 90px;
+    left: 50%;
+    transform: translate(-50%,0);
+}
 section{
     width: 1000px;
     height: 550px;
     border: 0px solid red;
     background-color: white;
-    position: absolute;
-    top: 90px;
-    left: 50%;
-    transform: translate(-50%,0);
+    float: left;
+    margin-top: 15px;
+
 }
 table{
     margin: auto;
@@ -77,9 +89,7 @@ a{
     width:500px;
     height: 60px;
     background-color: #C3C3C3;
-    position: relative;
-    top: 573px;
-    left: 700px;  
+    float: right;
 }
 #locker>p{
     line-height: 40px;
