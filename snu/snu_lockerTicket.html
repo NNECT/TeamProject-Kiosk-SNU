@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=deevice-width, initial-scale=1,minimum-scale=1,maxmun-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../snu/snu_lockerTicket.css"> 
+        <link href="https://cdn.jsdelivr.net/gh/sunn-us/SUITE/fonts/static/woff2/SUITE.css" rel="stylesheet">
+
+        <style>
+            body {font-family: 'SUITE', sans-serif;}
+        </style>
+        <title>snu_newPassword_page</title>
+    </head>
+    <body>
+        <div id="whiteWrap">
+            <section>
+                <ul>
+                    <li id="lockerTicket">사물함</li>
+                </ul>
+                <hr>
+                
+                <form id="lockerFrm">
+                    <p>사물함을 선택해주세요</p>
+                    <table id="locker">
+                        
+                        <tr>
+                            <td class="l use"></td>
+                            <td class="l use"></td>
+                            <td class="l" colspan="7"></td>
+                        </tr>
+                        <tr>
+                            <td class="l use"></td>
+                            <td class="l use"></td>
+                            <td class="l use"></td>
+                            <td class="l use"></td>
+                            <td class="l use"></td>
+                            <td class="l use"></td>
+                            <td class="l use"></td>
+                            <td class="l use"></td>
+                            <td class="l use"></td>
+                        </tr>
+                        <tr>
+                            <td class="l use"></td>
+                            <td class="l use"></td>
+                            <td class="l use"></td>
+                            <td class="l use"></td>
+                            <td class="l use"></td>
+                            <td class="l use"></td>
+                            <td class="l use"></td>
+                            <td class="l use"></td>
+                            <td class="l use"></td>
+                        </tr>
+                    </table>
+                    <div id="info"><!--자리설명-->
+                        <div class="box b"></div>&nbsp;<span class="blue">사용 가능</span>&nbsp;&nbsp;
+                        <div class="box g"></div>&nbsp;<span class="gray">사용 불가능</span>
+                   </div>
+                    <table id="ticket">
+                            <td>
+                                <label class="label">
+                                <input type="radio" name="ticket" id="tRadio">
+                                    <span>
+                                    <p class="t" name="time" class="rText">30일</p>
+                                    <p class="p" name="price" class="rText">6,000원</p>
+                                    </span>
+                                </label>
+                            </td>
+                            <td>
+                                <label class="label">
+                                <input type="radio" name="ticket" id="tRadio"><br>
+                                    <span>
+                                    <p class="t" name="time">사용X</p><br>
+                                    <p class="p" name="price"></p><br>
+                                    </span>
+                                </label>
+                            </td>
+                        </tr>
+                    </table>
+                    <script>
+                        const radioInputs = document.querySelectorAll('.label');
+                        
+                        radioInputs.forEach(radioInput => {
+                            radioInput.addEventListener('change', (event) => {
+                                // All labels back to normal
+                                document.querySelectorAll('.label').forEach(label => {
+                                    label.style.backgroundColor = "#ffffff";
+                                });
+                                // Selected label to blue
+                                if (event.target.checked) {
+                                    event.target.parentElement.style.backgroundColor = "#285FF5";
+                                    event.target.parentElement.querySelectorAll('.rText').style.color = "#ffffff";
+                                    
+                                }
+                            });
+
+                            
+                        });
+
+                        
+                    </script>
+                    <input id="beforeBtn" type="submit" value="이전">
+                    <input id="nextBtn" type="submit" value="다음">
+                </form>
+            </section>
+        </div>
+    </body>
+ </html>
