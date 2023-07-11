@@ -13,7 +13,7 @@
     <title>Index</title>
 </head>
 <body>
-    <a href="void:javascript(0)"><h1>외부 키오스크 페이지</h1></a>
+    <a href="<c:url value="/outside"/>"><h1>외부 키오스크 페이지</h1></a>
     <a href="void:javascript(0)"><h1>내부 키오스크 페이지</h1></a>
     <a href="<c:url value="/admin"/>"><h1>관리자 페이지</h1></a>
     테스트용 파일<br>

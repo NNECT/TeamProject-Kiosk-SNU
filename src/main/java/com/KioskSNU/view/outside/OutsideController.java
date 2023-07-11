@@ -4,9 +4,8 @@ import com.KioskSNU.secure.RSA;
 import com.KioskSNU.secure.SHA;
 import com.KioskSNU.snu.dto.UsageRoomDTO;
 import com.KioskSNU.snu.dto.UsageSeatDTO;
-import com.KioskSNU.snu.service.AccountService;
-import com.KioskSNU.snu.service.RoomService;
-import com.KioskSNU.snu.service.SeatService;
+import com.KioskSNU.snu.service.*;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -14,14 +13,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-@Controller("/outside")
+@Controller
+@RequestMapping("/outside")
 public class OutsideController {
     private final Map<Integer, UsageSeatDTO> seatMap;
     private final Map<Integer, UsageRoomDTO> roomMap;
@@ -30,6 +28,8 @@ public class OutsideController {
     private final AccountService accountService;
     private final SeatService seatService;
     private final RoomService roomService;
+    private final UsageSeatService usageSeatService;
+    private final UsageRoomService usageRoomService;
 
     @Autowired
     public OutsideController(
@@ -39,7 +39,9 @@ public class OutsideController {
             SHA sha,
             AccountService accountService,
             SeatService seatService,
-            RoomService roomService
+            RoomService roomService,
+            UsageSeatService usageSeatService,
+            UsageRoomService usageRoomService
     ) {
         this.seatMap = seatMap;
         this.roomMap = roomMap;
@@ -48,6 +50,8 @@ public class OutsideController {
         this.accountService = accountService;
         this.seatService = seatService;
         this.roomService = roomService;
+        this.usageSeatService = usageSeatService;
+        this.usageRoomService = usageRoomService;
     }
 
     @RequestMapping("")
@@ -63,14 +67,14 @@ public class OutsideController {
         mav.setViewName("outside/select");
 
         Map<Integer, Integer> seatStatusMap = new HashMap<>();
-        seatService.getAll().forEach(seat -> seatStatusMap.put(seat.getId(), seat.isUsable() ? 1 : -1));
+        seatService.getAll().forEach(seat -> seatStatusMap.put(seat.getSeatNumber(), seat.isUsable() ? 1 : -1));
         seatMap.forEach((id, usage) -> seatStatusMap.put(id, 0));
-        mav.addObject("seatStatusMap", seatStatusMap);
+        mav.addObject("seatStatusMap", new Gson().toJson(seatStatusMap));
 
         Map<Integer, Integer> roomStatusMap = new HashMap<>();
-        roomService.getAll().forEach(room -> roomStatusMap.put(room.getId(), room.isUsable() ? 1 : -1));
+        roomService.getAll().forEach(room -> roomStatusMap.put(room.getRoomNumber(), room.isUsable() ? 1 : -1));
         roomMap.forEach((id, usage) -> roomStatusMap.put(id, 0));
-        mav.addObject("roomStatusMap", roomStatusMap);
+        mav.addObject("roomStatusMap", new Gson().toJson(roomStatusMap));
 
         return mav;
     }
@@ -84,16 +88,36 @@ public class OutsideController {
             mav.setViewName("redirect:/outside/select");
         } else if (type.equals("seat")) {
             UsageSeatDTO usage = new UsageSeatDTO();
-            usage.setSeat_id(number);
+            usage.setSeat_id(seatService.getBySeatNumber(number).getId());
             seatMap.put(number, usage);
-            session.setAttribute("seat_id", number);
+            session.setAttribute("seatNumber", number);
         } else if (type.equals("room")) {
             UsageRoomDTO usage = new UsageRoomDTO();
-            usage.setRoom_id(number);
+            usage.setRoom_id(roomService.getByRoomNumber(number).getId());
             roomMap.put(number, usage);
-            session.setAttribute("room_id", number);
+            session.setAttribute("roomNumber", number);
         } else {
             mav.setViewName("redirect:/outside/select");
+        }
+
+        return mav;
+    }
+
+    @RequestMapping("/logout")
+    public ModelAndView outsideLogout(HttpSession session) {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("redirect:/outside");
+
+        Integer seatNumber = (Integer) session.getAttribute("seatNumber");
+        if (seatNumber != null) {
+            seatMap.remove(seatNumber);
+            session.removeAttribute("seatNumber");
+        }
+
+        Integer roomNumber = (Integer) session.getAttribute("roomNumber");
+        if (roomNumber != null) {
+            roomMap.remove(roomNumber);
+            session.removeAttribute("roomNumber");
         }
 
         return mav;
