@@ -41,7 +41,7 @@
                                 <!-- 필요한 만큼 공지사항 목록을 추가할 수 있습니다. -->
                             </ul>
                             <!-- 공지사항 작성 버튼 -->
-                            <a href="<c:url value='/adminnotificationWrite' />" class="btn btn-primary mt-3 float-right">공지 작성</a>
+                            <a href="${pageContext.request.contextPath}/admin/adminnotificationwrite" class="btn btn-primary mt-3 float-right">공지 작성</a>
 
                             
                         </div>

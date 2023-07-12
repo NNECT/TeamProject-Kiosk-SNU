@@ -10,6 +10,7 @@
     <title>스터디카페 관리자 페이지</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/adminHome.css">
+
 </head>
 <body>
 

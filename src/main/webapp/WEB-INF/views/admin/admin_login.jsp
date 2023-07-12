@@ -15,12 +15,12 @@
                     <form action="${pageContext.request.contextPath}/admin" method="POST">
                         <ul class="list-group">
                             <li class="list-group-item">
-                                <label for="userId">아이디</label>
-                                <input type="text" id="userId" name="id" required autofocus>
+                                <label for="userName">아이디</label>
+                                <input type="text" id="userName" name="id" required autofocus>
                             </li>
                             <li class="list-group-item">
-                                <label for="userPassword">비밀번호</label>
-                                <input type="password" id="userPassword" name="password" required>
+                                <label for="password">비밀번호</label>
+                                <input type="password" id="password" name="password" required>
                             </li>
                             <li class="list-group-item">
                                 <button type="submit" class="btn btn-primary">로그인</button>
