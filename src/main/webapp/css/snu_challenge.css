@@ -1,0 +1,119 @@
+body{
+    text-align: center;
+    position: relative;
+}
+/*pageTitle*/
+#snuTitle{
+    font-size: 30px;
+    color: #285FF5;
+}
+span{
+    font-weight: 550;
+}
+
+#challInfo{
+    margin-top: 15px;
+    color: #707070;
+    font-size: 20px;
+    font-weight: 200;
+}
+
+/*challen*/
+#wrap{
+    width: 900px;
+    height: 400px;
+    border: 0px solid rebeccapurple;
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translate(-50%,0);
+}
+.box{
+    width: 250px;
+    height: 400px;
+    border-radius: 20px;
+    margin: 0 25px;
+}
+.challeng1{
+    margin-top: 50px;
+    float: left;
+    background-color: #EDF2FF;
+}
+
+.challeng2{
+    margin-top: 50px;
+    float: left;
+    background-color: #285FF5;
+}
+
+.challeng3{
+    margin-top: 50px;
+    float: left;
+    background-color: #34CB51;
+}
+
+.iconCircle{
+    margin: 65px 65px 0;
+    width: 130px;
+    height: 130px;
+    border-radius: 100px;
+}
+.c1{
+    background-color: #285FF5;
+}
+.c2{
+    background-color: #FFFFB9;
+}
+.c3{
+    background-color: #ffffff;
+}
+.c1>img{margin-top: 25px;}
+.c2>img{margin-top: 45px;}
+.c3>img{margin-top: 20px;}
+
+
+/*첼린지 세부사항*/
+.cTitle{
+    font-size: 24px;
+    font-weight: 500;
+}
+.cContent{
+    margin-top: -10px;
+    font-size: 17px;
+}
+.cPoint{margin-top: -10px;}
+#point{
+    font-size: 17px;
+}
+/*challenge1*/
+.num1{color: #285FF5;}
+.num2 {color: #ffffff;}
+.num3{color: #ffffff;}
+/*button*/
+#buttonWrap{
+    position: relative;
+    top: 500px;
+    left: 240px;
+}
+#nextBtn{
+    width: 120px;
+    height: 40px;
+    margin-top: 180px;
+    margin-left: 20px;
+    border-radius: 10px;
+    border: 0px solid #285FF5;
+    background-color: #E4E4E4; 
+    font-size: 20px;
+    color: #ffffff;
+}
+#startBtn{
+    width: 120px;
+    height: 40px;
+    margin-top: 180px;
+    margin-left: 20px;
+    border-radius: 10px;
+    border: 1px solid #285FF5;
+    background-color: #ffffff; 
+    font-size: 20px;
+    color: #285FF5;
+}
