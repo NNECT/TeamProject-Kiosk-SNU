@@ -66,19 +66,15 @@
         <span id="info">상세보기</span>
     </div>
 </section>
-<script src="<c:url value="/js/jquery-3.6.4.js"/>"></script>
+<script src="<c:url value="/js/jquery-3.7.0.min.js"/>"></script>
 <script>
     function idCheck() {
-        const usernameBox = document.getElementById("usernameBox");
-        const username = usernameBox.value;
-        const data = {
-            "username": username
-        };
-
         $.ajax({
             type: "POST",
             url: "../ajax/username",
-            data: JSON.stringify(data),
+            data: JSON.stringify({
+                "username": document.getElementById("usernameBox").value
+            }),
             dataType: "json",
             async: false,
             contentType: "application/json; charset=utf-8",
@@ -92,7 +88,7 @@
             error: function (request, status, error) {
                 alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
             }
-        })
+        });
     }
 </script>
 </body>
