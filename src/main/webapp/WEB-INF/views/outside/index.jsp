@@ -28,7 +28,7 @@
 <section id="allWrap"><!--전체 감싸는 박스-->
   <div id="warning"><!--공지란-->
     <img id="warningIcon" src="<c:url value="/img/start/triangle-warning.png"/>" width="35" height="35">
-    <div id="warningText"><strong> 공지공지공지공지</strong></div><!--공지나타나는 곳-->
+    <div id="warningText"><strong>공지공지공지공지</strong></div><!--공지나타나는 곳-->
   </div>
   <a href="<c:url value="/outside/select"/>">
     <div id="start"><!--클릭란-->
@@ -36,7 +36,7 @@
       <div id="iconWrap">
         <div id="circle1"></div><!--원1-->
         <div id="circle2"></div><!--원2-->
-        <img id="finger"src="<c:url value="/img/start/cursor-finger.png"/>" width="60" height="60">
+        <img id="finger" src="<c:url value="/img/start/cursor-finger.png"/>" width="60" height="60">
       </div>
       <p id="explain">시작하려면 클릭하세요</p>
     </div>
