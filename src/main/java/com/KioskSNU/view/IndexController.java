@@ -47,17 +47,17 @@ public class IndexController {
     public ModelAndView index() {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("index");
-        mav.addObject("user1", accountService.getById(1));
-        List<UsageCommutationTicketDTO> usage = usageCommutationTicketService.getAll();
-        System.out.println(usage + " " + usage.size());
-        mav.addObject("usage", usage);
-
-        AccountDTO accountDTO = accountService.getByUsername("admin");
-        System.out.println(accountDTO);
-
-        String json = new Gson().toJson(usage);
-        System.out.println(json);
-        mav.addObject("usage2", json);
+//        mav.addObject("user1", accountService.getById(1));
+//        List<UsageCommutationTicketDTO> usage = usageCommutationTicketService.getAll();
+//        System.out.println(usage + " " + usage.size());
+//        mav.addObject("usage", usage);
+//
+//        AccountDTO accountDTO = accountService.getByUsername("admin");
+//        System.out.println(accountDTO);
+//
+//        String json = new Gson().toJson(usage);
+//        System.out.println(json);
+//        mav.addObject("usage2", json);
 
         return mav;
     }

@@ -1,0 +1,51 @@
+#circleWrap1{
+    float: right;
+    width: 200px;
+}
+
+#bigCircle1{
+    width: 290px;
+    height: 290px;
+    border-radius: 400px;
+    background-color:#285FF5;
+    opacity: 10%;
+    position: relative;
+    top: 10px;
+    left: 10px;
+}
+
+#smallCircle1{
+    width: 90px;
+    height: 90px;
+    border-radius: 400px;
+    background-color: #285FF5;
+    opacity: 10%;
+    position: relative;
+    top: 70px;
+    left: -40px;
+}
+#circleWrap2{
+    float: left;
+}
+
+#bigCircle2{
+    width: 290px;
+    height: 290px;
+    border-radius: 400px;
+    background-color: #285FF5;
+    opacity: 10%;
+    position: relative;
+    top: 400px;
+    left: -100px;
+}
+
+#smallCircle2{
+    width: 90px;
+    height: 90px;
+    border-radius: 400px;
+    background-color: #285FF5;
+    opacity: 10%;
+    position: relative;
+    top: -10px;
+    left: 150px;
+}

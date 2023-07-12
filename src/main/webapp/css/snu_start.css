@@ -1,0 +1,199 @@
+body{
+    background-color: #285FF5 ;
+    position: relative;
+}
+/*움직이는 원*/
+#circleWrap1{
+    float: right;
+    width: 200px;
+}
+#bigCircle1{
+    width: 290px;
+    height: 290px;
+    border-radius: 400px;
+    background-color: #ffffff;
+    opacity: 10%;
+    position: relative;
+    top: 10px;
+    left: 10px;
+
+    animation-duration: 5s;
+    animation-name: slidein;
+    animation-name: upDown;
+    animation-duration: 3s;
+    animation-delay: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-out;
+    animation-direction:reverse;
+}
+
+@keyframes upDown {
+    0% {
+      margin-top: 0px;
+    }
+   50%{
+    margin-top: 30px;
+   }
+    100% {
+        margin-top: 0px;
+    }
+  }
+
+#smallCircle1{
+    width: 90px;
+    height: 90px;
+    border-radius: 400px;
+    background-color: #ffffff;
+    opacity: 10%;
+    position: relative;
+    top: 70px;
+    left: -40px;
+}
+
+#circleWrap2{
+    float: left;
+}
+#bigCircle2{
+    width: 290px;
+    height: 290px;
+    border-radius: 400px;
+    background-color: #ffffff;
+    opacity: 10%;
+    position: relative;
+    top: 400px;
+    left: -100px;
+
+    animation-duration: 3s;
+    animation-name: slidein;
+    animation-name: upDown;
+    animation-duration: 2s;
+    animation-delay: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-out;
+    animation-direction:reverse;
+}
+
+#smallCircle2{
+    width: 90px;
+    height: 90px;
+    border-radius: 400px;
+    background-color: #ffffff;
+    opacity: 10%;
+    position: relative;
+    top: -10px;
+    left: 150px;
+}
+/**/
+#allWrap{
+    width: 500px;
+    height: 500px;
+    border: 0px solid red;
+    position: absolute;
+    
+    top: 30px;
+    left: 50%;
+    transform: translate(-50%,0);
+}
+/*공지란*/
+#warning{
+    width: 500px;
+    height: 60px;
+    background-color: #ffffff;
+    border-radius: 10px;
+}
+#warningIcon{
+    margin-top: 10px;
+    margin-left: 15px;
+    float: left;
+}
+#warningText{
+    border: 0px solid green;
+    margin-top: 10px;
+    margin-left: 20px;
+    padding: 10px 0;
+    width: 350px;
+    height: 20px;
+    float: left;
+}
+/*클릭란*/
+a{
+    display: block;
+    text-decoration: none;
+}
+#start{
+    margin: 0; padding: 0;
+    margin-top: 25px;
+    width: 500px;
+    height: 550px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0px 3px 20px 1px #707070;
+}
+#snuStudy{
+    font-size: 43px;
+    color: #285FF5 ;
+    position: relative;
+    top: 120px;
+}
+/*아이콘영역*/
+#iconWrap{
+    width: 160px;
+    height: 160px;
+    position: relative;
+    border: 0px solid blue;
+    left: 165px;
+    top: 140px;
+}
+#circle1{
+    width: 160px;
+    height: 160px;
+    background-color: #A2BBFF;
+    border-radius: 500px;
+    position: absolute;
+    /*transition: all 1s;*/
+    animation-duration: 3s;
+    animation-name: slidein;
+    animation-name: bigAndsmall;
+    animation-duration: 3s;
+    animation-delay: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-out;
+    animation-direction:reverse;
+}
+
+@keyframes bigAndsmall {
+    0% {
+      transform: none;
+    }
+   
+    50% {
+      transform: scale(1.3);
+    }
+   
+    100% {
+      transform: none;
+    }
+  }
+
+#circle2{
+    width: 90px;
+    height: 90px;
+    background-color: #5280FF;
+    border-radius: 500px;
+    position: absolute;
+    top: 35px;
+    left: 35px;
+}
+#finger{
+    position: absolute;
+    top: 75px;
+    left: 55px;
+}
+/*시작하려면 클릭하세요*/
+#explain{
+    position: relative;
+    top: 165px;
+    color:#707070;
+    font-size: 20px;
+}

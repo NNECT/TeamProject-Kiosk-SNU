@@ -1,0 +1,96 @@
+body{
+    background-color: #EDF2FF;
+    position: relative;
+    text-align: center;
+}
+#title{
+    font-size: 30px;
+    font-weight: 600;
+    color: #383838;
+}
+#info{
+    width: 270px;
+    height: 15px;
+    border: 0px solid blue;
+    float: left;
+}
+.box{
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin: 0 5px;
+}
+.b{background-color: #285FF5;}
+.g{background-color: #C3C3C3;}
+.r{background-color: #f52828;}
+.blue{
+    color: #285FF5;
+    font-size: 15px;
+}
+.gray{
+    color:#707070;
+    font-size: 15px;
+}
+.red{
+    color: #f52828;
+    font-size: 15px;
+}
+/* 자리선택 */
+#seatWrap{
+    width: 1000px;
+    height: 700px;
+    border: 0px solid red;
+    position: absolute;
+    top: 90px;
+    left: 50%;
+    transform: translate(-50%,0);
+}
+section{
+    width: 1000px;
+    height: 550px;
+    border: 0px solid red;
+    background-color: white;
+    float: left;
+    margin-top: 15px;
+
+}
+table{
+    margin: auto;
+    margin-top: 10px;
+}
+
+td{
+    width: 60px;
+    height: 60px;
+    background-color: #ffffff;
+    text-align: center;
+}
+a{
+    text-decoration: none;
+    color: #ffffff;
+    display: block;
+}
+.sit{background-color: #C3C3C3;}
+.room{background-color: #C3C3C3;}
+
+#door{
+    width: 186px;
+    height: 40px;
+    background-color: #EDF2FF;
+    position: relative;
+    top: -30px;
+    left: 200px;
+}
+#door>p{
+    line-height: 25px;
+    color: #383838;
+}
+#locker{
+    width:500px;
+    height: 60px;
+    background-color: #C3C3C3;
+    float: right;
+}
+#locker>p{
+    line-height: 40px;
+}

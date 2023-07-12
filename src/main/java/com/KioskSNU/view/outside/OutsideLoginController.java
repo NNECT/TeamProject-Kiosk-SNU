@@ -8,21 +8,18 @@ import com.KioskSNU.snu.service.AccountService;
 import com.KioskSNU.snu.service.RoomService;
 import com.KioskSNU.snu.service.SeatService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-@Controller("/outside")
-public class OutsideController {
+@Controller
+public class OutsideLoginController {
     private final Map<Integer, UsageSeatDTO> seatMap;
     private final Map<Integer, UsageRoomDTO> roomMap;
     private final RSA rsa;
@@ -32,9 +29,9 @@ public class OutsideController {
     private final RoomService roomService;
 
     @Autowired
-    public OutsideController(
-            @Qualifier("seatMap") ConcurrentHashMap<Integer, UsageSeatDTO> seatMap,
-            @Qualifier("roomMap") ConcurrentHashMap<Integer, UsageRoomDTO> roomMap,
+    public OutsideLoginController(
+            ConcurrentHashMap<Integer, UsageSeatDTO> seatMap,
+            ConcurrentHashMap<Integer, UsageRoomDTO> roomMap,
             RSA rsa,
             SHA sha,
             AccountService accountService,
@@ -50,52 +47,36 @@ public class OutsideController {
         this.roomService = roomService;
     }
 
-    @RequestMapping("")
-    public ModelAndView outsideIndex() {
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("outside/index");
-        return mav;
-    }
-
-    @RequestMapping("/select")
-    public ModelAndView outsideSelect() {
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("outside/select");
-
-        Map<Integer, Integer> seatStatusMap = new HashMap<>();
-        seatService.getAll().forEach(seat -> seatStatusMap.put(seat.getId(), seat.isUsable() ? 1 : -1));
-        seatMap.forEach((id, usage) -> seatStatusMap.put(id, 0));
-        mav.addObject("seatStatusMap", seatStatusMap);
-
-        Map<Integer, Integer> roomStatusMap = new HashMap<>();
-        roomService.getAll().forEach(room -> roomStatusMap.put(room.getId(), room.isUsable() ? 1 : -1));
-        roomMap.forEach((id, usage) -> roomStatusMap.put(id, 0));
-        mav.addObject("roomStatusMap", roomStatusMap);
-
-        return mav;
-    }
-
-    @GetMapping("/login")
-    public ModelAndView outsideLogin(String type, int number, HttpSession session) {
+    @GetMapping("/outside/login")
+    public ModelAndView getProcess(String type, int number, HttpSession session) {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("outside/login");
 
         if (type == null) {
-            mav.setViewName("redirect:/outside/select");
+            mav.setViewName("redirect:/outside/logout");
         } else if (type.equals("seat")) {
             UsageSeatDTO usage = new UsageSeatDTO();
-            usage.setSeat_id(number);
+            usage.setSeat_id(seatService.getBySeatNumber(number).getId());
             seatMap.put(number, usage);
-            session.setAttribute("seat_id", number);
+            session.setAttribute("selectType", type);
+            session.setAttribute("selectNumber", number);
         } else if (type.equals("room")) {
             UsageRoomDTO usage = new UsageRoomDTO();
-            usage.setRoom_id(number);
+            usage.setRoom_id(roomService.getByRoomNumber(number).getId());
             roomMap.put(number, usage);
-            session.setAttribute("room_id", number);
+            session.setAttribute("selectType", type);
+            session.setAttribute("selectNumber", number);
         } else {
             mav.setViewName("redirect:/outside/select");
         }
 
+        return mav;
+    }
+
+    @PostMapping("/outside/login")
+    public ModelAndView postProcess() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("outside/login");
         return mav;
     }
 }
