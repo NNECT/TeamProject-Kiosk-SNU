@@ -43,14 +43,14 @@
             <li><a href="void:javascript(0)">비밀번호찾기</a></li>
             <li><a href="/outside/login">로그인</a></li>
         </ul>
-        <a href="snu_joinFinish.html"><div id="checkBtn"></div></a>
+        <a href="/outside/joinFinish.html"><div id="checkBtn"></div></a>
     </div>
     <div id="wrap"><!--wrap-->
         <p id="title">회원가입</p>
         <div id="input"><!--입력란-->
             <p>아이디를 입력해주세요</p>
             <input id="usernameBox" class="input id" type="text">
-            <input type="button"  class="btn " value="인증" onclick="idCheck()">
+            <input type="button"  class="btn " value="중복확인" onclick="idCheck()">
             <p>전화번호를 입력해주세요</p>
             <input class="input tel" type="text">
             <input type="button"  class="btn " value="인증">

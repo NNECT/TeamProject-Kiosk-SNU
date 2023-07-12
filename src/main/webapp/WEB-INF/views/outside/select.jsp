@@ -13,7 +13,7 @@
   <style>
     body {font-family: 'SUITE', sans-serif;}
   </style>
-  <title>snu_site_page</title>
+  <title>snu_seat_page</title>
 </head>
 <body>
 <p id="title">좌석을 선택해주세요</p>
