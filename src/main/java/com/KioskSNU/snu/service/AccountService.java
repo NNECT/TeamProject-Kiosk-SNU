@@ -13,4 +13,5 @@ public interface AccountService {
     AccountDTO getById(int id);
     AccountDTO getByUsername(String username);
     List<AccountDTO> getAll();
+    List<AccountDTO> getAllByPhoneNumber(String phoneNumber);
 }

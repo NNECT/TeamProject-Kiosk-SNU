@@ -38,8 +38,9 @@
   <img src="<c:url value="/img/login/snu_logo.png"/>" width="70" height="70">
   <p><strong>SNU</strong> 스터디</p>
   <form id="sudo-login-form">
-    <input class="input" id="username" type="text" name="username" placeholder="아이디를 입력해주세요"><br>
-    <input class="input" id="password" type="password" name="password" placeholder="비밀번호를 입력해주세요"><br>
+    <input class="input" id="username" type="text" name="username" placeholder="아이디를 입력해주세요"
+          required minlength="6" maxlength="30"><br>
+    <input class="input" id="password" type="password" name="password" placeholder="비밀번호를 입력해주세요" required><br>
     <input id="loginBtn" type="submit" value="로그인">
   </form>
   <div id="box">

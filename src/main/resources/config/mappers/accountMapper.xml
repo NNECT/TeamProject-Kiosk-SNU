@@ -51,4 +51,20 @@
         from        account
         order by    id;
     </select>
+
+    <select id="getAllByPhoneNumber" parameterType="String" resultMap="accountResultMap">
+        select      *
+        from        account
+        where       phoneNumber = #{phoneNumber}
+        order by    (
+            select ifnull(max(startDateTime), 0)
+            from usageSeat
+            where account_id in (
+                select id
+                from account
+                where phoneNumber = #{phoneNumber}
+                )
+            group by account_id
+        ) desc;
+    </select>
 </mapper>
