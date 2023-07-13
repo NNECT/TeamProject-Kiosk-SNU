@@ -15,8 +15,8 @@
                     <form action="${pageContext.request.contextPath}" method="POST">
                         <ul class="list-group">
                             <li class="list-group-item">
-                                <label for="userName">아이디</label>
-                                <input type="text" id="userName" name="id" required autofocus>
+                                <label for="username">아이디</label>
+                                <input type="text" id="username" name="username" required autofocus>
                             </li>
                             <li class="list-group-item">
                                 <label for="password1">비밀번호</label>
