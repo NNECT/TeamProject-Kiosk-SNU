@@ -15,7 +15,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.servlet.http.HttpSession;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -76,12 +81,36 @@ public class OutsideLoginController {
     }
 
     @PostMapping("/outside/login")
-    public ModelAndView postProcess(AccountDTO accountDTO, HttpSession session) {
+    public ModelAndView postProcess(AccountDTO accountDTO, HttpSession session) throws NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("outside/login");
         mav.addObject("publicKey", rsa.getPublicKey());
-        System.out.println(accountDTO.getUsername());
-        System.out.println(accountDTO.getPassword());
+
+
+        if (accountDTO == null) {
+            //accountDTO로 들어오는 내용이 null 이라면 첫화면으로 다시 보내기
+            mav.setViewName("redirect:/outside");
+        } else if (accountDTO.getUsername() == null) {
+            mav.setViewName("/outside/login");
+        } else {
+            //로그인 정보 먼저 받아오기 (*전체정보 모두 들어옴)
+            AccountDTO getUser = accountService.getByUsername(accountDTO.getUsername());
+
+            if (getUser == null) {
+                mav.addObject("userNameError", "회원정보를 확인해주세요.");
+                mav.setViewName("/outside/login");
+            } else if (getUser.getPassword().equals(sha.encrypt(rsa.decrypt(accountDTO.getPassword())))) {
+                //저장되어 있는 SHA 비밀번호와 입력된 비밀번호 비교
+                //로그인성공 (세션에 user이름으로 user정보 저장)
+                session.setAttribute("user", getUser);
+                mav.setViewName("redirect:/outside/ticket");
+            } else {
+                //비밀번호가 틀리면
+                mav.addObject("userPasswordError", "비밀번호를 확인해주세요");
+                mav.setViewName("/outside/login");
+            }
+        }
+
         return mav;
     }
 }
