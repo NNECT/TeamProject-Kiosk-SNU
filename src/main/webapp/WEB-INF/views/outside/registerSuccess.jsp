@@ -37,10 +37,10 @@
 <section id="whiteBox"><!--흰 박스-->
     <form>
         <p id="text">SNU스터디에 오신것을 환영합니다!</p>
-        <img src="<c:url value="/img/party.png"/> width="110" height="110">
+        <img src="<c:url value="/img/party.png"/>" width="110" height="110">
         <p>회원가입이 완료되었어요<br>
             다시 로그인 해주세요</p>
-        <a href="/outside/login.html"><input type="button"  id="loginBtn" value="로그인하러가기" ></a>
+        <a href="<c:url value="/outside/login?type=${sessionScope.selectType}&number=${sessionScope.selectNumber}" />"><input type="button"  id="loginBtn" value="로그인하러가기" ></a>
     </form>
 </section>
 </body>

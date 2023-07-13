@@ -35,7 +35,7 @@
             <li><a href="<c:url value="/outside/findUsername" />">아이디찾기</a></li>
             <li><a href="<c:url value="/outside/findPassword" />">비밀번호찾기</a></li>
         </ul>
-        <div id="checkBtn"><input type='button' value='다음' id='newBtn'></div>
+        <div id="checkBtn"><input type='button' value='가입' id='newBtn' style="display: none"></div>
     </div>
     <div id="wrap"><!--wrap-->
         <p id="title">회원가입</p>
@@ -70,152 +70,47 @@
             </p>
             <input id="password_confirm" class="input password" type="password">
         </div>
-        <input type="checkbox" id="agree" onclick="checkBoxBtn()"><span id="agreeText" >개인정보 수집동의</span>
+        <input type="checkbox" id="agree"><span id="agreeText"><label for="agree">개인정보 수집동의</label></span>
         <span id="info">상세보기</span>
     </div>
 </section>
 <script src="<c:url value="/js/jquery-3.7.0.min.js"/>"></script>
 <script src="<c:url value="/js/jsencrypt.min.js"/>"></script>
-<script src="<c:url value="/js/hiddenBtn.js"/>"></script>
+<script src="<c:url value="/js/register.js"/>"></script>
 <script>
-    let usableUsername = false;
-    let usablePhoneNumber = false;
-    let usablePassword = false;
+    const crypt = new JSEncrypt();
+    crypt.setPublicKey("${publicKey}");
 
-    document.getElementById("username").addEventListener("input", e => {
-        document.getElementById("usernameCheck").innerHTML = "";
-        usableUsername = false;
-    });
-    document.getElementById("phoneNumber").addEventListener("input", e => {
-        document.getElementById("codeSendCheck").innerHTML = "";
-        document.getElementById("codeCheck").innerHTML = "";
-        usablePhoneNumber = false;
-    });
+    document.getElementById("newBtn").addEventListener("click", registerSubmit);
+    function registerSubmit(e) {
+        if (!document.getElementById("agree").checked) return;
 
-    document.getElementById("phoneNumber").addEventListener("input", e => {
-        let x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,4})(\d{0,4})/);
-        e.target.value = !x[2] ? x[1] : x[1] + '-' + x[2] + (x[3] ? '-' + x[3] : '');
-    });
-    document.getElementById("password").addEventListener("input", passwordConfirmCheck);
-    document.getElementById("password_confirm").addEventListener("input", passwordConfirmCheck);
+        const form = document.createElement("form");
+        form.setAttribute("method", "post");
+        form.setAttribute("action", "<c:url value="/outside/register" />");
+        form.setAttribute("charset", "UTF-8");
+        form.setAttribute("hidden", "true");
 
-    function passwordConfirmCheck(e) {
-        let password = document.getElementById("password").value;
-        let password_confirm = document.getElementById("password_confirm").value;
-        if (password === password_confirm) {
-            const passwordCheck = document.getElementById("passwordCheck");
-            passwordCheck.innerHTML = "일치";
-            passwordCheck.style.color = "blue";
-            usablePassword = true;
-        } else {
-            const passwordCheck = document.getElementById("passwordCheck");
-            passwordCheck.innerHTML = "불일치";
-            passwordCheck.style.color = "red";
-            usablePassword = false;
-        }
-    }
+        const usernameInput = document.createElement("input");
+        usernameInput.setAttribute("type", "text");
+        usernameInput.setAttribute("name", "username");
+        usernameInput.setAttribute("value", document.getElementById("username").value);
+        form.appendChild(usernameInput);
 
-    function usernameCheck() {
-        let username = document.getElementById("username").value;
-        const usernameCheck = document.getElementById("usernameCheck");
+        const passwordInput = document.createElement("input");
+        passwordInput.setAttribute("type", "password");
+        passwordInput.setAttribute("name", "password");
+        passwordInput.setAttribute("value", crypt.encrypt(document.getElementById("password").value));
+        form.appendChild(passwordInput);
 
-        if (username.length < 6 || username.length > 30) {
-            usernameCheck.innerHTML = "사용 불가";
-            usernameCheck.style.color = "red";
-            usableUsername = false;
-            return;
-        }
+        const phoneNumberInput = document.createElement("input");
+        phoneNumberInput.setAttribute("type", "text");
+        phoneNumberInput.setAttribute("name", "phoneNumber");
+        phoneNumberInput.setAttribute("value", document.getElementById("phoneNumber").value);
+        form.appendChild(phoneNumberInput);
 
-        $.ajax({
-            type: "POST",
-            url: "../ajax/username",
-            data: JSON.stringify({
-                "username": username
-            }),
-            dataType: "json",
-            async: false,
-            contentType: "application/json; charset=utf-8",
-            success: function (response) {
-                if (response.msg === "true") {
-                    usernameCheck.innerHTML = "사용 가능";
-                    usernameCheck.style.color = "blue";
-                    usableUsername = true;
-                } else {
-                    usernameCheck.innerHTML = "사용중";
-                    usernameCheck.style.color = "red";
-                    usableUsername = false;
-                }
-            },
-            error: function (request, status, error) {
-                alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-            }
-        });
-    }
-
-    function codeSend() {
-        let phoneNumber = document.getElementById("phoneNumber").value;
-        const codeSendCheck = document.getElementById("codeSendCheck");
-
-        if (phoneNumber.length < 12 || phoneNumber.length > 13) {
-            codeSendCheck.innerHTML = "사용 불가";
-            codeSendCheck.style.color = "red";
-            return;
-        }
-
-        $.ajax({
-            type: "POST",
-            url: "../ajax/codeSend",
-            data: JSON.stringify({
-                "codePurpose": "join",
-                "codePhoneNumber": phoneNumber
-            }),
-            dataType: "json",
-            async: false,
-            contentType: "application/json; charset=utf-8",
-            success: function (response) {
-                if (response.result === "success") {
-                    codeSendCheck.innerHTML = "전송됨";
-                    codeSendCheck.style.color = "green";
-                } else {
-                    codeSendCheck.innerHTML = "전송 실패";
-                    codeSendCheck.style.color = "red";
-                }
-            },
-            error: function (request, status, error) {
-                alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-            }
-        });
-    }
-
-    function codeCheck() {
-        const codeCheck = document.getElementById("codeCheck");
-
-        $.ajax({
-            type: "POST",
-            url: "../ajax/codeCheck",
-            data: JSON.stringify({
-                "codePurpose": "join",
-                "codePhoneNumber": document.getElementById("phoneNumber").value,
-                "code": document.getElementById("code").value
-            }),
-            dataType: "json",
-            async: false,
-            contentType: "application/json; charset=utf-8",
-            success: function (response) {
-                if (response.result === "success") {
-                    codeCheck.innerHTML = "인증 성공";
-                    codeCheck.style.color = "blue";
-                    usablePhoneNumber = true;
-                } else {
-                    codeCheck.innerHTML = "인증 실패";
-                    codeCheck.style.color = "red";
-                    usablePhoneNumber = false;
-                }
-            },
-            error: function (request, status, error) {
-                alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-            }
-        });
+        document.body.appendChild(form);
+        form.submit();
     }
 </script>
 </body>
