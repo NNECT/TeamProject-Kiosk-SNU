@@ -13,7 +13,7 @@
   <style>
     body {font-family: 'SUITE', sans-serif;}
   </style>
-  <title>snu_site_page</title>
+  <title>snu_seat_page</title>
 </head>
 <body>
 <p id="title">좌석을 선택해주세요</p>
@@ -134,7 +134,7 @@
       if(status[Number(seat.id)] === 1) {
         seat.classList.remove('r');
         seat.classList.add('b');
-        seat.innerHTML = "<a href='/outside/login?type=seat&number" + seat.id + "'>" + seat.id + "</a>"
+        seat.innerHTML = "<a href='<c:url value="/outside/login"/>?type=seat&number=" + seat.id + "'>" + seat.id + "</a>"
       } else if (status[Number(seat.id)] === 0) {
         seat.classList.remove('r');
         seat.classList.add('g');
