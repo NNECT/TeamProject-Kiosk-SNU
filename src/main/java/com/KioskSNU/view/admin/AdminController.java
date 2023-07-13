@@ -12,9 +12,12 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
+    private final AdminService adminService;
 
     @Autowired
-    private AdminService adminService;
+    public AdminController(AdminService adminService) {
+        this.adminService = adminService;
+    }
 
     @RequestMapping("") //admin 관리자 페이지로 이동시 로그인을 확인하고 로그아웃, 마이페이지로 표시할지 체크
     public String index(HttpServletRequest request, Model model) {
