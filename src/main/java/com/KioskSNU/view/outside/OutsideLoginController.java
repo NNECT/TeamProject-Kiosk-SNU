@@ -15,7 +15,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.servlet.http.HttpSession;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -76,12 +81,40 @@ public class OutsideLoginController {
     }
 
     @PostMapping("/outside/login")
-    public ModelAndView postProcess(AccountDTO accountDTO, HttpSession session) {
+    public ModelAndView postProcess(AccountDTO accountDTO, HttpSession session) throws NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("outside/login");
         mav.addObject("publicKey", rsa.getPublicKey());
-        System.out.println(accountDTO.getUsername());
-        System.out.println(accountDTO.getPassword());
-        return mav;
+
+
+        if (accountDTO == null) {
+            //accountDTO로 들어오는 내용이 null 이라면 첫화면으로 다시 보내기
+            mav.setViewName("/outside/start");
+            return mav;
+
+        } else {
+            //로그인 정보 먼저 받아오기 (*전체정보 모두 들어옴)
+            AccountDTO getUser = accountService.getByUsername(accountDTO.getUsername());
+
+            //저장되어 있는 SHA 비밀번호와 입력된 비밀번호 비교
+            if (getUser != null && getUser.getPassword() != null && getUser.getPassword().equals(sha.encrypt(rsa.decrypt(accountDTO.getPassword())))) {
+                //로그인성공 (세션에 user이름으로 user정보 저장)
+                session.setAttribute("user", getUser);
+                mav.setViewName("redirect:/outside/ticket");
+                return mav;
+            } else if (getUser != null && getUser.getPassword() != null && !getUser.getPassword().equals(sha.encrypt(rsa.decrypt(accountDTO.getPassword())))) {
+                //비밀번호가 틀리면
+                mav.addObject("userPasswordError", "비밀번호를 확인해주세요");
+                mav.setViewName("/outside/login");
+                return mav;
+            } else{
+                //회원이름 정보가 없으면 회원이름 확인
+                mav.addObject("userNameError", "회원정보를 확인해주세요.");
+                mav.setViewName("/outside/login");
+                return mav;
+            }
+        }
+
+
     }
 }
