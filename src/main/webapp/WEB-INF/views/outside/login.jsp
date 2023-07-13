@@ -37,7 +37,7 @@
 <section id="whiteBox"><!--흰 박스-->
   <img src="<c:url value="/img/login/snu_logo.png"/>" width="70" height="70">
   <p><strong>SNU</strong> 스터디</p>
-  <form action="">
+  <form id="sudo-login-form">
     <input class="input" id="username" type="text" name="username" placeholder="아이디를 입력해주세요"><br>
     <input class="input" id="password" type="password" name="password" placeholder="비밀번호를 입력해주세요"><br>
     <input id="loginBtn" type="submit" value="로그인">
@@ -48,5 +48,39 @@
     <a href="<c:url value="/outside/register" />">회원가입</a>
   </div>
 </section>
+<script src="<c:url value="/js/jsencrypt.min.js"/>"></script>
+<script>
+  window.addEventListener("DOMContentLoaded", (event) => {
+    document.getElementById("sudo-login-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const crypt = new JSEncrypt();
+      crypt.setPublicKey("${publicKey}");
+
+      const username = document.getElementById("username").value;
+      const password = crypt.encrypt(document.getElementById("password").value);
+
+      const form = document.createElement("form");
+      form.setAttribute("method", "post");
+      form.setAttribute("action", "<c:url value="/outside/login" />");
+      form.setAttribute("charset", "UTF-8");
+
+      const usernameInput = document.createElement("input");
+      usernameInput.setAttribute("type", "text");
+      usernameInput.setAttribute("name", "username");
+      usernameInput.setAttribute("value", username);
+      form.appendChild(usernameInput);
+
+      const passwordInput = document.createElement("input");
+      passwordInput.setAttribute("type", "password");
+      passwordInput.setAttribute("name", "password");
+      passwordInput.setAttribute("value", password);
+      form.appendChild(passwordInput);
+
+      document.body.appendChild(form);
+      form.submit();
+    });
+  });
+</script>
 </body>
 </html>

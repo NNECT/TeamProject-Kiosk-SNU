@@ -2,6 +2,7 @@ package com.KioskSNU.view.outside;
 
 import com.KioskSNU.secure.RSA;
 import com.KioskSNU.secure.SHA;
+import com.KioskSNU.snu.dto.AccountDTO;
 import com.KioskSNU.snu.dto.UsageRoomDTO;
 import com.KioskSNU.snu.dto.UsageSeatDTO;
 import com.KioskSNU.snu.service.AccountService;
@@ -51,6 +52,7 @@ public class OutsideLoginController {
     public ModelAndView getProcess(String type, int number, HttpSession session) {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("outside/login");
+        mav.addObject("publicKey", rsa.getPublicKey());
 
         if (type == null) {
             mav.setViewName("redirect:/outside/logout");
@@ -74,9 +76,12 @@ public class OutsideLoginController {
     }
 
     @PostMapping("/outside/login")
-    public ModelAndView postProcess() {
+    public ModelAndView postProcess(AccountDTO accountDTO, HttpSession session) {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("outside/login");
+        mav.addObject("publicKey", rsa.getPublicKey());
+        System.out.println(accountDTO.getUsername());
+        System.out.println(accountDTO.getPassword());
         return mav;
     }
 }
