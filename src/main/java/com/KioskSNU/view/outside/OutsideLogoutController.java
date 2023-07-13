@@ -32,7 +32,14 @@ public class OutsideLogoutController {
         String selectType = (String) session.getAttribute("selectType");
         if (selectType != null) {
             int selectNumber = (int) session.getAttribute("selectNumber");
-            seatMap.remove(selectNumber);
+            switch (selectType) {
+                case "seat":
+                    seatMap.remove(selectNumber);
+                    break;
+                case "room":
+                    roomMap.remove(selectNumber);
+                    break;
+            }
             session.removeAttribute("selectType");
             session.removeAttribute("selectNumber");
         }

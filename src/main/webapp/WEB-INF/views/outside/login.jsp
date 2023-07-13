@@ -43,9 +43,9 @@
     <input id="loginBtn" type="submit" value="로그인">
   </form>
   <div id="box">
-    <a href="<c:url value="/outside/foundUsername" />">아이디찾기</a>
-    <a href="<c:url value="/outside/foundPassword" />">비밀번호찾기</a>
     <a href="<c:url value="/outside/register" />">회원가입</a>
+    <a href="<c:url value="/outside/findUsername" />">아이디찾기</a>
+    <a href="<c:url value="/outside/findPassword" />">비밀번호찾기</a>
   </div>
 </section>
 <script src="<c:url value="/js/jsencrypt.min.js"/>"></script>
@@ -64,6 +64,7 @@
       form.setAttribute("method", "post");
       form.setAttribute("action", "<c:url value="/outside/login" />");
       form.setAttribute("charset", "UTF-8");
+      form.setAttribute("hidden", "true");
 
       const usernameInput = document.createElement("input");
       usernameInput.setAttribute("type", "text");

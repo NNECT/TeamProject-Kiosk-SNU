@@ -13,22 +13,28 @@ import java.util.Random;
 @RestController
 public class OutsideAjaxCodeCheckController {
     @RequestMapping("/ajax/codeSend")
-    public ResponseEntity<Map<String, String>> process(@RequestBody Map<String, String> map, HttpSession session) {
+    public ResponseEntity<Map<String, String>> sendProcess(@RequestBody Map<String, String> map, HttpSession session) {
         session.setAttribute("codePurpose", map.get("codePurpose"));
+        session.setAttribute("codePhoneNumber", map.get("codePhoneNumber"));
         session.setAttribute("codeTime", LocalDateTime.now());
         session.setAttribute("code", String.format("%04d", new Random().nextInt(10000)));
         System.out.println(session.getAttribute("codePurpose"));
+        System.out.println(session.getAttribute("codePhoneNumber"));
         System.out.println(session.getAttribute("codeTime"));
         System.out.println(session.getAttribute("code"));
         return ResponseEntity.ok(Map.of("result", "success"));
     }
 
     @RequestMapping("/ajax/codeCheck")
-    public ResponseEntity<Map<String, String>> process2(@RequestBody Map<String, String> map, HttpSession session) {
-        if (session.getAttribute("codeTime") == null
+    public ResponseEntity<Map<String, String>> checkProcess(@RequestBody Map<String, String> map, HttpSession session) {
+        if (
+                session.getAttribute("codeTime") == null
                 || LocalDateTime.now().isAfter(((LocalDateTime) session.getAttribute("codeTime")).plusMinutes(3))
                 || session.getAttribute("codePurpose") == null
-                || !session.getAttribute("codePurpose").equals(map.get("codePurpose"))) {
+                || !session.getAttribute("codePurpose").equals(map.get("codePurpose"))
+                || session.getAttribute("codePhoneNumber") == null
+                || !session.getAttribute("codePhoneNumber").equals(map.get("codePhoneNumber"))
+        ) {
             return ResponseEntity.ok(Map.of("result", "fail"));
         }
         System.out.println(map.get("code"));
