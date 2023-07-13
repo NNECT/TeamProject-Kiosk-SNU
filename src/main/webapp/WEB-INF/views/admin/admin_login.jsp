@@ -12,15 +12,15 @@
                 <div class="card-body text-center">
                     <h2 class="card-title">스터디카페 관리자 페이지</h2>
                     <hr>
-                    <form action="${pageContext.request.contextPath}" method="POST">
+                    <form action="${pageContext.request.contextPath}/admin" method="POST">
                         <ul class="list-group">
                             <li class="list-group-item">
                                 <label for="username">아이디</label>
-                                <input type="text" id="userId" name="id" required autofocus>
+                                <input type="text" id="username" name="username" required autofocus>
                             </li>
                             <li class="list-group-item">
                                 <label for="password">비밀번호</label>
-                                <input type="password" id="userPassword" name="password" required>
+                                <input type="password" id="password" name="password" required>
                             </li>
                             <li class="list-group-item">
                                 <button type="submit" class="btn btn-primary">로그인</button>

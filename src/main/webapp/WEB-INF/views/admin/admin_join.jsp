@@ -16,15 +16,15 @@
                         <ul class="list-group">
                             <li class="list-group-item">
                                 <label for="username">아이디</label>
-                                <input type="text" id="userId" name="id" required autofocus>
+                                <input type="text" id="username" name="username" required autofocus>
                             </li>
                             <li class="list-group-item">
-                                <label for="password">비밀번호</label>
-                                <input type="password" id="userPassword" name="password" required>
+                                <label for="password1">비밀번호</label>
+                                <input type="password" id="password1" name="password" required>
                             </li>
                             <li class="list-group-item">
-                                <label for="password">비밀번호 확인</label>
-                                <input type="password" id="userPassword" name="password" required>
+                                <label for="password2">비밀번호 확인</label>
+                                <input type="password" id="password2" name="password" required>
                             </li>
                             <li class="list-group-item">
                                 <button type="submit" class="btn btn-primary">회원가입</button>
