@@ -89,32 +89,28 @@ public class OutsideLoginController {
 
         if (accountDTO == null) {
             //accountDTO로 들어오는 내용이 null 이라면 첫화면으로 다시 보내기
-            mav.setViewName("/outside/start");
-            return mav;
-
+            mav.setViewName("redirect:/outside");
+        } else if (accountDTO.getUsername() == null) {
+            mav.setViewName("/outside/login");
         } else {
             //로그인 정보 먼저 받아오기 (*전체정보 모두 들어옴)
             AccountDTO getUser = accountService.getByUsername(accountDTO.getUsername());
 
-            //저장되어 있는 SHA 비밀번호와 입력된 비밀번호 비교
-            if (getUser != null && getUser.getPassword() != null && getUser.getPassword().equals(sha.encrypt(rsa.decrypt(accountDTO.getPassword())))) {
+            if (getUser == null) {
+                mav.addObject("userNameError", "회원정보를 확인해주세요.");
+                mav.setViewName("/outside/login");
+            } else if (getUser.getPassword().equals(sha.encrypt(rsa.decrypt(accountDTO.getPassword())))) {
+                //저장되어 있는 SHA 비밀번호와 입력된 비밀번호 비교
                 //로그인성공 (세션에 user이름으로 user정보 저장)
                 session.setAttribute("user", getUser);
                 mav.setViewName("redirect:/outside/ticket");
-                return mav;
-            } else if (getUser != null && getUser.getPassword() != null && !getUser.getPassword().equals(sha.encrypt(rsa.decrypt(accountDTO.getPassword())))) {
+            } else {
                 //비밀번호가 틀리면
                 mav.addObject("userPasswordError", "비밀번호를 확인해주세요");
                 mav.setViewName("/outside/login");
-                return mav;
-            } else{
-                //회원이름 정보가 없으면 회원이름 확인
-                mav.addObject("userNameError", "회원정보를 확인해주세요.");
-                mav.setViewName("/outside/login");
-                return mav;
             }
         }
 
-
+        return mav;
     }
 }
