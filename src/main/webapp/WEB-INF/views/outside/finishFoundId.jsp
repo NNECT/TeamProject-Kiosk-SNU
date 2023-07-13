@@ -39,7 +39,7 @@
         <form>
             <img src="<c:url value="/img/id.png" />" width="110" height="110">
             <p>회원님의 아이디는</p>
-            <p id="showId">아이디</p>
+            <p id="showId">${username}</p>
             <p>입니다.다시 로그인 해주세요</p>
             <input type="button"  id="loginBtn" value="로그인하러가기" ></a>
         </form>
