@@ -38,14 +38,14 @@
   <img src="<c:url value="/img/login/snu_logo.png"/>" width="70" height="70">
   <p><strong>SNU</strong> 스터디</p>
   <form action="">
-    <input class="input" id="id" type="text" name="" placeholder="아이디를 입력해주세요"><br>
-    <input class="input" id="pass" type="password" name="" placeholder="비밀번호를 입력해주세요"><br>
+    <input class="input" id="username" type="text" name="username" placeholder="아이디를 입력해주세요"><br>
+    <input class="input" id="password" type="password" name="password" placeholder="비밀번호를 입력해주세요"><br>
     <input id="loginBtn" type="submit" value="로그인">
   </form>
   <div id="box">
-    <a href="/outside/foundId.jsp">아이디찾기</a>
-    <a href="/outside/foundPassword.jsp">비밀번호찾기</a>
-    <a href="/outside/register.jsp">회원가입</a>
+    <a href="<c:url value="/outside/foundUsername" />">아이디찾기</a>
+    <a href="<c:url value="/outside/foundPassword" />">비밀번호찾기</a>
+    <a href="<c:url value="/outside/register" />">회원가입</a>
   </div>
 </section>
 </body>
