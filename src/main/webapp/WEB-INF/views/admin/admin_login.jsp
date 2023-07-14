@@ -15,7 +15,7 @@
                     <form action="${pageContext.request.contextPath}/admin" method="POST">
                         <ul class="list-group">
                             <li class="list-group-item">
-                                <label for="username">아이디</label>
+                                <label for="username" class="text-center">아이디&nbsp;&nbsp;&nbsp;&nbsp;</label>  <%--죄송합니다...--%>
                                 <input type="text" id="username" name="username" required autofocus>
                             </li>
                             <li class="list-group-item">
@@ -23,7 +23,7 @@
                                 <input type="password" id="password" name="password" required>
                             </li>
                             <li class="list-group-item">
-                                <button type="submit" class="btn btn-primary">로그인</button>
+                                <button type="submit" class="btn btn-primary">로그인&nbsp;</button>
                             </li>
                         </ul>
                     </form>

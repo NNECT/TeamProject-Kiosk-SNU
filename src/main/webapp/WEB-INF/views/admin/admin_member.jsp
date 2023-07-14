@@ -12,7 +12,7 @@
                 <div class="card-body text-center">
                     <h2 class="card-title">회원목록</h2>
                     <div class="text-right">
-                        <input type="text" placeholder="이름 검색하기" id="username" name="id">
+                        <input type="text" placeholder="아이디 검색하기" id="username" name="id">
                     </div>
                     <hr>
                     <table class="table">
@@ -90,7 +90,7 @@
             phone: "010-1234-5678",
             subscription: "정기권",
             lockerStatus: "이용 중",
-            challengeProgress: "80%"
+            challengeProgress: "작심삼일을 넘어라"
         };
 
         // 모달 창에 회원 정보를 채웁니다.
