@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Controller
 public class OutsideLogoutController {
@@ -17,8 +18,8 @@ public class OutsideLogoutController {
 
     @Autowired
     public OutsideLogoutController(
-            Map<Integer, UsageSeatDTO> seatMap,
-            Map<Integer, UsageRoomDTO> roomMap
+            ConcurrentHashMap<Integer, UsageSeatDTO> seatMap,
+            ConcurrentHashMap<Integer, UsageRoomDTO> roomMap
     ) {
         this.seatMap = seatMap;
         this.roomMap = roomMap;
@@ -43,6 +44,7 @@ public class OutsideLogoutController {
             session.removeAttribute("selectType");
             session.removeAttribute("selectNumber");
         }
+        session.removeAttribute("author");
 
         return mav;
     }
