@@ -19,7 +19,6 @@
 						    <textarea class="form-control form-control-lg" id="title" rows="1"></textarea>
 						</div>
 
-
                         <div class="form-group">
                             <label for="notice">공지 내용</label>
                             <textarea class="form-control form-control-lg" id="notice" rows="5"></textarea>

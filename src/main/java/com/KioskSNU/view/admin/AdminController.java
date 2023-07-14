@@ -83,5 +83,9 @@ public class AdminController {
     public String adminNotificationWrite() {
         return "admin/admin_notificationwrite";
     }
+    @RequestMapping("/adminnotificationedit")
+    public String adminNotificationEdit() {
+        return "admin/admin_notificationedit";
+    }
 
 }

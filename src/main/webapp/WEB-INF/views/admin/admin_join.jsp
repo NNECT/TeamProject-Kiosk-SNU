@@ -15,12 +15,15 @@
                     <form action="${pageContext.request.contextPath}" method="POST">
                         <ul class="list-group">
                             <li class="list-group-item">
-                                <label for="username">아이디</label>
+
+                                <label for="username">아이디&nbsp;&nbsp;</label>
                                 <input type="text" id="username" name="username" required autofocus>
                             </li>
                             <li class="list-group-item">
+
                                 <label for="password1">비밀번호</label>
                                 <input type="password" id="password1" name="password" required>
+
                             </li>
                             <li class="list-group-item">
                                 <label for="password2">비밀번호 확인</label>
