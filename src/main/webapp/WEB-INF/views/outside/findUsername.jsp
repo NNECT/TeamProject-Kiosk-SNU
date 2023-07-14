@@ -43,10 +43,10 @@
     <form action="">
         <div id="menu"><!--매뉴창-->
             <ul>
-                <li><a><img src="<c:url value="/img/start/home.png"/>" width="40px" height="40px"></a></li>
-                <li><a href="/outside/foundPassword.html">비밀번호찾기</a></li>
-                <li><a href="/outside/login.html">로그인</a></li>
-                <li><a href="/outside/newMember.html">회원가입</a></li>
+                <li><a href="<c:url value="/outside"/>"><img src="<c:url value="/img/start/home.png"/>" width="40px" height="40px"></a></li>
+                <li><a href="<c:url value="/outside/login?type=${sessionScope.selectType}&number=${sessionScope.selectNumber}" />">로그인</a></li>
+                <li><a href="<c:url value="/outside/findUsername" />">아이디찾기</a></li>
+                <li><a href="<c:url value="/outside/findPassword" />">비밀번호찾기</a></li>
             </ul>
             <div id="checkBtn"><input type='button' value='다음' id='newBtn' style="display: none"></div>
         </div>

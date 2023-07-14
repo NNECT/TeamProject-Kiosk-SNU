@@ -14,7 +14,7 @@ import java.util.List;
 public class OutsideFindUsernameController {
 
     private final AccountService accountService;
-    //검사받기
+
     @Autowired
     public OutsideFindUsernameController(
             AccountService accountService
