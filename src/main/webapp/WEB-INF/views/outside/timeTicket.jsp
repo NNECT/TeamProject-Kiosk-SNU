@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: admin
@@ -19,6 +20,7 @@
 
   <style>
     body {font-family: 'SUITE', sans-serif;}
+    .radio-input {display: none;}
   </style>
   <title>snu_newPassword_page</title>
 </head>
@@ -30,40 +32,31 @@
       <li id="commutationTicket"><a href="/outside/commutationTicket .html">정기권</a></li>
     </ul>
     <hr>
-    <form action=""><!--티켓영역다 -->
+    <form>
       <table>
         <tr>
-          <td>
-            <p class="t" name="time">3시간</p>
-            <p class="p" name="price">6,000원</p>
-          </td>
-          <td>
-            <p class="t" name="time">3시간</p>
-            <p class="p" name="price">6,000원</p>
-          </td>
-          <td>
-            <p class="t" name="time">3시간</p>
-            <p class="p" name="price">6,000원</p>
-          </td>
+          <c:forEach var="i" begin="0" end="2" step="1">
+            <td class="radio-box">
+              <input type="radio" name="radio-button" class="radio-input" value="${timeTicketList[i].id}">
+              <p class="t btn-text">${timeTicketList[i].time}시간</p>
+              <p class="p btn-text"><fmt:formatNumber value="${timeTicketList[i].price}" pattern="#,##0"/>원</p>
+            </td>
+          </c:forEach>
         </tr>
         <tr>
-          <td>
-            <p class="t" name="time">3시간</p>
-            <p class="p" name="price">6,000원</p>
-          </td>
-          <td>
-            <p class="t" name="time">3시간</p>
-            <p class="p" name="price">6,000원</p>
-          </td>
-          <td>
-            <p class="t" name="time">3시간</p>
-            <p class="p" name="price">6,000원</p>
-          </td>
+          <c:forEach var="i" begin="3" end="5" step="1">
+            <td class="radio-box">
+              <input type="radio" name="radio-button" class="radio-input" value="${timeTicketList[i].id}">
+              <p class="t btn-text">${timeTicketList[i].time}시간</p>
+              <p class="p btn-text"><fmt:formatNumber value="${timeTicketList[i].price}" pattern="#,##0"/>원</p>
+            </td>
+          </c:forEach>
         </tr>
       </table>
       <input id="nextBtn" type="submit" value="다음">
     </form>
   </section>
 </div>
+<script src="<c:url value="/js/radioBox.js"/>"></script>
 </body>
 </html>
