@@ -43,13 +43,15 @@ document.getElementById("password_confirm").addEventListener("input", passwordCo
 function passwordConfirmCheck(e) {
     let password = document.getElementById("password").value;
     let password_confirm = document.getElementById("password_confirm").value;
-    if (password === password_confirm) {
-        const passwordCheck = document.getElementById("passwordCheck");
+    const passwordCheck = document.getElementById("passwordCheck");
+    if (password === "" || password_confirm === "") {
+        passwordCheck.innerHTML = "";
+        proxyButtonState.usablePassword = false;
+    } else if (password === password_confirm) {
         passwordCheck.innerHTML = "일치";
         passwordCheck.style.color = "blue";
         proxyButtonState.usablePassword = true;
     } else {
-        const passwordCheck = document.getElementById("passwordCheck");
         passwordCheck.innerHTML = "불일치";
         passwordCheck.style.color = "red";
         proxyButtonState.usablePassword = false;
