@@ -1,7 +1,7 @@
 
 let buttonState = {
-    usablePhoneNumber: false,
-    usableCode: false
+    usablePhoneNumber: false
+
 };
 
 let buttonStateHandler = {
@@ -31,6 +31,7 @@ document.getElementById("phoneNumber").addEventListener("input", e => {
 
 function codeSend(){
     let phoneNumber = document.getElementById("phoneNumber").value;
+    let username = document.getElementById("username").value;
     const codeSendCheck = document.getElementById("codeSendCheck");
 
     if (phoneNumber.length < 12 || phoneNumber.length > 13) {
@@ -43,8 +44,9 @@ function codeSend(){
         type: "Post",
         url: "../ajax/codeSend",
         data: JSON.stringify({
-            "codePurpose": "findUsername",
-            "codePhoneNumber": phoneNumber
+            "codePurpose": "findPassword",
+            "codePhoneNumber": phoneNumber,
+            "username" : username
         }),
         dataType: "json",
         async: false,
@@ -55,6 +57,9 @@ function codeSend(){
                 codeSendCheck.style.color = "green";
             }else if(response.result === "wrongNumber"){
                 codeSendCheck.innerHTML = "잘못된 번호";
+                codeSendCheck.style.color = "red";
+            }else if(response.result === "notFoundUsername"){
+                codeSendCheck.innerHTML = "잘못된 아이디"
                 codeSendCheck.style.color = "red";
             }else{
                 codeSendCheck.innerHTML = "전송 실패";
@@ -75,7 +80,7 @@ function codeCheck(){
         type: "POST",
         url: "../ajax/codeCheck",
         data: JSON.stringify({
-            "codePurpose": "findUsername",
+            "codePurpose": "findPassword",
             "codePhoneNumber" : document.getElementById("phoneNumber").value,
             "code": document.getElementById("code").value
         }),
@@ -86,11 +91,11 @@ function codeCheck(){
             if(response.result === "success"){
                 codeCheck.innerHTML = "인증 성공";
                 codeCheck.style.color = "blue";
-                proxyButtonState.usableCode = true;
+                proxyButtonState.usablePhoneNumber = true;
             } else{
                 codeCheck.innerHTML = "인증 실패";
                 codeCheck.style.color = "red";
-                proxyButtonState.usableCode = false;
+                proxyButtonState.usablePhoneNumber = false;
             }
         },
         error: function (request, status, error) {
@@ -99,4 +104,8 @@ function codeCheck(){
     });
 
 }
+
+document.getElementById("newBtn").onclick = function() {
+    document.getElementById("findPassword").submit();
+};
 
