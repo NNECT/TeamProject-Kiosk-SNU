@@ -1,0 +1,92 @@
+
+@media only screen and (min-device-width : 768px) and (max-device-width : 1023px) {
+
+}
+#body{
+    background-color: #ffffff ;
+    position: relative;
+    width: 1024px;
+    height: 768px;
+    border: 1px solid red;
+}
+/*before*/
+img{
+    position: relative;
+    top: 40px;
+    left: 70px;
+    width: 30px;
+    height: 30px;
+}
+/**/
+#allWrap{
+    width: 700px;
+    height: 768px;
+    border: 0px solid red;
+    position: absolute;
+    
+    top: 0px;
+    left: 50%;
+    transform: translate(-50%,0);
+
+    text-align: center;
+}
+#title{
+    font-size: 25px;
+    margin-top: 40px;
+}
+
+/**/
+#tableWrap{
+    margin-top: -10px;
+    width: 700px;
+    height: 600px;
+    border: 1px solid red;
+}
+/*table*/
+table{
+    border-collapse: collapse;
+    border-spacing: 20px;
+}
+#trTitle{
+    width: 700px;
+    height: 60px;
+    background-color: #EDF2FF;
+    border-bottom: 2px solid #E4E4E4;
+    border: 0px solid blue;
+    border-bottom: 2px solid #E4E4E4;
+    font-size: 18px;
+}
+th{font-weight: normal; color: #383838;}
+#date{
+    width: 250px;
+    height: 60px;
+    padding: 0 10px;
+}
+#name{
+    width: 100px;
+    height: 60px;
+    padding: 0 10px;
+}
+#result{
+    width: 100px;
+    height: 60px;
+    padding: 0 10px;
+}
+#point{
+    width: 170px;
+    height: 60px;
+    padding: 0 10px;
+}
+/**/
+tr{
+   width: 700px;
+    height: 50px; 
+    border-bottom: 2px solid #E4E4E4;
+    color: #383838;
+}
+td{
+    font-size: 20px;
+}
+.point{
+    color: #285FF5;
+}
