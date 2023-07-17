@@ -12,7 +12,7 @@
                 <div class="card-body text-center">
                     <h2 class="card-title">관리자 페이지 비밀번호 변경</h2>
                     <hr>
-                    <form action="${pageContext.request.contextPath}/admin" method="POST">
+                    <form action="${pageContext.request.contextPath}/admin/adminmypage?id=${admin.id}" method="POST">
                         <ul class="list-group">
                             <li class="list-group-item">
                                 <label for="username" class="text-center">현재 비밀번호</label>

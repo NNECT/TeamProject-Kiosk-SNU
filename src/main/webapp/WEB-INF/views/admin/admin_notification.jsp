@@ -20,18 +20,12 @@
                             <hr>
                             <!-- 공지사항 목록 -->
                             <ul class="list-group">
+                                <c:forEach items="${noticeList}" var="notice">
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    <a href="${pageContext.request.contextPath}/admin/adminnotificationedit">에어컨 관련 공지</a>
+                                    <a href="${pageContext.request.contextPath}/admin/adminnotificationedit?id=${notice.id}">${notice.title}</a>
                                     <a href="#" class="btn btn-success btn-danger" onclick="deleteNotification(this)">공지 삭제</a>
                                 </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    <a href="${pageContext.request.contextPath}/admin/adminnotificationedit">에어컨 관련 공지</a>
-                                    <a href="#" class="btn btn-success btn-danger" onclick="deleteNotification(this)">공지 삭제</a>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    <a href="${pageContext.request.contextPath}/admin/adminnotificationedit">화장실 관련 공지</a>
-                                    <a href="#" class="btn btn-success btn-danger" onclick="deleteNotification(this)">공지 삭제</a>
-                                </li>
+                                </c:forEach>
                                 <!-- 필요한 만큼 공지사항 목록을 추가할 수 있습니다. -->
 
                             </ul>

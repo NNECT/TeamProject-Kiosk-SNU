@@ -13,15 +13,15 @@
                     <h2 class="card-title">스터디카페 관리자 페이지</h2>
                     <hr>
                     <h4>공지사항 수정</h4>
-                    <form action="${pageContext.request.contextPath}/admin/adminnotification" method="post">
+                    <form action="${pageContext.request.contextPath}/admin/adminnotification?id=${notice.id}" method="post">
                         <div class="form-group">
-                            <label for="title">제목</label>
-                            <textarea class="form-control form-control-lg" id="title" rows="1"></textarea>
+                            <label for="title"></label>
+                            <textarea class="form-control form-control-lg" id="title" name="title" rows="1">${notice.title}</textarea>
                         </div>
 
                         <div class="form-group">
                             <label for="notice">공지 내용</label>
-                            <textarea class="form-control form-control-lg" id="notice" rows="5"></textarea>
+                            <textarea class="form-control form-control-lg" id="notice" name="content" rows="5">${notice.content}</textarea>
                         </div>
                         <div class="text-center">
                         <button type="submit" class="btn btn-primary ">수정</button>
