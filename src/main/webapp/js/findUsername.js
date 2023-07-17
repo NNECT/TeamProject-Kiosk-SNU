@@ -1,16 +1,44 @@
+let changeIcon = document.getElementById('changeIcon')
 
 let buttonState = {
     usablePhoneNumber: false,
-    usableCode: false
+    usableCode : false
 };
 
 let buttonStateHandler = {
     set: function(target, key, value) {
         target[key] = value;
+        const codeSendCheck = document.getElementById("codeSendCheck");
+
         if (target.usablePhoneNumber) {
-            document.getElementById('newBtn').style.display = 'block';
-        } else {
-            document.getElementById('newBtn').style.display = 'none';
+
+           if(codeSendCheck.innerHTML == "전송됨" && target.usableCode==null){
+                document.getElementById('newBtn').style.display = 'none';
+                let ingIcon = "<img src='../img/snu_loding.gif' width='90'>"
+                changeIcon.innerHTML = ingIcon;
+
+               //
+
+            }else if(target.usableCode){
+
+                    document.getElementById('newBtn').style.display = 'block';
+                     let succesIcon="<img src='../img/success&fail/succesCheck.png' width='150'>"
+                     changeIcon.innerHTML = succesIcon;
+
+            }else if(target.usableCode===false){
+
+                     document.getElementById('newBtn').style.display = 'none';
+                     let failIcon = "<img src='../img/success&fail/failCheck.png' width='140'>"
+                     changeIcon.innerHTML = failIcon;
+            }
+
+        } else if(target.usablePhoneNumber === false){
+            if(codeSendCheck.innerHTML === "잘못된 번호"){
+                document.getElementById('newBtn').style.display = 'none';
+                let failIcon = "<img src='../img/success&fail/failCheck.png' width='140'>"
+                changeIcon.innerHTML = failIcon;
+            }
+
         }
         return true;
     }
@@ -53,12 +81,15 @@ function codeSend(){
             if(response.result === "success"){
                 codeSendCheck.innerHTML = "전송됨";
                 codeSendCheck.style.color = "green";
+                proxyButtonState.usablePhoneNumber = true;
             }else if(response.result === "wrongNumber"){
                 codeSendCheck.innerHTML = "잘못된 번호";
                 codeSendCheck.style.color = "red";
+                proxyButtonState.usablePhoneNumber = false;
             }else{
                 codeSendCheck.innerHTML = "전송 실패";
                 codeSendCheck.style.color = "red";
+                proxyButtonState.usablePhoneNumber = false;
             }
         },
         error: function (request, status, error) {
