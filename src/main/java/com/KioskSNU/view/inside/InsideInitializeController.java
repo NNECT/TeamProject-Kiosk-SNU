@@ -82,7 +82,7 @@ public class InsideInitializeController {
             return modelAndView;
         }
 
-        // type 분기 처리
+        // type에 따른 number 존재 여부 확인
         switch (type) {
             case "seat":
                 // seatNumber 존재 여부 확인
@@ -91,10 +91,6 @@ public class InsideInitializeController {
                     modelAndView.addObject("publicKey", rsa.getPublicKey());
                     return modelAndView;
                 }
-
-                // 세션에 자리 등록
-                session.setAttribute("insideType", "seat");
-                session.setAttribute("insideNumber", number);
                 break;
 
             case "room":
@@ -104,10 +100,6 @@ public class InsideInitializeController {
                     modelAndView.addObject("publicKey", rsa.getPublicKey());
                     return modelAndView;
                 }
-
-                // 세션에 자리 등록
-                session.setAttribute("insideType", "room");
-                session.setAttribute("insideNumber", number);
                 break;
 
             default:
@@ -115,6 +107,10 @@ public class InsideInitializeController {
                 modelAndView.addObject("publicKey", rsa.getPublicKey());
                 return modelAndView;
         }
+
+        // 세션에 자리 등록
+        session.setAttribute("insideType", type);
+        session.setAttribute("insideNumber", number);
 
         modelAndView.setViewName("redirect:/inside/index");
         return modelAndView;
