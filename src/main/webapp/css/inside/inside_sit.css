@@ -1,28 +1,50 @@
-body{
+@media only screen and (min-device-width : 768px) and (max-device-width : 1023px) {
+
+}
+#body{
     background-color: #EDF2FF;
     position: relative;
     text-align: center;
+    width: 1024px;
+    height: 768px;
+    border:0px solid rebeccapurple;
+}
+/*이전버튼*/
+img{
+    position: relative;
+    top: 30px;
+    left: -402px;
+    width: 30px;
+    height: 30px;
 }
 #title{
+    width: 300px;
+    height: 40px;
+    border: 1px solid green;
     font-size: 30px;
     font-weight: 600;
     color: #383838;
+    position: relative;
+    top: -35px;
+    left: 50%;
+    transform: translate(-50%,0);
 }
 #info{
-    width: 270px;
+    width: 400px;
     height: 15px;
     border: 0px solid blue;
     float: left;
 }
 .box{
     display: inline-block;
-    width: 15px;
-    height: 15px;
+    width: 13px;
+    height: 13px;
     margin: 0 5px;
 }
 .b{background-color: #285FF5;}
 .g{background-color: #C3C3C3;}
 .r{background-color: #f52828;}
+.m{background-color: #89FF00;}
 .blue{
     color: #285FF5;
     font-size: 15px;
@@ -35,9 +57,13 @@ body{
     color: #f52828;
     font-size: 15px;
 }
+.my{
+    color: #707070;
+    font-size: 15px;
+}
 /* 자리선택 */
 #seatWrap{
-    width: 1000px;
+    width: 900px;
     height: 700px;
     border: 0px solid red;
     position: absolute;
@@ -46,22 +72,23 @@ body{
     transform: translate(-50%,0);
 }
 section{
-    width: 1000px;
-    height: 550px;
+    width: 900px;
+    height: 500px;
     border: 0px solid red;
     background-color: white;
     float: left;
     margin-top: 15px;
-    
+
 }
 table{
     margin: auto;
     margin-top: 10px;
+    border: 0px solid blue;
 }
 
 td{
-    width: 60px;
-    height: 60px;
+    width: 55px;
+    height: 55px;
     background-color: #ffffff;
     text-align: center;
 }

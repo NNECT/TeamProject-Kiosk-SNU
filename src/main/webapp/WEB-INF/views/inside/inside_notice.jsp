@@ -14,7 +14,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=deevice-width, initial-scale=1,minimum-scale=1,maxmun-scale=1">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="<c:url value="/css/inside/snu_notice.css"/>">
+        <link rel="stylesheet" href="<c:url value="/css/inside/inside_notice.css"/>">
         
         <link href="https://cdn.jsdelivr.net/gh/sunn-us/SUITE/fonts/static/woff2/SUITE.css" rel="stylesheet">
 
@@ -25,7 +25,7 @@
     </head>
         <body>
             <div id="body">
-                <a href="inside_noticeList.jsp"><img src="<c:url value="/img/beforBtn.png"/>" alt=""></a>
+                <a href="inside_noticeList.jsp"><img src="<c:url value="/img/inside/beforBtn.png"/>" alt=""></a>
 
                 <section id="allWrap"><!--전체 감싸는 박스-->
                     <p id="title">공지사항</p>
