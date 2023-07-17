@@ -1,0 +1,118 @@
+
+@media only screen and (min-device-width : 768px) and (max-device-width : 1023px) {
+
+}
+#body{
+    background-color: #ffffff ;
+    position: relative;
+    width: 1024px;
+    height: 768px;
+    border: 1px solid red;
+}
+/*before*/
+img{
+    position: relative;
+    top: 40px;
+    left: 70px;
+    width: 30px;
+    height: 30px;
+}
+/**/
+#allWrap{
+    width: 700px;
+    height: 768px;
+    border: 0px solid red;
+    position: absolute;
+    
+    top: 0px;
+    left: 50%;
+    transform: translate(-50%,0);
+
+    text-align: center;
+}
+#title{
+    font-size: 25px;
+    margin-top: 40px;
+}
+/**/
+#tr{
+    margin: auto; padding: 0;
+    width: 500px;
+    height: 50px;
+    border: 0px solid green;
+    margin-bottom: 15px;
+}
+/**/
+#contentBox{
+    width: 500px;
+    height: 600px;
+    margin:0 100px;
+    border: 0px solid blue;
+    text-align: left;
+}
+.content{
+    display: inline-block;
+    font-size: 20px;
+    color: #383838;
+    line-height: 25px;
+    float: left;
+    
+}
+   
+#border{
+    width: 410px;
+    height: 50px;
+    display: inline-block;
+    border: 0px solid gray;
+    border-bottom: 1.5px solid #E4E4E4;
+    margin-left: 15px;
+    float: left;
+}
+#fullborder{
+    width: 480px;
+    height: 50px;
+    display: inline-block;
+    border: 0px solid gray;
+    border-bottom: 1.5px solid #E4E4E4;
+    margin-left: 0px;
+}
+/*span*/
+.showText{
+    margin-top: 13px;
+    font-size: 23px;
+    display: inline-block;
+    color: #383838;
+    width: 300px;
+    height: 20px;
+    border: 0px solid brown;
+
+}
+/*btn*/
+.btn{
+    border: none;
+    background-color: #285FF5;
+    color: #ffffff;
+    font-size: 17px;
+    float: right;
+    margin-top: 10px;
+}
+.telBtn{
+    width: 80px;
+    height: 35px;
+    border-radius: 10px;
+}
+.passBtn{
+    width: 80px;
+    height: 35px;
+    border-radius: 10px;
+}
+.ticketBtn{
+    width: 90px;
+    height: 35px;
+    border-radius: 10px;
+}
+.challBtn{
+    width: 90px;
+    height: 35px;
+    border-radius: 10px;
+}

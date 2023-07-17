@@ -1,0 +1,100 @@
+@media only screen and (min-device-width : 768px) and (max-device-width : 1023px) {
+
+}
+#body{
+    margin: 0; padding: 0;
+    background-color: #ffffff;
+    position: relative;
+    width: 1024px;
+    height: 768px;
+    border:1px solid rebeccapurple;
+}
+img{
+    position: relative;
+    top: 40px;
+    left: 70px;
+    width: 30px;
+    height: 30px;
+    z-index: 2;
+}
+
+#whiteWrap{
+    width: 900px;
+    height: 768px;
+    background-color: #ffffff;
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    transform: translate(-50%,0);
+     
+}
+section{
+    margin: 0 120px;
+    margin-top: 50px;
+}
+/*메뉴*/
+ul{
+    margin-top: 0px;
+}
+li{
+    display: inline-block;
+    margin-right: 80px;
+    font-size: 20px;
+    width: 110px;
+    height: 40px;
+    border: 1px solid #285FF5;
+    border-radius: 20px;
+    text-align: center;
+    line-height: 40px;
+}
+#timeTicket{
+    background-color: #285FF5;
+    color: #ffffff;
+}
+
+a{text-decoration: none; color: #285FF5;}
+#commutationTicket :hover{
+    display: block;
+    color: #ffffff;
+    background-color: #285FF5;
+    border-radius: 18px;
+}
+hr{
+    border: 0.9px solid #285FF5;  
+}
+
+table{
+   border-spacing: 20px;
+}
+td{
+    width: 200px;
+    height: 110px;
+    border: 1px solid #285FF5;
+    border-radius: 10px;
+    text-align: center;
+    margin:10px 10px 10px 10px;
+}
+.t{
+    font-size: 20px;
+    color: #285FF5;
+}
+.p{
+    margin-top: -10px;
+    font-size: 17px;
+    color: #285FF5;
+}
+.radio-input {
+    display: none;
+}
+#nextBtn{
+    width: 120px;
+    height: 50px;
+    background-color: #285FF5;
+    border-radius: 30px;
+    border: none;
+    font-size: 20px;
+    color: #ffffff;
+    position: relative;
+    top: 100px;
+    left: 520px;
+}

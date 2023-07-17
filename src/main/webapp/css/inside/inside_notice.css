@@ -1,0 +1,97 @@
+
+@media only screen and (min-device-width : 768px) and (max-device-width : 1023px) {
+
+}
+#body{
+    background-color: #ffffff ;
+    position: relative;
+    width: 1024px;
+    height: 768px;
+    border: 1px solid red;
+}
+/*before*/
+img{
+    position: relative;
+    top: 40px;
+    left: 70px;
+    width: 30px;
+    height: 30px;
+}
+/**/
+#allWrap{
+    width: 800px;
+    height: 768px;
+    border: 0px solid red;
+    position: absolute;
+    
+    top: 0px;
+    left: 50%;
+    transform: translate(-50%,0);
+
+    text-align: center;
+}
+#title{
+    font-size: 25px;
+    margin-top: 40px;
+}
+hr{
+    border: 1px solid #285FF5;
+}
+/**/
+#tableWrap{
+    margin-top: -10px;
+    width: 800px;
+    height: 600px;
+    border: 0px solid red;
+}
+/*table*/
+table{
+    border-collapse: collapse;
+}
+#trTitle{
+    width: 800px;
+    height: 70px;
+    
+    border: 0px solid rebeccapurple;
+    border-bottom: 2px solid #E4E4E4;
+}
+#noticeTitle{
+    height: 60px;
+    font-size: 23px;
+    font-weight: normal;
+    display: inline-block;
+    float: left;
+    margin: 20px;
+    margin-left: 50px;
+}
+#writer{
+    height: 60px;
+    font-size: 18px;
+    font-weight: normal;
+    display: inline-block;
+    float: left;
+    margin: 25px;
+    margin-left: 220px;
+}
+span{
+    font-size: 15px;
+    font-weight: lighter;
+}
+
+#date{
+    height: 60px;
+    font-size: 18px;
+    font-weight: normal;
+    display: inline-block; 
+    float: right;
+    margin: 25px;
+    margin-right: 50px;
+}
+/*content*/
+#content{
+    width: 740px;
+    height: 500px;
+    text-align: left;
+    padding:  0 30px;
+    border: 0px solid green ;
+}

@@ -1,0 +1,84 @@
+body{
+    position: relative;
+}
+#whiteBox{
+    margin: 0; padding: 0;
+    width: 700px;
+    height: 600px;
+    border: 0px solid rebeccapurple;
+    background-color: #ffffff;
+    box-shadow: 0px 3px 20px 1px #E4E4E4;
+    border-radius: 15px;
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translate(-50%,0);
+}
+
+#menu{
+    width: 200px;
+    height: 600px;
+    background-color: #285FF5;
+    float: right;
+    border-radius: 0 14px 14px 0px;
+}
+
+ul{
+    list-style: none;
+}
+li{
+    margin-top: 10px;
+    margin-bottom: 40px;
+}
+a{
+    text-decoration: none;
+    color: #ffffff;
+   
+}
+#wrap{
+    margin: 0; padding: 0;
+    text-align: center;
+}
+
+#title{
+    margin-top: 40px;
+    font-size: 32px;
+    font-weight: 600;
+    color: #285FF5;
+}
+
+.input{
+    margin-top: 7px;
+    width: 200px;
+    height: 30px;
+    border: 1px solid #285FF5;
+    border-radius: 7px;
+    outline: none;
+    background-color: white;
+    padding-left: 5px;
+}
+
+.btn{
+    margin-top: 7px;
+    width: 80px;
+    height: 35px;
+    border-radius: 10px;
+    border: none;
+    background-color: #285FF5; 
+    font-size: 16px;
+    color: #ffffff;
+}
+
+/*hiddenBTN*/
+
+#newBtn{
+    width: 80px;
+    height: 35px;
+    margin-top: 180px;
+    margin-left: 20px;
+    border-radius: 10px;
+    border: none;
+    background-color: #ffffff; 
+    font-size: 16px;
+    color: #285FF5;
+}
