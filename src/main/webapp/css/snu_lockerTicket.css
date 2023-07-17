@@ -16,6 +16,7 @@ body{
 section{
     margin: 0 120px;
     margin-top: 90px;
+    border: 0px solid rebeccapurple;
 }
 /*메뉴*/
 ul{
@@ -48,22 +49,26 @@ hr{
     border-spacing: 10px 3px;
     margin-left: 60px;
 }
-.l{
+.r{
     width: 50px;
     height: 50px;
     border-radius: 0;
-    border: 0px;
+    border: 0px solid rebeccapurple; 
 }
-.use{
+/* .loker{
     background-color: gray;
+} */
+.none{
+    width: 50px;
+    display: none;
 }
 /*사용가능,불가능*/
 #info{
-    width: 200px;
+    width: 250px;
     height: 15px;
     border: 0px solid blue;
     margin-top: 10px;
-    margin-left: 52px;
+    margin-left: 57px;
 }
 .box{
     display: inline-block;
@@ -72,6 +77,7 @@ hr{
 }
 .b{background-color: #285FF5;}
 .g{background-color: #C3C3C3;}
+.rBox{background-color: #F52828;}
 .blue{
     color: #285FF5;
     font-size: 15px;
@@ -80,24 +86,25 @@ hr{
     color:#707070;
     font-size: 15px;
 }
+.red{
+    color:#F52828;
+    font-size: 15px;
+}
 
 /*ticket*/
 #ticket{
-   border-spacing: 20px;
-   margin-top: 50px;
-   margin-left: 50px;
-}
-label{
-    display: block;
-    width: 190px;
-    height: 100px;
-    border: 1px solid #285FF5;
-    border-radius: 10px;
-    text-align: center;
-    margin:10px 10px 10px 10px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
+    border-spacing: 20px;
+    margin-top: 10px;
+    margin-left: 45px;
+ }
+td{
+     width: 200px;
+     height: 110px;
+     border: 1px solid #285FF5;
+     border-radius: 10px;
+     text-align: center;
+     margin:10px 10px 10px 10px;
+ }
 .t{
     font-size: 20px;
     color: #285FF5;
@@ -107,7 +114,7 @@ label{
     font-size: 17px;
     color: #285FF5;
 }
-#tRadio{
+.radio-input {
     display: none;
 }
 /*버튼*/
