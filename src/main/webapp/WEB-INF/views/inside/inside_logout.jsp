@@ -40,15 +40,15 @@
                         <div id="icon">
                             <img src="<c:url value="/img/inside/endicon/check-circle.png"/>">
                         </div>
-                        <p id="explain">0000챌린지</p>
-                        <p id="SorF">!성공!</p>
+                        <p id="explain">0000챌린지</p><!--문구 변경 -->
+                        <p id="SorF">!성공!</p><!--문구 변경 -->
 
                         <div id="btn">
                             <div id="noBox">
-                                <input type="submit" class="no btn" value="취소">
+                                <input type="submit" class="no btn" value="취소"><!--홈화면으로이동 좌석사용가능-->
                             </div>
                             <div id="yesBox">
-                                <input type="submit" class="yes btn" value="퇴실">
+                                <input type="submit" class="yes btn" value="퇴실"><!--홈화면으로이동 로그인유지,좌석사용중-->
                             </div>
                         </div>
                     </div>

@@ -35,7 +35,8 @@
                         <table>
                             <tr>
                                 <td>
-                                    <a href=""><div id="menuBox"><img src="<c:url value="/img/inside/menu/clock.png"/>" alt=""></div></a>
+                                    <a href="">
+                                        <div id="menuBox"><img src="<c:url value="/img/inside/menu/clock.png"/>" alt=""></div></a>
                                     <p id="menuName">연장</p>
                                 </td>
                                 <td>
@@ -44,7 +45,7 @@
                                     <p id="menuName">퇴실</p>
                                 </td>
                                 <td>
-                                    <a href="">
+                                    <a href="inside_select.jsp">
                                         <div id="menuBox"><img src="<c:url value="/img/inside/menu/marker.png"/>" alt=""></div></a>
                                     <p id="menuName">자리이동</p>
                                 </td>
