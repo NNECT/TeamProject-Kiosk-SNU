@@ -34,3 +34,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
         });
     });
 });
+
+
+function selectedCheck() {
+    for (const elm of document.getElementsByName("radio-button")) {
+        if (elm.checked) {
+            return true;
+        }
+    }
+    return false;
+}
