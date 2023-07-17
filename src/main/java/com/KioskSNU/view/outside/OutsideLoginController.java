@@ -54,10 +54,15 @@ public class OutsideLoginController {
     }
 
     @GetMapping("/outside/login")
-    public ModelAndView getProcess(String type, int number, HttpSession session) {
+    public ModelAndView getProcess(String type, Integer number, HttpSession session) {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("outside/login");
         mav.addObject("publicKey", rsa.getPublicKey());
+
+        if (type == null && session.getAttribute("selectType") != null) {
+            type = (String) session.getAttribute("selectType");
+            number = (Integer) session.getAttribute("selectNumber");
+        }
 
         if (type == null) {
             mav.setViewName("redirect:/outside/logout");
