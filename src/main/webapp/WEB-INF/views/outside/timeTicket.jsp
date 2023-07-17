@@ -28,28 +28,42 @@
 <div id="whiteWrap">
   <section>
     <ul>
-      <li id="timeTicket">시간권</li>
-      <li id="commutationTicket"><a href="/outside/commutationTicket .html">정기권</a></li>
+      <li id="selectedTicket">시간권</li>
+      <li id="unselectedTicket"><a href="<c:url value="/outside/ticket/seat/commutationTicket"/>">정기권</a></li>
     </ul>
     <hr>
-    <form>
+    <form action="<c:url value="/outside/ticket/seat/timeTicket"/>" method="post" onsubmit="return selectedCheck()">
       <table>
         <tr>
           <c:forEach var="i" begin="0" end="2" step="1">
-            <td class="radio-box">
-              <input type="radio" name="radio-button" class="radio-input" value="${timeTicketList[i].id}">
-              <p class="t btn-text">${timeTicketList[i].time}시간</p>
-              <p class="p btn-text"><fmt:formatNumber value="${timeTicketList[i].price}" pattern="#,##0"/>원</p>
-            </td>
+            <c:choose>
+              <c:when test="${timeTicketList.size() > i}">
+                <td class="radio-box">
+                  <input type="radio" name="radio-button" class="radio-input" value="${timeTicketList[i].id}">
+                  <p class="t btn-text">${timeTicketList[i].time}시간</p>
+                  <p class="p btn-text"><fmt:formatNumber value="${timeTicketList[i].price}" pattern="#,##0"/>원</p>
+                </td>
+              </c:when>
+              <c:otherwise>
+                <td class="radio-box"></td>
+              </c:otherwise>
+            </c:choose>
           </c:forEach>
         </tr>
         <tr>
           <c:forEach var="i" begin="3" end="5" step="1">
-            <td class="radio-box">
-              <input type="radio" name="radio-button" class="radio-input" value="${timeTicketList[i].id}">
-              <p class="t btn-text">${timeTicketList[i].time}시간</p>
-              <p class="p btn-text"><fmt:formatNumber value="${timeTicketList[i].price}" pattern="#,##0"/>원</p>
-            </td>
+            <c:choose>
+              <c:when test="${timeTicketList.size() > i}">
+                <td class="radio-box">
+                  <input type="radio" name="radio-button" class="radio-input" value="${timeTicketList[i].id}">
+                  <p class="t btn-text">${timeTicketList[i].time}시간</p>
+                  <p class="p btn-text"><fmt:formatNumber value="${timeTicketList[i].price}" pattern="#,##0"/>원</p>
+                </td>
+              </c:when>
+              <c:otherwise>
+                <td class="radio-box"></td>
+              </c:otherwise>
+            </c:choose>
           </c:forEach>
         </tr>
       </table>

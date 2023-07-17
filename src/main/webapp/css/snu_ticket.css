@@ -32,13 +32,13 @@ li{
     text-align: center;
     line-height: 40px;
 }
-#timeTicket{
+#selectedTicket{
     background-color: #285FF5;
     color: #ffffff;
 }
 
 a{text-decoration: none; color: #285FF5;}
-#commutationTicket :hover{
+#unselectedTicket :hover{
     display: block;
     color: #ffffff;
     background-color: #285FF5;
