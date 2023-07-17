@@ -18,16 +18,18 @@
                     <table class="table">
                         <thead>
                         <tr style="background-color: lightblue;">
-                            <th>전화번호</th>
                             <th>아이디</th>
+                            <th>전화번호</th>
                             <th>등록일</th>
                         </tr>
                         </thead>
+                        <c:forEach var="userDTO" items = "${list}">
                         <tr id="list" onclick="showMemberDetails()">
-                            <td>010-1234-5678</td>
-                            <td>abc123</td>
-                            <td>2023-07-01</td>
+                            <td>${userDTO.username}</td>
+                            <td>${userDTO.phoneNumber}</td>
+                            <td>${userDTO.dateTime}</td>
                         </tr>
+                        </c:forEach>
                     </table>
                 </div>
             </div>
@@ -70,6 +72,9 @@
                     <tr>
                         <th>챌린지 참여내역:</th>
                         <td id="memberChallengeProgress"></td>
+                    </tr>
+                    <tr>
+                        <td><a class ="float-right" href ="<c:url value='/admin/adminmemberedit'/>">수정</a></td>
                     </tr>
                 </table>
             </div>
