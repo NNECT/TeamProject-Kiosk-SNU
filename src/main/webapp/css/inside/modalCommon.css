@@ -7,20 +7,8 @@
     z-index: 4;
     top: -768px;
 }
-/*modal*/
+/*modal 1*/
 #modalPage{
-    width: 400px;
-    height: 420px;
-    background-color: #ffffff;
-    box-shadow: 0 3px 10px 3px #7C7D7D;
-    border-radius: 25px;
-    display: none;
-    position: relative;
-    z-index: 5;
-    top: -1400px;
-    left: 312px;
-}
-#rePasswordModal{
     width: 400px;
     height: 420px;
     background-color: #ffffff;
@@ -59,7 +47,7 @@
     height: 36px;
     border: 1px solid #285FF5;
     border-radius: 7px;
-    
+
 }
 #modalCheckBtn{
     width: 80px;
@@ -69,7 +57,7 @@
     border: none;
     font-size: 18px;
     color: white;
-    
+
 }
 .second{
     margin-top: 10px;
@@ -104,6 +92,31 @@
     font-size: 20px;
     color: #ffffff;
 }
+
+#modalYesBtn{
+    width: 250px;
+    height: 80px;
+    border: none;
+    border-radius: 0 0 25px 0;
+    background-color: #285FF5;
+    float: right;
+    font-size: 20px;
+    color: #ffffff;
+}
+
+/*modal2*/
+#rePasswordModal{
+    width: 400px;
+    height: 420px;
+    background-color: #ffffff;
+    box-shadow: 0 3px 10px 3px #7C7D7D;
+    border-radius: 25px;
+    display: none;
+    position: relative;
+    z-index: 5;
+    top: -1400px;
+    left: 312px;
+}
 #reModalNoBtn{
     width: 150px;
     height: 80px;
@@ -114,7 +127,41 @@
     font-size: 20px;
     color: #ffffff;
 }
-#modalYesBtn{
+#modalNextBtn{
+    width: 250px;
+    height: 80px;
+    border: none;
+    border-radius: 0 0 25px 0;
+    background-color: #285FF5;
+    float: right;
+    font-size: 20px;
+    color: #ffffff;
+}
+
+/*modal3*/
+#newPasswordModal{
+    width: 400px;
+    height: 420px;
+    background-color: #ffffff;
+    box-shadow: 0 3px 10px 3px #7C7D7D;
+    border-radius: 25px;
+    display: none;
+    position: relative;
+    z-index: 5;
+    top: -1400px;
+    left: 312px;
+}
+#newModalNoBtn{
+    width: 150px;
+    height: 80px;
+    border: none;
+    border-radius: 0 0 0 25px;
+    background-color: #C3C3C3;
+    float: left;
+    font-size: 20px;
+    color: #ffffff;
+}
+#finishModalBtn{
     width: 250px;
     height: 80px;
     border: none;

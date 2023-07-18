@@ -49,14 +49,14 @@
                             <p class="content ticket">사용권</p>
                             <div id="border">
                                 <span class="showText"></span>
-                                <input type="button" class="btn ticketBtn" value="결제내역">
+                                <a href="inside_paymentList.jsp"><input type="button" class="btn ticketBtn" value="결제내역"></a>
                             </div>
                         </div>
                         <div id="tr">
                             <p class="content challenge">첼린지</p>
                             <div id="border">
                                 <span class="showText"></span>
-                                <input type="button" class="btn challBtn" value="참여내역">
+                                <a href=""><input type="button" class="btn challBtn" value="참여내역"></a>
                             </div> 
                         </div>
                         <div id="tr">
@@ -109,6 +109,25 @@
             </div>
         </div>
         <!--모달영역-->
+
+            <!-- 비밀번호변경 모달-->
+            <div id="newPasswordModal">
+                <div id="modalContent">
+                    <p id="modalP">
+                        <span id="modalSpan">변경할 비밀번호</span>를 입력해주세요<br>
+
+                    </p>
+                    <hr id="modalHr">
+                    <input type="text" name="" id="modelPassword"  class="third" placeholder="새 비밀번호"><br>
+                    <input type="text" name="" id="modelPassword" class="third" placeholder="비밀번호 확인">
+                </div>
+                <div id="modalBtn">
+                    <input type="button" id="newModalNoBtn" value="변경 취소">
+                    <input type="submit" name="" id="finishModalBtn" value="변경">
+                </div>
+            </div>
+            <script src="./js/modalNewPass.js"></script>
+        </body>
         </body>
     
  </html>
