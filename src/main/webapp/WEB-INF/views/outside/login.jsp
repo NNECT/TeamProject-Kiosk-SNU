@@ -16,6 +16,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="<c:url value="/css/snu_common_bg.css"/>">
   <link rel="stylesheet" href="<c:url value="/css/snu_login.css"/>">
+  <link rel="stylesheet" href="<c:url value="/css/loginModal.css"/>">
   <link href="https://cdn.jsdelivr.net/gh/sunn-us/SUITE/fonts/static/woff2/SUITE.css" rel="stylesheet">
 
   <style>
@@ -48,6 +49,20 @@
     <a href="<c:url value="/outside/findUsername" />">아이디찾기</a>
     <a href="<c:url value="/outside/findPassword" />">비밀번호찾기</a>
   </div>
+  <!-- 로그인실패 모달 -->
+  <div id="loginFail">
+    <div id="modalContent">
+      <p id="modalP">
+        로그인에 실패<br>
+        <strong>아이디와 비밀번호</strong>를
+        <br><strong>확인</strong>해주세요
+      </p>
+    </div>
+    <div id="modalBtn">
+      <input type="button" id="modalCheckBtn" value="확인">
+    </div>
+  </div>
+  <!-- 모달 -->
 </section>
 <script src="<c:url value="/js/jsencrypt.min.js"/>"></script>
 <script>
