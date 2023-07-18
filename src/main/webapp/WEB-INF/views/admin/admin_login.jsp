@@ -12,7 +12,7 @@
                 <div class="card-body text-center">
                     <h2 class="card-title">스터디카페 관리자 페이지</h2>
                     <hr>
-                    <form action="${pageContext.request.contextPath}/admin" method="POST">
+                    <form action="${pageContext.request.contextPath}/admin/adminLogin" method="POST">
                         <ul class="list-group">
                             <li class="list-group-item">
                                 <label for="username" class="text-center">아이디&nbsp;&nbsp;&nbsp;&nbsp;</label>  <%--죄송합니다...--%>
