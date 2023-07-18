@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="ko">
     <head>
@@ -5,8 +7,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=deevice-width, initial-scale=1,minimum-scale=1,maxmun-scale=1">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../inside/css/snu_mypage.css">
-        <link rel="stylesheet" href="../inside/css/modalCommon.css">
+        <link rel="stylesheet" href="<c:url value="/css/inside/inside_mypage.css"/>">
+        <link rel="stylesheet" href="<c:url value="/css/inside/modalCommon.css"/>">
         <link href="https://cdn.jsdelivr.net/gh/sunn-us/SUITE/fonts/static/woff2/SUITE.css" rel="stylesheet">
 
 <style>
@@ -16,7 +18,7 @@
     </head>
         <body>
             <div id="body">
-                <a href="inside_menu.jsp"><img src="../inside/img/beforBtn.png" alt=""></a>
+                <a href="inside_menu.jsp"><img src="<c:url value="/img/inside/beforBtn.png"/>" alt=""></a>
 
                 <section id="allWrap"><!--전체 감싸는 박스-->
                     <p id="title">마이페이지</p>
@@ -35,7 +37,7 @@
                                 <span class="showText">aaaa-a-a-a-a-a-a</span>
                                 <input type="button" class="btn telBtn"  id="opeanModal"  onclick="showModal()" value="변경">
                             </div> 
-                            <script src="./js/modal.js"></script>   
+                            <script src="<c:url value="/js/modal.js"/>"></script>
                         </div> 
                         
                         <div id="tr">
@@ -126,7 +128,7 @@
                     <input type="submit" name="" id="finishModalBtn" value="변경">
                 </div>
             </div>
-            <script src="./js/modalNewPass.js"></script>
+            <script src="<c:url value="/js/modalNewPass.js"/>"></script>
         </body>
         </body>
     
