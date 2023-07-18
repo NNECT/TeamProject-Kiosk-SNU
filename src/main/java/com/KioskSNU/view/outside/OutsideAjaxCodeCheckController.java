@@ -50,7 +50,7 @@ public class OutsideAjaxCodeCheckController {
                     return ResponseEntity.ok(Map.of("result", "notFoundUsername"));
                 }
                 //입력한 연락처가 username에 등록되어 있는 연락처랑 다를 경우
-                if (getUser.getPhoneNumber().equals(phoneNumber)) {
+                if (!getUser.getPhoneNumber().equals(phoneNumber)) {
                     return ResponseEntity.ok(Map.of("result", "wrongNumber"));
                 }
                 break;
