@@ -16,7 +16,6 @@
     <meta name="viewport" content="width=deevice-width, initial-scale=1,minimum-scale=1,maxmun-scale=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<c:url value="/css/snu_common_bg.css"/>">
-    <link rel="stylesheet" href="<c:url value="/css/snu_common.css"/>">
     <link rel="stylesheet" href="<c:url value="/css/snu_newPassword.css"/>">
     <link href="https://cdn.jsdelivr.net/gh/sunn-us/SUITE/fonts/static/woff2/SUITE.css" rel="stylesheet">
 
@@ -53,24 +52,19 @@
     </div>
     <div id="wrap"><!--wrap-->
         <p id="title">비밀번호 재설정</p>
-
-        <div><!--아이콘 변경란-->
-            <img src="<c:url value="/img/snu_loding.gif"/>" width="90">
-        </div>
-        <form id="sudo-newPassword-form" method="post"><!--입력란-->
-
-            <p><label for="password">새비밀번호를 입력해주세요</label></p>
-            <input id="password" class="input newPassword" type="password" name="newPassword"
-                   onkeyup="checkPasswordMatch()">
-
-            <p>
-                <label for="password_confirm">다시 입력해주세요</label>
-                <span id="passwordCheck" style="float: right; margin-right: 105px;"></span>
-            </p>
-            <input id="password_confirm" class="input password" type="password" onkeyup="checkPasswordMatch()">
-
+        <form action="">
+            <div id="input"><!--입력란-->
+                <p>새비밀번호를 입력해주세요</p>
+                <input class="input newPassword" type="password" name="">
+                <p>다시 입력해주세요</p>
+                <input class="input password" type="password" name="">
+                <input type="button" id="checkBtn" value="비밀번호 확인">
+            </div>
         </form>
-
+        <div id="showBtn">
+            <hr>
+            <a href=""><input type="button" id="loginBtn" value="로그인페이지로 이동"></a>
+        </div>
     </div>
 </section>
 <script src="<c:url value="/js/jsencrypt.min.js"/>"></script>
