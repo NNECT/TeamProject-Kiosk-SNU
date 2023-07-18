@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.crypto.BadPaddingException;
@@ -88,46 +87,53 @@ public class OutsideLoginController {
     @PostMapping("/outside/login")
     public ModelAndView postProcess(AccountDTO accountDTO, HttpSession session) throws NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("outside/login");
 
+        //accountDTO로 들어오는 내용이 null 이라면 첫화면으로 다시 보내기
         if (accountDTO == null) {
-            //accountDTO로 들어오는 내용이 null 이라면 첫화면으로 다시 보내기
             mav.setViewName("redirect:/outside/logout");
-        } else if (accountDTO.getUsername() == null) {
+            return mav;
+        }
+
+        //좌석선택이후 로그인으로 들어오는 경우, publicKey와 함께 로그인 화면으로 이동
+        if (accountDTO.getUsername() == null) {
             mav.addObject("publicKey", rsa.getPublicKey());
             mav.setViewName("/outside/login");
-        } else {
-            //로그인 정보 먼저 받아오기 (*전체정보 모두 들어옴)
-            AccountDTO getUser = accountService.getByUsername(accountDTO.getUsername());
-            if (getUser == null) {
-                mav.addObject("userNameError", "회원정보를 확인해주세요.");
-                mav.addObject("publicKey", rsa.getPublicKey());
-                mav.setViewName("/outside/login");
-            } else if (getUser.getPassword().equals(sha.encrypt(rsa.decrypt(accountDTO.getPassword())))) {
-                //저장되어 있는 SHA 비밀번호와 입력된 비밀번호 비교
-                //로그인성공 (세션에 author 이름으로 account 정보 저장)
-                session.setAttribute("author", getUser);
-                switch ((String) session.getAttribute("selectType")) {
-                    case "seat":
-                        mav.setViewName("redirect:/outside/ticket/seat");
-                        seatMap.get((int) session.getAttribute("selectNumber")).setAccount_id(getUser.getId());
-                        break;
-                    case "room":
-                        mav.setViewName("redirect:/outside/ticket/room");
-                        roomMap.get((int) session.getAttribute("selectNumber")).setAccount_id(getUser.getId());
-                        break;
-                    default:
-                        mav.setViewName("redirect:/outside/logout");
-                        break;
-                }
-            } else {
-                //비밀번호가 틀리면
-                mav.addObject("userPasswordError", "비밀번호를 확인해주세요");
-                mav.addObject("publicKey", rsa.getPublicKey());
-                mav.setViewName("/outside/login");
-            }
+            return mav;
+        }
+
+        //회원목록에서 username없으면 로그인 화면으로
+        if (accountService.getByUsername(accountDTO.getUsername()) == null) {
+            mav.addObject("publicKey", rsa.getPublicKey());
+            mav.setViewName("/outside/login");
+            return mav;
+        }
+
+        //비밀번호가 틀리면
+        //모달창으로 비밀번호 오류 안내 후 다시 로그인 페이지 이동할 예정 (reset)
+        if (!accountService.getByUsername(accountDTO.getUsername()).getPassword().equals(sha.encrypt(rsa.decrypt(accountDTO.getPassword())))) {
+            mav.addObject("publicKey", rsa.getPublicKey());
+            mav.setViewName("/outside/login");
+            return mav;
+        }
+
+        //로그인성공 (세션에 author 이름으로 account 정보 저장)
+        AccountDTO getUser = accountService.getByUsername(accountDTO.getUsername());
+        session.setAttribute("author", getUser);
+        switch ((String) session.getAttribute("selectType")) {
+            case "seat":
+                mav.setViewName("redirect:/outside/ticket/seat");
+                seatMap.get((int) session.getAttribute("selectNumber")).setAccount_id(getUser.getId());
+                break;
+            case "room":
+                mav.setViewName("redirect:/outside/ticket/room");
+                roomMap.get((int) session.getAttribute("selectNumber")).setAccount_id(getUser.getId());
+                break;
+            default:
+                mav.setViewName("redirect:/outside/logout");
+                break;
         }
 
         return mav;
+
     }
 }
