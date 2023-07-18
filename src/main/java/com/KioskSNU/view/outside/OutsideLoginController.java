@@ -54,10 +54,15 @@ public class OutsideLoginController {
     }
 
     @GetMapping("/outside/login")
-    public ModelAndView getProcess(String type, int number, HttpSession session) {
+    public ModelAndView getProcess(String type, Integer number, HttpSession session) {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("outside/login");
         mav.addObject("publicKey", rsa.getPublicKey());
+
+        if (type == null && session.getAttribute("selectType") != null) {
+            type = (String) session.getAttribute("selectType");
+            number = (Integer) session.getAttribute("selectNumber");
+        }
 
         if (type == null) {
             mav.setViewName("redirect:/outside/logout");
@@ -84,18 +89,19 @@ public class OutsideLoginController {
     public ModelAndView postProcess(AccountDTO accountDTO, HttpSession session) throws NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("outside/login");
-        mav.addObject("publicKey", rsa.getPublicKey());
 
         if (accountDTO == null) {
             //accountDTO로 들어오는 내용이 null 이라면 첫화면으로 다시 보내기
             mav.setViewName("redirect:/outside/logout");
         } else if (accountDTO.getUsername() == null) {
+            mav.addObject("publicKey", rsa.getPublicKey());
             mav.setViewName("/outside/login");
         } else {
             //로그인 정보 먼저 받아오기 (*전체정보 모두 들어옴)
             AccountDTO getUser = accountService.getByUsername(accountDTO.getUsername());
             if (getUser == null) {
                 mav.addObject("userNameError", "회원정보를 확인해주세요.");
+                mav.addObject("publicKey", rsa.getPublicKey());
                 mav.setViewName("/outside/login");
             } else if (getUser.getPassword().equals(sha.encrypt(rsa.decrypt(accountDTO.getPassword())))) {
                 //저장되어 있는 SHA 비밀번호와 입력된 비밀번호 비교
@@ -117,6 +123,7 @@ public class OutsideLoginController {
             } else {
                 //비밀번호가 틀리면
                 mav.addObject("userPasswordError", "비밀번호를 확인해주세요");
+                mav.addObject("publicKey", rsa.getPublicKey());
                 mav.setViewName("/outside/login");
             }
         }

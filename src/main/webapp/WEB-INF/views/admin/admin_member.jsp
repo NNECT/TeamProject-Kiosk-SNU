@@ -18,16 +18,18 @@
                     <table class="table">
                         <thead>
                         <tr style="background-color: lightblue;">
-                            <th>아이디</th>
+                            <th>번호</th>
                             <th>전화번호</th>
-                            <th>등록일</th>
+                            <th>아이디</th>
+                            <%--<th>등록일</th>--%>
                         </tr>
                         </thead>
-                        <c:forEach var="userDTO" items = "${list}">
+                        <c:forEach items="${memberList}" var="member">
                         <tr id="list" onclick="showMemberDetails()">
-                            <td>${userDTO.username}</td>
-                            <td>${userDTO.phoneNumber}</td>
-                            <td>${userDTO.dateTime}</td>
+                            <td>${member.id}</td>
+                            <td>${member.phoneNumber}</td>
+                            <td>${member.username}</td>
+                            <%--<td>2023-07-01</td>--%>
                         </tr>
                         </c:forEach>
                     </table>
