@@ -4,6 +4,7 @@ import com.KioskSNU.interceptor.OutsideLoginRequired;
 import com.KioskSNU.snu.dto.CommutationTicketDTO;
 import com.KioskSNU.snu.dto.TimeTicketDTO;
 import com.KioskSNU.snu.service.CommutationTicketService;
+import com.KioskSNU.snu.service.RoomService;
 import com.KioskSNU.snu.service.TimeTicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,14 +22,17 @@ import java.util.List;
 public class OutsideTicketController {
     private final TimeTicketService timeTicketService;
     private final CommutationTicketService commutationTicketService;
+    private final RoomService roomService;
 
     @Autowired
     public OutsideTicketController(
             TimeTicketService timeTicketService,
-            CommutationTicketService commutationTicketService
+            CommutationTicketService commutationTicketService,
+            RoomService roomService
     ) {
         this.timeTicketService = timeTicketService;
         this.commutationTicketService = commutationTicketService;
+        this.roomService = roomService;
     }
 
     @GetMapping({"/seat", "/seat/timeTicket"})
@@ -79,11 +83,36 @@ public class OutsideTicketController {
         return mav;
     }
 
-    @RequestMapping("/room")
+    @GetMapping("/room")
     @OutsideLoginRequired
-    public ModelAndView roomProcess(){
+    public ModelAndView roomGetProcess(HttpSession session){
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("outside/timeTicket");
+
+        // 선택이 되지 않았거나, 선택이 룸이 아닐 경우
+        if (session.getAttribute("selectType") == null || !session.getAttribute("selectType").equals("room")) {
+            mav.setViewName("redirect:/outside/logout");
+            return mav;
+        }
+
+        // 선택한 방이 존재하지 않을 경우
+        int roomNumber = (int) session.getAttribute("selectNumber");
+        if (roomService.getByRoomNumber(roomNumber) == null) {
+            System.out.println(roomNumber + "번 방 정보가 존재하지 않음");
+            mav.setViewName("redirect:/outside/logout");
+            return mav;
+        }
+
+        mav.addObject("room", roomService.getByRoomNumber(roomNumber));
+
+        mav.setViewName("outside/roomTicket");
+        return mav;
+    }
+
+    @PostMapping("/room")
+    @OutsideLoginRequired
+    public ModelAndView roomPostProcess(){
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("redirect:/outside/locker");
         return mav;
     }
 }
