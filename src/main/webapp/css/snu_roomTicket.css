@@ -32,13 +32,13 @@ li{
     text-align: center;
     line-height: 40px;
 }
-#selectedTicket{
+#timeTicket{
     background-color: #285FF5;
     color: #ffffff;
 }
 
 a{text-decoration: none; color: #285FF5;}
-#unselectedTicket :hover{
+#commutationTicket :hover{
     display: block;
     color: #ffffff;
     background-color: #285FF5;
@@ -67,6 +67,9 @@ td{
     margin-top: -10px;
     font-size: 17px;
     color: #285FF5;
+}
+.radio-input {
+    display: none;
 }
 #nextBtn{
     width: 120px;
