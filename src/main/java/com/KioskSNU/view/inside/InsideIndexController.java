@@ -48,7 +48,7 @@ public class InsideIndexController {
     public ModelAndView start(HttpSession session) {
         ModelAndView modelAndView = new ModelAndView();
 
-        switch ((String) session.getAttribute("insideType")) {
+        /*switch ((String) session.getAttribute("insideType")) {
             case "seat": {
                 // 사용자가 등록되지 않았거나 사용 시작이 되지 않았으면 인덱스 페이지에서 대기
                 if (!seatMap.containsKey((Integer) session.getAttribute("insideNumber"))
@@ -93,7 +93,13 @@ public class InsideIndexController {
                 modelAndView.setViewName("redirect:/inside");
                 return modelAndView;
             }
-        }
+        }*/
+
+        //테스트코드
+        session.setAttribute("author",accountService.getById(1));
+
+
+
 
         modelAndView.setViewName("redirect:/inside/login");
         return modelAndView;

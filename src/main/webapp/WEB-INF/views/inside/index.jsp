@@ -33,7 +33,7 @@
     </section>
 
     <section id="allWrap"><!--전체 감싸는 박스-->
-        <a href="<c:url value="/inside/login"/>">
+        <a href="<c:url value="/inside/start"/>">
             <div id="start"><!--클릭란-->
                 <p id="snuStudy"><strong>${sessionScope.insideNumber}번</strong></p>
                 <div id="iconWrap">

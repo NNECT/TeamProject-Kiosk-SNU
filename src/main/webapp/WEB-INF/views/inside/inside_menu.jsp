@@ -27,11 +27,11 @@
             <div id="body">
             <section id="allWrap"><!--전체 감싸는 박스-->
                     <div id="login"><!--클릭란-->
-                        <p id="seatNum"><strong>24번</strong></p>
+                        <p id="seatNum"><strong>${sessionScope.insideNumber}번</strong></p>
                         <div id="line">
                             <hr>
                         </div>
-                            <p id="userName">김감자님</p> 
+                            <p id="userName">${sessionScope.author.username}님</p>
                         <table>
                             <tr>
                                 <td>
