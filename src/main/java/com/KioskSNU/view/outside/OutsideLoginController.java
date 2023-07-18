@@ -121,7 +121,7 @@ public class OutsideLoginController {
         session.setAttribute("author", getUser);
         switch ((String) session.getAttribute("selectType")) {
             case "seat":
-                mav.setViewName("redirect:/outside/ticket/seat");
+                mav.setViewName("redirect:/outside/having");
                 seatMap.get((int) session.getAttribute("selectNumber")).setAccount_id(getUser.getId());
                 break;
             case "room":
@@ -134,6 +134,5 @@ public class OutsideLoginController {
         }
 
         return mav;
-
     }
 }
