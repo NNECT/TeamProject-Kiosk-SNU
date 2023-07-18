@@ -105,8 +105,8 @@
           <td class="seat r" id="6"></td>
           <td class="seat r" id="9"></td>
           <td></td><td></td><td></td><td></td><td></td>
-          <td colspan="3" rowspan="3" class="room"><a href="snu_login.html">room1</a></td>
-          <td colspan="3" rowspan="3" class="room"><a href="snu_login.html">room2</a></td>
+          <td colspan="3" rowspan="3" class="room r" id="r1"><a href="snu_login.html">room1</a></td>
+          <td colspan="3" rowspan="3" class="room r" id="r2"><a href="snu_login.html">room2</a></td>
         </tr>
         <tr>
           <td class="seat r" id="7"></td>
@@ -129,19 +129,36 @@
 <script>
   window.addEventListener('DOMContentLoaded', (event) => {
     const seats = document.querySelectorAll('.seat');
-    const status = ${seatStatusMap};
+    const seatStatus = ${seatStatusMap};
     seats.forEach((seat, index) => {
-      if(status[Number(seat.id)] === 1) {
+      if(seatStatus[Number(seat.id)] === 1) {
         seat.classList.remove('r');
         seat.classList.add('b');
         seat.innerHTML = "<a href='<c:url value="/outside/login"/>?type=seat&number=" + seat.id + "'>" + seat.id + "</a>"
-      } else if (status[Number(seat.id)] === 0) {
+      } else if (seatStatus[Number(seat.id)] === 0) {
         seat.classList.remove('r');
         seat.classList.add('g');
         seat.innerHTML = seat.id;
       } else {
         seat.innerHTML = seat.id;
       }
+    });
+
+    const rooms = document.querySelectorAll('.room');
+    const roomStatus = ${roomStatusMap};
+    rooms.forEach((room, index) => {
+      const roomId = Number(room.id.substring(1));
+        if(roomStatus[roomId] === 1) {
+            room.classList.remove('r');
+            room.classList.add('b');
+            room.innerHTML = "<a href='<c:url value="/outside/login"/>?type=room&number=" + roomId + "'>" + roomId + "</a>"
+        } else if (roomStatus[roomId] === 0) {
+            room.classList.remove('r');
+            room.classList.add('g');
+            room.innerHTML = room.id;
+        } else {
+            room.innerHTML = room.id;
+        }
     });
   });
 </script>

@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -22,32 +23,22 @@
             <li id="timeTicket">시간권</li>
         </ul>
         <hr>
-        <form>
+        <form action="<c:url value="/outside/ticket/room"/>" method="post" onsubmit="return selectedCheck()">
             <table>
                 <tr>
-                    <td class="radio-box">
-                        <input type="radio" name="radio-button" class="radio-input" value="">
-                        <p class="t btn-text" name="time">1시간</p>
-                        <p class="p btn-text" name="price">6,000원</p>
-                    </td>
-                    <td class="radio-box">
-                        <input type="radio" name="radio-button" class="radio-input" value="">
-                        <p class="t btn-text" name="time">2시간</p>
-                        <p class="p btn-text" name="price">6,000원</p>
-                    </td>
-                    <td class="radio-box">
-                        <input type="radio" name="radio-button" class="radio-input" value="">
-                        <p class="t btn-text" name="time">3시간</p>
-                        <p class="p btn-text" name="price">6,000원</p>
-                    </td>
-                </tr>
-
+                    <c:forEach var="i" begin="1" end="3" step="1">
+                        <td class="radio-box">
+                            <input type="radio" name="radio-button" class="radio-input" value="${i}">
+                            <p class="t btn-text">${i}시간</p>
+                            <p class="p btn-text"><fmt:formatNumber value="${room.roomType_price * i}" pattern="#,##0"/>원</p>
+                        </td>
+                    </c:forEach>
                 </tr>
             </table>
             <input id="nextBtn" type="submit" value="다음">
         </form>
     </section>
 </div>
-<script src="/js/radioBox.js"></script>
+<script src="<c:url value="/js/radioBox.js"/>"></script>
 </body>
 </html>
