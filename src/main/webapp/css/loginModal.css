@@ -4,7 +4,7 @@
     background-color: #ffffff;
     border-radius: 20px;
     box-shadow: 0 3px 30px 5px gray;
-    /* display: none; */
+    display: none;
     position: absolute;
     top: 180px;
     left: 160px;
