@@ -75,6 +75,9 @@
                         <th>챌린지 참여내역:</th>
                         <td id="memberChallengeProgress"></td>
                     </tr>
+                    <tr>
+                        <td><a class ="float-right" href ="<c:url value='/admin/adminmemberedit'/>">수정</a></td>
+                    </tr>
                 </table>
             </div>
         </div>
