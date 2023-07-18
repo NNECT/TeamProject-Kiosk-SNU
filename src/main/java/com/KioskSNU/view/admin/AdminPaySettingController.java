@@ -8,8 +8,11 @@ import com.KioskSNU.snu.service.TimeTicketService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Map;
 
 @Controller
 public class AdminPaySettingController {
@@ -43,49 +46,40 @@ public class AdminPaySettingController {
 
     @PostMapping("/admin/adminpaysetting")
     public ModelAndView PostProcess(
-            @RequestParam("timeTicketTime") int timeTicketTime,
-            @RequestParam("timeTicketId") int timeTicketId,
-            @RequestParam("hourlyPrice") int hourlyPrice,
-            @RequestParam("commutationTicketDay") int commutationTicketDay,
-            @RequestParam("commutationTicketId") int commutationTicketId,
-            @RequestParam("monthlyPrice") int monthlyPrice,
-            @RequestParam("lockerTicketDay") int lockerTicketDay,
-            @RequestParam("lockerTicketId") int lockerTicketId,
-            @RequestParam("lockerPrice") int lockerPrice,
-            @RequestParam("roomTicketId") int roomTicketId,
-            @RequestParam("roomTicketName") String roomTicketName,
-            @RequestParam("roomPrice") int roomPrice
-            ){
-
+            @RequestBody Map<String, String> timeTicketMap,
+            @RequestBody Map<String, String> commutationTicketMap,
+            @RequestBody Map<String, String> lockerTicketMap,
+            @RequestBody Map<String, String> roomTypeMap
+    ){
         ModelAndView mav = new ModelAndView();
 
-        TimeTicketDTO timeTicketDTO = new TimeTicketDTO();
-        timeTicketDTO.setTime(timeTicketTime);
-        timeTicketDTO.setId(timeTicketId);
-        timeTicketDTO.setPrice(hourlyPrice);
-        timeTicketService.update(timeTicketDTO);
+        timeTicketMap.forEach((key, value) -> {
+            TimeTicketDTO timeTicketDTO = timeTicketService.getById(Integer.parseInt(key));
+            if (timeTicketDTO == null) return;
+            timeTicketDTO.setPrice(Integer.parseInt(value));
+            timeTicketService.update(timeTicketDTO);
+        });
 
-        System.out.println(timeTicketId);
-        System.out.println(timeTicketTime);
-        System.out.println(hourlyPrice);
+        commutationTicketMap.forEach((key, value) -> {
+            CommutationTicketDTO commutationTicketDTO = commutationTicketService.getById(Integer.parseInt(key));
+            if (commutationTicketDTO == null) return;
+            commutationTicketDTO.setPrice(Integer.parseInt(value));
+            commutationTicketService.update(commutationTicketDTO);
+        });
 
-        CommutationTicketDTO commutationTicketDTO = new CommutationTicketDTO();
-        commutationTicketDTO.setDay(commutationTicketDay);
-        commutationTicketDTO.setId(commutationTicketId);
-        commutationTicketDTO.setPrice(monthlyPrice);
-        commutationTicketService.update(commutationTicketDTO);
+        lockerTicketMap.forEach((key, value) -> {
+            LockerTicketDTO lockerTicketDTO = lockerTicketService.getById(Integer.parseInt(key));
+            if (lockerTicketDTO == null) return;
+            lockerTicketDTO.setPrice(Integer.parseInt(value));
+            lockerTicketService.update(lockerTicketDTO);
+        });
 
-        LockerTicketDTO lockerTicketDTO = new LockerTicketDTO();
-        lockerTicketDTO.setDay(lockerTicketDay);
-        lockerTicketDTO.setId(lockerTicketId);
-        lockerTicketDTO.setPrice(lockerPrice);
-        lockerTicketService.update(lockerTicketDTO);
-
-        RoomTypeDTO roomTypeDTO = new RoomTypeDTO();
-        roomTypeDTO.setId(roomTicketId);
-        roomTypeDTO.setName(roomTicketName);
-        roomTypeDTO.setPrice(roomPrice);
-        roomTypeService.update(roomTypeDTO);
+        roomTypeMap.forEach((key, value) -> {
+            RoomTypeDTO roomTypeDTO = roomTypeService.getById(Integer.parseInt(key));
+            if (roomTypeDTO == null) return;
+            roomTypeDTO.setPrice(Integer.parseInt(value));
+            roomTypeService.update(roomTypeDTO);
+        });
 
         mav.setViewName("admin/admin_main");
         return mav;
