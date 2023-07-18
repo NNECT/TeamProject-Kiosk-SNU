@@ -30,12 +30,11 @@ public class OutsideLockerController {
     @RequestMapping("/outside/locker")
     public ModelAndView process() {
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("outside/locker");
 
-        Map<Integer, Integer> seatStatusMap = new HashMap<>();
+        Map<Integer, Integer> lockerStatusMap = new HashMap<>();
         lockerService.getAll().forEach(locker -> {
             if (!locker.isUsable()) {
-                seatStatusMap.put(locker.getLockerNumber(), -1);
+                lockerStatusMap.put(locker.getLockerNumber(), -1);
                 return;
             }
 
@@ -43,15 +42,17 @@ public class OutsideLockerController {
             if (!usageLockerList.isEmpty()) {
                 UsageLockerDTO latest = usageLockerList.get(0);
                 if (latest.getEndDate().equals(LocalDate.now()) || latest.getEndDate().isAfter(LocalDate.now())) {
-                    seatStatusMap.put(locker.getLockerNumber(), 0);
+                    lockerStatusMap.put(locker.getLockerNumber(), 0);
                     return;
                 }
             }
 
-            seatStatusMap.put(locker.getLockerNumber(), 1);
+            lockerStatusMap.put(locker.getLockerNumber(), 1);
         });
 
-        mav.addObject("seatStatusMap", seatStatusMap);
+        mav.addObject("lockerStatusMap", lockerStatusMap);
+
+        mav.setViewName("outside/locker");
         return mav;
     }
 }
