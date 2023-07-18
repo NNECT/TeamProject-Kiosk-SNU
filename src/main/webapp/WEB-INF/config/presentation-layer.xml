@@ -19,9 +19,15 @@
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/admin/**"/>
-            <mvc:exclude-mapping path="/**/*.js"/>
-            <mvc:exclude-mapping path="/**/*.css"/>
             <bean class="com.KioskSNU.interceptor.AdminLoginInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/inside/**"/>
+            <bean class="com.KioskSNU.interceptor.InsideLoginInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/outside/**"/>
+            <bean class="com.KioskSNU.interceptor.OutsideLoginInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
 
