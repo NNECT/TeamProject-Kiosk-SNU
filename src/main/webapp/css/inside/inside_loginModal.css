@@ -1,0 +1,39 @@
+#loginFail{
+    width: 180px;
+    height: 150px;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 3px 30px 5px gray;
+    display: none;
+    position: absolute;
+    top: 180px;
+    left: 110px;
+}
+#modalContent{
+    width: 150px;
+    height: 80px;
+    border :0px solid red;
+    margin-left: 15px;
+    text-align: center;
+    position: relative;
+    top: 20px;
+}
+#modalP{
+    font-size: 15px;
+    color: #F52828;
+}
+#modalStrong{
+    color: #F52828;
+}
+#modalBtn{
+    position: relative;
+    top: 10px;
+}
+#modalCheckBtn{
+    width: 180px;
+    height: 50px;
+    border: none;
+    border-radius: 0 0 20px 20px;
+    background-color: #F52828;
+    color: #ffffff;
+}
