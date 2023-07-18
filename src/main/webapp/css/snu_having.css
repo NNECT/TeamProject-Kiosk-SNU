@@ -56,11 +56,11 @@ li{
     color: #383838;
     margin-left: 70px;
 }
-.paiedTime{
+.paidTime{
     float: right;
     color:#383838 ;
 }
-#havingBox{
+.havingBox{
     width: 535px;
     height: 28px;
     border: 1px solid #285FF5;
