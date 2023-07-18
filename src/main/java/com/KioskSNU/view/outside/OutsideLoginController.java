@@ -104,6 +104,7 @@ public class OutsideLoginController {
         //회원목록에서 username없으면 로그인 화면으로
         if (accountService.getByUsername(accountDTO.getUsername()) == null) {
             mav.addObject("publicKey", rsa.getPublicKey());
+            mav.addObject("loginFail","loginFail");
             mav.setViewName("/outside/login");
             return mav;
         }
@@ -112,6 +113,7 @@ public class OutsideLoginController {
         //모달창으로 비밀번호 오류 안내 후 다시 로그인 페이지 이동할 예정 (reset)
         if (!accountService.getByUsername(accountDTO.getUsername()).getPassword().equals(sha.encrypt(rsa.decrypt(accountDTO.getPassword())))) {
             mav.addObject("publicKey", rsa.getPublicKey());
+            mav.addObject("loginFail","loginFail");
             mav.setViewName("/outside/login");
             return mav;
         }
