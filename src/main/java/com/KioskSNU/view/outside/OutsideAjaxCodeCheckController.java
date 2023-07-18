@@ -31,22 +31,29 @@ public class OutsideAjaxCodeCheckController {
         String phoneNumber = map.get("codePhoneNumber");
         String username = map.get("username");
 
-        if(purpose.equals("findUsername")){
-            List<AccountDTO> getUserList = accountService.getAllByPhoneNumber(phoneNumber);
-            //아이디찾기
-            //phoneNumber 여부 확인
-            if(getUserList.isEmpty()){
-                return ResponseEntity.ok(Map.of("result", "wrongNumber"));
+        switch (purpose) {
+            //findUsername 요청
+            //: { 사용된 이유 : 같은이름 객체 사용 가능하기 위해서
+            case "findUsername": {
+                //아이디찾기
+                //phoneNumber 여부 확인
+                if (accountService.getAllByPhoneNumber(phoneNumber).isEmpty()) {
+                    return ResponseEntity.ok(Map.of("result", "wrongNumber"));
+                }
+                break;
             }
-        }else if(purpose.equals("findPassword")){
-            //비밀번호 찾기
-            //넘어온 username으로 고객 조회가 불가하면 잘못된 아이디
-            //고객조회 성공하면 넘어온 phoneNumber 와 일치하면 성공 / 실패하면 잘못된 번호
-            AccountDTO getUser = accountService.getByUsername(username);
-            if(getUser == null){
-                return ResponseEntity.ok(Map.of("result","notFoundUsername"));
-            }else if(!getUser.getPhoneNumber().equals(phoneNumber)){
-                return ResponseEntity.ok(Map.of("result", "wrongNumber"));
+            //findPassword 요청
+            case "findPassword": {
+                AccountDTO getUser = accountService.getByUsername(username);
+                //입력한 연락처가 username에 등록되어 있는 연락처랑 다를 경우
+                if (getUser == null) {
+                    return ResponseEntity.ok(Map.of("result", "notFoundUsername"));
+                }
+                //입력한 연락처가 username에 등록되어 있는 연락처랑 다를 경우
+                if (getUser.getPhoneNumber().equals(phoneNumber)) {
+                    return ResponseEntity.ok(Map.of("result", "wrongNumber"));
+                }
+                break;
             }
         }
 
@@ -65,11 +72,11 @@ public class OutsideAjaxCodeCheckController {
     public ResponseEntity<Map<String, String>> checkProcess(@RequestBody Map<String, String> map, HttpSession session) {
         if (
                 session.getAttribute("codeTime") == null
-                || LocalDateTime.now().isAfter(((LocalDateTime) session.getAttribute("codeTime")).plusMinutes(3))
-                || session.getAttribute("codePurpose") == null
-                || !session.getAttribute("codePurpose").equals(map.get("codePurpose"))
-                || session.getAttribute("codePhoneNumber") == null
-                || !session.getAttribute("codePhoneNumber").equals(map.get("codePhoneNumber"))
+                        || LocalDateTime.now().isAfter(((LocalDateTime) session.getAttribute("codeTime")).plusMinutes(3))
+                        || session.getAttribute("codePurpose") == null
+                        || !session.getAttribute("codePurpose").equals(map.get("codePurpose"))
+                        || session.getAttribute("codePhoneNumber") == null
+                        || !session.getAttribute("codePhoneNumber").equals(map.get("codePhoneNumber"))
         ) {
             return ResponseEntity.ok(Map.of("result", "fail"));
         }

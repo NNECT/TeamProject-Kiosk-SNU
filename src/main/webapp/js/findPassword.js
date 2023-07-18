@@ -1,16 +1,29 @@
-
 let buttonState = {
-    usablePhoneNumber: false
-
+    usablePhoneNumber: false,
+    usableCode: "before"
 };
 
 let buttonStateHandler = {
     set: function(target, key, value) {
         target[key] = value;
-        if (target.usablePhoneNumber) {
-            document.getElementById('newBtn').style.display = 'block';
-        } else {
+
+        //연락처가 맞지 않으면 그대로 진행중 유지
+        //(만약)전화번호 인증 이후에 인증번호 입력도중, 연락처 입력으로 다시 돌아오는 경우(수정발생) 진행중 이미지로 다시 변경
+        if (!target.usablePhoneNumber) {
             document.getElementById('newBtn').style.display = 'none';
+            document.getElementById('changeIcon').innerHTML = '<img src="../img/snu_loding.gif" width="90">';
+        }
+
+        //연락처는 맞지만 코드가 틀리면 fail 이미지
+        if (target.usablePhoneNumber && target.usableCode === "fail") {
+            document.getElementById('newBtn').style.display = 'none';
+            document.getElementById('changeIcon').innerHTML = '<img src="../img/inside/findStatus/failCheck.png" width="140">';
+        }
+
+        //인증성공
+        if (target.usablePhoneNumber && target.usableCode === "success") {
+            document.getElementById('newBtn').style.display = 'block';
+            document.getElementById('changeIcon').innerHTML = '<img src="../img/inside/findStatus/succesCheck.png" width="150">';
         }
         return true;
     }
@@ -55,6 +68,7 @@ function codeSend(){
             if(response.result === "success"){
                 codeSendCheck.innerHTML = "전송됨";
                 codeSendCheck.style.color = "green";
+                proxyButtonState.usablePhoneNumber = true;
             }else if(response.result === "wrongNumber"){
                 codeSendCheck.innerHTML = "잘못된 번호";
                 codeSendCheck.style.color = "red";
@@ -91,11 +105,11 @@ function codeCheck(){
             if(response.result === "success"){
                 codeCheck.innerHTML = "인증 성공";
                 codeCheck.style.color = "blue";
-                proxyButtonState.usablePhoneNumber = true;
+                proxyButtonState.usableCode = "success";
             } else{
                 codeCheck.innerHTML = "인증 실패";
                 codeCheck.style.color = "red";
-                proxyButtonState.usablePhoneNumber = false;
+                proxyButtonState.usableCode = "fail";
             }
         },
         error: function (request, status, error) {

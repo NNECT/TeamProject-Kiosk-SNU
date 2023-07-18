@@ -57,7 +57,7 @@
         <div id="wrap"><!--wrap-->
             <p id="title">비밀번호 찾기</p>
 
-            <div><!--아이콘 변경란-->
+            <div id="changeIcon"><!--아이콘 변경란-->
                 <img src="<c:url value="/img/snu_loding.gif"/>" width="90">
             </div>
             <div id="input"><!--입력란-->
