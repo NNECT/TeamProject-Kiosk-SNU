@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=deevice-width, initial-scale=1,minimum-scale=1,maxmun-scale=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<c:url value="/css/inside/inside_sit.css"/>">
-
+    <link rel="stylesheet" href="<c:url value="/css/inside/seatModal.css"/>">
     <link href="https://cdn.jsdelivr.net/gh/sunn-us/SUITE/fonts/static/woff2/SUITE.css" rel="stylesheet">
 
     <style>
@@ -130,6 +130,22 @@
         <div id="locker"><!--사물함-->
             <p>사물함</p>
         </div>
+        <!-- 이동질문 모달영역 -->
+        <div id="modalbg">
+            <div id="seatModal">
+                <div id="modalContent">
+                    <p id="modalP">
+                        <strong id="modalStrong">00번자리</strong>로<br>
+                        이동하시겠습니까?
+                    </p>
+                </div>
+                <div id="modalBtn">
+                    <input type="button" id="modalNoBtn" value="취소">
+                    <input type="button" id="modalYesBtn" value="이동">
+                </div>
+            </div>
+        </div>
+        <!--  -->
     </div>
     <script>
         window.addEventListener('DOMContentLoaded', (event) => {
