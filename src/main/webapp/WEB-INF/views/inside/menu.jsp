@@ -44,11 +44,21 @@
                             <div class="menuBox"><img src="<c:url value="/img/inside/menu/exit (1).png"/>" alt=""></div></a>
                         <p class="menuName">퇴실</p>
                     </td>
-                    <td>
-                        <a href="<c:url value="/inside/move"/>">
-                            <div class="menuBox"><img src="<c:url value="/img/inside/menu/marker.png"/>" alt=""></div></a>
-                        <p class="menuName">자리이동</p>
-                    </td>
+                    <c:choose>
+                        <c:when test="${sessionScope.insideType eq 'room'}">
+                            <td>
+                                <div class="menuBox" style="background-color: #C3C3C3"><img src="<c:url value="/img/inside/menu/marker.png"/>" alt=""></div>
+                                <p class="menuName" style="color: #C3C3C3">자리이동</p>
+                            </td>
+                        </c:when>
+                        <c:otherwise>
+                            <td>
+                                <a href="<c:url value="/inside/move"/>">
+                                    <div class="menuBox"><img src="<c:url value="/img/inside/menu/marker.png"/>" alt=""></div></a>
+                                <p class="menuName">자리이동</p>
+                            </td>
+                        </c:otherwise>
+                    </c:choose>
                     <td>
                         <a href="<c:url value="/inside/mypage"/>">
                             <div class="menuBox"><img src="<c:url value="/img/inside/menu/user.png"/>" alt=""></div></a>
