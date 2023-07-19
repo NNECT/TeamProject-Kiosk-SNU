@@ -19,7 +19,7 @@
 </head>
 <body>
 <div id="body">
-    <a href="/inside/inside_menu.jsp"><img src="<c:url value="/img/inside/beforBtn.png"/>" alt=""></a>
+    <a href="<c:url value="/inside/menu"/>"><img src="<c:url value="/img/inside/beforBtn.png"/>" alt=""></a>
 
     <p id="title">좌석을 선택해주세요</p>
     <div id="seatWrap">
