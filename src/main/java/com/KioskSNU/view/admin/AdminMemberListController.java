@@ -19,7 +19,7 @@ public class AdminMemberListController {
 
     @GetMapping("/admin/adminmember")
     @AdminLoginRequired
-    public ModelAndView getMemberList(Integer id){
+    public ModelAndView getMemberList(){
         ModelAndView mav = new ModelAndView();
         mav.addObject("memberList", accountService.getAll());
         mav.setViewName("admin/admin_member");
