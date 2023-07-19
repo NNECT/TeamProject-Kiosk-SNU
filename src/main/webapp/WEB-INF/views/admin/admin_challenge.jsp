@@ -28,27 +28,24 @@
                         <thead>
                         <tr>
                             <th>챌린지명</th>
-                            <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;챌린지 기간&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                             <th>현재 챌린지 여부</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach var="challenge" items="${challenges}">
+                        <c:forEach var="challenge" items="${list}">
                             <tr>
-                                <td><a href="/adminchallengeEdit?id=${challenge.id}"></a>${challenge.title}</td>
-                                <td>${challenge.peirodDays}</td>
-                                <td>${challenge.visiable}</td>
-                                </td>
+                                <td><a href="<c:url value='/admin/challenge/read'/>?id=${challenge.id}">${challenge.title}</a></td>
+                                <td>${challenge.visible}</td>
                             </tr>
                         </c:forEach>
                         </tbody>
                     </table>
+                    <button type="button" class="btn btn-primary mt-3">+</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 
 <!-- 부트스트랩 및 jQuery 스크립트 -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
