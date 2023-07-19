@@ -8,7 +8,25 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script>
+        $(document).ready(function() {
+            $("#titleColor").on("click", function() {
+                $("#titleColor").val(selectColor());
+            });
 
+            $("#descriptionColor").on("click", function() {
+                $("#descriptionColor").val(selectColor());
+            });
+
+            $("#backgroundColor").on("click", function() {
+                $("#backgroundColor").val(selectColor());
+            });
+        });
+
+        function selectColor() {
+            return prompt("색상코드 6자리를 입력하세요.");
+        }
+    </script>
 </head>
 <body class="bg-light">
 <c:import url="../headerFooterForm/headerFooterForm_adminHeader.jsp" />
@@ -21,115 +39,78 @@
                 <div class="card-body text-center">
                     <h2 class="card-title">챌린지 추가</h2>
                     <hr>
-                    <form action="${pageContext.request.contextPath}/admin/challenge/edit" method="POST">
-                        <input type="text" value="${id}" name="id" hidden/>
+                    <form action="${pageContext.request.contextPath}/admin/challenge/write" method="POST">
                         <div class="form-group">
                             <label for="title">챌린지명 :</label>
-                            <input type="text" class="form-control" id="title" name="title" value="${challenge.title}" required>
+                            <input type="text" class="form-control" id="title" name="title" value="챌린지명"  required>
                         </div>
                         <div class="form-group">
                             <label for="description">챌린지 설명 :</label>
-                            <textarea class="form-control" id="description" name="description" required>${challenge.description}</textarea>
+                            <textarea class="form-control" id="description" name="description" value="챌린지설명" required></textarea>
                         </div>
                         <div class="form-group">
                             <label for="titleColor">제목 색상 :</label>
-                            <input class="form-control" id="titleColor" name="titleColor" value="${challenge.titleColor}" required>
+                            <input class="form-control" id="titleColor" name="titleColor" value="000000" required>
                         </div>
                         <div class="form-group">
                             <label for="descriptionColor">설명 색상 :</label>
-                            <input class="form-control" id="descriptionColor" name="descriptionColor" value="${challenge.descriptionColor}" required>
+                            <input class="form-control" id="descriptionColor" name="descriptionColor"value="000000"  required>
                         </div>
                         <div class="form-group">
                             <label for="backgroundColor">배경 색상 :</label>
-                            <input class="form-control" id="backgroundColor" name="backgroundColor" value="${challenge.backgroundColor}" required>
+                            <input class="form-control" id="backgroundColor" name="backgroundColor" value="000000"  required>
                         </div>
                         <div class="form-group">
                             <label for="imageSrc">이미지 주소 :</label>
-                            <input class="form-control" id="imageSrc" name="imageSrc" value="${challenge.imageSrc}" required>
+                            <input class="form-control" id="imageSrc" name="imageSrc" value="/img123/321" required>
                         </div>
                         <div class="form-group">
                             <label for="activeStartTime">활성 시작시간 :</label>
-                            <input class="form-control" id="activeStartTime" name="StartTime" value="${challenge.activeStartTime}" >
+                            <input class="form-control" id="activeStartTime" name="startTime" value="12:00"  >
                         </div>
                         <div class="form-group">
                             <label for="activeEndTime">활성 종료시간 :</label>
-                            <input class="form-control" id="activeEndTime" name="EndTime" value="${challenge.activeEndTime}" >
+                            <input class="form-control" id="activeEndTime" name="endTime" value="12:00"  >
                         </div>
                         <div class="form-group">
                             <label for="periodDays">챌린지 적용기간(날) :</label>
-                            <input class="form-control" id="periodDays" name="periodDays" value="${challenge.periodDays}" >
+                            <input class="form-control" id="periodDays" name="periodDays" value="2"  >
                         </div>
                         <div class="form-group">
                             <label for="periodHours">챌린지 적용기간(시간) :</label>
-                            <input class="form-control" id="periodHours" name="periodHours" value="${challenge.periodHours}" >
+                            <input class="form-control" id="periodHours" name="periodHours" value="2" >
                         </div>
                         <div class="form-group">
-                            <label for="goalDay">챌린지 달성 조건(일) :</label>
-                            <input class="form-control" id="goalDay" name="goalDay" value="${challenge.goalDay}" >
+                            <label for="goalDay">챌린지 달성조건(일) :</label>
+                            <input class="form-control" id="goalDay" name="goalDay" value="2" >
                         </div>
                         <div class="form-group">
-                            <label for="goalHour">챌린지 달성 조건(시간) :</label>
-                            <input class="form-control" id="goalHour" name="goalHour" value="${challenge.goalHour}" >
+                            <label for="goalHour">챌린지 달성조건(시간) :</label>
+                            <input class="form-control" id="goalHour" name="goalHour" value="2" >
                         </div>
                         <div class="form-group">
                             <label for="rewardPoint">챌린지 리워드(포인트) :</label>
-                            <input class="form-control" id="rewardPoint" name="rewardPoint" value="${challenge.rewardPoint}" required>
+                            <input class="form-control" id="rewardPoint" name="rewardPoint" value="200" required>
                         </div>
                         <div class="form-group form-check">
                             <input class="form-check-input" type="checkbox" id="active" ${challenge.active ? 'checked' : ''} name="active">
                             <label class="form-check-label" for="active">현재의 챌린지로 등록</label>
                         </div>
                         <input type="hidden" value="${challenge.active ? 'true' : 'false'}" name="_active"/>
-
                         <div class="text-right">
                             <button type="submit" class="btn btn-primary mt-3">수정</button>
                         </div>
                     </form>
-                    <button type="button" id="list" class="btn btn-primary mt-3">목록</button>
-                    <button type="button" id="remove" class="btn btn-danger mt-3">삭제</button>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
 
 <!-- 부트스트랩 및 jQuery 스크립트 -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-<script>
-    $(document).ready(function() {
-        $("#titleColor").on("click", function() {
-            $("#titleColor").val(selectColor());
-        });
-
-        $("#descriptionColor").on("click", function() {
-            $("#descriptionColor").val(selectColor());
-        });
-
-        $("#backgroundColor").on("click", function() {
-            $("#backgroundColor").val(selectColor());
-        });
-
-        $("#remove").on("click", function() {
-            if (!confirm("해당 챌린지를 삭제하시겠습니까?")) return;
-            let form = $('form');
-            form.attr("action", "<c:url value='/admin/challenge/remove'/>?id=${id}");
-            form.attr("method", "post");
-            form.submit();
-        });
-
-        $("#list").on("click", function() {
-            location.href = "<c:url value='/admin/challenge/list'/>";
-        });
-    });
-
-    function selectColor() {
-        return prompt("색상을 선택하거나 'ff0000'과 같이 6자를 직접 입력하세요.");
-    }
-</script>
 
 </body>
 </html>

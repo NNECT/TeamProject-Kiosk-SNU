@@ -17,6 +17,11 @@
     </style>
 </head>
 <body>
+<script>
+    let msg = "${msg}"
+    if(msg == "gooooood") alert("삭제되었습니다.")
+    if(msg == "error") alert("삭제에 실패하였습니다.")
+</script>
 <div class="container">
     <div class="row justify-content-center align-items-center" style="height: 100vh;">
         <div class="col-md-8">
@@ -35,12 +40,21 @@
                         <c:forEach var="challenge" items="${list}">
                             <tr>
                                 <td><a href="<c:url value='/admin/challenge/read'/>?id=${challenge.id}">${challenge.title}</a></td>
-                                <td>${challenge.visible}</td>
+                                <td>
+                                    <c:choose>
+                                        <c:when test="${challenge.active}">
+                                            활성화
+                                        </c:when>
+                                        <c:otherwise>
+                                            비활성화
+                                        </c:otherwise>
+                                    </c:choose>
+                                </td>
                             </tr>
                         </c:forEach>
                         </tbody>
                     </table>
-                    <button type="button" class="btn btn-primary mt-3">+</button>
+                        <a href="${pageContext.request.contextPath}/admin/challenge/write" class="btn btn-primary mt-3">+</a>
                 </div>
             </div>
         </div>

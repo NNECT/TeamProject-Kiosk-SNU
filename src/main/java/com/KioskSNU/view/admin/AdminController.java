@@ -1,4 +1,3 @@
-/*
 package com.KioskSNU.view.admin;
 
 import com.KioskSNU.snu.service.AdminService;
@@ -126,4 +125,3 @@ public class AdminController {
     }
 
 }
-*/
