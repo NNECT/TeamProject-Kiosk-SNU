@@ -36,7 +36,6 @@ public class InsideLoginController {
         ModelAndView mav = new ModelAndView();
         mav.addObject("publicKey", rsa.getPublicKey());
         mav.setViewName("inside/inside_login");
-
         return mav;
     }
 
@@ -55,7 +54,7 @@ public class InsideLoginController {
         }
         
         //성공시
-        mav.setViewName("redirect:/inside/inside_menu");
+        mav.setViewName("redirect:/inside/menu");
         return mav;
     }
 
