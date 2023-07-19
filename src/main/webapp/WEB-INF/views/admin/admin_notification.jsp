@@ -23,7 +23,7 @@
                                 <c:forEach items="${noticeList}" var="notice">
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     <a href="${pageContext.request.contextPath}/admin/adminnotificationedit?id=${notice.id}">${notice.title}</a>
-                                    <a href="#" class="btn btn-success btn-danger" onclick="deleteNotification(this)">공지 삭제</a>
+                                    <a href="" class="btn btn-success btn-danger deleteBtn" id="${notice.id}">공지 삭제</a>
                                 </li>
                                 </c:forEach>
                                 <!-- 필요한 만큼 공지사항 목록을 추가할 수 있습니다. -->
@@ -42,32 +42,10 @@
 </div>
 
 <!-- 부트스트랩 및 jQuery 스크립트 -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="<c:url value="/js/jquery-3.7.0.min.js"/>"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script>
-    function deleteNotification(button) {
-        // 삭제할 공지사항 ID나 기타 필요한 데이터를 가져오는 로직
-        var notificationId = 1; // 데이터 베이스에서 삭제할 공지사항 ID를 가져오는 로직 작성하셔야 합니다.
-
-        // 서버로 삭제 요청을 보내는 AJAX 호출
-        $.ajax({
-            url: "deleteNotification",      //위 삭제버튼을 눌렀을 때 onclick 메소드
-            method: "POST",
-            data: { id: notificationId },   //데이터 베이스에서 가져온 id
-            success: function(response) {
-                // 삭제 성공 시 화면에서 해당 항목 제거
-                $(button).closest("li").remove();
-            },
-            error: function(xhr, status, error) {
-                // 삭제 실패 시 오류 처리
-                console.log("Error deleting notification: " + error);
-            }
-        });
-    }
-
-
-</script>
+<script src="<c:url value="/js/deleteNotice.js"/>"></script>
 
 </body>
 </html>

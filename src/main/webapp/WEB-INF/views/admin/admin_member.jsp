@@ -25,7 +25,7 @@
                         </tr>
                         </thead>
                         <c:forEach items="${memberList}" var="member">
-                        <tr id="list" onclick="showMemberDetails()">
+                        <tr id="${member.id}" onclick="showMemberDetails(this)" class="getMember">
                             <td>${member.id}</td>
                             <td>${member.phoneNumber}</td>
                             <td>${member.username}</td>
@@ -76,7 +76,8 @@
                         <td id="memberChallengeProgress"></td>
                     </tr>
                     <tr>
-                        <td><a class ="float-right" href ="<c:url value='/admin/adminmemberedit'/>">수정</a></td>
+                        <td><a class ="float-right updateMember">수정</a></td>
+                        <%--<td><a class ="float-right" href ="<c:url value='/admin/adminmemberedit'/>">수정</a></td>--%>
                     </tr>
                 </table>
             </div>
@@ -85,32 +86,48 @@
 </div>
 
 <!-- 부트스트랩 및 jQuery 스크립트 -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="<c:url value="/js/jquery-3.7.0.min.js"/>"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script>
-
-    function showMemberDetails() {
-        // 선택된 회원의 정보
-        var member = {
-            name: "John Doe",       //이 부분도 DB에서 값을 가져와서 name : $.{name} 이런식으로 처리 가능
-            id: "john123",
-            phone: "010-1234-5678",
-            subscription: "정기권",
-            lockerStatus: "이용 중",
-            challengeProgress: "작심삼일을 넘어라"
-        };
-
-        // 모달 창에 회원 정보를 채웁니다.
-        $("#memberName").text(member.name);
-        $("#memberId").text(member.id);
-        $("#memberPhone").text(member.phone);
-        $("#memberSubscription").text(member.subscription);
-        $("#memberLockerStatus").text(member.lockerStatus);
-        $("#memberChallengeProgress").text(member.challengeProgress);
-
-        // 모달 창을 띄웁니다.
-        $("#memberModal").modal("show");
-    }
-</script>
+<script src="<c:url value="/js/getMember.js"/>"></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<%--
+function showMemberDetails() {
+    // 선택된 회원의 정보
+    var member = {
+        name: "John Doe",       //이 부분도 DB에서 값을 가져와서 name : $.{name} 이런식으로 처리 가능
+        id: "john123",
+        phone: "010-1234-5678",
+        subscription: "정기권",
+        lockerStatus: "이용 중",
+        challengeProgress: "작심삼일을 넘어라"
+    };
+
+    // 모달 창에 회원 정보를 채웁니다.
+    $("#memberName").text(member.name);
+    $("#memberId").text(member.id);
+    $("#memberPhone").text(member.phone);
+    $("#memberSubscription").text(member.subscription);
+    $("#memberLockerStatus").text(member.lockerStatus);
+    $("#memberChallengeProgress").text(member.challengeProgress);
+
+    // 모달 창을 띄웁니다.
+    $("#memberModal").modal("show");
+}
+--%>
