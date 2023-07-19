@@ -104,6 +104,7 @@ public class InsideIndexController {
 //            }
 //        }
 
+
         modelAndView.setViewName("redirect:/inside/login");
         return modelAndView;
     }

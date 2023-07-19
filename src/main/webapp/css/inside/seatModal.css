@@ -1,0 +1,60 @@
+#modalbg{
+    width: 1024px;
+    height: 768px;
+    background-color: rgba(195 , 195, 195, 30%);
+    position: absolute;
+    top: 0;
+    z-index: 9;
+    display: none;
+    
+}
+#seatModal{
+    width: 200px;
+    height: 170px;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 3px 40px 5px #707070;
+    display: none;
+    position: absolute;
+    top: 200px;
+    left: 412px;
+    z-index: 10;
+}
+#modalContent{
+    width: 150px;
+    height: 80px;
+    border :0px solid red;
+    margin-left: 25px;
+    text-align: center;
+    position: relative;
+    top: 20px;
+}
+#modalP{
+    font-size: 20px;
+    color: #707070;
+}
+#modalStrong{
+    color: #285FF5;
+}
+#modalBtn{
+    position: relative;
+    top: 20px;
+}
+#modalNoBtn{
+    width: 100px;
+    height: 50px;
+    border: none;
+    border-radius: 0 0 0 20px ;
+    background-color: #C3C3C3;
+    color: #ffffff;
+    float: left;
+}
+#modalYesBtn{
+    width: 100px;
+    height: 50px;
+    border: none;
+    border-radius: 0 0  20px 0;
+    background-color: #285FF5;
+    color: #ffffff;
+    float: right;
+}
