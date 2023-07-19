@@ -10,6 +10,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-body text-center">
+                    <input type="hidden" value="${id}" name="id">
                     <h2 class="card-title">회원목록</h2>
                     <div class="text-right">
                         <input type="text" placeholder="아이디 검색하기" id="username" name="id">
@@ -76,8 +77,7 @@
                         <td id="memberChallengeProgress"></td>
                     </tr>
                     <tr>
-                        <td><a class ="float-right updateMember">수정</a></td>
-                        <%--<td><a class ="float-right" href ="<c:url value='/admin/adminmemberedit'/>">수정</a></td>--%>
+                        <td><button type="button" id="edit" class="float-right updateMember">수정</button></td>
                     </tr>
                 </table>
             </div>
@@ -88,7 +88,45 @@
 <!-- 부트스트랩 및 jQuery 스크립트 -->
 <script src="<c:url value="/js/jquery-3.7.0.min.js"/>"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="<c:url value="/js/getMember.js"/>"></script>
+
+<script>
+
+    function showMemberDetails(button) {
+        const memberID = button.id;
+
+        $.ajax({
+            type : "POST",
+            url : "../ajax/getMember",
+            data : JSON.stringify({
+                "memberID" : memberID
+            }),
+            dataType : "json",
+            async : false,
+            contentType : "application/json; charset=utf-8",
+            success: function (response){
+                if(response.result==="success"){
+                    $("#memberName").text(response.memberName);
+                    $("#memberId").text(response.memberId);
+                    $("#memberPhone").text(response.memberPhone);
+                    $("#memberSubscription").text(response.memberSubscription);
+                    $("#memberLockerStatus").text(response.memberLockerStatus);
+                    //$("#memberChallengeProgress").text(response.memberChallengeProgress);
+
+                    // 모달 창을 띄웁니다.
+                    $("#memberModal").modal("show");
+                }
+            },
+            error: function (request, status, error) {
+                alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+            }
+
+        })
+        $('#edit').on("click", function (){
+            location.href = "<c:url value='/admin/adminmemberedit'/>?id="+memberID;
+        });
+    }
+
+</script>
 </body>
 </html>
 
