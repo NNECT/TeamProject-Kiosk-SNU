@@ -145,7 +145,7 @@
                 </div>
             </div>
         </div>
-        <!--  -->
+        <!-- 모달영역 -->
     </div>
     <script>
         window.addEventListener('DOMContentLoaded', (event) => {
