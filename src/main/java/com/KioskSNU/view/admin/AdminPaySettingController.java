@@ -5,6 +5,7 @@ import com.KioskSNU.snu.service.CommutationTicketService;
 import com.KioskSNU.snu.service.LockerTicketService;
 import com.KioskSNU.snu.service.RoomTypeService;
 import com.KioskSNU.snu.service.TimeTicketService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,13 +46,11 @@ public class AdminPaySettingController {
     }
 
     @PostMapping("/admin/adminpaysetting")
-    public ModelAndView PostProcess(
-            @RequestBody Map<String, String> timeTicketMap,
-            @RequestBody Map<String, String> commutationTicketMap,
-            @RequestBody Map<String, String> lockerTicketMap,
-            @RequestBody Map<String, String> roomTypeMap
-    ){
-        ModelAndView mav = new ModelAndView();
+    public ResponseEntity<Map<String, String>> PostProcess(@RequestBody Map<String, Map<String, String>> payload) {
+        Map<String, String> timeTicketMap = payload.get("timeTicketMap");
+        Map<String, String> commutationTicketMap = payload.get("commutationTicketMap");
+        Map<String, String> lockerTicketMap = payload.get("lockerTicketMap");
+        Map<String, String> roomTypeMap = payload.get("roomTypeMap");
 
         timeTicketMap.forEach((key, value) -> {
             TimeTicketDTO timeTicketDTO = timeTicketService.getById(Integer.parseInt(key));
@@ -81,7 +80,6 @@ public class AdminPaySettingController {
             roomTypeService.update(roomTypeDTO);
         });
 
-        mav.setViewName("admin/admin_main");
-        return mav;
+        return ResponseEntity.ok(Map.of("result", "success"));
     }
 }

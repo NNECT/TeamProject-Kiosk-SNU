@@ -124,38 +124,24 @@
                 roomTypeJson[item.name] = item.value;
             });
 
-            const form = document.createElement("form");
-            form.setAttribute("method", "post");
-            form.setAttribute("action", "<c:url value='/admin/adminpaysetting' />");
-            form.setAttribute("charset", "UTF-8");
-            form.setAttribute("hidden", "true");
+            const data = {
+                timeTicketMap: timeTicketJson,
+                commutationTicketMap: commutationTicketJson,
+                lockerTicketMap: lockerTicketJson,
+                roomTypeMap: roomTypeJson
+            };
 
-            const timeTicketInput = document.createElement("input");
-            timeTicketInput.setAttribute("type", "text");
-            timeTicketInput.setAttribute("name", "timeTicketMap");
-            timeTicketInput.setAttribute("value", JSON.stringify(timeTicketJson));
-            form.appendChild(timeTicketInput);
-
-            const commutationTicketInput = document.createElement("input");
-            commutationTicketInput.setAttribute("type", "text");
-            commutationTicketInput.setAttribute("name", "commutationTicketMap");
-            commutationTicketInput.setAttribute("value", JSON.stringify(commutationTicketJson));
-            form.appendChild(commutationTicketInput);
-
-            const lockerTicketInput = document.createElement("input");
-            lockerTicketInput.setAttribute("type", "text");
-            lockerTicketInput.setAttribute("name", "lockerTicketMap");
-            lockerTicketInput.setAttribute("value", JSON.stringify(lockerTicketJson));
-            form.appendChild(lockerTicketInput);
-
-            const roomTypeInput = document.createElement("input");
-            roomTypeInput.setAttribute("type", "text");
-            roomTypeInput.setAttribute("name", "roomTypeMap");
-            roomTypeInput.setAttribute("value", JSON.stringify(roomTypeJson));
-            form.appendChild(roomTypeInput);
-
-            document.body.appendChild(form);
-            form.submit();
+            fetch('<c:url value="/admin/adminpaysetting" />', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            }).then(response => response.json()).then(data => {
+                window.location.reload();
+            }).catch((error) => {
+                console.error('Error:', error);
+            });
         });
     });
 </script>
