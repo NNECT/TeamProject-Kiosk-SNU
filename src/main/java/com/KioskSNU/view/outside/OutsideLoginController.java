@@ -58,6 +58,7 @@ public class OutsideLoginController {
         mav.setViewName("outside/login");
         mav.addObject("publicKey", rsa.getPublicKey());
 
+
         if (type == null && session.getAttribute("selectType") != null) {
             type = (String) session.getAttribute("selectType");
             number = (Integer) session.getAttribute("selectNumber");

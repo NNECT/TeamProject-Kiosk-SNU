@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=deevice-width, initial-scale=1,minimum-scale=1,maxmun-scale=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<c:url value="/css/inside/inside_sit.css"/>">
+    <link rel="stylesheet" href="<c:url value="/css/inside/seatModal.css"/>">
 
     <link href="https://cdn.jsdelivr.net/gh/sunn-us/SUITE/fonts/static/woff2/SUITE.css" rel="stylesheet">
 
@@ -110,8 +111,8 @@
                         <td class="seat r" id="6"></td>
                         <td class="seat r" id="9"></td>
                         <td></td><td></td><td></td><td></td><td></td>
-                        <td colspan="3" rowspan="3" class="room"><a href="inside_roomTicket.jsp">room1</a></td>
-                        <td colspan="3" rowspan="3" class="room"><a href="inside_roomTicket.jsp">room2</a></td>
+                        <td colspan="3" rowspan="3" class="room r" id="r1"><a href="snu_login.html">room1</a></td>
+                        <td colspan="3" rowspan="3" class="room r" id="r2"><a href="snu_login.html">room2</a></td>
                     </tr>
                     <tr>
                         <td class="seat r" id="7"></td>
@@ -131,15 +132,55 @@
             <p>사물함</p>
         </div>
     </div>
+    <!-- 이동질문 모달영역 -->
+    <div id="modalbg">
+        <div id="seatModal">
+            <div id="modalContent">
+                <p id="modalP">
+                    <strong id="modalStrong">00번자리</strong>로<br>
+                    이동하시겠습니까?
+                </p>
+            </div>
+            <div id="modalBtn">
+                <input type="button" id="modalNoBtn" value="취소">
+                <input type="button" id="modalYesBtn" value="이동">
+            </div>
+        </div>
+    </div>
     <script>
         window.addEventListener('DOMContentLoaded', (event) => {
             const seats = document.querySelectorAll('.seat');
             const status = ${seatStatusMap};
             seats.forEach((seat, index) => {
                 if(status[Number(seat.id)] === 1) {
+                    var modalBg = document.getElementById('modalbg');
+                    var seatModal = document.getElementById('seatModal');
+                    var modalNoBtn = document.getElementById('modalNoBtn')
+                    var modalYesBtn = document.getElementById('modalYesBtn')
+
+                    //번호 클릭하면 modal창 나옴
+                    seat.addEventListener('click',() => {
+                        modalBg.style.display = 'block';
+                        seatModal.style.display = 'block';
+                    });
+
+                    //모달창에서 취소 누르면 다시 뒤로
+                    modalNoBtn.addEventListener('click', () => {
+                        modalBg.style.display = 'none';
+                        seatModal.style.display = 'none';
+                    });
+
+                    //이동 누르면 다음으로
+                    modalYesBtn.addEventListener('click', () => {
+                        // modalBg.style.display = 'none';
+                        // seatModal.style.display = 'none';
+                        location.href = "<c:url value="/inside/move"/>?type=seat&number=" + seat.id;
+                    });
+
                     seat.classList.remove('r');
                     seat.classList.add('b');
-                    seat.innerHTML = "<a href='<c:url value="/inside/inside_timeTicktet.jsp"/>?type=seat&number=" + seat.id + "'>" + seat.id + "</a>"
+                    //seat.id 좌석번호를 get으로 보냄
+                    seat.innerHTML = seat.id;
                 } else if (status[Number(seat.id)] === 0) {
                     seat.classList.remove('r');
                     seat.classList.add('g');
@@ -148,7 +189,10 @@
                     seat.innerHTML = seat.id;
                 }
             });
-        });
+       });
+
+        //자리이동 confirm 모달창
+
     </script>
 
 </div>
