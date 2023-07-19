@@ -68,7 +68,11 @@ public class InsideLogoutController {
                     return mav;
                 }
 
+                // 사용자 저장
+                AccountDTO accountDTO = (AccountDTO) session.getAttribute("author");
+
                 // 자리 사용 종료
+                session.removeAttribute("author");
                 UsageSeatDTO usageSeatDTO = seatMap.get(seatNumber);
                 seatMap.remove(seatNumber);
 
@@ -78,7 +82,6 @@ public class InsideLogoutController {
                 else usageSeatService.update(usageSeatDTO);
 
                 // 정기권 처리
-                AccountDTO accountDTO = (AccountDTO) session.getAttribute("author");
                 List<UsageCommutationTicketDTO> commutationTicketDTOList = usageCommutationTicketService.getAllByAccount(accountDTO);
                 if (
                         !commutationTicketDTOList.isEmpty()
@@ -88,6 +91,7 @@ public class InsideLogoutController {
                 // 사용 시간 차감
                 int usedTime = (int) ChronoUnit.MINUTES.between(usageSeatDTO.getStartDateTime(), usageSeatDTO.getEndDateTime());
                 accountDTO.setRemainTime(Math.max(accountDTO.getRemainTime() - usedTime, 0));
+                accountService.update(accountDTO);
                 break;
             }
 
@@ -101,6 +105,7 @@ public class InsideLogoutController {
                 }
 
                 // 룸 사용 종료
+                session.removeAttribute("author");
                 UsageRoomDTO usageRoomDTO = roomMap.get(roomNumber);
                 roomMap.remove(roomNumber);
 

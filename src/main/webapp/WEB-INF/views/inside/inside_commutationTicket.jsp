@@ -21,7 +21,7 @@
     <div id="whiteWrap">
         <section>
             <ul>
-                <li id="timeTicket"><a href="inside_timeTicket.jsp">시간권</a></li>
+                <li id="timeTicket"><a href="timeTicket.jsp">시간권</a></li>
                 <li id="commutationTicket">정기권</li>
             </ul>
             <hr>

@@ -1,6 +1,5 @@
-package com.KioskSNU.view.outside;
+package com.KioskSNU.view.inside;
 
-import com.KioskSNU.interceptor.OutsideLoginRequired;
 import com.KioskSNU.snu.dto.CommutationTicketDTO;
 import com.KioskSNU.snu.dto.RoomDTO;
 import com.KioskSNU.snu.dto.TimeTicketDTO;
@@ -12,21 +11,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
-@RequestMapping("/outside/ticket")
-public class OutsideTicketController {
+@RequestMapping("/inside/ticket")
+public class InsideTicketController {
     private final TimeTicketService timeTicketService;
     private final CommutationTicketService commutationTicketService;
     private final RoomService roomService;
 
     @Autowired
-    public OutsideTicketController(
+    public InsideTicketController(
             TimeTicketService timeTicketService,
             CommutationTicketService commutationTicketService,
             RoomService roomService
@@ -36,11 +34,31 @@ public class OutsideTicketController {
         this.roomService = roomService;
     }
 
+    @RequestMapping("")
+    public ModelAndView process(HttpSession session){
+        ModelAndView mav = new ModelAndView();
+
+        String type = (String) session.getAttribute("insideType");
+        switch (type) {
+            case "seat":
+                mav.setViewName("redirect:/inside/ticket/seat");
+                break;
+            case "room":
+                mav.setViewName("redirect:/inside/ticket/room");
+                break;
+            default:
+                System.out.println("InsideTicketController.process: type is not seat or room");
+                mav.setViewName("redirect:/inside");
+                break;
+        }
+
+        return mav;
+    }
+
     @GetMapping({"/seat", "/seat/timeTicket"})
-    @OutsideLoginRequired
     public ModelAndView timeTicketGetProcess(){
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("outside/timeTicket");
+        mav.setViewName("inside/timeTicket");
 
         List<TimeTicketDTO> timeTicketList = timeTicketService.getAllByActive(true);
         mav.addObject("timeTicketList", timeTicketList);
@@ -49,22 +67,17 @@ public class OutsideTicketController {
     }
 
     @PostMapping("/seat/timeTicket")
-    @OutsideLoginRequired
-    public ModelAndView timeTicketPostProcess(@RequestParam("radio-button") int ticket, HttpSession session){
+    public ModelAndView timeTicketPostProcess(HttpSession session){
         ModelAndView mav = new ModelAndView();
-
-
-
-        // 이미 라커를 가지고 있을 경우 라커티켓으로 이동하는 분기 추가 필요
-        mav.setViewName("redirect:/outside/locker");
+        // 프로세스 추가 필요
+        mav.setViewName("redirect:/inside/menu");
         return mav;
     }
 
     @GetMapping("/seat/commutationTicket")
-    @OutsideLoginRequired
     public ModelAndView commutationTicketGetProcess(){
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("outside/commutationTicket");
+        mav.setViewName("inside/commutationTicket");
 
         List<CommutationTicketDTO> commutationTicketList = commutationTicketService.getAllByActive(true);
         mav.addObject("commutationTicketList", commutationTicketList);
@@ -73,48 +86,53 @@ public class OutsideTicketController {
     }
 
     @PostMapping("/seat/commutationTicket")
-    @OutsideLoginRequired
-    public ModelAndView commutationTicketPostProcess(){
+    public ModelAndView commutationTicketPostProcess(HttpSession session){
         ModelAndView mav = new ModelAndView();
-
-
-
-        // 이미 라커를 가지고 있을 경우 라커티켓으로 이동하는 분기 추가 필요
-        mav.setViewName("redirect:/outside/locker");
+        // 프로세스 추가 필요
+        mav.setViewName("redirect:/inside/menu");
         return mav;
     }
 
     @GetMapping("/room")
-    @OutsideLoginRequired
     public ModelAndView roomGetProcess(HttpSession session){
         ModelAndView mav = new ModelAndView();
 
-        // 선택이 되지 않았거나, 선택이 룸이 아닐 경우
-        if (session.getAttribute("selectType") == null || !session.getAttribute("selectType").equals("room")) {
-            mav.setViewName("redirect:/outside/logout");
+        // 등록이 되지 않은 경우
+        if (session.getAttribute("insideType") == null) {
+            mav.setViewName("redirect:/inside");
             return mav;
         }
 
-        // 선택한 방이 존재하지 않을 경우
-        int roomNumber = (int) session.getAttribute("selectNumber");
+        // 좌석이 등록된 경우
+        if (session.getAttribute("insideType").equals("seat")) {
+            mav.setViewName("redirect:/inside/ticket/seat");
+            return mav;
+        }
+
+        // 정상적인 등록이 아닐 경우
+        if (!session.getAttribute("insideType").equals("room")) {
+            mav.setViewName("redirect:/inside");
+        }
+
+        int roomNumber = (int) session.getAttribute("insideNumber");
         RoomDTO room = roomService.getByRoomNumber(roomNumber);
         if (room == null) {
             System.out.println(roomNumber + "번 방 정보가 존재하지 않음");
-            mav.setViewName("redirect:/outside/logout");
+            mav.setViewName("redirect:/inside");
             return mav;
         }
 
         mav.addObject("room", room);
 
-        mav.setViewName("outside/roomTicket");
+        mav.setViewName("inside/roomTicket");
         return mav;
     }
 
     @PostMapping("/room")
-    @OutsideLoginRequired
-    public ModelAndView roomPostProcess(){
+    public ModelAndView roomPostProcess(HttpSession session){
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("redirect:/outside/locker");
+        // 프로세스 추가 필요
+        mav.setViewName("redirect:/inside/menu");
         return mav;
     }
 }
