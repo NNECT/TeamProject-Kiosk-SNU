@@ -137,7 +137,7 @@
         <div id="seatModal">
             <div id="modalContent">
                 <p id="modalP">
-                    <strong id="modalStrong">00번자리</strong>로<br>
+                    <strong id="modalStrong"></strong>로<br>
                     이동하시겠습니까?
                 </p>
             </div>
@@ -157,9 +157,11 @@
                     var seatModal = document.getElementById('seatModal');
                     var modalNoBtn = document.getElementById('modalNoBtn')
                     var modalYesBtn = document.getElementById('modalYesBtn')
+                    var modalStrong = document.getElementById("modalStrong")
 
                     //번호 클릭하면 modal창 나옴
                     seat.addEventListener('click',() => {
+                        modalStrong.textContent = seat.id+"번 자리";
                         modalBg.style.display = 'block';
                         seatModal.style.display = 'block';
                     });
