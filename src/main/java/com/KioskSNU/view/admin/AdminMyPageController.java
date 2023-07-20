@@ -1,5 +1,6 @@
 package com.KioskSNU.view.admin;
 
+import com.KioskSNU.interceptor.AdminLoginRequired;
 import com.KioskSNU.snu.dto.AdminDTO;
 import com.KioskSNU.snu.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ public class AdminMyPageController {
     }
 
     @GetMapping("/admin/adminmypage")
+    @AdminLoginRequired
     public ModelAndView adminMyPage(AdminDTO adminDTO){
 
         ModelAndView mav = new ModelAndView();
