@@ -47,8 +47,7 @@
 
                 <div id="Timer"><!--남은시간 나타내는 곳-->
                     <span id="saveTime">남은시간:</span>
-                    <span id="time">100<!-- 남은시간 나타나는 곳--></span>
-                    <span id="minute">분</span>
+                    <span id="time">-</span>
                 </div>
 
                 <input type="password" id="password" placeholder="비밀번호를 입력하세요"><br>
@@ -71,6 +70,7 @@
         <!-- 모달 -->
     </section>
 </div>
+<script src="<c:url value="/js/jquery-3.7.0.min.js"/>"></script>
 <script src="<c:url value="/js/jsencrypt.min.js"/>"></script>
 <script>
     window.addEventListener("DOMContentLoaded", (event) => {
@@ -97,7 +97,61 @@
             document.body.appendChild(form);
             form.submit();
         });
+
+        setRemainTime();
+        if (commutationTicket) {
+            document.getElementById("saveTime").innerHTML = "정기권 기한:"
+            clearInterval(timer);
+        }
     });
+
+    let timer = setInterval(setRemainTime, 20000);
+    let commutationTicket = false;
+
+    function setRemainTime() {
+        const remainTime = remainTimeCheck();
+        if (remainTime === null) {
+            return;
+        }
+        document.getElementById("time").innerHTML = remainTime;
+        if (remainTime === "00:00") {
+            clearInterval(timer);
+            location.href = "<c:url value="/inside/logout"/>";
+        }
+    }
+
+    function remainTimeCheck() {
+        let value = null;
+
+        $.ajax({
+            type: "POST",
+            url: "../ajax/remainTime",
+            data: JSON.stringify({
+                "authorId": "${sessionScope.author.id}",
+                "insideType": "${sessionScope.insideType}",
+                "insideNumber": "${sessionScope.insideNumber}"
+            }),
+            dataType: "json",
+            async: false,
+            contentType: "application/json; charset=UTF-8",
+            success: function (response) {
+                if (response.result === "fail") {
+                    alert("남은 시간을 불러오는데 실패했습니다.");
+                    return;
+                }
+                if (response.commutationTicket === "true") {
+                    commutationTicket = true;
+                }
+                value = response.remainTime;
+            },
+            error: function (request, status, error) {
+                alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+            }
+        });
+
+        return value;
+    }
+
     //로그인 실패 모달창
     var loginFail = "${loginFail}";
     if (loginFail === "loginFail") {
