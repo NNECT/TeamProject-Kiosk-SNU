@@ -12,7 +12,7 @@
                 <div class="card-body text-center">
                     <h2 class="card-title">회원정보 수정</h2>
                     <hr>
-                    <form id ="form">
+                    <form id ="form" action="${pageContext.request.contextPath}/admin/adminmemberedit?id=${member.id}" method="post">
                         <table class="table">
                             <tr>
                                 <th>회원번호:</th>
@@ -51,7 +51,7 @@
                                 <td><input type="text" name="point" value="${member.point}" readonly></td>
                             </tr>
                         </table>
-                        <button id="edit">수정</button>
+                        <button id="edit" type="submit">수정</button>
                     </form>
                 </div>
             </div>
@@ -62,6 +62,17 @@
 <!-- 부트스트랩 및 jQuery 스크립트 -->
 <script src="<c:url value="/js/jquery-3.7.0.min.js"/>"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="<c:url value="/js/updateMember.js"/>"></script>
+<script>
+
+    // 수정이 완료되었을 때 알림 창 띄우기
+    function showNotification() {
+        alert("수정이 완료되었습니다!");
+    }
+
+    // 수정 버튼을 눌렀을 때 알림 창 띄우기
+    const submitButton = document.querySelector("button[type='submit']");
+    submitButton.addEventListener("click", showNotification);
+
+</script>
 </body>
 </html>

@@ -5,8 +5,12 @@ window.addEventListener("DOMContentLoaded", (event) => {
         button.addEventListener("click", (e) => {
             // a 태그 기본 링크 기능 중지
             e.preventDefault();
-            // 삭제 요청
-            deleteNotification(e.target);
+
+            //확인창
+            if(confirm("정말 삭제하시겠습니까?")){
+                // 확인 버튼을 눌렀을 때만 삭제 요청
+                deleteNotification(e.target);
+            }
         });
     });
 });

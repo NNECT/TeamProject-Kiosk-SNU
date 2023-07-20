@@ -24,11 +24,11 @@
                             <textarea class="form-control form-control-lg" id="notice" name="content" rows="5">${notice.content}</textarea>
                         </div>
                         <div class="text-center">
-                        <button type="submit" class="btn btn-primary ">수정</button>
+                            <button type="submit" class="btn btn-primary ">수정</button>
                         </div>
                         <div class="float-right">
                             <span><em>외부 키오스크 공지시 체크</em></span>
-                            <input type="checkbox" id="OutsideNotification">    <%--외부 공지--%>
+                            <input type="checkbox" id="OutsideNotification" name="outside">
                         </div>
 
                     </form>
@@ -40,13 +40,30 @@
 
 
 
-
-
-
 <!-- 부트스트랩 및 jQuery 스크립트 -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    const outsideCheckbox = document.getElementById("OutsideNotification");
+    const isOutside = ${notice.outside};
+
+    if (isOutside){
+        outsideCheckbox.checked = true;
+    }else {
+        outsideCheckbox.checked = false;
+    }
+
+    // 수정이 완료되었을 때 알림 창 띄우기
+    function showNotification() {
+        alert("수정이 완료되었습니다!");
+    }
+
+    // 수정 버튼을 눌렀을 때 알림 창 띄우기
+    const submitButton = document.querySelector("button[type='submit']");
+    submitButton.addEventListener("click", showNotification);
+    
+</script>
 
 </body>
 </html>
