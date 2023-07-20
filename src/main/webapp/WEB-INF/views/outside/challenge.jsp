@@ -42,47 +42,18 @@
       <p id="snuTitle">스누와함께 <span>챌린지</span>하고 <span>포인트</span>받아가세요!</p>
       <p id="challInfo">도전하고 싶은 챌린지를 선택해주세요</p>
     </div>
-    <div class="box challeng1">
-      <div>
-        <div class="iconCircle c1">
-          <img src="<c:url value="/img/challengeIcon/bolt.png"/>"  width="75">
+
+    <c:forEach var="challenge" items="${list}">
+      <div class="box challenge" STYLE="background-color: ${challenge.backgroundColor}">
+        <div>
+          <div class="iconCircle c1" id="circle" style="background-color: ${challenge.descriptionColor}">
+          <img src="<c:url value="${challenge.imageSrc}"/>"  width="72">
+          </div>
         </div>
+        <p class="cTitle" style="color: ${challenge.titleColor}">${challenge.title}</p>
+        <p class="cContent" style="color: ${challenge.titleColor}">${challenge.description}</p>
+        <p class="cPoint"  style="color: ${challenge.titleColor}"><!--숫자만 변경 --><span id="point">${challenge.rewardPoint}</span><!--숫자만 변경 -->point</p>
       </div>
-      <p class="cTitle num1">벼락치기</p>
-      <p class="cContent num1">24시간안에 6시간<br> 이상 사용하면</p>
-      <p class="cPoint num1"><!--숫자만 변경 --><span id="point1">100</span><!--숫자만 변경 -->point</p>
-    </div>
-    <div class="box challeng2 ">
-      <div>
-        <div class="iconCircle c2">
-          <img src="<c:url value="/img/challengeIcon/owl.png"/>" width="85">
-        </div>
-      </div>
-      <p class="cTitle num2">올빼미</p>
-      <p class="cContent num2">22시부터 6시까지<br>5시간 이상 사용하면</p>
-      <p class="cPoint num2"><!--숫자만 변경 --><span id="point2">300</span><!--숫자만 변경 -->point</p>
-    </div>
-    <div class="box challeng3">
-      <div>
-        <div class="iconCircle c3">
-          <img src="<c:url value="/img/challengeIcon/4days.png"/>" width="70">
-        </div>
-      </div>
-      <p class="cTitle num3">작심삼일 박살</p>
-      <p class="cContent num3">연속 4일 출석하면</p>
-      <p class="cPoint num3"><!--숫자만 변경 --><span id="point3">500</span><!--숫자만 변경 -->point</p>
-    </div>
-    <c:forEach var ="challenge" items="${list}">
-    <div class="box challenge" style="background-color: ${challenge.color}">
-      <div>
-        <div class="iconCircle c3">
-          <img src="<c:url value="${challenge.imgageSrc}"/>" width="70">
-        </div>
-      </div>
-      <p class="cTitle num3">${challenge.title}</p>
-      <p class="cContent num3">${challenge.description}</p>
-      <p class="cPoint num3"><!--숫자만 변경 --><span id="point">${challenge.rewardPoint}</span><!--숫자만 변경 -->point</p>
-    </div>
     </c:forEach>
   </section>
 
@@ -93,5 +64,16 @@
   </div>
 
 </form>
+
+<script>
+
+
+  // 해당 요소를 JavaScript로 선택합니다.
+  const circleElement = document.getElementById("circle");
+
+  // 동적으로 스타일을 변경합니다.
+  circleElement.style.backgroundColor = challenge.descriptionColor;
+
+</script>
 </body>
 </html>

@@ -118,6 +118,11 @@ public class AdminChallengeController {
             challengeDTO.setActiveStartTime(startTime);
             challengeDTO.setActiveEndTime(endTime);
             challengeDTO.setVisible(true);
+
+            // 개행 문자(\n)를 <br> 태그로 변환하여 challengeDTO 객체의 description 속성에 적용
+            String descriptionWithBreaks = challengeDTO.getDescription().replace("\n", "<br>");
+            challengeDTO.setDescription(descriptionWithBreaks);
+
             challengeService.update(challengeDTO);
             mav.addObject("challenge", challengeService.getById(challengeDTO.getId()));
         } catch (Exception e) {
@@ -126,6 +131,7 @@ public class AdminChallengeController {
         mav.setViewName("redirect:/admin/challenge/list");
         return mav;
     }
+
 
 
 }
