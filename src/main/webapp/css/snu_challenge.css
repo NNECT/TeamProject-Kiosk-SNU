@@ -51,6 +51,10 @@ span{
     float: left;
     background-color: #34CB51;
 }
+.challenge{
+    margin-top: 50px;
+    float: left;
+}
 
 .iconCircle{
     margin: 65px 65px 0;

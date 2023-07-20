@@ -17,6 +17,11 @@
     </style>
 </head>
 <body>
+<script>
+    let msg = "${msg}"
+    if(msg == "gooooood") alert("삭제되었습니다.")
+    if(msg == "error") alert("삭제에 실패하였습니다.")
+</script>
 <div class="container">
     <div class="row justify-content-center align-items-center" style="height: 100vh;">
         <div class="col-md-8">
@@ -28,27 +33,33 @@
                         <thead>
                         <tr>
                             <th>챌린지명</th>
-                            <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;챌린지 기간&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                             <th>현재 챌린지 여부</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach var="challenge" items="${challenges}">
+                        <c:forEach var="challenge" items="${list}">
                             <tr>
-                                <td><a href="/adminchallengeEdit?id=${challenge.id}"></a>${challenge.title}</td>
-                                <td>${challenge.peirodDays}</td>
-                                <td>${challenge.visiable}</td>
+                                <td><a href="<c:url value='/admin/challenge/read'/>?id=${challenge.id}">${challenge.title}</a></td>
+                                <td>
+                                    <c:choose>
+                                        <c:when test="${challenge.active}">
+                                            활성화
+                                        </c:when>
+                                        <c:otherwise>
+                                            비활성화
+                                        </c:otherwise>
+                                    </c:choose>
                                 </td>
                             </tr>
                         </c:forEach>
                         </tbody>
                     </table>
+                        <a href="${pageContext.request.contextPath}/admin/challenge/write" class="btn btn-primary mt-3">+</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 
 <!-- 부트스트랩 및 jQuery 스크립트 -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
