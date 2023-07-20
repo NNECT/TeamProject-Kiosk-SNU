@@ -11,12 +11,12 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Component
-public class AccountCommutationCheck {
+public class AccountCommutationTicketCheck {
     private final AccountService accountService;
     private final UsageCommutationTicketService usageCommutationTicketService;
 
     @Autowired
-    public AccountCommutationCheck(
+    public AccountCommutationTicketCheck(
             AccountService accountService,
             UsageCommutationTicketService usageCommutationTicketService
     ) {
