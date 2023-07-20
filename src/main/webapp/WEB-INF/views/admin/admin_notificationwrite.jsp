@@ -40,6 +40,18 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+
+    // 등록이 완료되었을 때 알림 창 띄우기
+    function showNotification() {
+        alert("등록되었습니다");
+    }
+
+    // 등록 버튼을 눌렀을 때 알림 창 띄우기
+    const submitButton = document.querySelector("button[type='submit']");
+    submitButton.addEventListener("click", showNotification);
+
+</script>
 
 </body>
 </html>

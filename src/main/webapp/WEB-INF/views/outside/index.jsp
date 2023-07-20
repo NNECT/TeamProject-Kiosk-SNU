@@ -28,7 +28,9 @@
 <section id="allWrap"><!--전체 감싸는 박스-->
   <div id="warning"><!--공지란-->
     <img id="warningIcon" src="<c:url value="/img/start/triangle-warning.png"/>" width="35" height="35">
-    <div id="warningText"><strong>공지공지공지공지</strong></div><!--공지나타나는 곳-->
+    <c:forEach items="${outsideNotice}" var="notice">
+      <div id="warningText"><strong>${notice.title}</strong></div>
+    </c:forEach>
   </div>
   <a href="<c:url value="/outside/select"/>">
     <div id="start"><!--클릭란-->

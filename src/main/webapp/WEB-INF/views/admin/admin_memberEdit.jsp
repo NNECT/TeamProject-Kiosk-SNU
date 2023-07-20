@@ -12,35 +12,46 @@
                 <div class="card-body text-center">
                     <h2 class="card-title">회원정보 수정</h2>
                     <hr>
-                    <form id ="form">
+                    <form id ="form" action="${pageContext.request.contextPath}/admin/adminmemberedit?id=${member.id}" method="post">
                         <table class="table">
                             <tr>
+                                <th>회원번호:</th>
+                                <td><input type="text" name ="id" value="${member.id}" readonly></td>
+                            </tr>
+                            <tr>
                                 <th>아이디:</th>
-                                <td><input type="text" name ="username" value="${member.username}" id="memberName" ></td>
+                                <td><input type="text" name ="username" value="${member.username}" readonly></td>
                             </tr>
                             <tr>
                                 <th>비밀번호:</th>
-                                <td><input type="text" name ="password" value="${member.password}"></td>
+                                <td><input type="password" name="password" value="${member.password}"></td>
                             </tr>
-
                             <tr>
                                 <th>전화번호:</th>
                                 <td><input type="text" name ="phoneNumber" value="${member.phoneNumber}"></td>
                             </tr>
                             <tr>
-                                <th>정기권:</th>
-                                <td><input type="text" name ="username" value="${memberSubscription}"></td>
+                                <th>사용권:</th>
+                                <td><input type="text" name="usageTicket" value="${memberSubscription}" readonly></td>
                             </tr>
                             <tr>
-                                <th>사물함 사용여부:</th>
-                                <td><input type="text" name ="username" value="${memberLockerStatus}"></td>
+                                <th>남은 시간:</th>
+                                <td><input type="text" name="usageTicket" value="${member.remainTime}" readonly></td>
                             </tr>
                             <tr>
-                                <th>챌린지 참여내역:</th>
-                                <td><input type="text" name ="username" id="memberChallengeProgress"></td>
+                                <th>사물함:</th>
+                                <td><input type="text" name="usageLocker" value="${memberLockerStatus}" readonly></td>
+                            </tr>
+                            <tr>
+                                <th>참여중인 챌린지:</th>
+                                <td><input type="text" name="participationChallenge" value="${memberChallengeProgress}" readonly></td>
+                            </tr>
+                            <tr>
+                                <th>포인트:</th>
+                                <td><input type="text" name="point" value="${member.point}" readonly></td>
                             </tr>
                         </table>
-                        <button id="edit">수정</button>
+                        <button id="edit" type="submit">수정</button>
                     </form>
                 </div>
             </div>
@@ -51,6 +62,17 @@
 <!-- 부트스트랩 및 jQuery 스크립트 -->
 <script src="<c:url value="/js/jquery-3.7.0.min.js"/>"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="<c:url value="/js/updateMember.js"/>"></script>
+<script>
+
+    // 수정이 완료되었을 때 알림 창 띄우기
+    function showNotification() {
+        alert("수정이 완료되었습니다!");
+    }
+
+    // 수정 버튼을 눌렀을 때 알림 창 띄우기
+    const submitButton = document.querySelector("button[type='submit']");
+    submitButton.addEventListener("click", showNotification);
+
+</script>
 </body>
 </html>
