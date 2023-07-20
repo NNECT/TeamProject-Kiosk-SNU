@@ -111,7 +111,6 @@ public class OutsideLoginController {
         }
 
         //비밀번호가 틀리면
-        //모달창으로 비밀번호 오류 안내 후 다시 로그인 페이지 이동할 예정 (reset)
         if (!accountService.getByUsername(accountDTO.getUsername()).getPassword().equals(sha.encrypt(rsa.decrypt(accountDTO.getPassword())))) {
             mav.addObject("publicKey", rsa.getPublicKey());
             mav.addObject("loginFail","loginFail");
@@ -135,7 +134,6 @@ public class OutsideLoginController {
                 mav.setViewName("redirect:/outside/logout");
                 break;
         }
-
         return mav;
     }
 }
