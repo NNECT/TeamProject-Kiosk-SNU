@@ -1,4 +1,4 @@
-package com.KioskSNU.common;
+package com.KioskSNU.api;
 
 import com.KioskSNU.snu.dto.AccountDTO;
 import com.KioskSNU.snu.dto.UsageCommutationTicketDTO;
