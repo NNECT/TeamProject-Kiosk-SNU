@@ -1,7 +1,6 @@
 package com.KioskSNU.api;
 
 import com.KioskSNU.snu.dto.AccountDTO;
-import com.KioskSNU.snu.dto.UsageRoomDTO;
 import com.KioskSNU.snu.dto.UsageSeatDTO;
 import com.KioskSNU.snu.service.SeatService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,20 +13,21 @@ import java.util.concurrent.ConcurrentHashMap;
 @Component
 public class SeatStatus {
     private final Map<Integer, UsageSeatDTO> seatMap;
-    private final Map<Integer, UsageRoomDTO> roomMap;
     private final SeatService seatService;
 
     @Autowired
     public SeatStatus(
             ConcurrentHashMap<Integer, UsageSeatDTO> seatMap,
-            ConcurrentHashMap<Integer, UsageRoomDTO> roomMap,
             SeatService seatService
     ) {
         this.seatMap = seatMap;
-        this.roomMap = roomMap;
         this.seatService = seatService;
     }
 
+    /**
+     * 현재 좌석 상태를 반환하는 메소드
+     * @return 좌석 상태를 나타내는 Map (-1: 사용 불가, 0: 사용중, 1: 사용 가능)
+     */
     public Map<Integer, Integer> getSeatStatusMap() {
         return getSeatStatusMap(null);
     }
