@@ -2,6 +2,7 @@ package com.KioskSNU.snu.service;
 
 import com.KioskSNU.snu.dto.ChallengeDTO;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -14,4 +15,5 @@ public interface ChallengeService {
     List<ChallengeDTO> getAll();
     List<ChallengeDTO> getAllByActive(boolean active);
     List<ChallengeDTO> getAllByVisible(boolean visible);
+    int getCountOfActiveChallenges();
 }

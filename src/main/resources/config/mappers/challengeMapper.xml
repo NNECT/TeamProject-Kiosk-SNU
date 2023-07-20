@@ -76,4 +76,9 @@
         from        challenge
         where       visible = #{visible};
     </select>
+
+    <select id="getCountOfActiveChallenges" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM challenge WHERE active = true;
+    </select>
+
 </mapper>

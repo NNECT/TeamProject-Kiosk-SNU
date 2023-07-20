@@ -9,23 +9,17 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script>
+        let msg ="${msg}";
+        if(msg == "error") alert("현재 챌린지 등록은 최대 3개까지 가능합니다.")
+
         $(document).ready(function() {
-            $("#titleColor").on("click", function() {
-                $("#titleColor").val(selectColor());
-            });
-
-            $("#descriptionColor").on("click", function() {
-                $("#descriptionColor").val(selectColor());
-            });
-
-            $("#backgroundColor").on("click", function() {
-                $("#backgroundColor").val(selectColor());
+            // 체크박스 상태 변경 시, hidden input에 값을 설정
+            $("#active").on("change", function() {
+                $("#activeInput").val(this.checked ? 'true' : 'false');
             });
         });
 
-        function selectColor() {
-            return prompt("색상코드 6자리를 입력하세요.");
-        }
+
     </script>
 </head>
 <body class="bg-light">
@@ -93,10 +87,11 @@
                             <input class="form-control" id="rewardPoint" name="rewardPoint" value="200" required>
                         </div>
                         <div class="form-group form-check">
-                            <input class="form-check-input" type="checkbox" id="active" ${challenge.active ? 'checked' : ''} name="active">
+                            <input class="form-check-input" type="checkbox" id="active" ${challenge.active ? 'checked' : ''}>
                             <label class="form-check-label" for="active">현재의 챌린지로 등록</label>
                         </div>
-                        <input type="hidden" value="${challenge.active ? 'true' : 'false'}" name="_active"/>
+                        <input type="hidden" id="activeInput" name="active" value="${challenge.active ? 'true' : 'false'}">
+
                         <div class="text-right">
                             <button type="submit" class="btn btn-primary mt-3">등록</button>
                         </div>

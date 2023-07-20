@@ -44,6 +44,8 @@
     </div>
 
     <c:forEach var="challenge" items="${list}">
+      <c:choose>
+        <c:when test="${challenge.active}">
       <div class="box challenge" STYLE="background-color: ${challenge.backgroundColor}">
         <div>
           <div class="iconCircle c1" id="circle" style="background-color: ${challenge.descriptionColor}">
@@ -54,6 +56,8 @@
         <p class="cContent" style="color: ${challenge.titleColor}">${challenge.description}</p>
         <p class="cPoint"  style="color: ${challenge.titleColor}"><!--숫자만 변경 --><span id="point">${challenge.rewardPoint}</span><!--숫자만 변경 -->point</p>
       </div>
+        </c:when>
+      </c:choose>
     </c:forEach>
   </section>
 

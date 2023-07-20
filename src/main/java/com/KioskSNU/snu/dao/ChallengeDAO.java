@@ -57,4 +57,10 @@ public class ChallengeDAO extends SqlSessionDaoSupport implements ChallengeServi
     public List<ChallengeDTO> getAllByVisible(boolean visible) {
         return getSqlSession().selectList("com.KioskSNU.snu.service.ChallengeService.getAllByVisible", visible);
     }
+    @Transactional(readOnly = true)
+    @Override
+    public int getCountOfActiveChallenges() {
+        return getSqlSession().selectOne("com.KioskSNU.snu.service.ChallengeService.getCountOfActiveChallenges");
+    }
+
 }

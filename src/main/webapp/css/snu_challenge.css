@@ -34,19 +34,19 @@ span{
     border-radius: 20px;
     margin: 0 25px;
 }
-.challeng1{
+.challenge1{
     margin-top: 50px;
     float: left;
     background-color: #EDF2FF;
 }
 
-.challeng2{
+.challenge2{
     margin-top: 50px;
     float: left;
     background-color: #285FF5;
 }
 
-.challeng3{
+.challenge3{
     margin-top: 50px;
     float: left;
     background-color: #34CB51;
@@ -63,13 +63,13 @@ span{
     border-radius: 100px;
 }
 .c1{
-    background-color: #285FF5;
+
 }
 .c2{
-    background-color: #FFFFB9;
+    /*background-color: #FFFFB9;*/
 }
 .c3{
-    background-color: #ffffff;
+    /*background-color: #ffffff;*/
 }
 .c1>img{margin-top: 25px;}
 .c2>img{margin-top: 45px;}
@@ -90,9 +90,9 @@ span{
     font-size: 17px;
 }
 /*challenge1*/
-.num1{color: #285FF5;}
+/*.num1{color: #285FF5;}
 .num2 {color: #ffffff;}
-.num3{color: #ffffff;}
+.num3{color: #ffffff;}*/
 /*button*/
 #buttonWrap{
     position: relative;

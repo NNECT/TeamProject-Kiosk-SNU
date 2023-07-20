@@ -107,6 +107,16 @@
         textareaElement.innerHTML = replacedValue;
     }
 
+    let msg ="${msg}";
+    if(msg == "error") alert("현재 챌린지 등록은 최대 3개까지 가능합니다.")
+
+    $(document).ready(function() {
+        // 체크박스 상태 변경 시, hidden input에 값을 설정
+        $("#active").on("change", function() {
+            $("#activeInput").val(this.checked ? 'true' : 'false');
+        });
+    });
+
     // 목록 버튼을 클릭하면 리스트 페이지로 이동합니다.
     $("#list").on("click", function() {
         location.href = "<c:url value='/admin/challenge/list'/>";
