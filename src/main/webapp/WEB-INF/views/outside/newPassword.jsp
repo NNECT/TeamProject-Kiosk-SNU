@@ -42,8 +42,7 @@
         <form id="sudo-newPassword-form" method="post">
             <div id="input"><!--입력란-->
                 <p><label for="password">새비밀번호를 입력해주세요</label></p>
-                <input id="password" class="input newPassword" type="password" name="newPassword"
-                       ">
+                <input id="password" class="input newPassword" type="password" name="newPassword">
                 <p>
                     <label for="password_confirm">다시 입력해주세요</label>
                     <span id="passwordCheck" style="float: right; margin-right: 0;"></span>
