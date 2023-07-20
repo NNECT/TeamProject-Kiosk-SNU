@@ -50,7 +50,7 @@
       </div>
       <p class="cTitle num1">벼락치기</p>
       <p class="cContent num1">24시간안에 6시간<br> 이상 사용하면</p>
-      <p class="cPoint num1"><!--숫자만 변경 --><span id="point">100</span><!--숫자만 변경 -->point</p>
+      <p class="cPoint num1"><!--숫자만 변경 --><span id="point1">100</span><!--숫자만 변경 -->point</p>
     </div>
     <div class="box challeng2 ">
       <div>
@@ -60,7 +60,7 @@
       </div>
       <p class="cTitle num2">올빼미</p>
       <p class="cContent num2">22시부터 6시까지<br>5시간 이상 사용하면</p>
-      <p class="cPoint num2"><!--숫자만 변경 --><span id="point">300</span><!--숫자만 변경 -->point</p>
+      <p class="cPoint num2"><!--숫자만 변경 --><span id="point2">300</span><!--숫자만 변경 -->point</p>
     </div>
     <div class="box challeng3">
       <div>
@@ -70,9 +70,23 @@
       </div>
       <p class="cTitle num3">작심삼일 박살</p>
       <p class="cContent num3">연속 4일 출석하면</p>
-      <p class="cPoint num3"><!--숫자만 변경 --><span id="point">500</span><!--숫자만 변경 -->point</p>
+      <p class="cPoint num3"><!--숫자만 변경 --><span id="point3">500</span><!--숫자만 변경 -->point</p>
     </div>
+    <c:forEach var ="challenge" items="${list}">
+    <div class="box challenge" style="background-color: ${challenge.color}">
+      <div>
+        <div class="iconCircle c3">
+          <img src="<c:url value="${challenge.imgageSrc}"/>" width="70">
+        </div>
+      </div>
+      <p class="cTitle num3">${challenge.title}</p>
+      <p class="cContent num3">${challenge.description}</p>
+      <p class="cPoint num3"><!--숫자만 변경 --><span id="point">${challenge.rewardPoint}</span><!--숫자만 변경 -->point</p>
+    </div>
+    </c:forEach>
   </section>
+
+
   <div id="buttonWrap">
     <input type="button" value="다음에" id="nextBtn">
     <input type="button" value="시작하기" id="startBtn">

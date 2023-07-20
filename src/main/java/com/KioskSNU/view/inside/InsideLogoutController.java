@@ -47,6 +47,54 @@ public class InsideLogoutController {
         this.usageCommutationTicketService = usageCommutationTicketService;
     }
 
+    @RequestMapping("/inside/logoutConfirm")
+    public ModelAndView confirmProcess(HttpSession session) {
+        ModelAndView mav = new ModelAndView();
+
+        // 자리 등록이 안되어있으면 자리 등록 페이지로 이동
+        String type = (String) session.getAttribute("insideType");
+        if (type == null) {
+            mav.setViewName("redirect:/inside");
+            return mav;
+        }
+
+        switch (type) {
+            case "seat": {
+                // 자리 번호 확인
+                int seatNumber = (Integer) session.getAttribute("insideNumber");
+                if (!seatMap.containsKey(seatNumber)) {
+                    mav.setViewName("redirect:/inside/index");
+                    return mav;
+                }
+
+                UsageSeatDTO usageSeatDTO = seatMap.get(seatNumber);
+                int usedTime = (int) ChronoUnit.MINUTES.between(usageSeatDTO.getStartDateTime(), LocalDateTime.now());
+                mav.addObject("usedTime", usedTime);
+                break;
+            }
+            case "room": {
+                // 룸 번호 확인
+                int roomNumber = (Integer) session.getAttribute("insideNumber");
+                if (!roomMap.containsKey(roomNumber)) {
+                    mav.setViewName("redirect:/inside/index");
+                    return mav;
+                }
+
+                UsageRoomDTO usageRoomDTO = roomMap.get(roomNumber);
+                int usedTime = (int) ChronoUnit.MINUTES.between(usageRoomDTO.getStartDateTime(), LocalDateTime.now());
+                mav.addObject("usedTime", usedTime);
+                break;
+            }
+            default: {
+                mav.setViewName("redirect:/inside");
+                return mav;
+            }
+        }
+
+        mav.setViewName("inside/logoutConfirm");
+        return mav;
+    }
+
     @RequestMapping("/inside/logout")
     public ModelAndView process(HttpSession session) {
         ModelAndView mav = new ModelAndView();
@@ -68,7 +116,11 @@ public class InsideLogoutController {
                     return mav;
                 }
 
+                // 사용자 저장
+                AccountDTO accountDTO = (AccountDTO) session.getAttribute("author");
+
                 // 자리 사용 종료
+                session.removeAttribute("author");
                 UsageSeatDTO usageSeatDTO = seatMap.get(seatNumber);
                 seatMap.remove(seatNumber);
 
@@ -78,7 +130,6 @@ public class InsideLogoutController {
                 else usageSeatService.update(usageSeatDTO);
 
                 // 정기권 처리
-                AccountDTO accountDTO = (AccountDTO) session.getAttribute("author");
                 List<UsageCommutationTicketDTO> commutationTicketDTOList = usageCommutationTicketService.getAllByAccount(accountDTO);
                 if (
                         !commutationTicketDTOList.isEmpty()
@@ -88,6 +139,7 @@ public class InsideLogoutController {
                 // 사용 시간 차감
                 int usedTime = (int) ChronoUnit.MINUTES.between(usageSeatDTO.getStartDateTime(), usageSeatDTO.getEndDateTime());
                 accountDTO.setRemainTime(Math.max(accountDTO.getRemainTime() - usedTime, 0));
+                accountService.update(accountDTO);
                 break;
             }
 
@@ -101,6 +153,7 @@ public class InsideLogoutController {
                 }
 
                 // 룸 사용 종료
+                session.removeAttribute("author");
                 UsageRoomDTO usageRoomDTO = roomMap.get(roomNumber);
                 roomMap.remove(roomNumber);
 

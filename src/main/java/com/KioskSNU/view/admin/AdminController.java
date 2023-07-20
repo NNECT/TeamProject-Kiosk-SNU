@@ -48,7 +48,7 @@ public class AdminController {
         return "admin/admin_mypage";
     }
 
-    @RequestMapping("/adminlogin")
+@RequestMapping("/adminlogin")
     public String adminLogin() {
         return "admin/admin_login";
     }
@@ -88,10 +88,12 @@ public class AdminController {
         return "admin/admin_seat";
     }
 
-    @RequestMapping("/adminchallenge")
-    public String adminChallenge() {
-        return "admin/admin_challenge";
-    }
+//    @RequestMapping("/adminchallenge")
+//    public String adminChallenge() {
+//        return "admin/admin_challenge";
+//    }
+
+
     @RequestMapping("/adminnotificationwrite")
     public String adminNotificationWrite() {
         return "admin/admin_notificationwrite";
@@ -121,4 +123,5 @@ public class AdminController {
 
         return "redirect:/admin/adminpaysetting"; // 관리자 페이지로 리다이렉트합니다.
     }
+
 }

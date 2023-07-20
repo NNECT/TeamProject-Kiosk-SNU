@@ -12,154 +12,74 @@
                 <div class="card-body text-center">
                     <h2 class="card-title">요금설정</h2>
                     <hr>
-                    <form action="/update-prices" method="post">
+                    <form id="sudo-form">
                         <div class="row">
                             <div class="col-sm-6">
                                 <h4 class="mt-4">사용권 요금</h4>
                                 <div class="bg-light p-3 mb-4">
-                                    <div class="form-group row">
-                                        <label for="hourlyPrice1" class="col-sm-6 col-form-label">1시간 사용권:</label>
-                                        <div class="col-sm-6">
-                                            <div class="input-group">
-                                                <input type="text" class="form-control text-right" id="hourlyPrice1" name="hourlyPrice1" value="기존 값" placeholder="요금을 입력하세요" maxlength="20">
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text">원</span>
+                                    <c:forEach items="${timeTicket}" var="timeTicket">
+                                        <div class="form-group row">
+                                            <label for="hourlyPrice${timeTicket.id}" class="col-sm-6 col-form-label">${timeTicket.time}시간 사용권:</label>
+                                            <div class="col-sm-6">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control text-right hourlyPrice" id="hourlyPrice${timeTicket.id}" name="${timeTicket.id}" value="${timeTicket.price}" placeholder="요금을 입력하세요" maxlength="20">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">원</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="hourlyPrice2" class="col-sm-6 col-form-label">2시간 사용권:</label>
-                                        <div class="col-sm-6">
-                                            <div class="input-group">
-                                                <input type="text" class="form-control text-right" id="hourlyPrice2" name="hourlyPrice2" value="기존 값" placeholder="요금을 입력하세요" maxlength="20">
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text">원</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="hourlyPrice3" class="col-sm-6 col-form-label">3시간 사용권:</label>
-                                        <div class="col-sm-6">
-                                            <div class="input-group">
-                                                <input type="text" class="form-control text-right" id="hourlyPrice3" name="hourlyPrice3" value="기존 값" placeholder="요금을 입력하세요" maxlength="20">
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text">원</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="hourlyPrice5" class="col-sm-6 col-form-label">5시간 사용권:</label>
-                                        <div class="col-sm-6">
-                                            <div class="input-group">
-                                                <input type="text" class="form-control text-right" id="hourlyPrice5" name="hourlyPrice5" value="기존 값" placeholder="요금을 입력하세요" maxlength="20">
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text">원</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="hourlyPrice50" class="col-sm-6 col-form-label">50시간 사용권:</label>
-                                        <div class="col-sm-6">
-                                            <div class="input-group">
-                                                <input type="text" class="form-control text-right" id="hourlyPrice50" name="hourlyPrice50" value="기존 값" placeholder="요금을 입력하세요" maxlength="20">
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text">원</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="hourlyPrice100" class="col-sm-6 col-form-label">100시간 사용권:</label>
-                                        <div class="col-sm-6">
-                                            <div class="input-group">
-                                                <input type="text" class="form-control text-right" id="hourlyPrice100" name="hourlyPrice100" value="기존 값" placeholder="요금을 입력하세요" maxlength="20">
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text">원</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    </c:forEach>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <h4 class="mt-4">정기권 요금</h4>
                                 <div class="bg-light p-3 mb-4">
-                                    <div class="form-group row">
-                                        <label for="monthlyPrice3" class="col-sm-6 col-form-label">정기권 3일:</label>
-                                        <div class="col-sm-6">
-                                            <div class="input-group">
-                                                <input type="text" class="form-control text-right" id="monthlyPrice3" name="monthlyPrice3" value="기존 값" placeholder="요금을 입력하세요" maxlength="20">
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text">원</span>
+                                    <c:forEach items="${commutationTicket}" var="commutationTicket">
+                                        <div class="form-group row">
+                                            <label for="monthlyPrice${commutationTicket.id}" class="col-sm-6 col-form-label">정기권 ${commutationTicket.day}일:</label>
+                                            <div class="col-sm-6">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control text-right monthlyPrice" id="monthlyPrice${commutationTicket.id}" name="${commutationTicket.id}" value="${commutationTicket.price}" placeholder="요금을 입력하세요" maxlength="20">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">원</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="monthlyPrice7" class="col-sm-6 col-form-label">정기권 7일:</label>
-                                        <div class="col-sm-6">
-                                            <div class="input-group">
-                                                <input type="text" class="form-control text-right" id="monthlyPrice7" name="monthlyPrice7" value="기존 값" placeholder="요금을 입력하세요" maxlength="20">
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text">원</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="monthlyPrice15" class="col-sm-6 col-form-label">정기권 15일:</label>
-                                        <div class="col-sm-6">
-                                            <div class="input-group">
-                                                <input type="text" class="form-control text-right" id="monthlyPrice15" name="monthlyPrice15" value="기존 값" placeholder="요금을 입력하세요" maxlength="20">
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text">원</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="monthlyPrice30" class="col-sm-6 col-form-label">정기권 30일:</label>
-                                        <div class="col-sm-6">
-                                            <div class="input-group">
-                                                <input type="text" class="form-control text-right" id="monthlyPrice30" name="monthlyPrice30" value="기존 값" placeholder="요금을 입력하세요" maxlength="20">
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text">원</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    </c:forEach>
                                 </div>
                                 <h4 class="mt-4">사물함 요금</h4>
                                 <div class="bg-light p-3 mb-4">
-                                    <div class="form-group row">
-                                        <label for="lockerPrice30" class="col-sm-6 col-form-label">30일 사물함 요금:</label>
-                                        <div class="col-sm-6">
-                                            <div class="input-group">
-                                                <input type="text" class="form-control text-right" id="lockerPrice30" name="lockerPrice30" value="기존 값" placeholder="요금을 입력하세요" maxlength="20">
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text">원</span>
+                                    <c:forEach items="${lockerTicket}" var="lockerTicket">
+                                        <div class="form-group row">
+                                            <label for="lockerPrice${lockerTicket.id}" class="col-sm-6 col-form-label">${lockerTicket.day}일 사물함 요금:</label>
+                                            <div class="col-sm-6">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control text-right lockerPrice" id="lockerPrice${lockerTicket.id}" name="${lockerTicket.id}" value="${lockerTicket.price}" placeholder="요금을 입력하세요" maxlength="20">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">원</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </c:forEach>
                                 </div>
                                 <h4 class="mt-4">룸 요금</h4>
                                 <div class="bg-light p-3 mb-4">
-                                    <div class="form-group row">
-                                        <label for="roomPrice1" class="col-sm-6 col-form-label">1시간 룸 요금:</label>
-                                        <div class="col-sm-6">
-                                            <div class="input-group">
-                                                <input type="text" class="form-control text-right" id="roomPrice1" name="roomPrice1" value="기존 값" placeholder="요금을 입력하세요" maxlength="20">
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text">원</span>
+                                    <c:forEach items="${roomTicket}" var="roomTicket">
+                                        <div class="form-group row">
+                                            <label for="roomPrice${roomTicket.id}" class="col-sm-6 col-form-label">1시간 룸 요금:</label>
+                                            <div class="col-sm-6">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control text-right roomPrice" id="roomPrice${roomTicket.id}" name="${roomTicket.id}" value="${roomTicket.price}" placeholder="요금을 입력하세요" maxlength="20">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">원</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </c:forEach>
                                 </div>
                             </div>
                         </div>
@@ -176,6 +96,54 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-<!-- 메뉴 클릭 시 해당 페이지로 이동 -->
+<script>
+    window.addEventListener("DOMContentLoaded", (event) => {
+        document.getElementById("sudo-form").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            let timeTicket = document.querySelectorAll(".hourlyPrice");
+            let commutationTicket = document.querySelectorAll(".monthlyPrice");
+            let lockerTicket = document.querySelectorAll(".lockerPrice");
+            let roomType = document.querySelectorAll(".roomPrice");
+
+            let timeTicketJson = {};
+            let commutationTicketJson = {};
+            let lockerTicketJson = {};
+            let roomTypeJson = {};
+
+            timeTicket.forEach((item) => {
+                timeTicketJson[item.name] = item.value;
+            });
+            commutationTicket.forEach((item) => {
+                commutationTicketJson[item.name] = item.value;
+            });
+            lockerTicket.forEach((item) => {
+                lockerTicketJson[item.name] = item.value;
+            });
+            roomType.forEach((item) => {
+                roomTypeJson[item.name] = item.value;
+            });
+
+            const data = {
+                timeTicketMap: timeTicketJson,
+                commutationTicketMap: commutationTicketJson,
+                lockerTicketMap: lockerTicketJson,
+                roomTypeMap: roomTypeJson
+            };
+
+            fetch('<c:url value="/admin/adminpaysetting" />', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            }).then(response => response.json()).then(data => {
+                window.location.reload();
+            }).catch((error) => {
+                console.error('Error:', error);
+            });
+        });
+    });
+</script>
 </body>
 </html>
