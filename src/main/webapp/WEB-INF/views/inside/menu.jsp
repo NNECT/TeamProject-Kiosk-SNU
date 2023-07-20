@@ -40,7 +40,7 @@
                         <p class="menuName">연장</p>
                     </td>
                     <td>
-                        <a href="<c:url value="/inside/logout"/>">
+                        <a href="<c:url value="/inside/logoutConfirm"/>">
                             <div class="menuBox"><img src="<c:url value="/img/inside/menu/exit (1).png"/>" alt=""></div></a>
                         <p class="menuName">퇴실</p>
                     </td>
