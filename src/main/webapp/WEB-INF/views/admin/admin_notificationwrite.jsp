@@ -23,6 +23,12 @@
                             <label for="notice">공지 내용</label>
                             <textarea class="form-control form-control-lg" id="notice" name="content" rows="5"></textarea>
                         </div>
+
+                        <div class="float-right">
+                            <span><em>외부 키오스크 공지시 체크</em></span>
+                            <input type="checkbox" id="OutsideNotification" name="outside">
+                        </div>
+
                         <button type="submit" class="btn btn-primary">등록</button>
                     </form>
                 </div>
@@ -41,6 +47,15 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
+
+    const outsideCheckbox = document.getElementById("OutsideNotification");
+    const isOutside = ${notice.outside};
+
+    if (isOutside){
+        outsideCheckbox.checked = true;
+    }else {
+        outsideCheckbox.checked = false;
+    }
 
     // 등록이 완료되었을 때 알림 창 띄우기
     function showNotification() {

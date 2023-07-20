@@ -4,6 +4,7 @@ import com.KioskSNU.snu.dto.AccountDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface AccountService {
@@ -14,4 +15,7 @@ public interface AccountService {
     AccountDTO getByUsername(String username);
     List<AccountDTO> getAll();
     List<AccountDTO> getAllByPhoneNumber(String phoneNumber);
+    int getCount();
+    List<AccountDTO> selectPage(Map<String, Integer> map);
+
 }

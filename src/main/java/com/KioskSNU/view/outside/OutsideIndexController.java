@@ -27,7 +27,9 @@ public class OutsideIndexController {
 
         //공지사항(outside가 true인 경우)
         List<NoticeDTO> outsideNotice = noticeService.getAllByOutside(true);
-        mav.addObject("outsideNotice",outsideNotice);
+        if (!outsideNotice.isEmpty()) {
+            mav.addObject("outsideNotice", outsideNotice.get(0));
+        }
 
         if (session.getAttribute("selectType") != null) {
             mav.setViewName("redirect:/outside/logout");

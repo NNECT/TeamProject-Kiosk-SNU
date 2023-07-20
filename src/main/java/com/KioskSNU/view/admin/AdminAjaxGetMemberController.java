@@ -19,14 +19,15 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-public class AdminMemberGetController {
+public class AdminAjaxGetMemberController {
     private final AccountService accountService;
     private final UsageCommutationTicketService usageCommutationTicketService;
     private final UsageLockerService usageLockerService;
     private final ParticipationChallengeService participationChallengeService;
+    private AdminPageHandler adminPageHandler;
 
     @Autowired
-    public AdminMemberGetController(AccountService accountService, UsageCommutationTicketService usageCommutationTicketService, UsageLockerService usageLockerService, ParticipationChallengeService participationChallengeService) {
+    public AdminAjaxGetMemberController(AccountService accountService, UsageCommutationTicketService usageCommutationTicketService, UsageLockerService usageLockerService, ParticipationChallengeService participationChallengeService) {
         this.accountService = accountService;
         this.usageCommutationTicketService = usageCommutationTicketService;
         this.usageLockerService = usageLockerService;
@@ -42,6 +43,7 @@ public class AdminMemberGetController {
         AccountDTO accountDTO = accountService.getById(id);
 
         Map<String, Object> resultMap = new HashMap<>();
+
         if (accountDTO != null) {
             resultMap.put("result", "success");
             resultMap.put("memberId", accountDTO.getId());
@@ -64,32 +66,30 @@ public class AdminMemberGetController {
             //남은 시간
             resultMap.put("memberRemainTime",accountDTO.getRemainTime());
 
-            //사물함 사용여부
+            //사용중인 사물함 번호
             List<UsageLockerDTO> locker = usageLockerService.getAllByAccount(accountDTO);
             if(!locker.isEmpty()){
                 UsageLockerDTO latest = locker.get(0);
                 if(latest.getEndDate().isEqual(LocalDate.now())||latest.getEndDate().isAfter(LocalDate.now())){
-                    //resultMap.put("memberLockerStatus","이용함");
                     resultMap.put("memberLockerStatus",latest.getLocker_lockerNumber());
                 }else{
-                    resultMap.put("memberLockerStatus","이용안함");
+                    resultMap.put("memberLockerStatus","없음");
                 }
             }else{
-                resultMap.put("memberLockerStatus","이용안함");
+                resultMap.put("memberLockerStatus","없음");
             }
 
-            //챌린지 참여여부
+            //참여중인 챌린지 제목
             List<ParticipationChallengeDTO> challenge = participationChallengeService.getAllByAccount(accountDTO);
             if(!challenge.isEmpty()){
                 ParticipationChallengeDTO latest = challenge.get(0);
                 if(latest.getEndDateTime().isEqual(LocalDateTime.now())||latest.getStartDateTime().isAfter(LocalDateTime.now())){
-                    //resultMap.put("memberChallengeProgress","참여중");
                     resultMap.put("memberChallengeProgress",latest.getChallenge_title());
                 }else{
-                    resultMap.put("memberChallengeProgress","참여안함");
+                    resultMap.put("memberChallengeProgress","없음");
                 }
             }else{
-                resultMap.put("memberChallengeProgress","참여안함");
+                resultMap.put("memberChallengeProgress","없음");
             }
 
             //포인트

@@ -79,6 +79,7 @@ public class AdminLoginController {
         //로그인 성공 (세션에 admin 이름으로 admin 정보 저장)
         AdminDTO getAdmin = adminService.getByUsername(adminDTO.getUsername());
         session.setAttribute("admin", getAdmin);
+        session.setAttribute("loggedIn",true);
 
         return mav;
 
