@@ -135,6 +135,39 @@ hr{ border: 0.9px solid #285FF5;}
     color: #707070;
     margin-top: 105px;
 }
+
+#Timer{
+    width: 170px;
+    height: 36px;
+    background-color: #285FF5;
+    border-radius: 30px;
+    margin-left: 115px;
+    margin-top: -17px;
+}
+#saveTime{
+    font-size: 15px;
+    color: #ffffff;
+    float: left;
+    margin-top: 7px;
+    margin-left: 20px;
+}
+#time{
+    font-size: 20px;
+    font-weight: 500;
+    color: #ffffff;
+    float: left;
+    margin-top: 3px;
+    margin-left: 20px;
+}
+#minute{
+    font-size: 15px;
+    color: #ffffff;
+    float: right;
+    margin-top: 7px;
+    margin-right: 20px;
+
+}
+
 #password{
     margin-top: 30px;
     width: 250px;
@@ -155,7 +188,5 @@ hr{ border: 0.9px solid #285FF5;}
     font-size: 19px;
     color: #ffffff;
 }
-#foundPassword{
-    color: #285FF5; 
-}
+
 
