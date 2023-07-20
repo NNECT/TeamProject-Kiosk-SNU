@@ -1,16 +1,17 @@
 package com.KioskSNU.view.inside;
 
+import com.KioskSNU.api.RoomStatus;
 import com.KioskSNU.api.SeatStatus;
 import com.KioskSNU.snu.dto.AccountDTO;
 import com.KioskSNU.snu.dto.UsageCommutationTicketDTO;
-import com.KioskSNU.snu.dto.UsageRoomDTO;
 import com.KioskSNU.snu.dto.UsageSeatDTO;
-import com.KioskSNU.snu.service.*;
+import com.KioskSNU.snu.service.AccountService;
+import com.KioskSNU.snu.service.SeatService;
+import com.KioskSNU.snu.service.UsageCommutationTicketService;
+import com.KioskSNU.snu.service.UsageSeatService;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -18,7 +19,6 @@ import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -26,36 +26,30 @@ import java.util.concurrent.ConcurrentHashMap;
 @Controller
 public class InsideMoveSeatController {
     private final Map<Integer, UsageSeatDTO> seatMap;
-    private final Map<Integer, UsageRoomDTO> roomMap;
     private final SeatStatus seatStatus;
+    private final RoomStatus roomStatus;
     private final AccountService accountService;
     private final SeatService seatService;
-    private final RoomService roomService;
     private final UsageSeatService usageSeatService;
-    private final UsageRoomService usageRoomService;
     private final UsageCommutationTicketService usageCommutationTicketService;
 
 
     @Autowired
     InsideMoveSeatController(
             ConcurrentHashMap<Integer, UsageSeatDTO> seatMap,
-            ConcurrentHashMap<Integer, UsageRoomDTO> roomMap,
             SeatStatus seatStatus,
+            RoomStatus roomStatus,
             AccountService accountService,
             SeatService seatService,
             UsageSeatService usageSeatService,
-            UsageRoomService usageRoomService,
-            RoomService roomService,
             UsageCommutationTicketService usageCommutationTicketService
     ) {
         this.seatMap = seatMap;
-        this.roomMap = roomMap;
         this.seatStatus = seatStatus;
+        this.roomStatus = roomStatus;
         this.accountService = accountService;
         this.usageSeatService = usageSeatService;
-        this.usageRoomService = usageRoomService;
         this.seatService = seatService;
-        this.roomService = roomService;
         this.usageCommutationTicketService = usageCommutationTicketService;
 
     }
@@ -65,16 +59,17 @@ public class InsideMoveSeatController {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("inside/inside_moveSeat");
 
+        //사용자 저장
+        AccountDTO accountDTO = (AccountDTO) session.getAttribute("author");
+
         //menu에서 자리이동 눌렀을 경우 자리선택 페이지로 이동
         if (type == null || number == null) {
             mav.setViewName("inside/inside_select");
 
-            Map<Integer, Integer> seatStatusMap = seatStatus.getSeatStatusMap();
+            Map<Integer, Integer> seatStatusMap = seatStatus.getSeatStatusMap(accountDTO);
             mav.addObject("seatStatusMap", new Gson().toJson(seatStatusMap));
 
-            Map<Integer, Integer> roomStatusMap = new HashMap<>();
-            roomService.getAll().forEach(room -> roomStatusMap.put(room.getRoomNumber(), room.isUsable() ? 1 : -1));
-            roomMap.forEach((id, usage) -> roomStatusMap.put(id, 0));
+            Map<Integer, Integer> roomStatusMap = roomStatus.getRoomStatusMap(accountDTO);
             mav.addObject("roomStatusMap", new Gson().toJson(roomStatusMap));
 
             return mav;
@@ -100,9 +95,6 @@ public class InsideMoveSeatController {
             mav.setViewName("redirect:/inside/index");
             return mav;
         }
-
-        //사용자 저장
-        AccountDTO accountDTO = (AccountDTO) session.getAttribute("author");
 
         //자리사용종료 / 로그인기록 로그아웃
         session.removeAttribute("author");
