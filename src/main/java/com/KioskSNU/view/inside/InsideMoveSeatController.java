@@ -1,5 +1,6 @@
 package com.KioskSNU.view.inside;
 
+import com.KioskSNU.api.SeatStatus;
 import com.KioskSNU.snu.dto.AccountDTO;
 import com.KioskSNU.snu.dto.UsageCommutationTicketDTO;
 import com.KioskSNU.snu.dto.UsageRoomDTO;
@@ -26,18 +27,20 @@ import java.util.concurrent.ConcurrentHashMap;
 public class InsideMoveSeatController {
     private final Map<Integer, UsageSeatDTO> seatMap;
     private final Map<Integer, UsageRoomDTO> roomMap;
-    AccountService accountService;
-    SeatService seatService;
-    RoomService roomService;
-    UsageSeatService usageSeatService;
-    UsageRoomService usageRoomService;
-    UsageCommutationTicketService usageCommutationTicketService;
+    private final SeatStatus seatStatus;
+    private final AccountService accountService;
+    private final SeatService seatService;
+    private final RoomService roomService;
+    private final UsageSeatService usageSeatService;
+    private final UsageRoomService usageRoomService;
+    private final UsageCommutationTicketService usageCommutationTicketService;
 
 
     @Autowired
     InsideMoveSeatController(
             ConcurrentHashMap<Integer, UsageSeatDTO> seatMap,
             ConcurrentHashMap<Integer, UsageRoomDTO> roomMap,
+            SeatStatus seatStatus,
             AccountService accountService,
             SeatService seatService,
             UsageSeatService usageSeatService,
@@ -47,6 +50,7 @@ public class InsideMoveSeatController {
     ) {
         this.seatMap = seatMap;
         this.roomMap = roomMap;
+        this.seatStatus = seatStatus;
         this.accountService = accountService;
         this.usageSeatService = usageSeatService;
         this.usageRoomService = usageRoomService;
@@ -65,9 +69,7 @@ public class InsideMoveSeatController {
         if (type == null || number == null) {
             mav.setViewName("inside/inside_select");
 
-            Map<Integer, Integer> seatStatusMap = new HashMap<>();
-            seatService.getAll().forEach(seat -> seatStatusMap.put(seat.getSeatNumber(), seat.isUsable() ? 1 : -1));
-            seatMap.forEach((id, usage) -> seatStatusMap.put(id, 0));
+            Map<Integer, Integer> seatStatusMap = seatStatus.getSeatStatusMap();
             mav.addObject("seatStatusMap", new Gson().toJson(seatStatusMap));
 
             Map<Integer, Integer> roomStatusMap = new HashMap<>();

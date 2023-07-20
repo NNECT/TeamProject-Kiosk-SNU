@@ -1,5 +1,6 @@
 package com.KioskSNU.view.outside;
 
+import com.KioskSNU.api.SeatStatus;
 import com.KioskSNU.snu.dto.UsageRoomDTO;
 import com.KioskSNU.snu.dto.UsageSeatDTO;
 import com.KioskSNU.snu.service.RoomService;
@@ -18,6 +19,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class OutsideSelectController {
     private final Map<Integer, UsageSeatDTO> seatMap;
     private final Map<Integer, UsageRoomDTO> roomMap;
+    private final SeatStatus seatStatus;
     private final SeatService seatService;
     private final RoomService roomService;
 
@@ -25,11 +27,13 @@ public class OutsideSelectController {
     public OutsideSelectController(
             ConcurrentHashMap<Integer, UsageSeatDTO> seatMap,
             ConcurrentHashMap<Integer, UsageRoomDTO> roomMap,
+            SeatStatus seatStatus,
             SeatService seatService,
             RoomService roomService
     ) {
         this.seatMap = seatMap;
         this.roomMap = roomMap;
+        this.seatStatus = seatStatus;
         this.seatService = seatService;
         this.roomService = roomService;
     }
@@ -39,9 +43,7 @@ public class OutsideSelectController {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("outside/select");
 
-        Map<Integer, Integer> seatStatusMap = new HashMap<>();
-        seatService.getAll().forEach(seat -> seatStatusMap.put(seat.getSeatNumber(), seat.isUsable() ? 1 : -1));
-        seatMap.forEach((id, usage) -> seatStatusMap.put(id, 0));
+        Map<Integer, Integer> seatStatusMap = seatStatus.getSeatStatusMap();
         mav.addObject("seatStatusMap", new Gson().toJson(seatStatusMap));
 
         Map<Integer, Integer> roomStatusMap = new HashMap<>();
