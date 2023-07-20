@@ -124,4 +124,26 @@
         where       account.id = #{id}
         order by    usageLocker.endDate desc;
     </select>
+
+    <select id="getAllValidDate" resultMap="usageLockerResultMap">
+        select      usageLocker.id                          as id,
+                    locker.id                               as locker_id,
+                    locker.lockerNumber                     as locker_lockerNumber,
+                    locker.usable                           as locker_usable,
+                    account.id                              as account_id,
+                    account.username                        as account_username,
+                    account.password                        as account_password,
+                    account.phoneNumber                     as account_phoneNumber,
+                    account.point                           as account_point,
+                    account.remainTime                      as account_remainTime,
+                    usageLocker.startDate                   as startDate,
+                    usageLocker.endDate                     as endDate
+        from        usageLocker
+        join        locker
+        on          usageLocker.locker_id = locker.id
+        join        account
+        on          usageLocker.account_id = account.id
+        where       usageLocker.endDate >= date(now())
+        order by    usageLocker.endDate desc;
+    </select>
 </mapper>

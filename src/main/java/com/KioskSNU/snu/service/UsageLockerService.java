@@ -16,4 +16,5 @@ public interface UsageLockerService {
     List<UsageLockerDTO> getAll();
     List<UsageLockerDTO> getAllByLocker(LockerDTO lockerDTO);
     List<UsageLockerDTO> getAllByAccount(AccountDTO accountDTO);
+    List<UsageLockerDTO> getAllValidDate();
 }

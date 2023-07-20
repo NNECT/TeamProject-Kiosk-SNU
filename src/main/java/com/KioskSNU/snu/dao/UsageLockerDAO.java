@@ -59,4 +59,10 @@ public class UsageLockerDAO extends SqlSessionDaoSupport implements UsageLockerS
     public List<UsageLockerDTO> getAllByAccount(AccountDTO accountDTO) {
         return getSqlSession().selectList("com.KioskSNU.snu.service.UsageLockerService.getAllByAccount", accountDTO);
     }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<UsageLockerDTO> getAllValidDate() {
+        return getSqlSession().selectList("com.KioskSNU.snu.service.UsageLockerService.getAllValidDate");
+    }
 }
