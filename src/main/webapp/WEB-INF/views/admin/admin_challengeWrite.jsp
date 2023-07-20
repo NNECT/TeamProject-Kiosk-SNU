@@ -45,8 +45,8 @@
                             <input type="text" class="form-control" id="title" name="title" value="챌린지명"  required>
                         </div>
                         <div class="form-group">
-                            <label for="description">챌린지 설명 :</label>
-                            <textarea class="form-control" id="description" name="description" value="챌린지설명" required></textarea>
+                            <label for="description">챌린지 설명:</label>
+                            <textarea class="form-control" id="description" name="description" required>${challenge.description}</textarea>
                         </div>
                         <div class="form-group">
                             <label for="titleColor">제목 색상 :</label>
@@ -73,7 +73,7 @@
                             <input class="form-control" id="activeEndTime" name="endTime" value="12:00"  >
                         </div>
                         <div class="form-group">
-                            <label for="periodDays">챌린지 적용기간(날) :</label>
+                            <label for="periodDays">챌린지 적용기간(일) :</label>
                             <input class="form-control" id="periodDays" name="periodDays" value="2"  >
                         </div>
                         <div class="form-group">
@@ -98,7 +98,7 @@
                         </div>
                         <input type="hidden" value="${challenge.active ? 'true' : 'false'}" name="_active"/>
                         <div class="text-right">
-                            <button type="submit" class="btn btn-primary mt-3">수정</button>
+                            <button type="submit" class="btn btn-primary mt-3">등록</button>
                         </div>
                     </form>
                 </div>

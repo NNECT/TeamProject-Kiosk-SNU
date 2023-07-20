@@ -28,7 +28,7 @@
                             <input type="text" class="form-control" id="title" name="title" value="${challenge.title}" required>
                         </div>
                         <div class="form-group">
-                            <label for="description">챌린지 설명 :</label>
+                            <label for="description">챌린지 설명:</label>
                             <textarea class="form-control" id="description" name="description" required>${challenge.description}</textarea>
                         </div>
                         <div class="form-group">
@@ -48,11 +48,11 @@
                             <input class="form-control" id="imageSrc" name="imageSrc" value="${challenge.imageSrc}" required>
                         </div>
                         <div class="form-group">
-                            <label for="activeStartTime">활성 시작시간 :</label>
+                            <label for="activeStartTime">활성 시작시간 (시 : 분) :</label>
                             <input class="form-control" id="activeStartTime" name="StartTime" value="${challenge.activeStartTime}" >
                         </div>
                         <div class="form-group">
-                            <label for="activeEndTime">활성 종료시간 :</label>
+                            <label for="activeEndTime">활성 종료시간 (시 : 분) :</label>
                             <input class="form-control" id="activeEndTime" name="EndTime" value="${challenge.activeEndTime}" >
                         </div>
                         <div class="form-group">
@@ -100,36 +100,33 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <script>
-    $(document).ready(function() {
-        $("#titleColor").on("click", function() {
-            $("#titleColor").val(selectColor());
-        });
+    function convertNewlinesToBreaks() {
+        const textareaElement = document.getElementById("description");
+        const textareaValue = textareaElement.value;
+        const replacedValue = textareaValue.replace(/\n/g, "<br>");
+        textareaElement.innerHTML = replacedValue;
+    }
 
-        $("#descriptionColor").on("click", function() {
-            $("#descriptionColor").val(selectColor());
-        });
-
-        $("#backgroundColor").on("click", function() {
-            $("#backgroundColor").val(selectColor());
-        });
-
-        $("#remove").on("click", function() {
-            if (!confirm("해당 챌린지를 삭제하시겠습니까?")) return;
-            let form = $('form');
-            form.attr("action", "<c:url value='/admin/challenge/remove'/>?id=${id}");
-            form.attr("method", "post");
-            form.submit();
-        });
-
-        $("#list").on("click", function() {
-            location.href = "<c:url value='/admin/challenge/list'/>";
-        });
+    // 목록 버튼을 클릭하면 리스트 페이지로 이동합니다.
+    $("#list").on("click", function() {
+        location.href = "<c:url value='/admin/challenge/list'/>";
     });
 
-    function selectColor() {
-        return prompt("색상을 선택하거나 'ff0000'과 같이 6자를 직접 입력하세요.");
-    }
+    // 챌린지 추가 버튼을 클릭하면 개행 문자를 <br> 태그로 변환합니다.
+    $("#convertNewlinesBtn").on("click", function() {
+        convertNewlinesToBreaks();
+    });
+
+    // 삭제 버튼을 클릭하면 해당 챌린지를 삭제합니다.
+    $("#remove").on("click", function() {
+        if (!confirm("해당 챌린지를 삭제하시겠습니까?")) return;
+        let form = $('form');
+        form.attr("action", "<c:url value='/admin/challenge/remove'/>?id=${id}");
+        form.attr("method", "post");
+        form.submit();
+    });
 </script>
+
 
 </body>
 </html>
