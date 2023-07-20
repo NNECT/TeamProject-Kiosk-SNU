@@ -26,12 +26,11 @@ public class AccountCommutationTicketCheck {
 
     /**
      * 유효 정기권 소지 여부 확인 메소드
-     * @param account_id 사용자 id
+     * @param accountDTO 사용자
      * @return 유효 정기권 소지 여부
      */
-    public boolean hasCommutationTicket(int account_id) {
+    public boolean hasCommutationTicket(AccountDTO accountDTO) {
         // 사용자 확인
-        AccountDTO accountDTO = accountService.getById(account_id);
         if (accountDTO == null) return false;
 
         // 티켓 확인
@@ -41,5 +40,25 @@ public class AccountCommutationTicketCheck {
         // 티켓 유효기간 확인
         UsageCommutationTicketDTO usageCommutationTicketDTO = usageCommutationTicketDTOList.get(0);
         return !usageCommutationTicketDTO.getEndDate().isBefore(LocalDate.now());
+    }
+
+    /**
+     * 유효 정기권 Get 메소드
+     * @param accountDTO 사용자
+     * @return 유효 정기권
+     */
+    public UsageCommutationTicketDTO getCommutationTicket(AccountDTO accountDTO) {
+        // 사용자 확인
+        if (accountDTO == null) return null;
+
+        // 티켓 확인
+        List<UsageCommutationTicketDTO> usageCommutationTicketDTOList = usageCommutationTicketService.getAllByAccount(accountDTO);
+        if (usageCommutationTicketDTOList.isEmpty()) return null;
+
+        // 티켓 유효기간 확인
+        UsageCommutationTicketDTO usageCommutationTicketDTO = usageCommutationTicketDTOList.get(0);
+        if (usageCommutationTicketDTO.getEndDate().isBefore(LocalDate.now())) return null;
+
+        return usageCommutationTicketDTO;
     }
 }
