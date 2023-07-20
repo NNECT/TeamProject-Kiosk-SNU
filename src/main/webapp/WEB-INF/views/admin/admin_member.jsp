@@ -53,28 +53,36 @@
             <div class="modal-body">
                 <table class="table">
                     <tr>
-                        <th>회원 이름:</th>
-                        <td id="memberName"></td>
+                        <th>회원번호:</th>
+                        <td id="memberId"></td>
                     </tr>
                     <tr>
                         <th>아이디:</th>
-                        <td id="memberId"></td>
+                        <td id="memberName"></td>
                     </tr>
                     <tr>
                         <th>전화번호:</th>
                         <td id="memberPhone"></td>
                     </tr>
                     <tr>
-                        <th>정기권:</th>
+                        <th>사용권:</th>
                         <td id="memberSubscription"></td>
                     </tr>
                     <tr>
-                        <th>사물함 사용여부:</th>
+                        <th>남은 시간:</th>
+                        <td id="memberRemainTime"></td>
+                    </tr>
+                    <tr>
+                        <th>사물함:</th>
                         <td id="memberLockerStatus"></td>
                     </tr>
                     <tr>
-                        <th>챌린지 참여내역:</th>
+                        <th>참여중인 챌린지:</th>
                         <td id="memberChallengeProgress"></td>
+                    </tr>
+                    <tr>
+                        <th>포인트:</th>
+                        <td id="memberPoint"></td>
                     </tr>
                     <tr>
                         <td><button type="button" id="edit" class="float-right updateMember">수정</button></td>
@@ -109,8 +117,10 @@
                     $("#memberId").text(response.memberId);
                     $("#memberPhone").text(response.memberPhone);
                     $("#memberSubscription").text(response.memberSubscription);
+                    $("#memberRemainTime").text(response.memberRemainTime);
                     $("#memberLockerStatus").text(response.memberLockerStatus);
-                    //$("#memberChallengeProgress").text(response.memberChallengeProgress);
+                    $("#memberChallengeProgress").text(response.memberChallengeProgress);
+                    $("#memberPoint").text(response.memberPoint);
 
                     // 모달 창을 띄웁니다.
                     $("#memberModal").modal("show");

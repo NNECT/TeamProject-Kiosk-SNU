@@ -15,29 +15,40 @@
                     <form id ="form">
                         <table class="table">
                             <tr>
+                                <th>회원번호:</th>
+                                <td><input type="text" name ="id" value="${member.id}" readonly></td>
+                            </tr>
+                            <tr>
                                 <th>아이디:</th>
-                                <td><input type="text" name ="username" value="${member.username}" id="memberName" ></td>
+                                <td><input type="text" name ="username" value="${member.username}" readonly></td>
                             </tr>
                             <tr>
                                 <th>비밀번호:</th>
-                                <td><input type="text" name ="password" value="${member.password}"></td>
+                                <td><input type="password" name="password" value="${member.password}"></td>
                             </tr>
-
                             <tr>
                                 <th>전화번호:</th>
                                 <td><input type="text" name ="phoneNumber" value="${member.phoneNumber}"></td>
                             </tr>
                             <tr>
-                                <th>정기권:</th>
-                                <td><input type="text" name ="username" value="${memberSubscription}"></td>
+                                <th>사용권:</th>
+                                <td><input type="text" name="usageTicket" value="${memberSubscription}" readonly></td>
                             </tr>
                             <tr>
-                                <th>사물함 사용여부:</th>
-                                <td><input type="text" name ="username" value="${memberLockerStatus}"></td>
+                                <th>남은 시간:</th>
+                                <td><input type="text" name="usageTicket" value="${member.remainTime}" readonly></td>
                             </tr>
                             <tr>
-                                <th>챌린지 참여내역:</th>
-                                <td><input type="text" name ="username" id="memberChallengeProgress"></td>
+                                <th>사물함:</th>
+                                <td><input type="text" name="usageLocker" value="${memberLockerStatus}" readonly></td>
+                            </tr>
+                            <tr>
+                                <th>참여중인 챌린지:</th>
+                                <td><input type="text" name="participationChallenge" value="${memberChallengeProgress}" readonly></td>
+                            </tr>
+                            <tr>
+                                <th>포인트:</th>
+                                <td><input type="text" name="point" value="${member.point}" readonly></td>
                             </tr>
                         </table>
                         <button id="edit">수정</button>
