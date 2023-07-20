@@ -84,6 +84,8 @@ public class InsideMoveSeatController {
         UsageSeatDTO usage = new UsageSeatDTO();
         //usage.seatId에 / 들어온 number로 조회한 좌석의 id값 넣어주기
         usage.setSeat_id(seatService.getBySeatNumber(number).getId());
+        //usage.accountID 넣어주기
+        usage.setAccount_id(accountDTO.getId());
         //현재 사용시간 넣어주기
         usage.setStartDateTime(LocalDateTime.now());
         //들어온 number 번호에 usage정보 넣어주기
