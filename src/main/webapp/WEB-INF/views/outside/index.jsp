@@ -29,7 +29,7 @@
   <div id="warning"><!--공지란-->
     <img id="warningIcon" src="<c:url value="/img/start/triangle-warning.png"/>" width="35" height="35">
     <c:forEach items="${outsideNotice}" var="notice">
-      <c:out value="${notice.title}"/>
+      <div id="warningText"><strong>${notice.title}</strong></div>
     </c:forEach>
   </div>
   <a href="<c:url value="/outside/select"/>">
