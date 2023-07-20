@@ -74,62 +74,91 @@
 <!--전화번호 변경 모달영역-->
 <div id="modalBg"></div>
 <div id="modalPage">
-    <div id="modalContent">
-        <p id="modalP">
-            00님의 회원정보 <span id="modalSpan">전화번호</span>를<br>
-            수정하기 위해 인증절차가 필요합니다.
-        </p>
-        <hr id="modalHr">
-        <input type="password" name="" id="modelPassword" class="first" placeholder="비밀번호를 입력해주세요">
-        <input type="button" id="modalCheckBtn" value="확인"><br>
-        <!--페스워드 확인이 되야 전화번호 변경가능-->
-        <input type="text" id="modalTel"  class="second" placeholder="변경할 전화번호를 입력해주세요">
-    </div>
-    <div id="modalBtn">
-        <input type="button" id="modalNoBtn" value="취소">
-        <input type="submit" name="" id="modalYesBtn" value="변경">
-    </div>
+    <form id="inside-changeTel-form">
+        <div id="modalContent">
+            <p id="modalP">
+                00님의 회원정보 <span id="modalSpan">전화번호</span>를<br>
+                수정하기 위해 인증절차가 필요합니다.
+            </p>
+            <hr id="modalHr">
+            <input type="password" name="" id="modelPassword" class="first" placeholder="비밀번호를 입력해주세요">
+            <input type="button" id="modalCheckBtn" value="확인"><br>
+            <!--페스워드 확인이 되야 전화번호 변경가능-->
+            <input type="text" id="modalTel"  class="second" placeholder="변경할 전화번호를 입력해주세요">
+            <div id="inputText1"></div>
+        </div>
+        <div id="modalBtn">
+            <input type="button" id="modalNoBtn" value="취소">
+            <input type="submit" name="" id="modalYesBtn" value="변경">
+        </div>
+    </form>
 </div>
 <!--모달영역-->
+<script>
+    window.addEventListener("DOMContentLoaded", (event) => {
+        document.getElementById("inside-changeTel-form").addEventListener("submit", function (e) {
+            e.preventDefault();
 
+            const crypt = new JSEncrypt();
+            crypt.setPublicKey("${publicKey}");
+
+            const password = crypt.encrypt(document.getElementById("password").value); //?
+
+            const form = document.createElement("form");
+            form.setAttribute("method", "post");
+            form.setAttribute("action", "<c:url value="/inside/password" />");
+            form.setAttribute("charset", "UTF-8");
+            form.setAttribute("hidden", "true");
+
+            const passwordInput = document.createElement("input");
+            passwordInput.setAttribute("type", "password");
+            passwordInput.setAttribute("name", "password");
+            passwordInput.setAttribute("value", password);
+            form.appendChild(passwordInput);
+
+            document.body.appendChild(form);
+            form.submit();
+        });
+    });
+</script>
 <!--비밀번호변경_모달영역1-->
 <div id="rePasswordModal">
-    <div id="modalContent">
-        <p id="modalP">
-            <span id="modalSpan">비밀번호</span>를 변경하려면 전화번호<br>
-            인증이 필요합니다.
-        </p>
-        <hr id="modalHr">
-        <input type="text" name="" id="modelTel" class="first" placeholder="전화번호를 입력해주세요">
-        <input type="button" id="modalCheckBtn" value="인증"><br>
-        <!--인증번호 확인이 되야 전화번호 변경가능-->
-        <input type="text" id="checkNum" class="second" placeholder="인증번호를 입력해주세요">
-    </div>
-    <div id="modalBtn">
-        <input type="button" id="reModalNoBtn" value="취소">
-        <input type="submit" name="" id="modalYesBtn" value="다음">
-    </div>
+    <form>
+        <div id="modalContent">
+            <p id="modalP">
+                <span id="modalSpan">비밀번호</span>를 변경하려면 전화번호<br>
+                인증이 필요합니다.
+            </p>
+            <hr id="modalHr">
+            <input type="text" name="" id="modelTel" class="first" placeholder="전화번호를 입력해주세요">
+            <input type="button" id="modalCheckBtn" value="인증"><br>
+            <!--인증번호 확인이 되야 전화번호 변경가능-->
+            <input type="text" id="checkNum" class="second" placeholder="인증번호를 입력해주세요">
+            <div id="inputText"></div>
+        </div>
+        <div id="modalBtn">
+            <input type="button" id="reModalNoBtn" value="취소">
+            <input type="submit" name="" id="modalYesBtn" value="다음">
+        </div>
+    </form>
 </div>
 <!--모달영역-->
 
 <!-- 비밀번호변경 모달-->
 <div id="newPasswordModal">
-    <div id="modalContent">
-        <p id="modalP">
-            <span id="modalSpan">변경할 비밀번호</span>를 입력해주세요<br>
-
-        </p>
-        <hr id="modalHr">
-        <input type="text" name="" id="modelPassword"  class="third" placeholder="새 비밀번호"><br>
-        <input type="text" name="" id="modelPassword" class="third" placeholder="비밀번호 확인">
-    </div>
-    <div id="modalBtn">
-        <input type="button" id="newModalNoBtn" value="변경 취소">
-        <input type="submit" name="" id="finishModalBtn" value="변경">
-    </div>
+    <form>
+        <div id="modalContent">
+            <p id="modalP">
+                <span id="modalSpan">변경할 비밀번호</span>를 입력해주세요<br>
+            </p>
+            <hr id="modalHr">
+            <input type="text" name="" id="modelPassword"  class="third" placeholder="새 비밀번호"><br>
+            <input type="text" name="" id="modelPassword" class="third" placeholder="비밀번호 확인">
+        </div>
+        <div id="modalBtn">
+            <input type="button" id="newModalNoBtn" value="변경 취소">
+            <input type="submit" name="" id="finishModalBtn" value="변경">
+        </div>
+    </form>
 </div>
-<script src="<c:url value="/js/modalNewPass.js"/>"></script>
-</body>
-</body>
-
 </html>

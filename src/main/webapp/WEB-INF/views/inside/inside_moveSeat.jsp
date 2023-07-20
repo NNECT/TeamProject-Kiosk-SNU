@@ -36,44 +36,16 @@
 
   </section>
 
-  <script type="text/javascript">
-    function startTimer(duration, display) {
-      var timer = duration, minutes, seconds;
-      var interval = setInterval(function () {
-        //minutes = parseInt(timer / 60, 10)
-        seconds = parseInt(timer % 60, 10);
-
-        //minutes = minutes < 10 ? "0" + minutes : minutes;
-        seconds = seconds < 10 ? "0" + seconds : seconds;
-
-        //display.textContent = minutes + ":" + seconds;
-        display.textContent = seconds;
-
-        if (--timer < 0) {
-          timer = duration;
-        }
-        if(timer === 0) {
-          clearInterval(interval);
-          display.textContent = "0";
-        }
-      }, 1000);
+  <script>
+    let time = 10;
+    let timer = setInterval(function () {
+    time--;
+    document.getElementById('MyTimer').innerText = String(time).padStart(2, '0');
+    if (time === 0) {
+    clearInterval(timer);
+    location.href = "<c:url value="/inside/index"/>";
     }
-
-    window.onload = function () {
-      /* 기본값 10(분)입니다. */
-      var seconds = 10;
-
-      var fiveSeconds = (seconds) - 1,
-              display = document.querySelector('#MyTimer');
-      startTimer(fiveSeconds, display);
-    };
-  </script>
-  <script type="text/javascript">
-    setTimeout('gotoPage()', 10000); // 3초 후 실행
-
-    function gotoPage(){
-      location.href="inside_start.jsp"  // 이동주소
-    }
+    }, 1000);
   </script>
 </div>
 </body>
