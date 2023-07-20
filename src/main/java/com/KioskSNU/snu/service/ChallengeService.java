@@ -2,7 +2,6 @@ package com.KioskSNU.snu.service;
 
 import com.KioskSNU.snu.dto.ChallengeDTO;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
