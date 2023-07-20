@@ -19,6 +19,7 @@
 </head>
 <body>
 <div id="body">
+
     <section id="circleWrap1">
         <div id="bigCircle1"></div><!--원-->
         <div id="smallCircle1"></div><!--원-->
@@ -37,6 +38,7 @@
         </p>
 
     </section>
+
 </div>
 <script>
     let time = 10;

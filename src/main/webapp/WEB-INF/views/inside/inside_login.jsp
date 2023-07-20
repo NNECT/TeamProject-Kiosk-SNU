@@ -45,6 +45,12 @@
                 </div>
                 <p id="userName">${sessionScope.author.username}님</p>
 
+                <div id="Timer"><!--남은시간 나타내는 곳-->
+                    <span id="saveTime">남은시간:</span>
+                    <span id="time">100<!-- 남은시간 나타나는 곳--></span>
+                    <span id="minute">분</span>
+                </div>
+
                 <input type="password" id="password" placeholder="비밀번호를 입력하세요"><br>
                 <input type="submit" id="loginBtn" value="로그인">
             </div>
