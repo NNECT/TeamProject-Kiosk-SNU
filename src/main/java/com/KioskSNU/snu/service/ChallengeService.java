@@ -14,4 +14,5 @@ public interface ChallengeService {
     List<ChallengeDTO> getAll();
     List<ChallengeDTO> getAllByActive(boolean active);
     List<ChallengeDTO> getAllByVisible(boolean visible);
+    int getCountOfActiveChallenges();
 }
