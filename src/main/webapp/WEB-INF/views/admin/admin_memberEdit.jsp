@@ -39,7 +39,7 @@
                                 <td><input type="text" name="usageTicket" value="${member.remainTime}" readonly></td>
                             </tr>
                             <tr>
-                                <th>사물함:</th>
+                                <th>사용중인 사물함 번호:</th>
                                 <td><input type="text" name="usageLocker" value="${memberLockerStatus}" readonly></td>
                             </tr>
                             <tr>

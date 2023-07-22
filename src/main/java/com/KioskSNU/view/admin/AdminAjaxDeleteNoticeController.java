@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @RestController
-public class AdminNoticeDeleteController {
+public class AdminAjaxDeleteNoticeController {
     private final NoticeService noticeService;
 
     @Autowired
-    public AdminNoticeDeleteController(NoticeService noticeService) {
+    public AdminAjaxDeleteNoticeController(NoticeService noticeService) {
         this.noticeService = noticeService;
     }
 

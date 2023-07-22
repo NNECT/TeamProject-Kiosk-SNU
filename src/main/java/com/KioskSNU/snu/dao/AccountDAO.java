@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 @Transactional
@@ -57,4 +58,15 @@ public class AccountDAO extends SqlSessionDaoSupport implements AccountService {
     public List<AccountDTO> getAllByPhoneNumber(String phoneNumber) {
         return getSqlSession().selectList("com.KioskSNU.snu.service.AccountService.getAllByPhoneNumber", phoneNumber);
     }
+
+    @Override
+    public int getCount() {
+        return getSqlSession().selectOne("com.KioskSNU.snu.service.AccountService.getCount");
+    }
+
+    @Override
+    public List<AccountDTO> selectPage(Map<String, Integer> map) {
+        return getSqlSession().selectList("com.KioskSNU.snu.service.AccountService.selectPage", map);
+    }
+
 }

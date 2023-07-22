@@ -97,6 +97,12 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <script>
+
+    // 수정이 완료되었을 때 알림 창 띄우기
+    function showNotification() {
+        alert("수정이 완료되었습니다");
+    }
+
     window.addEventListener("DOMContentLoaded", (event) => {
         document.getElementById("sudo-form").addEventListener("submit", function (e) {
             e.preventDefault();
@@ -138,6 +144,7 @@
                 },
                 body: JSON.stringify(data)
             }).then(response => response.json()).then(data => {
+                showNotification();
                 window.location.reload();
             }).catch((error) => {
                 console.error('Error:', error);

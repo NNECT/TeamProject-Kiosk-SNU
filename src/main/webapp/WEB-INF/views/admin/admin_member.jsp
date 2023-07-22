@@ -25,7 +25,7 @@
                             <%--<th>등록일</th>--%>
                         </tr>
                         </thead>
-                        <c:forEach items="${memberList}" var="member">
+                        <c:forEach items="${list}" var="member">
                         <tr id="${member.id}" onclick="showMemberDetails(this)" class="getMember">
                             <td>${member.id}</td>
                             <td>${member.phoneNumber}</td>
@@ -34,6 +34,19 @@
                         </tr>
                         </c:forEach>
                     </table>
+                    <br>
+                    <div>
+                        <c:if test="${ph.showPrev}">
+                            <a href="<c:url value='/admin/adminmember?page=${ph.beginPage-1}&pageSize=${ph.pageSize}'/>"><</a>
+                        </c:if>
+                        <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
+                            <a href="<c:url value='/admin/adminmember?page=${i}&pageSize=${ph.pageSize}'/>">${i}</a>
+                        </c:forEach>
+                        <c:if test="${ph.showNext}">
+                            <a href="<c:url value='/admin/adminmember?page=${ph.endPage+1}&pageSize=${ph.pageSize}'/>">></a>
+                        </c:if>
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -73,7 +86,7 @@
                         <td id="memberRemainTime"></td>
                     </tr>
                     <tr>
-                        <th>사물함:</th>
+                        <th>사용중인 사물함 번호:</th>
                         <td id="memberLockerStatus"></td>
                     </tr>
                     <tr>

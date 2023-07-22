@@ -32,7 +32,7 @@ public class AdminPaySettingController {
     }
 
     @GetMapping("/admin/adminpaysetting")
-    public ModelAndView GetProcess(){
+    public ModelAndView getProcess(){
 
         ModelAndView mav = new ModelAndView();
 
@@ -48,7 +48,7 @@ public class AdminPaySettingController {
 
     @PostMapping("/admin/adminpaysetting")
     @AdminLoginRequired
-    public ResponseEntity<Map<String, String>> PostProcess(@RequestBody Map<String, Map<String, String>> payload) {
+    public ResponseEntity<Map<String, String>> postProcess(@RequestBody Map<String, Map<String, String>> payload) {
         Map<String, String> timeTicketMap = payload.get("timeTicketMap");
         Map<String, String> commutationTicketMap = payload.get("commutationTicketMap");
         Map<String, String> lockerTicketMap = payload.get("lockerTicketMap");
