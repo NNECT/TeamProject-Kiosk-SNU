@@ -19,10 +19,18 @@
   <script src="hiddenBtn.js"></script>
   <script src="alertBtn.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/sunn-us/SUITE/fonts/static/woff2/SUITE.css" rel="stylesheet">
-
+  <%--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">--%>
   <style>
-    body {font-family: 'SUITE', sans-serif;}
+    body {
+      font-family: 'SUITE', sans-serif;
+      box-sizing: border-box;
+    }
+
+    .border-check {
+      box-shadow: 0 0 10px gray; /* 그림자 효과 추가 */
+    }
   </style>
+
   <title>snu_challenge_page</title>
 </head>
 <body>
@@ -46,16 +54,19 @@
     <c:forEach var="challenge" items="${list}">
       <c:choose>
         <c:when test="${challenge.active}">
-      <div class="box challenge" STYLE="background-color: ${challenge.backgroundColor}">
-        <div>
-          <div class="iconCircle c1" id="circle" style="background-color: ${challenge.descriptionColor}">
-          <img src="<c:url value="${challenge.imageSrc}"/>"  width="72">
+          <div class="box challenge border" STYLE="background-color: ${challenge.backgroundColor}"
+               id="${challenge.id}" onclick="checkChallenge(${challenge.id})">
+            <div>
+              <div class="iconCircle c1" id="circle"
+                   style="background-color: ${challenge.descriptionColor}">
+                <img src="<c:url value="${challenge.imageSrc}"/>" width="72">
+              </div>
+            </div>
+            <p class="cTitle" style="color: ${challenge.titleColor}">${challenge.title}</p>
+            <p class="cContent" style="color: ${challenge.titleColor}">${challenge.description}</p>
+            <p class="cPoint" style="color: ${challenge.titleColor}"><!--숫자만 변경 --><span
+                    id="point">${challenge.rewardPoint}</span><!--숫자만 변경 -->point</p>
           </div>
-        </div>
-        <p class="cTitle" style="color: ${challenge.titleColor}">${challenge.title}</p>
-        <p class="cContent" style="color: ${challenge.titleColor}">${challenge.description}</p>
-        <p class="cPoint"  style="color: ${challenge.titleColor}"><!--숫자만 변경 --><span id="point">${challenge.rewardPoint}</span><!--숫자만 변경 -->point</p>
-      </div>
         </c:when>
       </c:choose>
     </c:forEach>
@@ -70,13 +81,27 @@
 </form>
 
 <script>
+  let selectedChallengeId = null;
 
+  function checkChallenge(id) {
+    const challenge = document.getElementById(id);
 
-  // 해당 요소를 JavaScript로 선택합니다.
-  const circleElement = document.getElementById("circle");
+    // 클릭한 챌린지가 이미 선택된 상태인 경우 선택 해제
+    if (selectedChallengeId === id) {
+      selectedChallengeId = null;
+      challenge.classList.remove('border-check');
+    } else {
+      // 이전에 선택된 챌린지가 있으면 선택 해제하고
+      const prevSelectedChallenge = document.getElementById(selectedChallengeId);
+      if (prevSelectedChallenge) {
+        prevSelectedChallenge.classList.remove('border-check');
+      }
 
-  // 동적으로 스타일을 변경합니다.
-  circleElement.style.backgroundColor = challenge.descriptionColor;
+      // 클릭한 챌린지 선택
+      selectedChallengeId = id;
+      challenge.classList.add('border-check');
+    }
+  }
 
 </script>
 </body>

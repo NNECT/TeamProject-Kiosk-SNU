@@ -159,7 +159,7 @@ public class AdminChallengeController {
             challengeDTO.setDescription(descriptionWithBreaks);
 
             challengeService.update(challengeDTO);
-            mav.addObject("challenge", challengeService.getById(challengeDTO.getId()));
+
         } catch (Exception e) {
             e.printStackTrace();
         }
