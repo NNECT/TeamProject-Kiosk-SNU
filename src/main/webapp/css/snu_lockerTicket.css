@@ -61,18 +61,12 @@ hr{
     border-spacing: 10px 3px;
     margin-left: 60px;
 }
-.r{
-    width: 50px;
-    height: 50px;
-    border-radius: 0;
-    border: 0px solid rebeccapurple; 
-}
-.loker{
+.locker{
+    /*background-color: gray;*/
     width: 50px;
     height: 50px;
     border-radius: 0;
     border: 0px solid rebeccapurple;
-    color: #ffffff;
 }
 .none{
     width: 50px;
@@ -93,6 +87,7 @@ hr{
 }
 .b{background-color: #285FF5;}
 .g{background-color: #C3C3C3;}
+.r{background-color: #F52828;}
 .rBox{background-color: #F52828;}
 .blue{
     color: #285FF5;
@@ -131,6 +126,9 @@ td{
     color: #285FF5;
 }
 .radio-input {
+    display: none;
+}
+.locker-radio {
     display: none;
 }
 /*버튼*/

@@ -1,54 +1,32 @@
 package com.KioskSNU.view.outside;
 
 import com.KioskSNU.snu.dto.AccountDTO;
-import com.KioskSNU.snu.dto.UsageLockerDTO;
-import com.KioskSNU.snu.service.LockerService;
 import com.KioskSNU.snu.service.UsageLockerService;
+import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
-import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
 public class OutsideLockerController {
-    private final LockerService lockerService;
     private final UsageLockerService usageLockerService;
 
     @RequestMapping("/outside/locker")
     public ModelAndView process(HttpSession session) {
         ModelAndView mav = new ModelAndView();
 
-        System.out.println(((AccountDTO) session.getAttribute("author")).getUsername());
+        // 사용자 확인
+        AccountDTO accountDTO = (AccountDTO) session.getAttribute("accountDTO");
 
-        Map<Integer, Integer> lockerStatusMap = new HashMap<>();
-        lockerService.getAll().forEach(locker -> {
-            if (!locker.isUsable()) {
-                lockerStatusMap.put(locker.getLockerNumber(), -1);
-                return;
-            }
-
-            List<UsageLockerDTO> usageLockerList = usageLockerService.getAllByLocker(locker);
-            if (!usageLockerList.isEmpty()) {
-                UsageLockerDTO latest = usageLockerList.get(0);
-                if (latest.getEndDate().equals(LocalDate.now()) || latest.getEndDate().isAfter(LocalDate.now())) {
-                    lockerStatusMap.put(locker.getLockerNumber(), 0);
-                    return;
-                }
-            }
-
-            lockerStatusMap.put(locker.getLockerNumber(), 1);
-        });
-
-        mav.addObject("lockerStatusMap", lockerStatusMap);
-
-        mav.setViewName("outside/locker");
+        // 사물함 상태 확인
+        Map<Integer, Integer> lockerStatusMap = usageLockerService.getLockerStatusMap(accountDTO);
+        mav.addObject("lockerStatusMap", new Gson().toJson(lockerStatusMap));
+        mav.setViewName("outside/lockerTicket");
         return mav;
     }
 }

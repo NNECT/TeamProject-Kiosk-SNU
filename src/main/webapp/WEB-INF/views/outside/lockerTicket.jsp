@@ -45,15 +45,15 @@
                     <td class="locker r" id="10"></td>
                 </tr>
                 <tr>
-                    <td class="locker r" id="9"></td>
-                    <td class="locker r" id="8"></td>
-                    <td class="locker r" id="7"></td>
-                    <td class="locker r" id="6"></td>
-                    <td class="locker r" id="5"></td>
-                    <td class="locker r" id="4"></td>
-                    <td class="locker r" id="3"></td>
-                    <td class="locker r" id="2"></td>
-                    <td class="locker r" id="1"></td>
+                    <td class="locker r" id="9" ></td>
+                    <td class="locker r" id="8" ></td>
+                    <td class="locker r" id="7" ></td>
+                    <td class="locker r" id="6" ></td>
+                    <td class="locker r" id="5" ></td>
+                    <td class="locker r" id="4" ></td>
+                    <td class="locker r" id="3" ></td>
+                    <td class="locker r" id="2" ></td>
+                    <td class="locker r" id="1" ></td>
                 </tr>
             </table>
 
@@ -64,17 +64,18 @@
                 <div class="box rBox"></div>&nbsp;<span class="red">사용 불가능</span>
             </div>
             <table id="ticket">
-                <td class="radio-box">
-                    <input type="radio" name="radio-button" class="radio-input" value="">
-                    <p class="t btn-text" name="time" class="rText">30일</p>
-                    <p class="p btn-text" name="price" class="rText">6,000원</p>
-                </td>
-                <td class="radio-box">
-                    <input type="radio" name="radio-button" class="radio-input" value="">
-                    <p class="t btn-text" name="time">사용X</p><br>
-                    <p class="p btn-text" name="price"></p><br>
-
-                </td>
+                <tr>
+                    <td class="radio-box">
+                        <input type="radio" name="radio-button" class="radio-input" value="">
+                        <p class="t rText btn-text">30일</p>
+                        <p class="p rText btn-text">6,000원</p>
+                    </td>
+                    <td class="radio-box">
+                        <input type="radio" name="radio-button" class="radio-input" value="">
+                        <p class="t btn-text">사용X</p><br>
+                        <p class="p btn-text"></p><br>
+                    </td>
+                </tr>
             </table>
 
             <input id="beforeBtn" type="submit" value="이전">
@@ -82,7 +83,7 @@
         </form>
     </section>
 </div>
-<script src="/js/radioBox.js"></script>
+<script src="<c:url value="/js/radioBox.js"/>"></script>
 <script>
     // <!-- select테이블 코드를 그대로 가져와서 locker로만 변경했습니다 -->
     window.addEventListener('DOMContentLoaded', (event) => {
@@ -92,7 +93,7 @@
             if(status[Number(locker.id)] === 1) {
                 locker.classList.remove('r');
                 locker.classList.add('b');
-                locker.innerHTML = "<a href='<c:url value="/outside/login"/>?type=locker&number=" + locker.id + "'>" + locker.id + "</a>"
+                locker.innerHTML = '<label>' + locker.id + '<input type="radio" name="locker-radio" class="locket-radio-input" value=""></label>'
             } else if (status[Number(locker.id)] === 0) {
                 locker.classList.remove('r');
                 locker.classList.add('g');
