@@ -5,6 +5,7 @@ import com.KioskSNU.secure.SHA;
 import com.KioskSNU.snu.dto.AccountDTO;
 import com.KioskSNU.snu.dto.AdminDTO;
 import com.KioskSNU.snu.service.AdminService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,22 +23,11 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
 
 @Controller
+@RequiredArgsConstructor
 public class AdminLoginController {
     private final AdminService adminService;
     private final RSA rsa;
     private final SHA sha;
-
-    @Autowired
-    public AdminLoginController(
-            AdminService adminService,
-            RSA rsa,
-            SHA sha
-    ) {
-        this.adminService = adminService;
-        this.rsa = rsa;
-        this.sha = sha;
-
-    }
 
     @GetMapping("/admin/adminLogin")
     public ModelAndView getProcess(HttpSession session) {
@@ -80,7 +70,6 @@ public class AdminLoginController {
         AdminDTO getAdmin = adminService.getByUsername(adminDTO.getUsername());
         session.setAttribute("loggedIn",true);
         session.setAttribute("admin", getAdmin);
-        session.setAttribute("loggedIn",true);
 
         return mav;
 
