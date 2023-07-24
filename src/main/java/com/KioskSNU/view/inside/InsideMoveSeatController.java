@@ -1,16 +1,11 @@
 package com.KioskSNU.view.inside;
 
-import com.KioskSNU.api.RoomStatus;
-import com.KioskSNU.api.SeatStatus;
 import com.KioskSNU.snu.dto.AccountDTO;
 import com.KioskSNU.snu.dto.UsageCommutationTicketDTO;
 import com.KioskSNU.snu.dto.UsageSeatDTO;
-import com.KioskSNU.snu.service.AccountService;
-import com.KioskSNU.snu.service.SeatService;
-import com.KioskSNU.snu.service.UsageCommutationTicketService;
-import com.KioskSNU.snu.service.UsageSeatService;
+import com.KioskSNU.snu.service.*;
 import com.google.gson.Gson;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -24,35 +19,14 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Controller
+@RequiredArgsConstructor
 public class InsideMoveSeatController {
-    private final Map<Integer, UsageSeatDTO> seatMap;
-    private final SeatStatus seatStatus;
-    private final RoomStatus roomStatus;
+    private final ConcurrentHashMap<Integer, UsageSeatDTO> seatMap;
     private final AccountService accountService;
     private final SeatService seatService;
     private final UsageSeatService usageSeatService;
+    private final UsageRoomService usageRoomService;
     private final UsageCommutationTicketService usageCommutationTicketService;
-
-
-    @Autowired
-    InsideMoveSeatController(
-            ConcurrentHashMap<Integer, UsageSeatDTO> seatMap,
-            SeatStatus seatStatus,
-            RoomStatus roomStatus,
-            AccountService accountService,
-            SeatService seatService,
-            UsageSeatService usageSeatService,
-            UsageCommutationTicketService usageCommutationTicketService
-    ) {
-        this.seatMap = seatMap;
-        this.seatStatus = seatStatus;
-        this.roomStatus = roomStatus;
-        this.accountService = accountService;
-        this.usageSeatService = usageSeatService;
-        this.seatService = seatService;
-        this.usageCommutationTicketService = usageCommutationTicketService;
-
-    }
 
     @RequestMapping("/inside/move")
     public ModelAndView getProcess(String type, Integer number, HttpSession session) {
@@ -66,10 +40,10 @@ public class InsideMoveSeatController {
         if (type == null || number == null) {
             mav.setViewName("inside/inside_select");
 
-            Map<Integer, Integer> seatStatusMap = seatStatus.getSeatStatusMap(accountDTO);
+            Map<Integer, Integer> seatStatusMap = usageSeatService.getSeatStatusMap(accountDTO);
             mav.addObject("seatStatusMap", new Gson().toJson(seatStatusMap));
 
-            Map<Integer, Integer> roomStatusMap = roomStatus.getRoomStatusMap(accountDTO);
+            Map<Integer, Integer> roomStatusMap = usageRoomService.getRoomStatusMap(accountDTO);
             mav.addObject("roomStatusMap", new Gson().toJson(roomStatusMap));
 
             return mav;
@@ -123,6 +97,4 @@ public class InsideMoveSeatController {
 
         return mav;
     }
-
-
 }
