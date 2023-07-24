@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.KioskSNU.snu.service.CommutationTicketService">
+<mapper namespace="com.KioskSNU.snu.mapper.CommutationTicketMapper">
     <resultMap id="commutationTicketResultMap" type="commutationTicketAlias">
         <id     column="id"                     property="id"/>
         <result column="day"                    property="day"/>

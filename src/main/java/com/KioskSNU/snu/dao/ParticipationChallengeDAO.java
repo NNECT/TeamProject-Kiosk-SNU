@@ -3,7 +3,7 @@ package com.KioskSNU.snu.dao;
 import com.KioskSNU.snu.dto.AccountDTO;
 import com.KioskSNU.snu.dto.ChallengeDTO;
 import com.KioskSNU.snu.dto.ParticipationChallengeDTO;
-import com.KioskSNU.snu.service.ParticipationChallengeService;
+import com.KioskSNU.snu.mapper.ParticipationChallengeMapper;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import java.util.List;
 
 @Repository
 @Transactional
-public class ParticipationChallengeDAO extends SqlSessionDaoSupport implements ParticipationChallengeService {
+public class ParticipationChallengeDAO extends SqlSessionDaoSupport implements ParticipationChallengeMapper {
     @Autowired
     @Override
     public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
@@ -23,46 +23,46 @@ public class ParticipationChallengeDAO extends SqlSessionDaoSupport implements P
 
     @Override
     public int insert(ParticipationChallengeDTO participationChallengeDTO) {
-        return getSqlSession().insert("com.KioskSNU.snu.service.ParticipationChallengeService.insert", participationChallengeDTO);
+        return getSqlSession().insert("com.KioskSNU.snu.mapper.ParticipationChallengeMapper.insert", participationChallengeDTO);
     }
 
     @Override
     public int update(ParticipationChallengeDTO participationChallengeDTO) {
-        return getSqlSession().update("com.KioskSNU.snu.service.ParticipationChallengeService.update", participationChallengeDTO);
+        return getSqlSession().update("com.KioskSNU.snu.mapper.ParticipationChallengeMapper.update", participationChallengeDTO);
     }
 
     @Override
     public int delete(ParticipationChallengeDTO participationChallengeDTO) {
-        return getSqlSession().delete("com.KioskSNU.snu.service.ParticipationChallengeService.delete", participationChallengeDTO);
+        return getSqlSession().delete("com.KioskSNU.snu.mapper.ParticipationChallengeMapper.delete", participationChallengeDTO);
     }
 
     @Transactional(readOnly = true)
     @Override
     public ParticipationChallengeDTO getById(int id) {
-        return getSqlSession().selectOne("com.KioskSNU.snu.service.ParticipationChallengeService.getById", id);
+        return getSqlSession().selectOne("com.KioskSNU.snu.mapper.ParticipationChallengeMapper.getById", id);
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<ParticipationChallengeDTO> getAll() {
-        return getSqlSession().selectList("com.KioskSNU.snu.service.ParticipationChallengeService.getAll");
+        return getSqlSession().selectList("com.KioskSNU.snu.mapper.ParticipationChallengeMapper.getAll");
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<ParticipationChallengeDTO> getAllByAccount(AccountDTO accountDTO) {
-        return getSqlSession().selectList("com.KioskSNU.snu.service.ParticipationChallengeService.getAllByAccount", accountDTO);
+        return getSqlSession().selectList("com.KioskSNU.snu.mapper.ParticipationChallengeMapper.getAllByAccount", accountDTO);
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<ParticipationChallengeDTO> getAllByChallenge(ChallengeDTO challengeDTO) {
-        return getSqlSession().selectList("com.KioskSNU.snu.service.ParticipationChallengeService.getAllByChallenge", challengeDTO);
+        return getSqlSession().selectList("com.KioskSNU.snu.mapper.ParticipationChallengeMapper.getAllByChallenge", challengeDTO);
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<ParticipationChallengeDTO> getAllByActive(boolean active) {
-        return getSqlSession().selectList("com.KioskSNU.snu.service.ParticipationChallengeService.getAllByActive", active);
+        return getSqlSession().selectList("com.KioskSNU.snu.mapper.ParticipationChallengeMapper.getAllByActive", active);
     }
 }

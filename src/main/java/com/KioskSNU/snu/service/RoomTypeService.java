@@ -1,15 +1,5 @@
 package com.KioskSNU.snu.service;
 
-import com.KioskSNU.snu.dto.RoomTypeDTO;
-import org.apache.ibatis.annotations.Mapper;
+import com.KioskSNU.snu.mapper.RoomTypeMapper;
 
-import java.util.List;
-
-@Mapper
-public interface RoomTypeService {
-    int insert(RoomTypeDTO roomTypeDTO);
-    int update(RoomTypeDTO roomTypeDTO);
-    int delete(RoomTypeDTO roomTypeDTO);
-    RoomTypeDTO getById(int id);
-    List<RoomTypeDTO> getAll();
-}
+public interface RoomTypeService extends RoomTypeMapper {}

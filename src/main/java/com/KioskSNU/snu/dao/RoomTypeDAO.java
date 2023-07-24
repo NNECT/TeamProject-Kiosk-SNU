@@ -1,7 +1,7 @@
 package com.KioskSNU.snu.dao;
 
 import com.KioskSNU.snu.dto.RoomTypeDTO;
-import com.KioskSNU.snu.service.RoomTypeService;
+import com.KioskSNU.snu.mapper.RoomTypeMapper;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,7 @@ import java.util.List;
 
 @Repository
 @Transactional
-public class RoomTypeDAO extends SqlSessionDaoSupport implements RoomTypeService {
+public class RoomTypeDAO extends SqlSessionDaoSupport implements RoomTypeMapper {
     @Autowired
     @Override
     public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
@@ -21,28 +21,28 @@ public class RoomTypeDAO extends SqlSessionDaoSupport implements RoomTypeService
 
     @Override
     public int insert(RoomTypeDTO roomTypeDTO) {
-        return getSqlSession().insert("com.KioskSNU.snu.service.RoomTypeService.insert", roomTypeDTO);
+        return getSqlSession().insert("com.KioskSNU.snu.mapper.RoomTypeMapper.insert", roomTypeDTO);
     }
 
     @Override
     public int update(RoomTypeDTO roomTypeDTO) {
-        return getSqlSession().update("com.KioskSNU.snu.service.RoomTypeService.update", roomTypeDTO);
+        return getSqlSession().update("com.KioskSNU.snu.mapper.RoomTypeMapper.update", roomTypeDTO);
     }
 
     @Override
     public int delete(RoomTypeDTO roomTypeDTO) {
-        return getSqlSession().delete("com.KioskSNU.snu.service.RoomTypeService.delete", roomTypeDTO);
+        return getSqlSession().delete("com.KioskSNU.snu.mapper.RoomTypeMapper.delete", roomTypeDTO);
     }
 
     @Transactional(readOnly = true)
     @Override
     public RoomTypeDTO getById(int id) {
-        return getSqlSession().selectOne("com.KioskSNU.snu.service.RoomTypeService.getById", id);
+        return getSqlSession().selectOne("com.KioskSNU.snu.mapper.RoomTypeMapper.getById", id);
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<RoomTypeDTO> getAll() {
-        return getSqlSession().selectList("com.KioskSNU.snu.service.RoomTypeService.getAll");
+        return getSqlSession().selectList("com.KioskSNU.snu.mapper.RoomTypeMapper.getAll");
     }
 }
