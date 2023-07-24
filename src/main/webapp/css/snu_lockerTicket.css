@@ -74,7 +74,7 @@ hr{
 }
 /*사용가능,불가능*/
 #info{
-    width: 250px;
+    width: 350px;
     height: 15px;
     border: 0px solid blue;
     margin-top: 10px;
@@ -85,9 +85,20 @@ hr{
     width: 15px;
     height: 15px;
 }
-.b{background-color: #285FF5;}
-.g{background-color: #C3C3C3;}
-.r{background-color: #F52828;}
+.b{
+    background-color: #285FF5;
+    color: white;
+}
+.g{
+    background-color: #C3C3C3;
+}
+.r{
+    background-color: #F52828;
+    color: white;
+}
+.m{
+    background-color: #89FF00;
+}
 .rBox{background-color: #F52828;}
 .blue{
     color: #285FF5;
@@ -99,6 +110,10 @@ hr{
 }
 .red{
     color:#F52828;
+    font-size: 15px;
+}
+.my{
+    color: #707070;
     font-size: 15px;
 }
 
@@ -128,7 +143,7 @@ td{
 .radio-input {
     display: none;
 }
-.locker-radio {
+.locket-radio-input {
     display: none;
 }
 /*버튼*/

@@ -23,6 +23,10 @@ public class OutsideLockerController {
         // 사용자 확인
         AccountDTO accountDTO = (AccountDTO) session.getAttribute("accountDTO");
 
+        // 사용자 사물함 보유 여부 확인
+        boolean hasLocker = usageLockerService.hasLocker(accountDTO);
+        mav.addObject("hasLocker", hasLocker);
+
         // 사물함 상태 확인
         Map<Integer, Integer> lockerStatusMap = usageLockerService.getLockerStatusMap(accountDTO);
         mav.addObject("lockerStatusMap", new Gson().toJson(lockerStatusMap));
