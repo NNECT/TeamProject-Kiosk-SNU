@@ -18,8 +18,8 @@ import java.util.Set;
 @Component
 @RequiredArgsConstructor
 public class ChallengeSuccessCheck {
-    AccountService accountService;
-    UsageSeatService usageSeatService;
+    private final AccountService accountService;
+    private final UsageSeatService usageSeatService;
 
     /**
      * 챌린지 기간 내 사용 시간 계산
