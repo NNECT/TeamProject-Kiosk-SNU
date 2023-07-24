@@ -2,51 +2,42 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-<c:import url="../headerFooterForm/headerFooterForm_adminHeader.jsp" />
+<head>
+    <meta charset="UTF-8">
+    <title>스터디카페 관리자 페이지</title>
+    <c:import url="../headerFooterForm/headerFooterForm_adminHeader.jsp"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/adminHome.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css" ></head>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+</head>
 
-<!-- 메인 컨텐츠 -->
+<body>
 <div class="container">
     <div class="row justify-content-center align-items-center" style="height: 100vh;">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-body text-center">
-                    <input type="hidden" value="${id}" name="id">
                     <h2 class="card-title">회원목록</h2>
-                    <div class="text-right">
-                        <input type="text" placeholder="아이디 검색하기" id="username" name="id">
-                    </div>
-                    <hr>
-                    <table class="table">
+                    <table id="example" class="display" style="width:100%">
                         <thead>
                         <tr style="background-color: lightblue;">
                             <th>번호</th>
-                            <th>전화번호</th>
                             <th>아이디</th>
-                            <%--<th>등록일</th>--%>
+                            <th>전화번호</th>
                         </tr>
                         </thead>
-                        <c:forEach items="${list}" var="member">
-                        <tr id="${member.id}" onclick="showMemberDetails(this)" class="getMember">
-                            <td>${member.id}</td>
-                            <td>${member.phoneNumber}</td>
-                            <td>${member.username}</td>
-                            <%--<td>2023-07-01</td>--%>
-                        </tr>
-                        </c:forEach>
+                        <tbody>
+                            <c:forEach items="${list}" var="member">
+                                <tr id="${member.id}" onclick="showMemberDetails(this)" class="getMember">
+                                    <td>${member.id}</td>
+                                    <td>${member.username}</td>
+                                    <td>${member.phoneNumber}</td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
                     </table>
-                    <br>
-                    <div>
-                        <c:if test="${ph.showPrev}">
-                            <a href="<c:url value='/admin/adminmember?page=${ph.beginPage-1}&pageSize=${ph.pageSize}'/>"><</a>
-                        </c:if>
-                        <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
-                            <a href="<c:url value='/admin/adminmember?page=${i}&pageSize=${ph.pageSize}'/>">${i}</a>
-                        </c:forEach>
-                        <c:if test="${ph.showNext}">
-                            <a href="<c:url value='/admin/adminmember?page=${ph.endPage+1}&pageSize=${ph.pageSize}'/>">></a>
-                        </c:if>
-
-                    </div>
                 </div>
             </div>
         </div>
@@ -97,8 +88,15 @@
                         <th>포인트:</th>
                         <td id="memberPoint"></td>
                     </tr>
-                    <tr>
-                        <td><button type="button" id="edit" class="float-right updateMember">수정</button></td>
+                    <tr style="float:left; margin-left: 150px">
+                        <td>
+                            <button type="button" id="edit" class="float-right updateMember">수정</button>
+                        </td>
+                    </tr>
+                    <tr style="float:left;">
+                        <td>
+                            <button type="button" id="delete" class="float-right deleteMember">삭제</button>
+                        </td>
                     </tr>
                 </table>
             </div>
@@ -111,21 +109,24 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <script>
+    new DataTable('#example');
+</script>
+<script>
 
     function showMemberDetails(button) {
         const memberID = button.id;
 
         $.ajax({
-            type : "POST",
-            url : "../ajax/getMember",
-            data : JSON.stringify({
-                "memberID" : memberID
+            type: "POST",
+            url: "../ajax/getMember",
+            data: JSON.stringify({
+                "memberID": memberID
             }),
-            dataType : "json",
-            async : false,
-            contentType : "application/json; charset=utf-8",
-            success: function (response){
-                if(response.result==="success"){
+            dataType: "json",
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (response) {
+                if (response.result === "success") {
                     $("#memberName").text(response.memberName);
                     $("#memberId").text(response.memberId);
                     $("#memberPhone").text(response.memberPhone);
@@ -144,8 +145,15 @@
             }
 
         })
-        $('#edit').on("click", function (){
-            location.href = "<c:url value='/admin/adminmemberedit'/>?id="+memberID;
+        $('#edit').on("click", function () {
+            location.href = "<c:url value='/admin/adminmemberedit'/>?id=" + memberID;
+        });
+
+        $('#delete').on("click", function () {
+            const confirmed = confirm("정말 삭제하시겠습니까?");
+            if(confirmed){
+                location.href = "<c:url value='/admin/adminmemberdelete'/>?id=" + memberID;
+            }
         });
     }
 

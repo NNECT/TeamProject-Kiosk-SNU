@@ -80,7 +80,6 @@ public class AdminLoginController {
         AdminDTO getAdmin = adminService.getByUsername(adminDTO.getUsername());
         session.setAttribute("loggedIn",true);
         session.setAttribute("admin", getAdmin);
-        session.setAttribute("loggedIn",true);
 
         return mav;
 

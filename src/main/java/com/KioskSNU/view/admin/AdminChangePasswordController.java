@@ -3,7 +3,6 @@ package com.KioskSNU.view.admin;
 import com.KioskSNU.interceptor.AdminLoginRequired;
 import com.KioskSNU.secure.RSA;
 import com.KioskSNU.secure.SHA;
-import com.KioskSNU.snu.dto.AccountDTO;
 import com.KioskSNU.snu.dto.AdminDTO;
 import com.KioskSNU.snu.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,14 +19,14 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
 @Controller
-public class AdminMyPageController {
+public class AdminChangePasswordController {
 
     private final AdminService adminService;
     private final RSA rsa;
     private final SHA sha;
 
     @Autowired
-    public AdminMyPageController(
+    public AdminChangePasswordController(
             AdminService adminService,
             RSA rsa,
             SHA sha
@@ -37,19 +36,19 @@ public class AdminMyPageController {
         this.sha = sha;
     }
 
-    @GetMapping("/admin/adminmypage")
+    @GetMapping("/admin/adminChangePassword")
     @AdminLoginRequired
     public ModelAndView getProcess(HttpSession session){
 
         ModelAndView mav = new ModelAndView();
         mav.addObject("publicKey", rsa.getPublicKey());
-        mav.setViewName("admin/admin_mypage");
+        mav.setViewName("/admin/admin_changePassword");
         return mav;
 
     }
 
 
-    @PostMapping("/admin/adminmypage")
+    @PostMapping("/admin/adminChangePassword")
     public ModelAndView postProcess(AdminDTO adminDTO,HttpSession session, String prePassword) throws NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("admin/admin_main");
@@ -61,7 +60,7 @@ public class AdminMyPageController {
         if(!sha.encrypt(rsa.decrypt(prePassword)).equals(getAdmin.getPassword())){
             mav.addObject("publicKey", rsa.getPublicKey());
             mav.addObject("checkFail","checkFail");
-            mav.setViewName("/admin/admin_mypage");
+            mav.setViewName("/admin/admin_changePassword");
             return mav;
         }
 
