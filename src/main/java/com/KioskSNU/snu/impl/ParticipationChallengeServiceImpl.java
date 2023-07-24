@@ -3,19 +3,29 @@ package com.KioskSNU.snu.impl;
 import com.KioskSNU.snu.dto.AccountDTO;
 import com.KioskSNU.snu.dto.ChallengeDTO;
 import com.KioskSNU.snu.dto.ParticipationChallengeDTO;
+import com.KioskSNU.snu.dto.UsageSeatDTO;
 import com.KioskSNU.snu.mapper.ParticipationChallengeMapper;
+import com.KioskSNU.snu.service.AccountService;
 import com.KioskSNU.snu.service.ParticipationChallengeService;
+import com.KioskSNU.snu.service.UsageSeatService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
 public class ParticipationChallengeServiceImpl implements ParticipationChallengeService {
     @Qualifier("participationChallengeDAO")
     private final ParticipationChallengeMapper participationChallengeDAO;
+    private final AccountService accountService;
+    private final UsageSeatService usageSeatService;
 
     @Override
     public int insert(ParticipationChallengeDTO participationChallengeDTO) {
@@ -55,5 +65,112 @@ public class ParticipationChallengeServiceImpl implements ParticipationChallenge
     @Override
     public List<ParticipationChallengeDTO> getAllByActive(boolean active) {
         return participationChallengeDAO.getAllByActive(active);
+    }
+
+    @Override
+    public int getChallengeUsageMinutes(ParticipationChallengeDTO participationChallengeDTO) {
+        // 사용자 확인
+        AccountDTO accountDTO = accountService.getById(participationChallengeDTO.getAccount_id());
+        if (accountDTO == null) return 0;
+
+        // 사용 기록 확인
+        List<UsageSeatDTO> usageSeatDTOList = usageSeatService.getAllByAccount(accountDTO);
+        if (usageSeatDTOList == null || usageSeatDTOList.isEmpty()) return 0;
+
+        // 기간 내 사용 기록 확인
+        int[] usageMinutes = {0};
+        LocalDateTime challengeStartDateTime = participationChallengeDTO.getStartDateTime();
+        LocalDateTime challengeEndDateTime = participationChallengeDTO.getEndDateTime();
+        usageSeatDTOList.forEach(usage -> {
+            // 기간 내 사용 기록만 확인
+            LocalDateTime startDateTime = usage.getStartDateTime();
+            if (startDateTime.isBefore(challengeStartDateTime))
+                startDateTime = challengeStartDateTime;
+            LocalDateTime endDateTime = usage.getEndDateTime();
+            if (endDateTime.isAfter(challengeEndDateTime))
+                endDateTime = challengeEndDateTime;
+
+            // 사용 기록이 기간 내에 없으면 continue
+            if (!startDateTime.isBefore(endDateTime)) return;
+
+            // 기간 내 사용 시간 계산
+            usageMinutes[0] += startDateTime.until(endDateTime, ChronoUnit.MINUTES);
+        });
+
+        return usageMinutes[0];
+    }
+
+    @Override
+    public int getChallengeUsageDates(ParticipationChallengeDTO participationChallengeDTO) {
+        // 사용자 확인
+        AccountDTO accountDTO = accountService.getById(participationChallengeDTO.getAccount_id());
+        if (accountDTO == null) return 0;
+
+        // 사용 기록 확인
+        List<UsageSeatDTO> usageSeatDTOList = usageSeatService.getAllByAccount(accountDTO);
+        if (usageSeatDTOList == null || usageSeatDTOList.isEmpty()) return 0;
+
+        // 기간 내 사용 기록 확인
+        Set<LocalDate> usageDates = new HashSet<>();
+        LocalDateTime challengeStartDateTime = participationChallengeDTO.getStartDateTime();
+        LocalDateTime challengeEndDateTime = participationChallengeDTO.getEndDateTime();
+        usageSeatDTOList.forEach(usage -> {
+            // 기간 내 사용 기록만 확인
+            LocalDateTime startDateTime = usage.getStartDateTime();
+            if (startDateTime.isBefore(challengeStartDateTime))
+                startDateTime = challengeStartDateTime;
+            LocalDateTime endDateTime = usage.getEndDateTime();
+            if (endDateTime.isAfter(challengeEndDateTime))
+                endDateTime = challengeEndDateTime;
+
+            // 사용 기록이 기간 내에 없으면 continue
+            if (!startDateTime.isBefore(endDateTime)) return;
+
+            // 기간 내 사용 날짜 계산
+            for (
+                    LocalDate date = startDateTime.toLocalDate();
+                    date.isBefore(endDateTime.toLocalDate());
+                    date = date.plusDays(1)
+            ) {
+                usageDates.add(date);
+            }
+        });
+
+        return usageDates.size();
+    }
+
+    @Override
+    public int challengeSuccessCheck(ParticipationChallengeDTO participationChallengeDTO) {
+        // 사용자 확인
+        AccountDTO accountDTO = accountService.getById(participationChallengeDTO.getAccount_id());
+        if (accountDTO == null) return 0;
+
+        // 기간 내 사용 기록 확인
+        int usageDates = getChallengeUsageDates(participationChallengeDTO);
+        int usageMinutes = getChallengeUsageMinutes(participationChallengeDTO);
+
+        int success = 1;
+
+        // 날짜 조건
+        int remainDays = usageDates - participationChallengeDTO.getGoalDay();
+        if (remainDays > 0) {
+            if (remainDays > LocalDate.now().until(participationChallengeDTO.getEndDateTime().toLocalDate(), ChronoUnit.DAYS)) {
+                success = -1;
+            } else {
+                success = 0;
+            }
+        }
+
+        // 시간 조건
+        int remainMinutes = usageMinutes - participationChallengeDTO.getGoalHour() * 60;
+        if (remainMinutes > 0) {
+            if (remainMinutes > LocalDateTime.now().until(participationChallengeDTO.getEndDateTime(), ChronoUnit.MINUTES)) {
+                success = -1;
+            } else {
+                success = 0;
+            }
+        }
+
+        return success;
     }
 }
