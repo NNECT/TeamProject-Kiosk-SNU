@@ -4,12 +4,10 @@ import com.KioskSNU.secure.RSA;
 import com.KioskSNU.secure.SHA;
 import com.KioskSNU.snu.dto.AccountDTO;
 import com.KioskSNU.snu.service.AccountService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.crypto.BadPaddingException;
@@ -20,22 +18,11 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
 @Controller
+@RequiredArgsConstructor
 public class OutsideNewPasswordController {
-
     private final AccountService accountService;
     private final RSA rsa;
     private final SHA sha;
-
-    @Autowired
-    public OutsideNewPasswordController(
-            AccountService accountService,
-            RSA rsa,
-            SHA sha
-    ){
-        this.accountService = accountService;
-        this.rsa = rsa;
-        this.sha = sha;
-    }
 
 
     @GetMapping("/outside/newPassword")

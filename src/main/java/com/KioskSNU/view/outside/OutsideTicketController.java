@@ -7,7 +7,7 @@ import com.KioskSNU.snu.dto.TimeTicketDTO;
 import com.KioskSNU.snu.service.CommutationTicketService;
 import com.KioskSNU.snu.service.RoomService;
 import com.KioskSNU.snu.service.TimeTicketService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,22 +19,12 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/outside/ticket")
 public class OutsideTicketController {
     private final TimeTicketService timeTicketService;
     private final CommutationTicketService commutationTicketService;
     private final RoomService roomService;
-
-    @Autowired
-    public OutsideTicketController(
-            TimeTicketService timeTicketService,
-            CommutationTicketService commutationTicketService,
-            RoomService roomService
-    ) {
-        this.timeTicketService = timeTicketService;
-        this.commutationTicketService = commutationTicketService;
-        this.roomService = roomService;
-    }
 
     @GetMapping({"/seat", "/seat/timeTicket"})
     @OutsideLoginRequired

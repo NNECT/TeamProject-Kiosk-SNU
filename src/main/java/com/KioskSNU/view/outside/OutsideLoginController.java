@@ -8,7 +8,7 @@ import com.KioskSNU.snu.dto.UsageSeatDTO;
 import com.KioskSNU.snu.service.AccountService;
 import com.KioskSNU.snu.service.RoomService;
 import com.KioskSNU.snu.service.SeatService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,37 +20,18 @@ import javax.crypto.NoSuchPaddingException;
 import javax.servlet.http.HttpSession;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Controller
+@RequiredArgsConstructor
 public class OutsideLoginController {
-    private final Map<Integer, UsageSeatDTO> seatMap;
-    private final Map<Integer, UsageRoomDTO> roomMap;
+    private final ConcurrentHashMap<Integer, UsageSeatDTO> seatMap;
+    private final ConcurrentHashMap<Integer, UsageRoomDTO> roomMap;
     private final RSA rsa;
     private final SHA sha;
     private final AccountService accountService;
     private final SeatService seatService;
     private final RoomService roomService;
-
-    @Autowired
-    public OutsideLoginController(
-            ConcurrentHashMap<Integer, UsageSeatDTO> seatMap,
-            ConcurrentHashMap<Integer, UsageRoomDTO> roomMap,
-            RSA rsa,
-            SHA sha,
-            AccountService accountService,
-            SeatService seatService,
-            RoomService roomService
-    ) {
-        this.seatMap = seatMap;
-        this.roomMap = roomMap;
-        this.rsa = rsa;
-        this.sha = sha;
-        this.accountService = accountService;
-        this.seatService = seatService;
-        this.roomService = roomService;
-    }
 
     @GetMapping("/outside/login")
     public ModelAndView getProcess(String type, Integer number, HttpSession session) {

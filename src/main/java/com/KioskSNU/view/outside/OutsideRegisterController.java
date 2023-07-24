@@ -4,7 +4,7 @@ import com.KioskSNU.secure.RSA;
 import com.KioskSNU.secure.SHA;
 import com.KioskSNU.snu.dto.AccountDTO;
 import com.KioskSNU.snu.service.AccountService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,24 +15,13 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class OutsideRegisterController {
     private final RSA rsa;
     private final SHA sha;
     private final AccountService accountService;
-
-    @Autowired
-    public OutsideRegisterController(
-            RSA rsa,
-            SHA sha,
-            AccountService accountService
-    ) {
-        this.rsa = rsa;
-        this.sha = sha;
-        this.accountService = accountService;
-    }
 
     @GetMapping("/outside/register")
     public ModelAndView getProcess() {

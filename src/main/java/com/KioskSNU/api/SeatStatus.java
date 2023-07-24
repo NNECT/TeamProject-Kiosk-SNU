@@ -4,7 +4,6 @@ import com.KioskSNU.snu.dto.AccountDTO;
 import com.KioskSNU.snu.dto.UsageSeatDTO;
 import com.KioskSNU.snu.service.SeatService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -14,7 +13,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Component
 @RequiredArgsConstructor
 public class SeatStatus {
-    private final Map<Integer, UsageSeatDTO> seatMap;
+    private final ConcurrentHashMap<Integer, UsageSeatDTO> seatMap;
     private final SeatService seatService;
 
     /**

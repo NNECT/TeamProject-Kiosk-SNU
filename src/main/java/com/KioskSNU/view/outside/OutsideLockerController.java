@@ -3,7 +3,7 @@ package com.KioskSNU.view.outside;
 import com.KioskSNU.snu.dto.UsageLockerDTO;
 import com.KioskSNU.snu.service.LockerService;
 import com.KioskSNU.snu.service.UsageLockerService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -14,18 +14,10 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
+@RequiredArgsConstructor
 public class OutsideLockerController {
     private final LockerService lockerService;
     private final UsageLockerService usageLockerService;
-
-    @Autowired
-    public OutsideLockerController(
-            LockerService lockerService,
-            UsageLockerService usageLockerService
-    ) {
-        this.lockerService = lockerService;
-        this.usageLockerService = usageLockerService;
-    }
 
     @RequestMapping("/outside/locker")
     public ModelAndView process() {
