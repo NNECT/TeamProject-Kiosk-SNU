@@ -32,9 +32,16 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-<!-- 메뉴 클릭 시 해당 페이지로 이동 -->
-<script>
 
+<script>
+    /*마이페이지에서 비밀번호 변경 성공 이후 경우*/
+    var changePasswordSuccess = "${changePasswordSuccess}";
+    if(changePasswordSuccess === "changePasswordSuccess"){
+        //비밀번호 변경 완료 alert
+        alert("비밀번호 변경이 완료되었습니다.")
+    }
+
+    <!-- 메뉴 클릭 시 해당 페이지로 이동 -->
 /*     
 
 		$(document).ready(function () {
