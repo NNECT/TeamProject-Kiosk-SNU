@@ -1,7 +1,7 @@
 package com.KioskSNU.view.outside;
 
-import com.KioskSNU.api.RoomStatus;
-import com.KioskSNU.api.SeatStatus;
+import com.KioskSNU.snu.service.UsageRoomService;
+import com.KioskSNU.snu.service.UsageSeatService;
 import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -13,18 +13,18 @@ import java.util.Map;
 @Controller
 @RequiredArgsConstructor
 public class OutsideSelectController {
-    private final SeatStatus seatStatus;
-    private final RoomStatus roomStatus;
+    private final UsageSeatService usageSeatService;
+    private final UsageRoomService usageRoomService;
 
     @RequestMapping("/outside/select")
     public ModelAndView process() {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("outside/select");
 
-        Map<Integer, Integer> seatStatusMap = seatStatus.getSeatStatusMap();
+        Map<Integer, Integer> seatStatusMap = usageSeatService.getSeatStatusMap();
         mav.addObject("seatStatusMap", new Gson().toJson(seatStatusMap));
 
-        Map<Integer, Integer> roomStatusMap = roomStatus.getRoomStatusMap();
+        Map<Integer, Integer> roomStatusMap = usageRoomService.getRoomStatusMap();
         mav.addObject("roomStatusMap", new Gson().toJson(roomStatusMap));
 
         return mav;

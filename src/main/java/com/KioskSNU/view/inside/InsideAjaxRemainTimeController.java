@@ -1,12 +1,11 @@
 package com.KioskSNU.view.inside;
 
-import com.KioskSNU.api.AccountCommutationTicketCheck;
 import com.KioskSNU.snu.dto.AccountDTO;
 import com.KioskSNU.snu.dto.UsageCommutationTicketDTO;
 import com.KioskSNU.snu.dto.UsageRoomDTO;
 import com.KioskSNU.snu.dto.UsageSeatDTO;
 import com.KioskSNU.snu.service.AccountService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,24 +19,11 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @RestController
+@RequiredArgsConstructor
 public class InsideAjaxRemainTimeController {
-    private final Map<Integer, UsageSeatDTO> seatMap;
-    private final Map<Integer, UsageRoomDTO> roomMap;
-    private final AccountCommutationTicketCheck accountCommutationTicketCheck;
+    private final ConcurrentHashMap<Integer, UsageSeatDTO> seatMap;
+    private final ConcurrentHashMap<Integer, UsageRoomDTO> roomMap;
     private final AccountService accountService;
-
-    @Autowired
-    public InsideAjaxRemainTimeController(
-            ConcurrentHashMap<Integer, UsageSeatDTO> seatMap,
-            ConcurrentHashMap<Integer, UsageRoomDTO> roomMap,
-            AccountCommutationTicketCheck accountCommutationTicketCheck,
-            AccountService accountService
-    ) {
-        this.seatMap = seatMap;
-        this.roomMap = roomMap;
-        this.accountCommutationTicketCheck = accountCommutationTicketCheck;
-        this.accountService = accountService;
-    }
 
     @RequestMapping("/ajax/remainTime")
     public ResponseEntity<Map<String, String>> process(@RequestBody Map<String, String> map) {
@@ -77,7 +63,7 @@ public class InsideAjaxRemainTimeController {
                 }
 
                 // 정기권 확인
-                UsageCommutationTicketDTO usageCommutationTicketDTO = accountCommutationTicketCheck.getCommutationTicket(accountDTO);
+                UsageCommutationTicketDTO usageCommutationTicketDTO = accountService.getCommutationTicket(accountDTO);
                 if (usageCommutationTicketDTO != null) {
                     result.put("commutationTicket", "true");
                     result.put("remainTime", usageCommutationTicketDTO.getEndDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
