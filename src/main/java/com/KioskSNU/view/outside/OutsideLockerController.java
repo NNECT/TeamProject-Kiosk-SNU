@@ -1,5 +1,6 @@
 package com.KioskSNU.view.outside;
 
+import com.KioskSNU.snu.dto.AccountDTO;
 import com.KioskSNU.snu.dto.UsageLockerDTO;
 import com.KioskSNU.snu.service.LockerService;
 import com.KioskSNU.snu.service.UsageLockerService;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
@@ -20,8 +22,10 @@ public class OutsideLockerController {
     private final UsageLockerService usageLockerService;
 
     @RequestMapping("/outside/locker")
-    public ModelAndView process() {
+    public ModelAndView process(HttpSession session) {
         ModelAndView mav = new ModelAndView();
+
+        System.out.println(((AccountDTO) session.getAttribute("author")).getUsername());
 
         Map<Integer, Integer> lockerStatusMap = new HashMap<>();
         lockerService.getAll().forEach(locker -> {
