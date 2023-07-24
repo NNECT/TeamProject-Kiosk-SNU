@@ -16,7 +16,7 @@
 
 <!-- 상단 네비게이션 바 -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="${pageContext.request.contextPath}/admin">스터디카페 관리자</a>
+    <a class="navbar-brand" href="${pageContext.request.contextPath}/admin/index">스터디카페 관리자</a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
@@ -26,7 +26,7 @@
                         <span class="nav-link ml-auto">
                             <a href="${pageContext.request.contextPath}/admin/adminlogout">로그아웃</a>
                             <span class="text-muted mx-2">|</span>
-                            <a href="${pageContext.request.contextPath}/admin/adminmypage">마이페이지</a>
+                            <a href="${pageContext.request.contextPath}/admin/adminChangePassword">비밀번호변경</a>
                         </span>
                     </c:when>
                 </c:choose>
