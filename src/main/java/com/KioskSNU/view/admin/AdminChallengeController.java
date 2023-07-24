@@ -115,7 +115,7 @@ public class AdminChallengeController {
             int rowCnt = challengeService.delete(challengeService.getById(id));
             if (rowCnt != 1)
                 throw new Exception("error");
-            rattr.addFlashAttribute("msg", "gooooood");
+            rattr.addFlashAttribute("msg", "good");
         } catch (Exception e) {
             e.printStackTrace();
             rattr.addFlashAttribute("msg", "error");
@@ -159,7 +159,6 @@ public class AdminChallengeController {
             challengeDTO.setDescription(descriptionWithBreaks);
 
             challengeService.update(challengeDTO);
-            mav.addObject("challenge", challengeService.getById(challengeDTO.getId()));
         } catch (Exception e) {
             e.printStackTrace();
         }
