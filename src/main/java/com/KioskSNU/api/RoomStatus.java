@@ -3,6 +3,7 @@ package com.KioskSNU.api;
 import com.KioskSNU.snu.dto.AccountDTO;
 import com.KioskSNU.snu.dto.UsageRoomDTO;
 import com.KioskSNU.snu.service.RoomService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -11,18 +12,10 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Component
+@RequiredArgsConstructor
 public class RoomStatus {
     private final Map<Integer, UsageRoomDTO> roomMap;
     private final RoomService roomService;
-
-    @Autowired
-    public RoomStatus(
-            ConcurrentHashMap<Integer, UsageRoomDTO> roomMap,
-            RoomService roomService
-    ) {
-        this.roomMap = roomMap;
-        this.roomService = roomService;
-    }
 
     /**
      * 현재 룸 상태를 반환하는 메소드

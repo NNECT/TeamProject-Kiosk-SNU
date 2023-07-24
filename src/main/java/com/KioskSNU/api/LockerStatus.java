@@ -4,6 +4,7 @@ import com.KioskSNU.snu.dto.AccountDTO;
 import com.KioskSNU.snu.dto.UsageLockerDTO;
 import com.KioskSNU.snu.service.LockerService;
 import com.KioskSNU.snu.service.UsageLockerService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,18 +14,10 @@ import java.util.List;
 import java.util.Map;
 
 @Component
+@RequiredArgsConstructor
 public class LockerStatus {
     private final LockerService lockerService;
     private final UsageLockerService usageLockerService;
-
-    @Autowired
-    public LockerStatus(
-            LockerService lockerService,
-            UsageLockerService usageLockerService
-    ) {
-        this.lockerService = lockerService;
-        this.usageLockerService = usageLockerService;
-    }
 
     /**
      * 사물함 등록 여부 확인 메소드

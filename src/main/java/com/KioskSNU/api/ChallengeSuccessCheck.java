@@ -5,6 +5,7 @@ import com.KioskSNU.snu.dto.ParticipationChallengeDTO;
 import com.KioskSNU.snu.dto.UsageSeatDTO;
 import com.KioskSNU.snu.service.AccountService;
 import com.KioskSNU.snu.service.UsageSeatService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,18 +17,10 @@ import java.util.List;
 import java.util.Set;
 
 @Component
+@RequiredArgsConstructor
 public class ChallengeSuccessCheck {
     AccountService accountService;
     UsageSeatService usageSeatService;
-
-    @Autowired
-    public ChallengeSuccessCheck(
-            AccountService accountService,
-            UsageSeatService usageSeatService
-    ) {
-        this.accountService = accountService;
-        this.usageSeatService = usageSeatService;
-    }
 
     /**
      * 챌린지 기간 내 사용 시간 계산
