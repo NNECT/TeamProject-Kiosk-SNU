@@ -1,9 +1,10 @@
 package com.KioskSNU.snu.impl;
 
-import com.KioskSNU.snu.dao.AdminDAO;
 import com.KioskSNU.snu.dto.AdminDTO;
+import com.KioskSNU.snu.mapper.AdminMapper;
 import com.KioskSNU.snu.service.AdminService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,7 +12,8 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class AdminServiceImpl implements AdminService {
-    private final AdminDAO adminDAO;
+    @Qualifier("adminDAO")
+    private final AdminMapper adminDAO;
 
     @Override
     public int insert(AdminDTO adminDTO) {

@@ -1,10 +1,11 @@
 package com.KioskSNU.snu.impl;
 
-import com.KioskSNU.snu.dao.PaymentDAO;
 import com.KioskSNU.snu.dto.AccountDTO;
 import com.KioskSNU.snu.dto.PaymentDTO;
+import com.KioskSNU.snu.mapper.PaymentMapper;
 import com.KioskSNU.snu.service.PaymentService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,7 +13,8 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class PaymentServiceImpl implements PaymentService {
-    private final PaymentDAO paymentDAO;
+    @Qualifier("paymentDAO")
+    private final PaymentMapper paymentDAO;
 
     @Override
     public int insert(PaymentDTO paymentDTO) {

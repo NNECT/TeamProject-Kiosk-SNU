@@ -1,11 +1,12 @@
 package com.KioskSNU.snu.impl;
 
-import com.KioskSNU.snu.dao.UsageLockerDAO;
 import com.KioskSNU.snu.dto.AccountDTO;
 import com.KioskSNU.snu.dto.LockerDTO;
 import com.KioskSNU.snu.dto.UsageLockerDTO;
+import com.KioskSNU.snu.mapper.UsageLockerMapper;
 import com.KioskSNU.snu.service.UsageLockerService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,7 +14,8 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class UsageLockerServiceImpl implements UsageLockerService {
-    private final UsageLockerDAO usageLockerDAO;
+    @Qualifier("usageLockerDAO")
+    private final UsageLockerMapper usageLockerDAO;
 
     @Override
     public int insert(UsageLockerDTO usageLockerDTO) {

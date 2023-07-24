@@ -1,10 +1,11 @@
 package com.KioskSNU.snu.impl;
 
-import com.KioskSNU.snu.dao.UsageCommutationTicketDAO;
 import com.KioskSNU.snu.dto.AccountDTO;
 import com.KioskSNU.snu.dto.UsageCommutationTicketDTO;
+import com.KioskSNU.snu.mapper.UsageCommutationTicketMapper;
 import com.KioskSNU.snu.service.UsageCommutationTicketService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,7 +13,8 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class UsageCommutationTicketServiceImpl implements UsageCommutationTicketService {
-    private final UsageCommutationTicketDAO usageCommutationTicketDAO;
+    @Qualifier("usageCommutationTicketDAO")
+    private final UsageCommutationTicketMapper usageCommutationTicketDAO;
 
     @Override
     public int insert(UsageCommutationTicketDTO usageCommutationTicketDTO) {

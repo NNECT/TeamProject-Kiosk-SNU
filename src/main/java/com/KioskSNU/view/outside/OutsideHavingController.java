@@ -19,8 +19,8 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 public class OutsideHavingController {
-    UsageCommutationTicketService usageCommutationTicketService;
-    UsageLockerService usageLockerService;
+    private final UsageCommutationTicketService usageCommutationTicketService;
+    private final UsageLockerService usageLockerService;
 
     @RequestMapping("/outside/having")
     @OutsideLoginRequired

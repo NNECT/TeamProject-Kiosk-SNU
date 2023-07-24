@@ -1,9 +1,10 @@
 package com.KioskSNU.snu.impl;
 
-import com.KioskSNU.snu.dao.LockerDAO;
 import com.KioskSNU.snu.dto.LockerDTO;
+import com.KioskSNU.snu.mapper.LockerMapper;
 import com.KioskSNU.snu.service.LockerService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,7 +12,8 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class LockerServiceImpl implements LockerService {
-    private final LockerDAO lockerDAO;
+    @Qualifier("lockerDAO")
+    private final LockerMapper lockerDAO;
 
     @Override
     public int insert(LockerDTO lockerDTO) {

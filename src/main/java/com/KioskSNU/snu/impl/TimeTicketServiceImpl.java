@@ -1,9 +1,10 @@
 package com.KioskSNU.snu.impl;
 
-import com.KioskSNU.snu.dao.TimeTicketDAO;
 import com.KioskSNU.snu.dto.TimeTicketDTO;
+import com.KioskSNU.snu.mapper.TimeTicketMapper;
 import com.KioskSNU.snu.service.TimeTicketService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,7 +12,8 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class TimeTicketServiceImpl implements TimeTicketService {
-    private final TimeTicketDAO timeTicketDAO;
+    @Qualifier("timeTicketDAO")
+    private final TimeTicketMapper timeTicketDAO;
 
     @Override
     public int insert(TimeTicketDTO timeTicketDTO) {

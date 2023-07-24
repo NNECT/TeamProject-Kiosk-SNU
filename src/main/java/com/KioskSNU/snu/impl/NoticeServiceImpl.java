@@ -1,9 +1,10 @@
 package com.KioskSNU.snu.impl;
 
-import com.KioskSNU.snu.dao.NoticeDAO;
 import com.KioskSNU.snu.dto.NoticeDTO;
+import com.KioskSNU.snu.mapper.NoticeMapper;
 import com.KioskSNU.snu.service.NoticeService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,7 +12,8 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class NoticeServiceImpl implements NoticeService {
-    private final NoticeDAO noticeDAO;
+    @Qualifier("noticeDAO")
+    private final NoticeMapper noticeDAO;
 
     @Override
     public int insert(NoticeDTO noticeDTO) {

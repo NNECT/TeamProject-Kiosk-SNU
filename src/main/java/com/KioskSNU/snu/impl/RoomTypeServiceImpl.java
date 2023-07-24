@@ -1,9 +1,10 @@
 package com.KioskSNU.snu.impl;
 
-import com.KioskSNU.snu.dao.RoomTypeDAO;
 import com.KioskSNU.snu.dto.RoomTypeDTO;
+import com.KioskSNU.snu.mapper.RoomTypeMapper;
 import com.KioskSNU.snu.service.RoomTypeService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,7 +12,8 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class RoomTypeServiceImpl implements RoomTypeService {
-    private final RoomTypeDAO roomTypeDAO;
+    @Qualifier("roomTypeDAO")
+    private final RoomTypeMapper roomTypeDAO;
 
     @Override
     public int insert(RoomTypeDTO roomTypeDTO) {

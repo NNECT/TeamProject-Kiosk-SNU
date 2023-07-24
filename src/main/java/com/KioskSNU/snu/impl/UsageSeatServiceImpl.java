@@ -1,11 +1,12 @@
 package com.KioskSNU.snu.impl;
 
-import com.KioskSNU.snu.dao.UsageSeatDAO;
 import com.KioskSNU.snu.dto.AccountDTO;
 import com.KioskSNU.snu.dto.SeatDTO;
 import com.KioskSNU.snu.dto.UsageSeatDTO;
+import com.KioskSNU.snu.mapper.UsageSeatMapper;
 import com.KioskSNU.snu.service.UsageSeatService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,7 +14,8 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class UsageSeatServiceImpl implements UsageSeatService {
-    private final UsageSeatDAO usageSeatDAO;
+    @Qualifier("usageSeatDAO")
+    private final UsageSeatMapper usageSeatDAO;
 
     @Override
     public int insert(UsageSeatDTO usageSeatDTO) {

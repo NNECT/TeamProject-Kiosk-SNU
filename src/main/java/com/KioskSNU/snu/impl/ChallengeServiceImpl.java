@@ -1,9 +1,10 @@
 package com.KioskSNU.snu.impl;
 
-import com.KioskSNU.snu.dao.ChallengeDAO;
 import com.KioskSNU.snu.dto.ChallengeDTO;
+import com.KioskSNU.snu.mapper.ChallengeMapper;
 import com.KioskSNU.snu.service.ChallengeService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,7 +12,8 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class ChallengeServiceImpl implements ChallengeService {
-    private final ChallengeDAO challengeDAO;
+    @Qualifier("challengeDAO")
+    private final ChallengeMapper challengeDAO;
 
     @Override
     public int insert(ChallengeDTO challengeDTO) {

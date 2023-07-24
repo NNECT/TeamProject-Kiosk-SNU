@@ -1,9 +1,10 @@
 package com.KioskSNU.snu.impl;
 
-import com.KioskSNU.snu.dao.AccountDAO;
 import com.KioskSNU.snu.dto.AccountDTO;
+import com.KioskSNU.snu.mapper.AccountMapper;
 import com.KioskSNU.snu.service.AccountService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,7 +13,8 @@ import java.util.Map;
 @Service
 @RequiredArgsConstructor
 public class AccountServiceImpl implements AccountService {
-    private final AccountDAO accountDAO;
+    @Qualifier("accountDAO")
+    private final AccountMapper accountDAO;
 
     @Override
     public int insert(AccountDTO accountDTO) {
