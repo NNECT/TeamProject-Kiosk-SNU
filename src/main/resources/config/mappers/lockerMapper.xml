@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.KioskSNU.snu.service.LockerService">
+<mapper namespace="com.KioskSNU.snu.mapper.LockerMapper">
     <resultMap id="lockerResultMap" type="lockerAlias">
         <id     column="id"                     property="id"/>
         <result column="lockerNumber"           property="lockerNumber"/>

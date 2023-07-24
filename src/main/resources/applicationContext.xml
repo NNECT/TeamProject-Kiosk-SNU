@@ -9,6 +9,7 @@
     <context:annotation-config/>
     <context:component-scan base-package="com.KioskSNU.secure"/>
     <context:component-scan base-package="com.KioskSNU.snu.dao"/>
+    <context:component-scan base-package="com.KioskSNU.snu.impl"/>
     <context:component-scan base-package="com.KioskSNU.api"/>
 
 <!--    트랜잭션 어노테이션 설정-->
@@ -29,7 +30,7 @@
     </bean>
 
     <!-- mybatis: Mapper 어노테이션이 있는 클래스를 Mapper로 등록 -->
-    <mybatis:scan base-package="com.KioskSNU.snu.service" annotation="org.apache.ibatis.annotations.Mapper"/>
+    <mybatis:scan base-package="com.KioskSNU.snu.mapper" annotation="org.apache.ibatis.annotations.Mapper"/>
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="configLocation" value="classpath:config/mybatis-config.xml"/>

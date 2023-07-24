@@ -1,16 +1,5 @@
 package com.KioskSNU.snu.service;
 
-import com.KioskSNU.snu.dto.AdminDTO;
-import org.apache.ibatis.annotations.Mapper;
+import com.KioskSNU.snu.mapper.AdminMapper;
 
-import java.util.List;
-
-@Mapper
-public interface AdminService {
-    int insert(AdminDTO adminDTO);
-    int update(AdminDTO adminDTO);
-    int delete(AdminDTO adminDTO);
-    AdminDTO getById(int id);
-    AdminDTO getByUsername(String username);
-    List<AdminDTO> getAll();
-}
+public interface AdminService extends AdminMapper {}

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.KioskSNU.snu.service.ParticipationChallengeService">
+<mapper namespace="com.KioskSNU.snu.mapper.ParticipationChallengeMapper">
     <resultMap id="participationChallengeResultMap" type="participationChallengeAlias">
         <id     column="id"                         property="id"/>
         <result column="account_id"                 property="account_id"/>
