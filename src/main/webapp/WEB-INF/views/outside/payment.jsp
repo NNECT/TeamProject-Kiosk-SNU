@@ -27,6 +27,7 @@
   <section>
     <ul>
       <li id="pay">결제내역</li>
+      <li id="homeLi"><a href="start.jsp"><img id="homeImg" src="<c:url value="/img/bluehome.png"/>"></a></li>
     </ul>
     <hr id="line">
     <form id="payFrm">

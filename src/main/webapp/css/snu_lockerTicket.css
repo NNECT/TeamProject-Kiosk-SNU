@@ -37,6 +37,18 @@ li{
     background-color: #285FF5;
     color: #ffffff;
 }
+/*home*/
+#homeLi{
+    border: none;
+    position: relative;
+    top: 10px;
+    left: 110px;
+}
+#homeImg{
+    width: 35px;
+    height: 35px;
+}
+/*------*/
 hr{
     border: 0.9px solid #285FF5;  
 }
@@ -55,9 +67,13 @@ hr{
     border-radius: 0;
     border: 0px solid rebeccapurple; 
 }
-/* .loker{
-    background-color: gray;
-} */
+.loker{
+    width: 50px;
+    height: 50px;
+    border-radius: 0;
+    border: 0px solid rebeccapurple;
+    color: #ffffff;
+}
 .none{
     width: 50px;
     display: none;
