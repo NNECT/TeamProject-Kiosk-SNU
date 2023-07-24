@@ -58,12 +58,14 @@ public class AccountDAO extends SqlSessionDaoSupport implements AccountService {
     public List<AccountDTO> getAllByPhoneNumber(String phoneNumber) {
         return getSqlSession().selectList("com.KioskSNU.snu.service.AccountService.getAllByPhoneNumber", phoneNumber);
     }
-
+    
+    @Transactional(readOnly = true)
     @Override
     public int getCount() {
         return getSqlSession().selectOne("com.KioskSNU.snu.service.AccountService.getCount");
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<AccountDTO> selectPage(Map<String, Integer> map) {
         return getSqlSession().selectList("com.KioskSNU.snu.service.AccountService.selectPage", map);
