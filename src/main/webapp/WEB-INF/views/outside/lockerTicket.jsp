@@ -45,36 +45,47 @@
                     <td class="locker r" id="10"></td>
                 </tr>
                 <tr>
-                    <td class="locker r" id="9"></td>
-                    <td class="locker r" id="8"></td>
-                    <td class="locker r" id="7"></td>
-                    <td class="locker r" id="6"></td>
-                    <td class="locker r" id="5"></td>
-                    <td class="locker r" id="4"></td>
-                    <td class="locker r" id="3"></td>
-                    <td class="locker r" id="2"></td>
-                    <td class="locker r" id="1"></td>
+                    <td class="locker r" id="9" ></td>
+                    <td class="locker r" id="8" ></td>
+                    <td class="locker r" id="7" ></td>
+                    <td class="locker r" id="6" ></td>
+                    <td class="locker r" id="5" ></td>
+                    <td class="locker r" id="4" ></td>
+                    <td class="locker r" id="3" ></td>
+                    <td class="locker r" id="2" ></td>
+                    <td class="locker r" id="1" ></td>
                 </tr>
             </table>
 
 
             <div id="info"><!--자리설명-->
-                <div class="box b"></div>&nbsp;<span class="blue">사용 가능</span>&nbsp;&nbsp;
-                <div class="box g"></div>&nbsp;<span class="gray">사용 중</span>
-                <div class="box rBox"></div>&nbsp;<span class="red">사용 불가능</span>
+                <div class="box b"></div>&nbsp;<span class="blue">사용 가능</span>&nbsp;
+                <div class="box g"></div>&nbsp;<span class="gray">사용 중</span>&nbsp;
+                <div class="box rBox"></div>&nbsp;<span class="red">사용 불가능</span>&nbsp;
+                <div class="box m"></div>&nbsp;<span class="my">
+                <c:choose>
+                    <c:when test="${hasLocker}">
+                        내 사물함
+                    </c:when>
+                    <c:otherwise>
+                        선택한 사물함
+                    </c:otherwise>
+                </c:choose>
+                </span>
             </div>
             <table id="ticket">
-                <td class="radio-box">
-                    <input type="radio" name="radio-button" class="radio-input" value="">
-                    <p class="t btn-text" name="time" class="rText">30일</p>
-                    <p class="p btn-text" name="price" class="rText">6,000원</p>
-                </td>
-                <td class="radio-box">
-                    <input type="radio" name="radio-button" class="radio-input" value="">
-                    <p class="t btn-text" name="time">사용X</p><br>
-                    <p class="p btn-text" name="price"></p><br>
-
-                </td>
+                <tr>
+                    <td class="radio-box">
+                        <input type="radio" name="radio-button" class="radio-input" value="">
+                        <p class="t rText btn-text">30일</p>
+                        <p class="p rText btn-text">6,000원</p>
+                    </td>
+                    <td class="radio-box">
+                        <input type="radio" name="radio-button" class="radio-input" value="">
+                        <p class="t btn-text">사용X</p><br>
+                        <p class="p btn-text"></p><br>
+                    </td>
+                </tr>
             </table>
 
             <input id="beforeBtn" type="submit" value="이전">
@@ -82,9 +93,8 @@
         </form>
     </section>
 </div>
-<script src="/js/radioBox.js"></script>
+<script src="<c:url value="/js/radioBox.js"/>"></script>
 <script>
-    // <!-- select테이블 코드를 그대로 가져와서 locker로만 변경했습니다 -->
     window.addEventListener('DOMContentLoaded', (event) => {
         const lockers = document.querySelectorAll('.locker');
         const status = ${lockerStatusMap};
@@ -92,14 +102,49 @@
             if(status[Number(locker.id)] === 1) {
                 locker.classList.remove('r');
                 locker.classList.add('b');
-                locker.innerHTML = "<a href='<c:url value="/outside/login"/>?type=locker&number=" + locker.id + "'>" + locker.id + "</a>"
+                <c:choose>
+                <c:when test="${hasLocker}">
+                locker.innerHTML = locker.id;
+                </c:when>
+                <c:otherwise>
+                locker.innerHTML = '<label>' + locker.id + '<input type="radio" name="locker-radio" class="locket-radio-input" value=""></label>';
+                </c:otherwise>
+                </c:choose>
             } else if (status[Number(locker.id)] === 0) {
                 locker.classList.remove('r');
                 locker.classList.add('g');
                 locker.innerHTML = locker.id;
+            } else if (status[Number(locker.id)] === 2) {
+                locker.classList.remove('r');
+                locker.classList.add('m');
+                locker.innerHTML = locker.id;
             } else {
                 locker.innerHTML = locker.id;
             }
+        });
+
+        // 'locker' 클래스를 가진 요소 중에서 input type이 radio인 요소를 선택
+        const radioLockers = Array.from(document.querySelectorAll('.locker')).filter(locker => locker.querySelector('input[type="radio"]'));
+        radioLockers.forEach((box) => {
+            const radioButton = box.querySelector('input[type="radio"]');
+            box.addEventListener('click', (e) => {
+                // 라디오 버튼을 선택
+                radioButton.checked = true;
+
+                // 모든 박스의 클래스를 'b'로 되돌림
+                radioLockers.forEach((b) => {
+                    if (b.querySelector('input[type="radio"]').checked === false) {
+                        b.classList.remove('m');
+                        b.classList.add('b');
+                    }
+                });
+
+                // 클릭한 박스만 'm' 클래스를 추가
+                if (radioButton.checked === true) {
+                    box.classList.remove('b');
+                    box.classList.add('m');
+                }
+            });
         });
     });
 </script>
