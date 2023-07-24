@@ -72,6 +72,9 @@ public class AdminMyPageController {
         adminService.update(getAdmin);
         //세션에 업데이트된 정보 덮어씌우기
         session.setAttribute("admin",adminService.getByUsername(getAdmin.getUsername()));
+        //메인페이지로 비밀번호 성공 정보 보내기
+        mav.addObject("changePasswordSuccess","changePasswordSuccess");
+
 
         return mav;
 
