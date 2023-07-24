@@ -1,12 +1,11 @@
 package com.KioskSNU.view.outside;
 
-import com.KioskSNU.api.ChallengeSuccessCheck;
 import com.KioskSNU.snu.dto.AccountDTO;
 import com.KioskSNU.snu.dto.ChallengeDTO;
 import com.KioskSNU.snu.dto.ParticipationChallengeDTO;
 import com.KioskSNU.snu.service.ChallengeService;
 import com.KioskSNU.snu.service.ParticipationChallengeService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,30 +13,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/outside/challenge")
 public class OutsideChallengeController {
     private final ChallengeService challengeService;
     private final ParticipationChallengeService participationChallengeService;
-    private final ChallengeSuccessCheck challengeSuccessCheck;
-
-    @Autowired
-    public OutsideChallengeController(
-            ChallengeService challengeService,
-            ParticipationChallengeService participationChallengeService,
-            ChallengeSuccessCheck challengeSuccessCheck
-    ){
-        this.challengeService = challengeService;
-        this.participationChallengeService = participationChallengeService;
-        this.challengeSuccessCheck = challengeSuccessCheck;
-    }
 
     @RequestMapping("/list")
     public ModelAndView list(){
@@ -87,12 +72,12 @@ public class OutsideChallengeController {
         return mav;
     }
     public boolean checkSuccess(ParticipationChallengeDTO participationChallengeDTO) {
-        int result = challengeSuccessCheck.challengeSuccessCheck(participationChallengeDTO);
+        int result = participationChallengeService.challengeSuccessCheck(participationChallengeDTO);
 
         return result == 1;
     }
     public boolean isActive(ParticipationChallengeDTO participationChallengeDTO) {
-        return challengeSuccessCheck.challengeSuccessCheck(participationChallengeDTO) == 0;
+        return participationChallengeService.challengeSuccessCheck(participationChallengeDTO) == 0;
     }
 
 
