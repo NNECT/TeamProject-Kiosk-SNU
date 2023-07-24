@@ -2,6 +2,7 @@ package com.KioskSNU.view.admin;
 
 import com.KioskSNU.snu.dto.ChallengeDTO;
 import com.KioskSNU.snu.service.ChallengeService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,7 +41,7 @@ public class AdminChallengeController {
     }
 
     @GetMapping("/read")
-    public ModelAndView read(Integer id) {
+    public ModelAndView read(@RequestParam Integer id) {
         ModelAndView mav = new ModelAndView();
 
         try {
@@ -115,7 +116,7 @@ public class AdminChallengeController {
             int rowCnt = challengeService.delete(challengeService.getById(id));
             if (rowCnt != 1)
                 throw new Exception("error");
-            rattr.addFlashAttribute("msg", "gooooood");
+            rattr.addFlashAttribute("msg", "good");
         } catch (Exception e) {
             e.printStackTrace();
             rattr.addFlashAttribute("msg", "error");
@@ -143,7 +144,7 @@ public class AdminChallengeController {
             if (challengeDTO.isActive() && currentChallengesCount >= 3) {
                 // 최대 등록 가능 개수를 초과하는 경우, 메시지를 담아서 다시 등록 페이지로 돌려보냅니다.
                 redirectAttributes.addFlashAttribute("msg", "error");
-                mav.setViewName("redirect:/admin/challenge/read?id="+challengeDTO.getId());
+                mav.setViewName("redirect:/admin/challenge/read?id=" + challengeDTO.getId());
                 return mav;
             }
             // 시간 형식을 "HH:mm"으로 지정하여 LocalTime 객체 생성
@@ -159,13 +160,11 @@ public class AdminChallengeController {
             challengeDTO.setDescription(descriptionWithBreaks);
 
             challengeService.update(challengeDTO);
-            mav.addObject("challenge", challengeService.getById(challengeDTO.getId()));
+
         } catch (Exception e) {
             e.printStackTrace();
         }
         mav.setViewName("redirect:/admin/challenge/list");
         return mav;
     }
-
-
 }

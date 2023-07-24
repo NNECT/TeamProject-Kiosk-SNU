@@ -19,22 +19,25 @@ public class ChallengeDAO extends SqlSessionDaoSupport implements ChallengeServi
         super.setSqlSessionFactory(sqlSessionFactory);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public int insert(ChallengeDTO challengeDTO) {
         return getSqlSession().insert("com.KioskSNU.snu.service.ChallengeService.insert", challengeDTO);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public int update(ChallengeDTO challengeDTO) {
         return getSqlSession().update("com.KioskSNU.snu.service.ChallengeService.update", challengeDTO);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public int delete(ChallengeDTO challengeDTO) {
         return getSqlSession().delete("com.KioskSNU.snu.service.ChallengeService.delete", challengeDTO);
     }
 
-    @Transactional(readOnly = true)
+
     @Override
     public ChallengeDTO getById(int id) {
         return getSqlSession().selectOne("com.KioskSNU.snu.service.ChallengeService.getById", id);
@@ -57,10 +60,9 @@ public class ChallengeDAO extends SqlSessionDaoSupport implements ChallengeServi
     public List<ChallengeDTO> getAllByVisible(boolean visible) {
         return getSqlSession().selectList("com.KioskSNU.snu.service.ChallengeService.getAllByVisible", visible);
     }
-    @Transactional(readOnly = true)
+
     @Override
     public int getCountOfActiveChallenges() {
-        return getSqlSession().selectOne("com.KioskSNU.snu.service.ChallengeService.getCountOfActiveChallenges");
+        return 0;
     }
-
 }

@@ -19,7 +19,7 @@
 <body>
 <script>
     let msg = "${msg}"
-    if(msg == "gooooood") alert("삭제되었습니다.")
+    if(msg == "good") alert("삭제되었습니다.")
     if(msg == "error") alert("삭제에 실패하였습니다.")
 </script>
 <div class="container">
