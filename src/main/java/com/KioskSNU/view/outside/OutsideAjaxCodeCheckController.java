@@ -1,9 +1,8 @@
 package com.KioskSNU.view.outside;
 
-import com.KioskSNU.snu.dao.AccountDAO;
 import com.KioskSNU.snu.dto.AccountDTO;
 import com.KioskSNU.snu.service.AccountService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,18 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
 @RestController
+@RequiredArgsConstructor
 public class OutsideAjaxCodeCheckController {
     private final AccountService accountService;
-
-    @Autowired
-    public OutsideAjaxCodeCheckController(AccountService accountService) {
-        this.accountService = accountService;
-    }
 
     @RequestMapping("/ajax/codeSend")
     public ResponseEntity<Map<String, String>> sendProcess(@RequestBody Map<String, String> map, HttpSession session) {

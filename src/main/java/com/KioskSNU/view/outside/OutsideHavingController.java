@@ -6,7 +6,7 @@ import com.KioskSNU.snu.dto.UsageCommutationTicketDTO;
 import com.KioskSNU.snu.dto.UsageLockerDTO;
 import com.KioskSNU.snu.service.UsageCommutationTicketService;
 import com.KioskSNU.snu.service.UsageLockerService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,18 +17,10 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class OutsideHavingController {
     UsageCommutationTicketService usageCommutationTicketService;
     UsageLockerService usageLockerService;
-
-    @Autowired
-    public OutsideHavingController(
-            UsageCommutationTicketService usageCommutationTicketService,
-            UsageLockerService usageLockerService
-    ) {
-        this.usageCommutationTicketService = usageCommutationTicketService;
-        this.usageLockerService = usageLockerService;
-    }
 
     @RequestMapping("/outside/having")
     @OutsideLoginRequired

@@ -2,28 +2,19 @@ package com.KioskSNU.view.outside;
 
 import com.KioskSNU.snu.dto.UsageRoomDTO;
 import com.KioskSNU.snu.dto.UsageSeatDTO;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
-import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Controller
+@RequiredArgsConstructor
 public class OutsideLogoutController {
-    private final Map<Integer, UsageSeatDTO> seatMap;
-    private final Map<Integer, UsageRoomDTO> roomMap;
-
-    @Autowired
-    public OutsideLogoutController(
-            ConcurrentHashMap<Integer, UsageSeatDTO> seatMap,
-            ConcurrentHashMap<Integer, UsageRoomDTO> roomMap
-    ) {
-        this.seatMap = seatMap;
-        this.roomMap = roomMap;
-    }
+    private final ConcurrentHashMap<Integer, UsageSeatDTO> seatMap;
+    private final ConcurrentHashMap<Integer, UsageRoomDTO> roomMap;
 
     @RequestMapping("/outside/logout")
     public ModelAndView process(HttpSession session) {

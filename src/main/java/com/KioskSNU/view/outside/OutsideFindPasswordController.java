@@ -1,29 +1,19 @@
 package com.KioskSNU.view.outside;
 
-import com.KioskSNU.secure.RSA;
 import com.KioskSNU.snu.dto.AccountDTO;
 import com.KioskSNU.snu.service.AccountService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class OutsideFindPasswordController {
-
     private final AccountService accountService;
-
-    @Autowired
-    public OutsideFindPasswordController(
-            AccountService accountService
-    ){
-        this.accountService = accountService;
-    }
 
     @GetMapping("/outside/findPassword")
     public ModelAndView getProcess(){

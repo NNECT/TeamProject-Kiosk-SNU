@@ -3,7 +3,7 @@ package com.KioskSNU.view.outside;
 import com.KioskSNU.api.RoomStatus;
 import com.KioskSNU.api.SeatStatus;
 import com.google.gson.Gson;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -11,18 +11,10 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.Map;
 
 @Controller
+@RequiredArgsConstructor
 public class OutsideSelectController {
     private final SeatStatus seatStatus;
     private final RoomStatus roomStatus;
-
-    @Autowired
-    public OutsideSelectController(
-            SeatStatus seatStatus,
-            RoomStatus roomStatus
-    ) {
-        this.seatStatus = seatStatus;
-        this.roomStatus = roomStatus;
-    }
 
     @RequestMapping("/outside/select")
     public ModelAndView process() {
