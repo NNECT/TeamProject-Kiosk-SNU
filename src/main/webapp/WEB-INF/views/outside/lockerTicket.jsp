@@ -20,6 +20,7 @@
     <section>
         <ul>
             <li id="lockerTicket">사물함</li>
+            <li id="homeLi"><a href="start.jsp"><img id="homeImg" src="<c:url value="/img/bluehome.png"/>"></a></li>
         </ul>
         <hr>
 

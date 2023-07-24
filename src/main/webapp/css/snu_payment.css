@@ -37,6 +37,20 @@ li{
     font-size: 22px;
     font-weight: 500;
 }
+
+/*home*/
+#homeLi{
+    border: none;
+    position: relative;
+    top: 10px;
+    left: 270px;
+}
+#homeImg{
+    width: 35px;
+    height: 35px;
+}
+/*------*/
+
 #line{
     border: 0.9px solid #285FF5;  
 }

@@ -21,6 +21,7 @@
     <section>
         <ul>
             <li id="timeTicket">시간권</li>
+            <li id="homeLi"><a href="start.jsp"><img id="homeImg" src="<c:url value="/img/bluehome.png"/>"></a></li>
         </ul>
         <hr>
         <form action="<c:url value="/outside/ticket/room"/>" method="post" onsubmit="return selectedCheck()">

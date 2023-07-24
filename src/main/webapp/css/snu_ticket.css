@@ -44,6 +44,19 @@ a{text-decoration: none; color: #285FF5;}
     background-color: #285FF5;
     border-radius: 18px;
 }
+/*home*/
+#homeLi{
+    border: none;
+    position: relative;
+    top: 10px;
+    left: 110px;
+}
+#homeImg{
+    width: 35px;
+    height: 35px;
+}
+/*------*/
+
 hr{
     border: 0.9px solid #285FF5;  
 }
