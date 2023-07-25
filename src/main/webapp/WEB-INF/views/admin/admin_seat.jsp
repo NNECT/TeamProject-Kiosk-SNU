@@ -8,48 +8,7 @@
 <link rel="stylesheet" href="<c:url value="/css/admin/admin_seat.css"/>">
 <%--폰트--%>
 <link href="https://cdn.jsdelivr.net/gh/sunn-us/SUITE/fonts/static/woff2/SUITE.css" rel="stylesheet">
-<style>
-    /* 스타일링을 위한 CSS 코드 */
-    .modal {
-        display: none;
-        position: fixed;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0, 0, 0, 0.5);
-    }
 
-    .modal-content {
-        background-color: white;
-        margin: 15% auto;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 80%;
-        max-width: 400px;
-        position: relative;
-    }
-
-    .close {
-        color: #aaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-        position: absolute;
-        top: 0;
-        right: 0;
-    }
-
-    .close:hover,
-    .close:focus {
-        color: black;
-        text-decoration: none;
-        cursor: pointer;
-
-    }
-</style>
 <!-- 메인 컨텐츠 -->
 <div id="seatWrap">
     <div id="info"><!--자리설명-->
