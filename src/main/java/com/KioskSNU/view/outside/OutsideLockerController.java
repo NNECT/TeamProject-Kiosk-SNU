@@ -40,6 +40,10 @@ public class OutsideLockerController {
         // 사물함 상태 확인
         Map<Integer, Integer> lockerStatusMap = usageLockerService.getLockerStatusMap(accountDTO);
         mav.addObject("lockerStatusMap", new Gson().toJson(lockerStatusMap));
+
+        // 사물함 사용권 목록 확인
+        mav.addObject("lockerTicketList", lockerTicketService.getAllByActive(true));
+
         mav.setViewName("outside/lockerTicket");
         return mav;
     }

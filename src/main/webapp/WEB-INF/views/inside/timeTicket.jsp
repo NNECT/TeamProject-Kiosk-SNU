@@ -23,8 +23,9 @@
     <div id="whiteWrap">
         <section>
             <ul>
-                <li id="timeTicket">시간권</li>
-                <li id="commutationTicket"><a href="<c:url value="/inside/ticket/commutation"/>">정기권</a></li>
+                <li class="currentTicketButton">시간권</li>
+                <li class="otherTicketButton"><a href="<c:url value="/inside/ticket/seat/commutationTicket"/>">정기권</a></li>
+                <li class="otherTicketButton"><a href="<c:url value="/inside/ticket/locker"/>">사물함</a></li>
             </ul>
             <hr>
             <form>

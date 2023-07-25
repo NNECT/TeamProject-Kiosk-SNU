@@ -21,8 +21,9 @@
     <div id="whiteWrap">
         <section>
             <ul>
-                <li id="timeTicket"><a href="timeTicket.jsp">시간권</a></li>
-                <li id="commutationTicket">정기권</li>
+                <li class="otherTicketButton"><a href="<c:url value="/inside/ticket/seat/timeTicket"/>">시간권</a></li>
+                <li class="currentTicketButton">정기권</li>
+                <li class="otherTicketButton"><a href="<c:url value="/inside/ticket/locker"/>">사물함</a></li>
             </ul>
             <hr>
             <form>

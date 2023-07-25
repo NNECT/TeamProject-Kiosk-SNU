@@ -47,13 +47,13 @@ li{
     text-align: center;
     line-height: 40px;
 }
-#timeTicket{
+.currentTicketButton {
     background-color: #285FF5;
     color: #ffffff;
 }
 
 a{text-decoration: none; color: #285FF5;}
-#commutationTicket :hover{
+.otherTicketButton :hover{
     display: block;
     color: #ffffff;
     background-color: #285FF5;

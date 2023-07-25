@@ -1,12 +1,12 @@
 package com.KioskSNU.view.inside;
 
+import com.KioskSNU.snu.dto.AccountDTO;
 import com.KioskSNU.snu.dto.CommutationTicketDTO;
 import com.KioskSNU.snu.dto.RoomDTO;
 import com.KioskSNU.snu.dto.TimeTicketDTO;
-import com.KioskSNU.snu.service.CommutationTicketService;
-import com.KioskSNU.snu.service.RoomService;
-import com.KioskSNU.snu.service.TimeTicketService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.KioskSNU.snu.service.*;
+import com.google.gson.Gson;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,24 +15,17 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/inside/ticket")
 public class InsideTicketController {
     private final TimeTicketService timeTicketService;
     private final CommutationTicketService commutationTicketService;
     private final RoomService roomService;
-
-    @Autowired
-    public InsideTicketController(
-            TimeTicketService timeTicketService,
-            CommutationTicketService commutationTicketService,
-            RoomService roomService
-    ) {
-        this.timeTicketService = timeTicketService;
-        this.commutationTicketService = commutationTicketService;
-        this.roomService = roomService;
-    }
+    private final UsageLockerService usageLockerService;
+    private final LockerTicketService lockerTicketService;
 
     @RequestMapping("")
     public ModelAndView process(HttpSession session){
@@ -133,6 +126,32 @@ public class InsideTicketController {
         ModelAndView mav = new ModelAndView();
         // 프로세스 추가 필요
         mav.setViewName("redirect:/inside/menu");
+        return mav;
+    }
+
+    @RequestMapping("/locker")
+    public ModelAndView lockerGetProcess(HttpSession session) {
+        ModelAndView mav = new ModelAndView();
+
+        // 사용자 확인
+        AccountDTO accountDTO = (AccountDTO) session.getAttribute("author");
+        if (accountDTO == null) {
+            mav.setViewName("redirect:/inside");
+            return mav;
+        }
+
+        // 사물함 보유 여부 확인
+        boolean hasLocker = usageLockerService.hasLocker(accountDTO);
+        mav.addObject("hasLocker", hasLocker);
+
+        // 사물함 상태 확인
+        Map<Integer, Integer> lockerStatusMap = usageLockerService.getLockerStatusMap(accountDTO);
+        mav.addObject("lockerStatusMap", new Gson().toJson(lockerStatusMap));
+
+        // 사물함 사용권 목록 확인
+        mav.addObject("lockerTicketList", lockerTicketService.getAllByActive(true));
+
+        mav.setViewName("inside/lockerTicket");
         return mav;
     }
 }
