@@ -16,12 +16,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/outside/ticket")
 public class OutsideTicketController {
+    private final HashMap<String, Object> ticketMap;
     private final TimeTicketService timeTicketService;
     private final CommutationTicketService commutationTicketService;
     private final RoomService roomService;
@@ -40,12 +42,17 @@ public class OutsideTicketController {
 
     @PostMapping("/seat/timeTicket")
     @OutsideLoginRequired
-    public ModelAndView timeTicketPostProcess(@RequestParam("radio-button") int ticket, HttpSession session){
+    public ModelAndView timeTicketPostProcess(@RequestParam("radio-button") int ticket){
         ModelAndView mav = new ModelAndView();
 
+		TimeTicketDTO timeTicket = timeTicketService.getById(ticket);
+        if (timeTicket == null) {
+            mav.setViewName("redirect:/seat/timeTicket");
+            return mav;
+        }
 
+        ticketMap.put("timeTicket", timeTicket);
 
-        // 이미 라커를 가지고 있을 경우 라커티켓으로 이동하는 분기 추가 필요
         mav.setViewName("redirect:/outside/locker");
         return mav;
     }
@@ -64,12 +71,17 @@ public class OutsideTicketController {
 
     @PostMapping("/seat/commutationTicket")
     @OutsideLoginRequired
-    public ModelAndView commutationTicketPostProcess(){
+    public ModelAndView commutationTicketPostProcess(@RequestParam("radio-button") int ticket){
         ModelAndView mav = new ModelAndView();
 
+        CommutationTicketDTO commutationTicket = commutationTicketService.getById(ticket);
+        if (commutationTicket == null) {
+            mav.setViewName("redirect:/seat/commutationTicket");
+            return mav;
+        }
 
+        ticketMap.put("commutationTicket", commutationTicket);
 
-        // 이미 라커를 가지고 있을 경우 라커티켓으로 이동하는 분기 추가 필요
         mav.setViewName("redirect:/outside/locker");
         return mav;
     }
@@ -102,9 +114,12 @@ public class OutsideTicketController {
 
     @PostMapping("/room")
     @OutsideLoginRequired
-    public ModelAndView roomPostProcess(){
+    public ModelAndView roomPostProcess(@RequestParam("radio-button") int time){
         ModelAndView mav = new ModelAndView();
         mav.setViewName("redirect:/outside/locker");
+
+        ticketMap.put("roomTicket", time);
+
         return mav;
     }
 }

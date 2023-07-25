@@ -36,6 +36,11 @@ public class LockerServiceImpl implements LockerService {
     }
 
     @Override
+    public LockerDTO getByLockerNumber(int lockerNumber) {
+        return lockerDAO.getByLockerNumber(lockerNumber);
+    }
+
+    @Override
     public List<LockerDTO> getAll() {
         return lockerDAO.getAll();
     }
