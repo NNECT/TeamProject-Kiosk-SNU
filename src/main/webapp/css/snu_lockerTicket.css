@@ -38,11 +38,14 @@ li{
     color: #ffffff;
 }
 /*home*/
+ul{
+    border: 0px solid rebeccapurple;
+}
 #homeLi{
     border: none;
     position: relative;
     top: 10px;
-    left: 110px;
+    left: 270px;
 }
 #homeImg{
     width: 35px;
