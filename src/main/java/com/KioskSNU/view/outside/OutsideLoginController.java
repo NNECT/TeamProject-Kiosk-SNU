@@ -49,13 +49,13 @@ public class OutsideLoginController {
             mav.setViewName("redirect:/outside/logout");
         } else if (type.equals("seat")) {
             UsageSeatDTO usage = new UsageSeatDTO();
-            usage.setSeat_id(seatService.getBySeatNumber(number).getId());
+            usage.setSeatDTO(seatService.getBySeatNumber(number));
             seatMap.put(number, usage);
             session.setAttribute("selectType", type);
             session.setAttribute("selectNumber", number);
         } else if (type.equals("room")) {
             UsageRoomDTO usage = new UsageRoomDTO();
-            usage.setRoom_id(roomService.getByRoomNumber(number).getId());
+            usage.setRoomDTO(roomService.getByRoomNumber(number));
             roomMap.put(number, usage);
             session.setAttribute("selectType", type);
             session.setAttribute("selectNumber", number);
@@ -105,11 +105,11 @@ public class OutsideLoginController {
         switch ((String) session.getAttribute("selectType")) {
             case "seat":
                 mav.setViewName("redirect:/outside/having");
-                seatMap.get((int) session.getAttribute("selectNumber")).setAccount_id(getUser.getId());
+                seatMap.get((int) session.getAttribute("selectNumber")).setAccountDTO(getUser);
                 break;
             case "room":
                 mav.setViewName("redirect:/outside/ticket/room");
-                roomMap.get((int) session.getAttribute("selectNumber")).setAccount_id(getUser.getId());
+                roomMap.get((int) session.getAttribute("selectNumber")).setAccountDTO(getUser);
                 break;
             default:
                 mav.setViewName("redirect:/outside/logout");
