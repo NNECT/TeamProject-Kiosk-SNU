@@ -18,4 +18,19 @@ public class UsageLockerDTO {
     private int account_remainTime;
     private LocalDate startDate;
     private LocalDate endDate;
+
+    public void setLocketDTO(LockerDTO lockerDTO) {
+        this.locker_id = lockerDTO.getId();
+        this.locker_lockerNumber = lockerDTO.getLockerNumber();
+        this.locker_usable = lockerDTO.isUsable();
+    }
+
+    public void setAccountDTO(AccountDTO accountDTO) {
+        this.account_id = accountDTO.getId();
+        this.account_username = accountDTO.getUsername();
+        this.account_password = accountDTO.getPassword();
+        this.account_phoneNumber = accountDTO.getPhoneNumber();
+        this.account_point = accountDTO.getPoint();
+        this.account_remainTime = accountDTO.getRemainTime();
+    }
 }

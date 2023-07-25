@@ -18,4 +18,19 @@ public class UsageSeatDTO {
     private int account_remainTime;
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
+
+    public void setSeatDTO(SeatDTO seatDTO) {
+        this.seat_id = seatDTO.getId();
+        this.seat_seatNumber = seatDTO.getSeatNumber();
+        this.seat_usable = seatDTO.isUsable();
+    }
+
+    public void setAccountDTO(AccountDTO accountDTO) {
+        this.account_id = accountDTO.getId();
+        this.account_username = accountDTO.getUsername();
+        this.account_password = accountDTO.getPassword();
+        this.account_phoneNumber = accountDTO.getPhoneNumber();
+        this.account_point = accountDTO.getPoint();
+        this.account_remainTime = accountDTO.getRemainTime();
+    }
 }

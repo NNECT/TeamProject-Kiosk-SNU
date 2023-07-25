@@ -15,4 +15,13 @@ public class UsageCommutationTicketDTO {
     private int account_remainTime;
     private LocalDate startDate;
     private LocalDate endDate;
+
+    public void setAccountDTO(AccountDTO accountDTO) {
+        this.account_id = accountDTO.getId();
+        this.account_username = accountDTO.getUsername();
+        this.account_password = accountDTO.getPassword();
+        this.account_phoneNumber = accountDTO.getPhoneNumber();
+        this.account_point = accountDTO.getPoint();
+        this.account_remainTime = accountDTO.getRemainTime();
+    }
 }

@@ -37,4 +37,32 @@ public class ParticipationChallengeDTO {
     private int rewardPoint;
     private boolean active;
     private boolean result;
+
+    public void setAccountDTO(AccountDTO accountDTO) {
+        this.account_id = accountDTO.getId();
+        this.account_username = accountDTO.getUsername();
+        this.account_password = accountDTO.getPassword();
+        this.account_phoneNumber = accountDTO.getPhoneNumber();
+        this.account_point = accountDTO.getPoint();
+        this.account_remainTime = accountDTO.getRemainTime();
+    }
+
+    public void setChallengeDTO(ChallengeDTO challengeDTO) {
+        this.challenge_id = challengeDTO.getId();
+        this.challenge_title = challengeDTO.getTitle();
+        this.challenge_description = challengeDTO.getDescription();
+        this.challenge_titleColor = challengeDTO.getTitleColor();
+        this.challenge_descriptionColor = challengeDTO.getDescriptionColor();
+        this.challenge_backgroundColor = challengeDTO.getBackgroundColor();
+        this.challenge_imageSrc = challengeDTO.getImageSrc();
+        this.challenge_activeStartTime = challengeDTO.getActiveStartTime();
+        this.challenge_activeEndTime = challengeDTO.getActiveEndTime();
+        this.challenge_periodHours = challengeDTO.getPeriodHours();
+        this.challenge_periodDays = challengeDTO.getPeriodDays();
+        this.challenge_goalDay = challengeDTO.getGoalDay();
+        this.challenge_goalHour = challengeDTO.getGoalHour();
+        this.challenge_rewardPoint = challengeDTO.getRewardPoint();
+        this.challenge_active = challengeDTO.isActive();
+        this.challenge_visible = challengeDTO.isVisible();
+    }
 }
