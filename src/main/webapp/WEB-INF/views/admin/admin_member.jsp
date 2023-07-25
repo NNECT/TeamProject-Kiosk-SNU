@@ -23,9 +23,9 @@
                     <table id="example" class="display" style="width:100%">
                         <thead>
                         <tr style="background-color: lightblue;">
-                            <th>번호</th>
-                            <th>아이디</th>
-                            <th>전화번호</th>
+                            <th style="text-align: center">번호</th>
+                            <th style="text-align: center">아이디</th>
+                            <th style="text-align: center">전화번호</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -45,7 +45,7 @@
 </div>
 
 <!-- 모달 창 -->
-<div id="memberModal" class="modal" style="display: none;">
+<div id="memberModal" class="modal" style="display: none; margin-top: 130px;">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -57,8 +57,8 @@
             <div class="modal-body">
                 <table class="table">
                     <tr>
-                        <th>회원번호:</th>
-                        <td id="memberId"></td>
+                        <th class="col-6">회원번호:</th>
+                        <td class="col-6" id="memberId"></td>
                     </tr>
                     <tr>
                         <th>아이디:</th>
@@ -88,14 +88,12 @@
                         <th>포인트:</th>
                         <td id="memberPoint"></td>
                     </tr>
-                    <tr style="float:left; margin-left: 150px">
+                    <tr>
                         <td>
                             <button type="button" id="edit" class="float-right updateMember">수정</button>
                         </td>
-                    </tr>
-                    <tr style="float:left;">
                         <td>
-                            <button type="button" id="delete" class="float-right deleteMember">삭제</button>
+                            <button type="button" id="delete" class="deleteMember">삭제</button>
                         </td>
                     </tr>
                 </table>
@@ -145,14 +143,18 @@
             }
 
         })
-        $('#edit').on("click", function () {
+
+        // "수정" 버튼 클릭 이벤트
+        $('#edit').off("click").on("click", function () {
             location.href = "<c:url value='/admin/adminmemberedit'/>?id=" + memberID;
         });
 
-        $('#delete').on("click", function () {
+        // "삭제" 버튼 클릭 이벤트
+        $('#delete').off("click").on("click", function () {
             const confirmed = confirm("정말 삭제하시겠습니까?");
-            if(confirmed){
+            if (confirmed) {
                 location.href = "<c:url value='/admin/adminmemberdelete'/>?id=" + memberID;
+                alert("삭제되었습니다");
             }
         });
     }

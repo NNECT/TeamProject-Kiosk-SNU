@@ -28,7 +28,8 @@ function deleteNotification(button) {
         contentType: "application/json; charset=utf-8",
         success: function(response) {
             if(response.result==="success"){
-                button.parentElement.remove();
+                button.closest("tr").remove();
+                alert("삭제되었습니다");
             }
         },
         error: function(request, status, error) {

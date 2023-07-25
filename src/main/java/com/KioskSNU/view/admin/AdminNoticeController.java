@@ -70,6 +70,9 @@ public class AdminNoticeController {
         noticeDTO.setDateTime(LocalDateTime.now());
         noticeService.insert(noticeDTO);
 
+        // 공지 등록이 완료되었다는 속성 설정
+        mav.addObject("noticeRegistered", true);
+
         mav.setViewName("redirect:/admin/adminnotification");
         return mav;
 

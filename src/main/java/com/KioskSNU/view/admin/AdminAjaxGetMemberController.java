@@ -6,6 +6,7 @@ import com.KioskSNU.snu.service.AccountService;
 import com.KioskSNU.snu.service.ParticipationChallengeService;
 import com.KioskSNU.snu.service.UsageCommutationTicketService;
 import com.KioskSNU.snu.service.UsageLockerService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,20 +20,12 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@RequiredArgsConstructor
 public class AdminAjaxGetMemberController {
     private final AccountService accountService;
     private final UsageCommutationTicketService usageCommutationTicketService;
     private final UsageLockerService usageLockerService;
     private final ParticipationChallengeService participationChallengeService;
-    private AdminPageHandler adminPageHandler;
-
-    @Autowired
-    public AdminAjaxGetMemberController(AccountService accountService, UsageCommutationTicketService usageCommutationTicketService, UsageLockerService usageLockerService, ParticipationChallengeService participationChallengeService) {
-        this.accountService = accountService;
-        this.usageCommutationTicketService = usageCommutationTicketService;
-        this.usageLockerService = usageLockerService;
-        this.participationChallengeService = participationChallengeService;
-    }
 
     //특정 회원정보
     @RequestMapping("/ajax/getMember")

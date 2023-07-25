@@ -6,6 +6,7 @@ import com.KioskSNU.snu.service.CommutationTicketService;
 import com.KioskSNU.snu.service.LockerTicketService;
 import com.KioskSNU.snu.service.RoomTypeService;
 import com.KioskSNU.snu.service.TimeTicketService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,21 +18,15 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.Map;
 
 @Controller
+@RequiredArgsConstructor
 public class AdminPaySettingController {
-
     private final TimeTicketService timeTicketService;
     private final CommutationTicketService commutationTicketService;
     private final LockerTicketService lockerTicketService;
     private final RoomTypeService roomTypeService;
 
-    public AdminPaySettingController(TimeTicketService timeTicketService, CommutationTicketService commutationTicketService, LockerTicketService lockerTicketService, RoomTypeService roomTypeService) {
-        this.timeTicketService = timeTicketService;
-        this.commutationTicketService = commutationTicketService;
-        this.lockerTicketService = lockerTicketService;
-        this.roomTypeService = roomTypeService;
-    }
-
     @GetMapping("/admin/adminpaysetting")
+    @AdminLoginRequired
     public ModelAndView getProcess(){
 
         ModelAndView mav = new ModelAndView();
