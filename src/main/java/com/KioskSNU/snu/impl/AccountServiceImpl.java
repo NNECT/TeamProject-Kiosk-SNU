@@ -56,16 +56,6 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public int getCount() {
-        return accountDAO.getCount();
-    }
-
-    @Override
-    public List<AccountDTO> selectPage(Map<String, Integer> map) {
-        return accountDAO.selectPage(map);
-    }
-
-    @Override
     public boolean hasCommutationTicket(AccountDTO accountDTO) {
         // 사용자 확인
         if (accountDTO == null) return false;

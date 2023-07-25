@@ -67,16 +67,4 @@
             group by account_id
         ) desc;
     </select>
-
-    <select id="getCount" resultType="int">
-        select count(*)
-        from account
-    </select>
-
-    <select id="selectPage" parameterType="map" resultType="accountAlias">
-        select *
-        from account
-        ORDER BY id DESC
-        LIMIT #{offset}, #{pageSize}
-    </select>
 </mapper>

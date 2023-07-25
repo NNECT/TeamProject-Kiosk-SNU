@@ -58,17 +58,4 @@ public class AccountDAO extends SqlSessionDaoSupport implements AccountMapper {
     public List<AccountDTO> getAllByPhoneNumber(String phoneNumber) {
         return getSqlSession().selectList("com.KioskSNU.snu.mapper.AccountMapper.getAllByPhoneNumber", phoneNumber);
     }
-    
-    @Transactional(readOnly = true)
-    @Override
-    public int getCount() {
-        return getSqlSession().selectOne("com.KioskSNU.snu.mapper.AccountMapper.getCount");
-    }
-
-    @Transactional(readOnly = true)
-    @Override
-    public List<AccountDTO> selectPage(Map<String, Integer> map) {
-        return getSqlSession().selectList("com.KioskSNU.snu.mapper.AccountMapper.selectPage", map);
-    }
-
 }
