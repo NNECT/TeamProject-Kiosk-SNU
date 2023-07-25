@@ -7,8 +7,8 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=deevice-width, initial-scale=1,minimum-scale=1,maxmun-scale=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="<c:url value="/css/snu_lockerTicket.css"/>">
-
 	<title>snu_locker_page</title>
 </head>
 <body>
@@ -22,7 +22,6 @@
 					<td colspan="8" class="none">
 				</tr>
 				<tr>
-
 					<td class="locker r" id="18"></td>
 					<td class="locker r" id="17"></td>
 					<td class="locker r" id="16"></td>
@@ -102,6 +101,10 @@
 	</div>
 </div>
 
+<!-- 부트스트랩 및 jQuery 스크립트 -->
+<script src="<c:url value="/js/jquery-3.7.0.min.js"/>"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 <script src="<c:url value="/js/radioBox.js"/>"></script>
 <script>
 	window.addEventListener('DOMContentLoaded', (event) => {
@@ -111,6 +114,7 @@
 			if(status[Number(locker.id)] === 1) {
 				locker.classList.remove('r');
 				locker.classList.add('b');
+				locker.innerHTML = locker.id;
 			} else if (status[Number(locker.id)] === 0) {
 				locker.classList.remove('r');
 				locker.classList.add('g');
@@ -121,22 +125,23 @@
 
 			locker.addEventListener('click', (e) => {
 				const lockerId = e.target.id;
+				console.log(lockerId);
 				showLockerModal(lockerId);
 			});
 		});
 
 		// 모달 창 보여주는 함수
 		function showLockerModal(lockerId) {
-			// Ajax 요청을 이용해서 모달에 표시할 정보 가져오기
 			$.ajax({
 				type: "POST",
-				url: "../ajax/getLocker", // 가져올 정보를 처리하는 컨트롤러 URL
+				url: "../ajax/getLocker",
 				data: JSON.stringify({ lockerId: lockerId }),
 				dataType: "json",
+				async: false,
 				contentType: "application/json; charset=utf-8",
 				success: function (response) {
 					if (response.result === "success") {
-						$("#lockerId").text(response.lockerId);
+						$("#lockerId").text(lockerId);
 						$("#memberId").text(response.memberId);
 						$("#memberName").text(response.memberName);
 						$("#memberPhone").text(response.memberPhone);
@@ -147,7 +152,7 @@
 					}
 				},
 				error: function (request, status, error) {
-					alert("오류 발생");
+					alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
 				}
 			});
 		}
