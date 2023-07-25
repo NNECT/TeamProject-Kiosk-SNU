@@ -34,6 +34,12 @@
         where       id = #{id};
     </select>
 
+    <select id="getByLockerNumber" parameterType="int" resultMap="lockerResultMap">
+        select      *
+        from        locker
+        where       lockerNumber = #{lockerNumber};
+    </select>
+
     <select id="getAll" resultMap="lockerResultMap">
         select      *
         from        locker;

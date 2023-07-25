@@ -2,6 +2,7 @@ package com.KioskSNU.snu.mapper;
 
 import com.KioskSNU.snu.dto.LockerDTO;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ public interface LockerMapper {
     int update(LockerDTO lockerDTO);
     int delete(LockerDTO lockerDTO);
     LockerDTO getById(int id);
+    LockerDTO getByLockerNumber(int lockerNumber);
     List<LockerDTO> getAll();
     List<LockerDTO> getAllByUsable(boolean usable);
 }
