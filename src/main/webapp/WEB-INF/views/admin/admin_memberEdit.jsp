@@ -25,6 +25,7 @@
                             <tr>
                                 <th>비밀번호:</th>
                                 <td><input type="password" name="password" value="${member.password}"></td>
+                                <td><button type="submit" id="passwordReset">비밀번호 초기화</button></td>
                             </tr>
                             <tr>
                                 <th>전화번호:</th>
@@ -72,6 +73,11 @@
     // 수정 버튼을 눌렀을 때 알림 창 띄우기
     const submitButton = document.querySelector("button[type='submit']");
     submitButton.addEventListener("click", showNotification);
+
+    // "비밀번호 리셋" 버튼 클릭 이벤트
+    $('#passwordReset').off("click").on("click", function () {
+        location.href = "<c:url value='/admin/memberPasswordReset'/>?id=" + memberID;
+    });
 
 </script>
 </body>

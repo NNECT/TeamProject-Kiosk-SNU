@@ -1,5 +1,6 @@
 package com.KioskSNU.view.admin;
 
+import com.KioskSNU.interceptor.AdminLoginRequired;
 import com.KioskSNU.snu.dto.ChallengeDTO;
 import com.KioskSNU.snu.service.ChallengeService;
 import lombok.RequiredArgsConstructor;
@@ -19,10 +20,10 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/admin/challenge")
 public class AdminChallengeController {
-    @Autowired
     private final ChallengeService challengeService;
 
     @GetMapping("/list")
+    @AdminLoginRequired
     public ModelAndView list() {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("/admin/admin_challenge");
@@ -37,6 +38,7 @@ public class AdminChallengeController {
     }
 
     @GetMapping("/read")
+    @AdminLoginRequired
     public ModelAndView read(Integer id) {
         ModelAndView mav = new ModelAndView();
 
@@ -52,11 +54,13 @@ public class AdminChallengeController {
     }
 
     @GetMapping("/write")
+    @AdminLoginRequired
     public String getWrite() {
         return "/admin/admin_challengeWrite";
     }
 
     @PostMapping("/write")
+    @AdminLoginRequired
     public ModelAndView postWrite(ChallengeDTO challengeDTO, @RequestParam(value = "startTime", required = false) String activeStartTime,
                                   @RequestParam(value = "endTime", required = false) String activeEndTime, RedirectAttributes redirectAttributes) {
         ModelAndView mav = new ModelAndView();
@@ -102,11 +106,13 @@ public class AdminChallengeController {
 
 
     @GetMapping("/remove")
+    @AdminLoginRequired
     public String getRemove() {
         return "/admin/admin_challengeEdit";
     }
 
     @PostMapping("/remove")
+    @AdminLoginRequired
     public String remove(Model m, Integer id, RedirectAttributes rattr) {
         try {
             int rowCnt = challengeService.delete(challengeService.getById(id));
@@ -121,12 +127,14 @@ public class AdminChallengeController {
     }
 
     @GetMapping("/edit")
+    @AdminLoginRequired
     public String getEdit() {
         return "/admin/admin_challengeEdit";
     }
 
 
     @PostMapping("/edit")
+    @AdminLoginRequired
     public ModelAndView edit(ChallengeDTO challengeDTO, @RequestParam(value = "StartTime") String StartTime,
                              @RequestParam(value = "EndTime") String EndTime, RedirectAttributes redirectAttributes) {
 

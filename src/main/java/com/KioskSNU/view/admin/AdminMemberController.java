@@ -107,4 +107,14 @@ public class AdminMemberController {
         return mav;
     }
 
+    //비밀번호 초기화
+    @RequestMapping("/admin/memberPasswordReset")
+    @AdminLoginRequired
+    public ModelAndView passwordReset(AccountDTO accountDTO){
+        ModelAndView mav = new ModelAndView();
+
+        mav.setViewName("");
+        return mav;
+    }
+
 }
