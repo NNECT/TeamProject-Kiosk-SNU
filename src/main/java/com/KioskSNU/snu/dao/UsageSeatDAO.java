@@ -59,4 +59,10 @@ public class UsageSeatDAO extends SqlSessionDaoSupport implements UsageSeatMappe
     public List<UsageSeatDTO> getAllByAccount(AccountDTO accountDTO) {
         return getSqlSession().selectList("com.KioskSNU.snu.mapper.UsageSeatMapper.getAllByAccount", accountDTO);
     }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<UsageSeatDTO> getAllBy1Year() {
+        return getSqlSession().selectList("com.KioskSNU.snu.mapper.UsageSeatMapper.getAllBy1Year");
+    }
 }
