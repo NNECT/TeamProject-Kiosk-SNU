@@ -19,4 +19,3 @@ public class UsageSeatDTO {
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
 }
-
