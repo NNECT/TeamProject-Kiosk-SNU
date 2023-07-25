@@ -124,4 +124,26 @@
         where       account.id = #{id}
         order by    usageSeat.endDateTime desc;
     </select>
+
+    <select id="getAllBy1Year" resultMap="usageSeatResultMap">
+        select      usageSeat.id                            as id,
+                    seat.id                                 as seat_id,
+                    seat.seatNumber                         as seat_seatNumber,
+                    seat.usable                             as seat_usable,
+                    account.id                              as account_id,
+                    account.username                        as account_username,
+                    account.password                        as account_password,
+                    account.phoneNumber                     as account_phoneNumber,
+                    account.point                           as account_point,
+                    account.remainTime                      as account_remainTime,
+                    usageSeat.startDateTime                 as startDateTime,
+                    usageSeat.endDateTime                   as endDateTime
+        from        usageSeat
+        join        seat
+        on          usageSeat.seat_id = seat.id
+        join        account
+        on          usageSeat.account_id = account.id
+        where       date(usageSeat.endDateTime) >= date(date_sub(usageSeat.endDateTime, INTERVAL 1 YEAR) + INTERVAL 1 DAY - INTERVAL day(usageSeat.endDateTime) DAY)
+        order by    usageSeat.endDateTime desc;
+    </select>
 </mapper>

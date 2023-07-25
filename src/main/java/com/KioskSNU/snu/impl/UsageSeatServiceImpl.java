@@ -10,7 +10,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -59,6 +63,11 @@ public class UsageSeatServiceImpl implements UsageSeatService {
     }
 
     @Override
+    public List<UsageSeatDTO> getAllBy1Year() {
+        return usageSeatDAO.getAllBy1Year();
+    }
+
+    @Override
     public Map<Integer, Integer> getSeatStatusMap() {
         return getSeatStatusMap(null);
     }
@@ -80,5 +89,49 @@ public class UsageSeatServiceImpl implements UsageSeatService {
         });
 
         return seatStatusMap;
+    }
+
+    @Override
+    public Map<LocalDate, Double> get1YearTimes() {
+        LinkedHashMap<LocalDate, Double> timesMap = new LinkedHashMap<>();
+        LocalDateTime ago1Year = LocalDateTime.now().minusYears(1).withDayOfMonth(1);
+        System.out.println(ago1Year);
+
+        // timesMap 1년치 초기화
+        for (
+                LocalDate month = LocalDate.now().minusYears(1).withDayOfMonth(1);
+                !month.isAfter(LocalDate.now().withDayOfMonth(1));
+                month = month.plusMonths(1)
+        ) {
+            timesMap.put(month, 0.0);
+        }
+        System.out.println(timesMap);
+
+        List<UsageSeatDTO> usageSeatDTOList = getAllBy1Year();
+        System.out.println(usageSeatDTOList);
+        usageSeatDTOList.forEach(usageSeatDTO -> {
+            LocalDateTime start = usageSeatDTO.getStartDateTime();
+            LocalDateTime end = usageSeatDTO.getEndDateTime();
+
+            // 탐색 범위를 벗어난 경우
+            if (end.isBefore(ago1Year)) return;
+
+            // 데이터가 걸쳐 있는 모든 월에 대해 반복
+            for (LocalDateTime date = start; !date.isAfter(end); date = date.plusMonths(1)) {
+                LocalDate firstDayOfMonth = date.withDayOfMonth(1).toLocalDate();
+
+                LocalDateTime endOfMonth = (date.getMonth() == end.getMonth() && date.getYear() == end.getYear())
+                        ? end
+                        : firstDayOfMonth.plusMonths(1).atStartOfDay();
+
+                long minutesUsed = Duration.between(date, endOfMonth).toMinutes();
+
+                // 현재 월의 사용 시간에 시간 사용 시간 더하기
+                timesMap.put(firstDayOfMonth, timesMap.get(firstDayOfMonth) + minutesUsed / 60.0);
+            }
+        });
+        System.out.println("over");
+
+        return timesMap;
     }
 }

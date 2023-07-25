@@ -19,7 +19,7 @@
                         <li class="list-group-item"><a href="<c:url value='/admin/adminpaysetting' />"><span class="h3">요금 설정</span></a></li>
                         <li class="list-group-item"><a href="<c:url value='/admin/adminnotification' />"><span class="h3">공지기록</span></a></li>
                         <li class="list-group-item"><a href="<c:url value='/admin/challenge/list' />"><span class="h3">챌린지</span></a></li>
-                        <li class="list-group-item"><a href="<c:url value='/admin/adminsales' />"><span class="h3">매출현황</span></a></li>
+                        <li class="list-group-item"><a href="<c:url value='/admin/sales' />"><span class="h3">매출현황</span></a></li>
                     </ul>
                 </div>
             </div>
