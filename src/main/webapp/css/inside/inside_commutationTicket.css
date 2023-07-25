@@ -47,18 +47,17 @@ li{
     text-align: center;
     line-height: 40px;
 }
-#timeTicket :hover{
+.currentTicketButton {
+    background-color: #285FF5;
+    color: #ffffff;
+}
+
+a{text-decoration: none; color: #285FF5;}
+.otherTicketButton :hover{
     display: block;
     color: #ffffff;
     background-color: #285FF5;
     border-radius: 18px;
-}
-
-a{text-decoration: none; color: #285FF5;}
-
-#commutationTicket{
-    background-color: #285FF5;
-    color: #ffffff;
 }
 hr{
     border: 0.9px solid #285FF5;  

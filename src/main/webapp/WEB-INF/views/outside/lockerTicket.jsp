@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -75,11 +76,13 @@
             </div>
             <table id="ticket">
                 <tr>
-                    <td class="radio-box">
-                        <input type="radio" name="radio-button" class="radio-input" value="1">
-                        <p class="t rText btn-text">30일</p>
-                        <p class="p rText btn-text">6,000원</p>
-                    </td>
+                    <c:forEach var="lockerTicket" items="${lockerTicketList}">
+                        <td class="radio-box">
+                            <input type="radio" name="radio-button" class="radio-input" value="${lockerTicket.id}">
+                            <p class="t rText btn-text">${lockerTicket.day}일</p>
+                            <p class="p rText btn-text"><fmt:formatNumber value="${lockerTicket.price}" pattern="#,##0"/>원</p>
+                        </td>
+                    </c:forEach>
                     <td class="radio-box">
                         <input type="radio" name="radio-button" class="radio-input" value="0">
                         <p class="t btn-text">사용X</p>
