@@ -56,13 +56,13 @@
 
     // 수정이 완료되었을 때 알림 창 띄우기
     function showNotification() {
-        alert("수정이 완료되었습니다!");
+        alert("수정되었습니다");
     }
 
     // 수정 버튼을 눌렀을 때 알림 창 띄우기
     const submitButton = document.querySelector("button[type='submit']");
     submitButton.addEventListener("click", showNotification);
-    
+
 </script>
 
 </body>

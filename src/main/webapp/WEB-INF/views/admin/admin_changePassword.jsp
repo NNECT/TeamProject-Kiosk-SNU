@@ -13,25 +13,41 @@
                     <h2 class="card-title">관리자 페이지 비밀번호 변경</h2>
                     <hr>
                     <form id="sudo-form">
-                        <ul class="list-group">
-                            <li class="list-group-item">
-                                <label for="prePassword" class="text-center">현재 비밀번호</label>
-                                <input type="password" id="prePassword" name="prePassword" required autofocus>
-                            </li>
-                            <li class="list-group-item">
-                                <label for="password">새로운 비밀번호</label>
-                                <%--dto 설정값으로 name 과 id 조금 헷갈릴 수 있음--%>
-                                <input type="password" id="password" name="password" onkeyup="checkPasswordMatch()" required>
-                            </li>
-                            <li class="list-group-item">
-                                <label for="password_confirm">다시 입력해주세요</label>
-                                <input type="password" id="password_confirm" name="password_confirm" onkeyup="checkPasswordMatch()" required>
-                                <span id="passwordCheck"></span>
-                            </li>
-                            <li class="list-group-item">
-                                <button type="submit" class="btn btn-primary">변경하기</button>
-                            </li>
-                        </ul>
+
+                        <table class="table">
+                            <tbody>
+                            <tr>
+                                <td class="text-right col-5">
+                                    <label for="prePassword">현재 비밀번호</label>
+                                </td>
+                                <td class="col-7 text-left">
+                                    <input type="password" id="prePassword" name="prePassword" required autofocus>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-right col-5">
+                                    <label for="password">새로운 비밀번호</label>
+                                </td>
+                                <td class="col-7 text-left">
+                                    <input type="password" id="password" name="password" onkeyup="checkPasswordMatch()" required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-right col-5">
+                                    <label for="password_confirm">다시 입력해주세요</label>
+                                </td>
+                                <td class="col-7">
+                                    <input type="password" id="password_confirm" name="password_confirm" onkeyup="checkPasswordMatch()" style="float: left;" required>
+                                    <span id="passwordCheck"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="text-center">
+                                    <button type="submit" class="btn btn-primary">변경하기</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </form>
                 </div>
             </div>

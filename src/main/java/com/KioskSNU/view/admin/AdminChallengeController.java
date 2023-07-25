@@ -2,6 +2,7 @@ package com.KioskSNU.view.admin;
 
 import com.KioskSNU.snu.dto.ChallengeDTO;
 import com.KioskSNU.snu.service.ChallengeService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,15 +16,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/admin/challenge")
 public class AdminChallengeController {
     @Autowired
     private final ChallengeService challengeService;
-
-    @Autowired
-    public AdminChallengeController(ChallengeService challengeService) {
-        this.challengeService = challengeService;
-    }
 
     @GetMapping("/list")
     public ModelAndView list() {

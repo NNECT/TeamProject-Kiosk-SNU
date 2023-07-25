@@ -3,6 +3,7 @@ package com.KioskSNU.view.admin;
 import com.KioskSNU.interceptor.AdminLoginRequired;
 import com.KioskSNU.snu.dto.NoticeDTO;
 import com.KioskSNU.snu.service.NoticeService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,13 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @RestController
+@RequiredArgsConstructor
 public class AdminAjaxDeleteNoticeController {
     private final NoticeService noticeService;
-
-    @Autowired
-    public AdminAjaxDeleteNoticeController(NoticeService noticeService) {
-        this.noticeService = noticeService;
-    }
 
     @RequestMapping("/ajax/deleteNotification")
     @AdminLoginRequired
