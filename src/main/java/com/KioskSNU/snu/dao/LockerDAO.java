@@ -42,6 +42,12 @@ public class LockerDAO extends SqlSessionDaoSupport implements LockerMapper {
 
     @Transactional(readOnly = true)
     @Override
+    public LockerDTO getByLockerNumber(int lockerNumber) {
+        return getSqlSession().selectOne("com.KioskSNU.snu.mapper.LockerMapper.getByLockerNumber", lockerNumber);
+    }
+
+    @Transactional(readOnly = true)
+    @Override
     public List<LockerDTO> getAll() {
         return getSqlSession().selectList("com.KioskSNU.snu.mapper.LockerMapper.getAll");
     }

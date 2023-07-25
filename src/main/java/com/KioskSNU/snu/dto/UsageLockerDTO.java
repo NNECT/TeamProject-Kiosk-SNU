@@ -19,7 +19,7 @@ public class UsageLockerDTO {
     private LocalDate startDate;
     private LocalDate endDate;
 
-    public void setLocketDTO(LockerDTO lockerDTO) {
+    public void setLockerDTO(LockerDTO lockerDTO) {
         this.locker_id = lockerDTO.getId();
         this.locker_lockerNumber = lockerDTO.getLockerNumber();
         this.locker_usable = lockerDTO.isUsable();

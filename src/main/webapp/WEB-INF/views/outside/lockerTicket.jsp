@@ -24,7 +24,7 @@
         </ul>
         <hr>
 
-        <form id="lockerFrm">
+        <form id="lockerFrm" action="<c:url value="/outside/locker"/>" method="post" onsubmit="return selectedLockerCheck()">
             <p>사물함을 선택해주세요</p>
             <table id="locker">
                 <tr>
@@ -76,19 +76,19 @@
             <table id="ticket">
                 <tr>
                     <td class="radio-box">
-                        <input type="radio" name="radio-button" class="radio-input" value="">
+                        <input type="radio" name="radio-button" class="radio-input" value="1">
                         <p class="t rText btn-text">30일</p>
                         <p class="p rText btn-text">6,000원</p>
                     </td>
                     <td class="radio-box">
-                        <input type="radio" name="radio-button" class="radio-input" value="">
-                        <p class="t btn-text">사용X</p><br>
-                        <p class="p btn-text"></p><br>
+                        <input type="radio" name="radio-button" class="radio-input" value="0">
+                        <p class="t btn-text">사용X</p>
+                        <p class="p btn-text"></p>
                     </td>
                 </tr>
             </table>
 
-            <input id="beforeBtn" type="submit" value="이전">
+            <input id="beforeBtn" type="button" value="이전">
             <input id="nextBtn" type="submit" value="다음">
         </form>
     </section>
@@ -107,7 +107,7 @@
                 locker.innerHTML = locker.id;
                 </c:when>
                 <c:otherwise>
-                locker.innerHTML = '<label>' + locker.id + '<input type="radio" name="locker-radio" class="locket-radio-input" value=""></label>';
+                locker.innerHTML = '<label>' + locker.id + '<input type="radio" name="locker-radio" class="locket-radio-input" value="' + locker.id + '"></label>';
                 </c:otherwise>
                 </c:choose>
             } else if (status[Number(locker.id)] === 0) {
@@ -147,6 +147,26 @@
             });
         });
     });
+
+    function selectedLockerCheck() {
+        <c:if test="${not hasLocker}">
+        let check = false;
+		for (const elm of document.getElementsByClassName("locket-radio-input")) {
+            if (elm.checked) {
+                check = true;
+                break;
+            }
+        }
+        if (!check) return false;
+        </c:if>
+
+        for (const elm of document.getElementsByName("radio-button")) {
+            if (elm.checked) {
+                return true;
+            }
+        }
+        return false;
+    }
 </script>
 </body>
 </html>
