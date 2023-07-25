@@ -15,6 +15,4 @@ public interface AccountMapper {
     AccountDTO getByUsername(String username);
     List<AccountDTO> getAll();
     List<AccountDTO> getAllByPhoneNumber(String phoneNumber);
-    int getCount();
-    List<AccountDTO> selectPage(Map<String, Integer> map);
 }
