@@ -9,7 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.sql.SQLOutput;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -75,10 +79,19 @@ public class AdminSeatController {
             AccountDTO getUser = accountService.getById(usageSeatDTO.getAccount_id());
             //좌석사용자의 accountid로 가져온 getUser 정보의 username, 입실시간 가져오기
             mav.addObject("accountID", getUser.getUsername());
-            mav.addObject("startDateTime", usageSeatDTO.getStartDateTime());
+
+            LocalDateTime startDateTime = usageSeatDTO.getStartDateTime();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            String formattedStartDateTime = startDateTime.format(formatter);
+            mav.addObject("startDateTime", formattedStartDateTime);
+
+            mav.addObject("startDateTime", formattedStartDateTime);
             mav.addObject("number",number);
             mav.addObject("type",type);
             return mav;
+
+
+
 
         } else if (type.equals("room")) {
             mav.setViewName("admin/admin_seat");
