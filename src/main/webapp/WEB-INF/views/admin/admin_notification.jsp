@@ -56,10 +56,16 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="<c:url value="/js/deleteNotice.js"/>"></script>
-<script src="<c:url value="/js/jquery-3.7.0.min.js"/>"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
     new DataTable('#example');
+</script>
+<script>
+    <c:if test="${noticeRegistered}">
+    window.addEventListener('DOMContentLoaded', (event) => {
+        window.alert("등록되었습니다.");
+    });
+    </c:if>
 </script>
 </body>
 </html>
