@@ -8,35 +8,17 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1,minimum-scale=1,max-mun-scale=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="<c:url value="/css/admin/admin_locker.css"/>">
+	<c:import url="../headerFooterForm/headerFooterForm_adminHeader.jsp"/>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/adminHome.css">
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
+	<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+	<script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
 
 	<title>스터디카페 관리자 페이지</title>
 </head>
+
 <body>
-
-<!-- 상단 네비게이션 바 -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-	<a class="navbar-brand" href="${pageContext.request.contextPath}/admin/index">스터디카페 관리자</a>
-	<div class="collapse navbar-collapse" id="navbarSupportedContent">
-		<ul class="navbar-nav ml-auto">
-			<li class="nav-item">
-				<c:choose>
-					<%-- 로그인 상태라면 네비게이션 바에 로그아웃, 마이페이지를 한 줄에 표시 --%>
-					<c:when test="${loggedIn}">
-                        <span class="nav-link ml-auto">
-                            <a href="${pageContext.request.contextPath}/admin/adminlogout">로그아웃</a>
-                            <span class="text-muted mx-2">|</span>
-                            <a href="${pageContext.request.contextPath}/admin/adminChangePassword">비밀번호변경</a>
-                        </span>
-					</c:when>
-				</c:choose>
-			</li>
-		</ul>
-	</div>
-</nav>
-
-
 <div class="container">
 	<div class="row justify-content-center align-items-center" style="height: 30vh;">
 		<div class="col-md-8">
@@ -90,12 +72,32 @@
 	</div>
 </div>
 
-<!-- 모달 창 -->
+<%-- 메뉴 선택 모달 창 --%>
+<div id="menuModal" class="modal" style="display: none; margin-top: 160px;">
+	<div class="modal-dialog">
+	<h5 class="modal-title">사물함 정보</h5>
+	<div class="modal-content">
+		<div class="modal-header">
+		<table class="table">
+			<tr>
+				<th colspan="2" style="text-align: center">원하는 메뉴를 선택해주세요</th>
+			</tr>
+			<tr>
+				<td style="text-align: center;"><button type="button" id="realTimeStatus">실시간 현황</button></td>
+				<td style="text-align: center"><button type="button" id="previousRecord">이전 기록</button></td>
+			</tr>
+		</table>
+	</div>
+	</div>
+	</div>
+</div>
+
+<!-- 실시간 현황 모달 창 -->
 <div id="lockerModal" class="modal" style="display: none; margin-top: 130px;">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title">사물함 정보</h5>
+				<h5 class="modal-title" style="font-weight: bold; position: relative; left: 38%;">실시간 현황</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
@@ -133,10 +135,44 @@
 	</div>
 </div>
 
+<%-- 이전 기록 모달 창 --%>
+<div id="previousModal" class="modal" style="display: none; margin-top: 130px;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<div class="modal-body">
+					<table id="example" class="display" style="width:100%">
+						<thead>
+							<tr>
+								<th>회원번호</th>
+								<th>아이디</th>
+								<th>전화번호</th>
+								<th>시작일</th>
+								<th>종료일</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
 <!-- 부트스트랩 및 jQuery 스크립트 -->
 <script src="<c:url value="/js/jquery-3.7.0.min.js"/>"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+<script>
+	new DataTable('#example');
+</script>
 <script src="<c:url value="/js/radioBox.js"/>"></script>
 <script>
 	window.addEventListener('DOMContentLoaded', (event) => {
@@ -157,12 +193,30 @@
 
 			locker.addEventListener('click', (e) => {
 				const lockerId = e.target.id;
-				console.log(lockerId);
-				showLockerModal(lockerId);
+				menuModal(lockerId);
 			});
 		});
 
-		//모달 창
+		// 메뉴 모달 창
+		function menuModal(lockerId){
+
+			$("#menuModal").modal("show");
+
+			// "실시간 현황" 버튼 클릭 이벤트
+			$("#realTimeStatus").off("click").on("click", function() {
+				$("#menuModal").modal("hide");
+				showLockerModal(lockerId);
+			});
+
+			// "이전 기록" 버튼 클릭 이벤트
+			$("#previousRecord").off("click").on("click", function() {
+				$("#menuModal").modal("hide");
+				previousRecord(lockerId);
+			});
+
+		}
+
+		// 실시간 현황 모달 창
 		function showLockerModal(lockerId) {
 			$.ajax({
 				type: "POST",
@@ -222,13 +276,18 @@
 						const lockerActivationBtn = $("#lockerActivationBtn");
 						lockerActivationBtn.val(response.lockerActivation ? '비활성화' : '활성화');
 						$("#lockerModal").modal("hide");
-						alert("처리되었습니다");
+						location.href = "<c:url value="/admin/adminlocker"/> ";
 					}
 				},
 				error: function (request, status, error) {
 					alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
 				}
 			});
+		}
+
+		function previousRecord(lockerId){
+			location.href = "<c:url value='/admin/adminLockerRecord'/>?id=" + lockerId;
+			$("#previousModal").modal("show");
 		}
 
 	});

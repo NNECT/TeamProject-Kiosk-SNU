@@ -3,7 +3,6 @@ package com.KioskSNU.view.admin;
 import com.KioskSNU.interceptor.AdminLoginRequired;
 import com.KioskSNU.snu.dto.LockerDTO;
 import com.KioskSNU.snu.service.LockerService;
-import com.KioskSNU.snu.service.UsageLockerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,7 +13,7 @@ import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
-public class AdminLockerActivationController {
+public class AdminAjaxLockerActivationController {
     private final LockerService lockerService;
 
     @RequestMapping("/ajax/updateLockerUsable")
