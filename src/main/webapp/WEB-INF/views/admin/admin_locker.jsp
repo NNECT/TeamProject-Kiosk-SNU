@@ -144,6 +144,7 @@
 					<table id="example" class="display" style="width:100%">
 						<thead>
 							<tr>
+								<th>사물함번호</th>
 								<th>회원번호</th>
 								<th>아이디</th>
 								<th>전화번호</th>
@@ -153,11 +154,22 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
+								<td id="rLockerId"></td>
+							</tr>
+							<tr>
+								<td id="rMemberId"></td>
+							</tr>
+							<tr>
+								<td id="rMemberName"></td>
+							</tr>
+							<tr>
+								<td id="rMemberPhone"></td>
+							</tr>
+							<tr>
+								<td id="rLockerStart"></td>
+							</tr>
+							<tr>
+								<td id="rLockerEnd"></td>
 							</tr>
 						</tbody>
 					</table>
@@ -285,9 +297,34 @@
 			});
 		}
 
+		// 이전 기록
 		function previousRecord(lockerId){
-			location.href = "<c:url value='/admin/adminLockerRecord'/>?id=" + lockerId;
-			$("#previousModal").modal("show");
+/*			location.href = "<c:url value='/admin/adminLockerRecord'/>?id=" + lockerId;*/
+
+			$.ajax({
+				type: "GET",
+				url: "../ajax/adminLockerRecord",
+				data: JSON.stringify({ lockerId: lockerId }),
+				dataType: "json",
+				async: false,
+				contentType: "application/json; charset=utf-8",
+				success: function (response) {
+					if (response.result === "success") {
+						$("#rLockerId").text(LockerId);
+						for(var i=0; i<response.length; i++){
+							$("#rMemberId").text(response.rMemberId);
+							$("#rMemberName").text(response.rMemberName);
+							$("#rMemberPhone").text(response.rMemberPhone);
+							$("#rLockerStart").text(response.rLockerStart);
+							$("#rLockerEnd").text(response.rLockerEnd);
+						}
+						$("#previousModal").modal("show");
+					}
+				},
+				error: function (request, status, error) {
+					alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+				}
+			});
 		}
 
 	});

@@ -48,4 +48,17 @@ public class AdminAjaxGetLockerController {
         return ResponseEntity.ok(resultMap);
     }
 
+/*    @RequestMapping("/ajax/adminLockerRecord")
+    @AdminLoginRequired
+    public ResponseEntity<Map<String,Object>> lockerRecord(@RequestBody Map<String,String> map){
+
+        int id = Integer.parseInt(map.get("lockerId"));
+        UsageLockerDTO usageLockerDTO = usageLockerService.getById(id);
+        LockerDTO lockerDTO = lockerService.getById(id);
+
+        Map<String, Object> resultMap = new HashMap<>();
+
+        return ResponseEntity.ok(resultMap);
+    }*/
+
 }
