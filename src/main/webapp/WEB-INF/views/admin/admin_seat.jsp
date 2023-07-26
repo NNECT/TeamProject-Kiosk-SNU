@@ -40,6 +40,7 @@
         <button id="activateSeat" onclick="activateSeat()">자리 활성화</button>
         <button id="deactivateSeat" onclick="deactivateSeat()">자리 비활성화</button>
         <button id="endUsage" onclick="endUsage()">사용 종료</button>
+        <button id="seatReport" onclick="seatReport()">자리 사용 내역</button>
     </div>
 </div>
 
@@ -96,6 +97,7 @@
     document.getElementById('startDateTime').style.display = 'none';
     document.getElementById('usable').style.display = 'none';
     document.getElementById('seatStatus').style.display = 'none';
+    document.getElementById('seatReport').style.display = 'none';
     const buttons = document.querySelectorAll('.modal-content button');
     buttons.forEach(button => {
         button.style.display = 'none';
@@ -337,6 +339,9 @@
     }
     </c:if>
 
+    function seatReport(){
+        window.location.href = "<c:url value="/admin/adminseatreport" />?type=${type}&number=${number}";
+    }
 
 </script>
 <!-- 부트스트랩 및 jQuery 스크립트 -->
