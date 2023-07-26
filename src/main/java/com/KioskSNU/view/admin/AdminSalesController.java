@@ -43,7 +43,7 @@ public class AdminSalesController {
 
         // 챌린지 선택률/성공률
         Map<String, List<ParticipationChallengeDTO>> challengeSituationMap = participationChallengeService.getEachChallengeSituation();
-        Map<String, Integer> challengeSituationScaledData = scaler.sumScaler(challengeSituationMap, 360);
+        Map<String, Integer> challengeSituationScaledData = scaler.sumMapScaler(challengeSituationMap, 360);
         List<String> challengeSituationLabels = new ArrayList<>();
         List<Double> challengeSituationData = new ArrayList<>();
         List<Integer> challengeSituationAngles = new ArrayList<>();

@@ -10,13 +10,12 @@ import java.util.Map;
 @Component
 public class Scaler {
     /**
-     * dataMap의 key String에 따른 각각의 value List에 들어있는 원소의 개수가 사용되는 정보이다.
      * 값의 합이 targetScaleSum과 같도록 스케일링하여 String-Integer 형태의 Map으로 반환한다.
-     * @param dataMap key: String, value: ? (List<?>)
+     * @param dataMap key: String, value: Integer
      * @param targetScaleSum 스케일링 후의 값의 합
      * @return 스케일링된 값의 합이 targetScaleSum과 같도록 스케일링된 String-Integer 형태의 LinkedHashMap
      */
-    public Map<String, Integer> sumScaler(Map<String, ?> dataMap, int targetScaleSum) {
+    public Map<String, Integer> sumScaler(Map<String, Integer> dataMap, int targetScaleSum) {
 		List<String> keyList = new ArrayList<>(dataMap.size());
         List<Integer> valueList = new ArrayList<>(dataMap.size());
 
@@ -24,9 +23,8 @@ public class Scaler {
         int[] sum = {0};
         dataMap.forEach((key, value) -> {
             keyList.add(key);
-            List<?> valueListTemp = (List<?>) value;
-            valueList.add(valueListTemp.size());
-            sum[0] += valueListTemp.size();
+            valueList.add(value);
+            sum[0] += value;
         });
 
         // valueList의 원소들을 targetScaleSum에 맞게 스케일링한다.
@@ -52,5 +50,18 @@ public class Scaler {
             resultMap.put(keyList.get(j), valueList.get(j));
         }
         return resultMap;
+    }
+
+    /**
+     * dataMap의 key String에 따른 각각의 value List에 들어있는 원소의 개수가 사용되는 정보이다.
+     * 값의 합이 targetScaleSum과 같도록 스케일링하여 String-Integer 형태의 Map으로 반환한다.
+     * @param listDataMap key: String, value: ? (List<?>)
+     * @param targetScaleSum 스케일링 후의 값의 합
+     * @return 스케일링된 값의 합이 targetScaleSum과 같도록 스케일링된 String-Integer 형태의 LinkedHashMap
+     */
+    public Map<String, Integer> sumMapScaler(Map<String, ?> listDataMap, int targetScaleSum) {
+        Map<String, Integer> dataMap = new LinkedHashMap<>();
+        listDataMap.forEach((key, value) -> dataMap.put(key, ((List<?>) value).size()));
+        return sumScaler(dataMap, targetScaleSum);
     }
 }
