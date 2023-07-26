@@ -113,7 +113,12 @@ img{
     font-weight: lighter;
     color: #ffffff;
 }
-
+#introduce{
+    margin-top: -20px;
+    font-size: 18px;
+    font-weight: lighter;
+    color: #ffffff;
+}
 /*btn*/
 #moveBtn{
     margin-top: 100px;
