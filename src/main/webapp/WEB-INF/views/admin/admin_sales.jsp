@@ -20,15 +20,15 @@
                             <div class="card">
                                 <div class="card-body">
                                     <h5 class="card-title">누적사용시간</h5>
-                                    <canvas id="myChart"></canvas>
+                                    <canvas id="timeChart"></canvas>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">금액</h5>
-                                    <!-- 금액 내용 -->
+                                    <h5 class="card-title">챌린지 선택률 및 성공률</h5>
+                                    <canvas id="challengeChart"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -45,9 +45,12 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
-    const ctx = document.getElementById('myChart');
+    const toRadians = (val) => val * Math.PI / 180;
 
-    new Chart(ctx, {
+    const timeCanvas = document.getElementById('timeChart');
+    const challengeCanvas = document.getElementById('challengeChart');
+
+    const timeChart = new Chart(timeCanvas, {
         type: 'line',
         data: {
             labels: ${seatTimesLabels},
@@ -62,6 +65,27 @@
             scales: {
                 y: {
                     beginAtZero: true
+                }
+            }
+        }
+    });
+
+    const challengeChart = new Chart(challengeCanvas, {
+        type: 'polarArea',
+        data: {
+            datasets: [{
+                data: ${challengeSituationData}
+            }],
+            labels: [
+                <c:forEach items="${challengeSituationLabels}" var="label" varStatus="status">
+                "${label}"<c:if test="${!status.last}">,</c:if>
+                </c:forEach>
+            ]
+        },
+        options: {
+            elements: {
+                arc: {
+                    angle: ${challengeSituationAngles}
                 }
             }
         }
