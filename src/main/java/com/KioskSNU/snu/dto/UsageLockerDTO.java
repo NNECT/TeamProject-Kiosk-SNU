@@ -3,9 +3,12 @@ package com.KioskSNU.snu.dto;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Data
 public class UsageLockerDTO {
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
     private int id;
     private int locker_id;
     private int locker_lockerNumber;
@@ -32,5 +35,13 @@ public class UsageLockerDTO {
         this.account_phoneNumber = accountDTO.getPhoneNumber();
         this.account_point = accountDTO.getPoint();
         this.account_remainTime = accountDTO.getRemainTime();
+    }
+
+    public String getStartDateString() {
+        return startDate.format(DATE_FORMATTER);
+    }
+
+    public String getEndDateString() {
+        return endDate.format(DATE_FORMATTER);
     }
 }

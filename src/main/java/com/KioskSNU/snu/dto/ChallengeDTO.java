@@ -3,9 +3,12 @@ package com.KioskSNU.snu.dto;
 import lombok.*;
 
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 @Data
 public class ChallengeDTO {
+    private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
+
     private int id;
     private String title;
     private String description;
@@ -22,4 +25,12 @@ public class ChallengeDTO {
     private int rewardPoint;
     private boolean active;
     private boolean visible;
+
+    public String getActiveStartTimeString() {
+        return activeStartTime.format(TIME_FORMATTER);
+    }
+
+    public String getActiveEndTimeString() {
+        return activeEndTime.format(TIME_FORMATTER);
+    }
 }

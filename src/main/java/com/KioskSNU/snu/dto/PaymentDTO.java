@@ -3,9 +3,12 @@ package com.KioskSNU.snu.dto;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Data
 public class PaymentDTO {
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
     private int id;
     private int account_id;
     private String account_username;
@@ -25,5 +28,9 @@ public class PaymentDTO {
         this.account_phoneNumber = accountDTO.getPhoneNumber();
         this.account_point = accountDTO.getPoint();
         this.account_remainTime = accountDTO.getRemainTime();
+    }
+
+    public String getDateTimeString() {
+        return dateTime.format(DATE_TIME_FORMATTER);
     }
 }

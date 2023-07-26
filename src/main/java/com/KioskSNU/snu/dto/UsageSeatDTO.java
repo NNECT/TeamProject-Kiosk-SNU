@@ -3,9 +3,12 @@ package com.KioskSNU.snu.dto;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Data
 public class UsageSeatDTO {
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
     private int id;
     private int seat_id;
     private int seat_seatNumber;
@@ -32,5 +35,13 @@ public class UsageSeatDTO {
         this.account_phoneNumber = accountDTO.getPhoneNumber();
         this.account_point = accountDTO.getPoint();
         this.account_remainTime = accountDTO.getRemainTime();
+    }
+
+    public String getStartDateTimeString() {
+        return startDateTime.format(DATE_TIME_FORMATTER);
+    }
+
+    public String getEndDateTimeString() {
+        return endDateTime.format(DATE_TIME_FORMATTER);
     }
 }
