@@ -3,15 +3,19 @@ body{
     background-color: #EDF2FF;
     position: relative;
 }
+/*스크롤 막음*/
+body.no-scroll {
+    overflow: hidden !important
+}
 #whiteWrap{
     width: 900px;
-    height: 785px;
+    height: 1460px;
     background-color: #ffffff;
     position: absolute;
     top: 0px;
     left: 50%;
     transform: translate(-50%,0);
-     
+
 }
 section{
     margin: 0 120px;
@@ -52,7 +56,7 @@ li{
 /*------*/
 
 #line{
-    border: 0.9px solid #285FF5;  
+    border: 0.9px solid #285FF5;
 }
 
 /*결제내역*/
@@ -61,7 +65,7 @@ li{
 }
 table{
     width: 500px;
-    
+
 }
 #locker{
     border-spacing: 10px 3px;
@@ -116,16 +120,106 @@ img{
     padding: 15px 35px;
 }
 /*버튼*/
-
+#beforeBtn{
+    width: 100px;
+    height: 50px;
+    background-color: #E4E4E4;
+    border-radius: 30px;
+    border: none;
+    font-size: 20px;
+    color: #ffffff;
+    position: relative;
+    top: 100px;
+    left: 0px;
+}
 #payBtn{
     width: 300px;
     height: 50px;
     background-color: #285FF5;
     border-radius: 30px;
     border: none;
+    position: relative;
+    top: 100px;
+    left: 250px;
+}
+a{
+    text-decoration: none;
     font-size: 20px;
     color: #ffffff;
-    position: relative;
-    top: 30px;
-    left: 280px;
+}
+/*결제하기*/
+#payChoose{
+    color: #285FF5;
+    font-size: 22px;
+    font-weight: 500;
+    margin-left: -25px;
+    margin-top: 170px;
+}
+#payChoose{
+    width: 300px;
+}
+
+#cardBox{
+    margin-top: 50px;
+    margin-left: 30px;
+    width: 600px;
+    height: 170px;
+    border: 0px solid rebeccapurple;
+}
+.card{
+    width: 170px;
+    height: 170px;
+    border: 1px solid #285FF5;
+    border-radius: 10px;
+    text-align: center;
+}
+.radio-input{
+    display: none;
+
+}
+.c1{float: left;}
+.c2{float: left; margin-left: 42.5px;}
+.c3{float: right;}
+#credit{
+    width: 100px;
+    height: 70px;
+    margin-top: 30px;
+}
+#kakao{
+    width: 100px;
+    height: 46px;
+    margin-top: 44px;
+}
+#naver{
+    width: 100px;
+    height: 40px;
+    margin-top: 44px;
+}
+.cardInfo{
+    font-size: 20px;
+    color: #285FF5;
+}
+#cardDot{
+    width: 650px;
+    height: 1px;
+    margin-top: 50px;
+    margin-left: -30px;
+}
+/**/
+.resultLastBox{
+    margin: 15px 0;
+}
+#finalP{
+
+}
+/*결제하기*/
+#payChooseBtn{
+    width: 900px;
+    height: 130px;
+    background-color: #285FF5;
+    border: none;
+    margin-top: 100px;
+    margin-left: -120px;
+    font-size: 30px;
+    color: #ffffff;
 }
