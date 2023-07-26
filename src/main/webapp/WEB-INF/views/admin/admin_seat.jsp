@@ -141,7 +141,7 @@
 
         $.ajax({
             type: "POST",
-            url: "/ajax/seatActivation",
+            url: "../ajax/seatActivation",
             data: JSON.stringify({
                 "codePurpose": "seatActivate",
                 "number": ${number},
@@ -171,7 +171,7 @@
 
         $.ajax({
             type: "POST",
-            url: "/ajax/roomActivation",
+            url: "../ajax/roomActivation",
             data: JSON.stringify({
                 "codePurpose": "roomActivate",
                 "number": ${number},
@@ -213,7 +213,7 @@
     function seatDeactivateControl() {
         $.ajax({
             type: "POST",
-            url: "/ajax/seatActivation",
+            url: "../ajax/seatActivation",
             data: JSON.stringify({
                 "codePurpose": "seatDeactivate",
                 "number": ${number},
@@ -243,7 +243,7 @@
     function roomDeactivateControl() {
         $.ajax({
             type: "POST",
-            url: "/ajax/roomActivation",
+            url: "../ajax/roomActivation",
             data: JSON.stringify({
                 "codePurpose": "roomDeactivate",
                 "number": ${number},
@@ -284,7 +284,7 @@
     function seatEndUsageControl() {
         $.ajax({
             type: "POST",
-            url: "/ajax/seatActivation",
+            url: "../ajax/seatActivation",
             data: JSON.stringify({
                 "codePurpose": "seatEndUsage",
                 "number": ${number},
@@ -313,7 +313,7 @@
     function roomEndUsageControl() {
         $.ajax({
             type: "POST",
-            url: "/ajax/roomActivation",
+            url: "../ajax/roomActivation",
             data: JSON.stringify({
                 "codePurpose": "roomEndUsage",
                 "number": ${number},

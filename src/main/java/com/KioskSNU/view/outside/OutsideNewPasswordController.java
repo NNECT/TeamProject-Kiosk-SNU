@@ -50,6 +50,7 @@ public class OutsideNewPasswordController {
         session.removeAttribute("findPasswordUser");
 
         //기존 session 에 들어있던 type과 number login으로 보내서 형태 맞춰주기 redirect 사용으로 get
+
         mav.setViewName(String.format("redirect:/outside/login?type=%s&number=%d", session.getAttribute("selectType"), (int) session.getAttribute("selectNumber")));
         return mav;
     }

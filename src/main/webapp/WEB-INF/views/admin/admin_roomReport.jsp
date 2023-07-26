@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/adminHome.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="/css/admin/admin_report.css">
+    <link rel="stylesheet" href="<c:url value="/css/admin/admin_report.css"/>">
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
 </head>
@@ -60,7 +60,7 @@
 <!-- 부트스트랩 및 jQuery 스크립트 -->
 <script src="<c:url value="/js/jquery-3.7.0.min.js"/>"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="/js/adminReport.js"></script>
+<script src="<c:url value="/js/adminReport.js"/>"></script>
 
 
 </body>
