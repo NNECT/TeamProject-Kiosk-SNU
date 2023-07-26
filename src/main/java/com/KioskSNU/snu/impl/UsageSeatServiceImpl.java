@@ -95,20 +95,17 @@ public class UsageSeatServiceImpl implements UsageSeatService {
     public Map<LocalDate, Double> get1YearTimes() {
         LinkedHashMap<LocalDate, Double> timesMap = new LinkedHashMap<>();
         LocalDateTime ago1Year = LocalDateTime.now().minusYears(1).withDayOfMonth(1);
-        System.out.println(ago1Year);
 
         // timesMap 1년치 초기화
         for (
                 LocalDate month = LocalDate.now().minusYears(1).withDayOfMonth(1);
-                !month.isAfter(LocalDate.now().withDayOfMonth(1));
+                !month.isAfter(LocalDate.now());
                 month = month.plusMonths(1)
         ) {
             timesMap.put(month, 0.0);
         }
-        System.out.println(timesMap);
 
         List<UsageSeatDTO> usageSeatDTOList = getAllBy1Year();
-        System.out.println(usageSeatDTOList);
         usageSeatDTOList.forEach(usageSeatDTO -> {
             LocalDateTime start = usageSeatDTO.getStartDateTime();
             LocalDateTime end = usageSeatDTO.getEndDateTime();
@@ -130,7 +127,6 @@ public class UsageSeatServiceImpl implements UsageSeatService {
                 timesMap.put(firstDayOfMonth, timesMap.get(firstDayOfMonth) + minutesUsed / 60.0);
             }
         });
-        System.out.println("over");
 
         return timesMap;
     }

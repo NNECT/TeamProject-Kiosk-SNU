@@ -81,4 +81,20 @@
         where       account.id = #{id}
         order by    usageCommutationTicket.endDate desc;
     </select>
+
+    <select id="getAllBy1Year" resultType="com.KioskSNU.snu.dto.UsageCommutationTicketDTO">
+        select      usageCommutationTicket.id               as id,
+                    account.id                              as account_id,
+                    account.username                        as account_username,
+                    account.password                        as account_password,
+                    account.phoneNumber                     as account_phoneNumber,
+                    account.point                           as account_point,
+                    account.remainTime                      as account_remainTime,
+                    usageCommutationTicket.startDate        as startDate,
+                    usageCommutationTicket.endDate          as endDate
+        from        usageCommutationTicket
+        join        account
+        on          usageCommutationTicket.account_id = account.id
+        where       usageCommutationTicket.endDate >= DATE(DATE_SUB(NOW(), INTERVAL 1 YEAR) + INTERVAL 1 DAY - INTERVAL DAY(NOW()) DAY);
+    </select>
 </mapper>

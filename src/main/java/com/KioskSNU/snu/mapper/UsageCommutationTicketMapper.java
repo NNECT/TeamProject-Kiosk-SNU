@@ -14,4 +14,10 @@ public interface UsageCommutationTicketMapper {
     UsageCommutationTicketDTO getById(int id);
     List<UsageCommutationTicketDTO> getAll();
     List<UsageCommutationTicketDTO> getAllByAccount(AccountDTO accountDTO);
+
+    /**
+     * 이전 연도의 같은 달부터 현재까지의 사용 기록을 가져온다.
+     * @return UsageCommutationTicketDTO List
+     */
+    List<UsageCommutationTicketDTO> getAllBy1Year();
 }

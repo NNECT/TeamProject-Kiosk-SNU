@@ -143,7 +143,6 @@
         on          usageSeat.seat_id = seat.id
         join        account
         on          usageSeat.account_id = account.id
-        where       date(usageSeat.endDateTime) >= date(date_sub(usageSeat.endDateTime, INTERVAL 1 YEAR) + INTERVAL 1 DAY - INTERVAL day(usageSeat.endDateTime) DAY)
-        order by    usageSeat.endDateTime desc;
+        where       date(usageSeat.endDateTime) >= date(date_sub(usageSeat.endDateTime, INTERVAL 1 YEAR) + INTERVAL 1 DAY - INTERVAL day(usageSeat.endDateTime) DAY);
     </select>
 </mapper>
