@@ -114,6 +114,7 @@
             loginFailModal.style.display = "none";
         });
     }
+
 </script>
 </body>
 </html>

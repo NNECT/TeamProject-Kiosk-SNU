@@ -76,7 +76,7 @@
 
     // "비밀번호 리셋" 버튼 클릭 이벤트
     $('#passwordReset').off("click").on("click", function () {
-        location.href = "<c:url value='/admin/memberPasswordReset'/>?id=" + memberID;
+        location.href = "<c:url value='/admin/memberPasswordReset'/>?id=${member.id}";
     });
 
 </script>
