@@ -1,0 +1,39 @@
+#cardModal{display: none;}
+#barCodeModal{display: none;} 
+#cardModal>.img{
+    width: 300px;
+    height: 400px;
+    border: 0px solid green;
+    border-radius: 15px;
+    box-shadow: 0px 3px 30px 7px gray;
+    position: absolute;
+    top: 400px;
+    left: 50%;
+    transform: translate(-50%,0);
+}
+#barCodeModal>.img{
+    width: 300px;
+    height: 400px;
+    border: 0px solid green;
+    border-radius: 15px;
+    box-shadow: 0px 3px 30px 7px gray;
+    position: absolute;
+    top: 400px;
+    left: 50%;
+    transform: translate(-50%,0);
+}
+.cancel{
+    width: 301px;
+    height: 50px;
+    background-color: #285FF5;
+    border: none;
+    position: absolute;
+    top: 750px;
+    left: 50%;
+    transform: translate(-50%,0);
+    
+    border-radius: 0 0 15px 15px;
+    font-size: 18px;
+    color: #ffffff;
+    
+}
