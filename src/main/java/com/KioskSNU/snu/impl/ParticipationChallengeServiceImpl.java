@@ -6,6 +6,7 @@ import com.KioskSNU.snu.dto.ParticipationChallengeDTO;
 import com.KioskSNU.snu.dto.UsageSeatDTO;
 import com.KioskSNU.snu.mapper.ParticipationChallengeMapper;
 import com.KioskSNU.snu.service.AccountService;
+import com.KioskSNU.snu.service.ChallengeService;
 import com.KioskSNU.snu.service.ParticipationChallengeService;
 import com.KioskSNU.snu.service.UsageSeatService;
 import lombok.RequiredArgsConstructor;
@@ -15,9 +16,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -26,6 +25,7 @@ public class ParticipationChallengeServiceImpl implements ParticipationChallenge
     private final ParticipationChallengeMapper participationChallengeDAO;
     private final AccountService accountService;
     private final UsageSeatService usageSeatService;
+    private final ChallengeService challengeService;
 
     @Override
     public int insert(ParticipationChallengeDTO participationChallengeDTO) {
@@ -65,6 +65,11 @@ public class ParticipationChallengeServiceImpl implements ParticipationChallenge
     @Override
     public List<ParticipationChallengeDTO> getAllByActive(boolean active) {
         return participationChallengeDAO.getAllByActive(active);
+    }
+
+    @Override
+    public List<ParticipationChallengeDTO> getAllByChallengeAndActive(ChallengeDTO challengeDTO, boolean active) {
+        return participationChallengeDAO.getAllByChallengeAndActive(challengeDTO, active);
     }
 
     @Override
@@ -172,5 +177,30 @@ public class ParticipationChallengeServiceImpl implements ParticipationChallenge
         }
 
         return success;
+    }
+
+    @Override
+    public Map<String, List<ParticipationChallengeDTO>> getEachChallengeSituation() {
+        Map<String, List<ParticipationChallengeDTO>> situationMap = new LinkedHashMap<>();
+
+        // 유효 챌린지 목록 가져오기
+        List<ChallengeDTO> challengeDTOList = challengeService.getAllByActive(true);
+
+        // 챌린지별 결과가 나온 참여 데이터 가져오기
+        challengeDTOList.forEach(challengeDTO -> {
+            List<ParticipationChallengeDTO> participationChallengeDTOList = getAllByChallengeAndActive(challengeDTO, false);
+            situationMap.put(challengeDTO.getTitle(), participationChallengeDTOList);
+        });
+
+        return situationMap;
+    }
+
+    @Override
+    public double getSuccessRate(List<ParticipationChallengeDTO> participationChallengeDTOList) {
+        double successCount = 0;
+        for (ParticipationChallengeDTO participationChallengeDTO : participationChallengeDTOList) {
+            if (participationChallengeDTO.isResult()) successCount++;
+        }
+        return successCount / participationChallengeDTOList.size() * 100;
     }
 }

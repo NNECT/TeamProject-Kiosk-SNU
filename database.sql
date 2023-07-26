@@ -201,6 +201,9 @@ create table participationChallenge (
 create index account_endDateTime_idx
 on participationChallenge (account_id, endDateTime desc);
 
+create index challenge_active_idx
+on participationChallenge (challenge_id, active);
+
 
 # 관리자 데이터
 create table admin (

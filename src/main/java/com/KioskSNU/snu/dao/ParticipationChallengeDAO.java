@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 @Transactional
@@ -64,5 +66,14 @@ public class ParticipationChallengeDAO extends SqlSessionDaoSupport implements P
     @Override
     public List<ParticipationChallengeDTO> getAllByActive(boolean active) {
         return getSqlSession().selectList("com.KioskSNU.snu.mapper.ParticipationChallengeMapper.getAllByActive", active);
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<ParticipationChallengeDTO> getAllByChallengeAndActive(ChallengeDTO challengeDTO, boolean active) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("id", challengeDTO.getId());
+        params.put("active", active);
+        return getSqlSession().selectList("com.KioskSNU.snu.mapper.ParticipationChallengeMapper.getAllByChallengeAndActive", params);
     }
 }

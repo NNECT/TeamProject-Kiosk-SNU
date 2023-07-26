@@ -17,4 +17,5 @@ public interface ParticipationChallengeMapper {
     List<ParticipationChallengeDTO> getAllByAccount(AccountDTO accountDTO);
     List<ParticipationChallengeDTO> getAllByChallenge(ChallengeDTO challengeDTO);
     List<ParticipationChallengeDTO> getAllByActive(boolean active);
+    List<ParticipationChallengeDTO> getAllByChallengeAndActive(ChallengeDTO challengeDTO, boolean active);
 }

@@ -275,4 +275,45 @@
         on          participationChallenge.challenge_id = challenge.id
         where       participationChallenge.active = #{active}
     </select>
+
+    <select id="getAllByChallengeAndActive" resultType="com.KioskSNU.snu.dto.ParticipationChallengeDTO">
+        select      participationChallenge.id               as id,
+                    account.id                              as account_id,
+                    account.username                        as account_username,
+                    account.password                        as account_password,
+                    account.phoneNumber                     as account_phoneNumber,
+                    account.point                           as account_point,
+                    account.remainTime                      as account_remainTime,
+                    challenge.id                            as challenge_id,
+                    challenge.title                         as challenge_title,
+                    challenge.description                   as challenge_description,
+                    challenge.titleColor                    as challenge_titleColor,
+                    challenge.descriptionColor              as challenge_descriptionColor,
+                    challenge.backgroundColor               as challenge_backgroundColor,
+                    challenge.imageSrc                      as challenge_imageSrc,
+                    challenge.activeStartTime               as challenge_activeStartTime,
+                    challenge.activeEndTime                 as challenge_activeEndTime,
+                    challenge.periodHours                   as challenge_periodHours,
+                    challenge.periodDays                    as challenge_periodDays,
+                    challenge.goalDay                       as challenge_goalDay,
+                    challenge.goalHour                      as challenge_goalHour,
+                    challenge.rewardPoint                   as challenge_rewardPoint,
+                    challenge.active                        as challenge_active,
+                    challenge.visible                       as challenge_visible,
+                    participationChallenge.startDateTime    as startDateTime,
+                    participationChallenge.endDateTime      as endDateTime,
+                    participationChallenge.goalDay          as goalDay,
+                    participationChallenge.goalHour         as goalHour,
+                    participationChallenge.rewardPoint      as rewardPoint,
+                    participationChallenge.active           as active,
+                    participationChallenge.result           as result
+        from        participationChallenge
+                        join        account
+                                    on          participationChallenge.account_id = account.id
+                        join        challenge
+                                    on          participationChallenge.challenge_id = challenge.id
+        where       participationChallenge.challenge_id = #{id}
+                    and
+            		participationChallenge.active = #{active}
+    </select>
 </mapper>
