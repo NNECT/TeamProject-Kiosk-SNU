@@ -1,4 +1,4 @@
-package com.KioskSNU.logger;
+package com.KioskSNU.config;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
