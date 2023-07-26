@@ -4,9 +4,13 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 @Data
 public class ParticipationChallengeDTO {
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
+
     private int id;
     private int account_id;
     private String account_username;
@@ -64,5 +68,21 @@ public class ParticipationChallengeDTO {
         this.challenge_rewardPoint = challengeDTO.getRewardPoint();
         this.challenge_active = challengeDTO.isActive();
         this.challenge_visible = challengeDTO.isVisible();
+    }
+
+    public String getStartDateTimeString() {
+        return startDateTime.format(DATE_TIME_FORMATTER);
+    }
+
+    public String getEndDateTimeString() {
+        return endDateTime.format(DATE_TIME_FORMATTER);
+    }
+
+    public String getChallenge_ActiveStartTimeString() {
+        return challenge_activeStartTime.format(TIME_FORMATTER);
+    }
+
+    public String getChallenge_ActiveEndTimeString() {
+        return challenge_activeEndTime.format(TIME_FORMATTER);
     }
 }
