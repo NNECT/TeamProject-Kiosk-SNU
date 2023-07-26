@@ -116,7 +116,7 @@ public class OutsideTicketController {
     @OutsideLoginRequired
     public ModelAndView roomPostProcess(@RequestParam("radio-button") int time){
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("redirect:/outside/locker");
+        mav.setViewName("redirect:/outside/payment");
 
         ticketMap.put("roomTicket", time);
 
