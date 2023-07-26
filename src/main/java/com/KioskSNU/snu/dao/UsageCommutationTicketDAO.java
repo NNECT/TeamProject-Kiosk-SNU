@@ -52,4 +52,9 @@ public class UsageCommutationTicketDAO extends SqlSessionDaoSupport implements U
     public List<UsageCommutationTicketDTO> getAllByAccount(AccountDTO accountDTO) {
         return getSqlSession().selectList("com.KioskSNU.snu.mapper.UsageCommutationTicketMapper.getAllByAccount", accountDTO);
     }
+
+    @Override
+    public List<UsageCommutationTicketDTO> getAllBy1Year() {
+        return getSqlSession().selectList("com.KioskSNU.snu.mapper.UsageCommutationTicketMapper.getAllBy1Year");
+    }
 }

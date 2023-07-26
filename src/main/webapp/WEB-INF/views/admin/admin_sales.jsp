@@ -27,6 +27,16 @@
                         <div class="col-md-6">
                             <div class="card">
                                 <div class="card-body">
+                                    <h5 class="card-title">정기권 사용자</h5>
+                                    <canvas id="commutationTicketChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
                                     <h5 class="card-title">챌린지 선택률 및 성공률</h5>
                                     <canvas id="challengeChart"></canvas>
                                 </div>
@@ -48,6 +58,7 @@
     const toRadians = (val) => val * Math.PI / 180;
 
     const timeCanvas = document.getElementById('timeChart');
+    const commutationTicketCanvas = document.getElementById('commutationTicketChart');
     const challengeCanvas = document.getElementById('challengeChart');
 
     const timeChart = new Chart(timeCanvas, {
@@ -59,6 +70,25 @@
                 data: ${seatTimesData},
                 fill: false,
                 tension: 0.1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    const commutationTicketChart = new Chart(commutationTicketCanvas, {
+        type: 'bar',
+        data: {
+            labels: ${commutationTicketUsersLabels},
+            datasets: [{
+                label: '정기권 사용자 수',
+                data: ${commutationTicketUsersData},
+                borderWidth: 1
             }]
         },
         options: {

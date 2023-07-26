@@ -2,10 +2,7 @@ package com.KioskSNU.view.admin;
 
 import com.KioskSNU.common.Scaler;
 import com.KioskSNU.snu.dto.ParticipationChallengeDTO;
-import com.KioskSNU.snu.service.ParticipationChallengeService;
-import com.KioskSNU.snu.service.UsageLockerService;
-import com.KioskSNU.snu.service.UsageRoomService;
-import com.KioskSNU.snu.service.UsageSeatService;
+import com.KioskSNU.snu.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +20,7 @@ public class AdminSalesController {
     private final UsageSeatService usageSeatService;
     private final UsageRoomService usageRoomService;
     private final UsageLockerService usageLockerService;
+    private final UsageCommutationTicketService usageCommutationTicketService;
     private final ParticipationChallengeService participationChallengeService;
     private final Scaler scaler;
 
@@ -40,6 +38,17 @@ public class AdminSalesController {
         });
         mav.addObject("seatTimesLabels", seatTimesLabels);
         mav.addObject("seatTimesData", seatTimesData);
+
+        // 최근 1년간 월별 정기권 사용자 수 현황
+        Map<LocalDate, Integer> commutationTicketUsers = usageCommutationTicketService.get1YearCommutationTicketUsers();
+        List<String> commutationTicketUsersLabels = new ArrayList<>();
+        List<Integer> commutationTicketUsersData = new ArrayList<>();
+        commutationTicketUsers.forEach((date, users) -> {
+            commutationTicketUsersLabels.add(date.format(DateTimeFormatter.ofPattern("yyyy.MM")));
+            commutationTicketUsersData.add(users);
+        });
+        mav.addObject("commutationTicketUsersLabels", commutationTicketUsersLabels);
+        mav.addObject("commutationTicketUsersData", commutationTicketUsersData);
 
         // 챌린지 선택률/성공률
         Map<String, List<ParticipationChallengeDTO>> challengeSituationMap = participationChallengeService.getEachChallengeSituation();
