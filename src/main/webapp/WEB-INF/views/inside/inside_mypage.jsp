@@ -9,11 +9,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<c:url value="/css/inside/inside_mypage.css"/>">
     <link rel="stylesheet" href="<c:url value="/css/inside/modalMyPagePassword.css"/>">
+<%--    <link rel="stylesheet" href="<c:url value="/css/inside/inside_challengList.css"/>">--%>
     <link href="https://cdn.jsdelivr.net/gh/sunn-us/SUITE/fonts/static/woff2/SUITE.css" rel="stylesheet">
     <style>
         body {
             font-family: 'SUITE', sans-serif;
         }
+    </style>
+
     </style>
     <title>snu_mypage_page</title>
 </head>
@@ -35,7 +38,7 @@
             <div class="tr">
                 <p class="content tel">전화번호</p>
                 <div class="border">
-                    <span class="showText">${phoneNumber}</span>
+                    <span class="showText">${sessionScope.author.phoneNumber}</span>
                     <input type="button" class="btn telBtn" id="openModal" onclick="showModal('modalPage')" value="변경">
                 </div>
             </div>
@@ -43,7 +46,7 @@
                 <div class="fullborder">
                     <p class="content pass">비밀번호</p>
                     <!-- 수정된 부분: onclick 함수에 모달 ID를 전달하도록 수정 -->
-                    <input type="button" class="btn passBtn" id="reOpenModal" onclick="showModal('rePasswordModal')"
+                    <input type="button" class="btn passBtn" id="reOpenModal" onclick="showModal ('rePasswordModal')"
                            value="재설정">
                 </div>
             </div>
@@ -58,7 +61,7 @@
                 <p class="content challenge">챌린지</p>
                 <div class="border">
                     <span class="showText"></span>
-                    <a href=""><input type="button" class="btn challBtn" value="참여내역"></a>
+                    <input type="button" class="btn challBtn" value="참여내역" onclick="showModal('challengeModal')">
                 </div>
             </div>
             <div class="tr">
@@ -68,7 +71,8 @@
                 </div>
             </div>
         </div>
-    </section>s
+    </section>
+    s
 </div>
 
 <!--전화번호 변경 모달영역-->
@@ -93,8 +97,8 @@
             <span id="codeCheck"></span>
         </div>
         <div class="modalBtn" id="changePhone">
-            <input type="button" class="modalNoBtn" value="취소" id ="cancelTel">
-            <input type="submit" id="phoneNumberChangeBtn" name="" class="modalYesBtn" value="변경">
+            <input type="button" class="modalNoBtn" value="취소" id="cancelTel">
+            <input type="submit" id="phoneNumberChangeBtn" name="" style="display: none" class="modalYesBtn" value="변경">
         </div>
     </form>
 </div>
@@ -118,8 +122,9 @@
             <span id="changePwdText2"></span>
         </div>
         <div class="modalBtn">
-            <input type="button" class="modalNoBtn" value="취소"  id = "cancelBtn">
-            <input type="button" id="editPassword_checkPhone" name="" class="modalYesBtn" value="다음" onclick="showNextModal()">
+            <input type="button" class="modalNoBtn" value="취소" id="cancelBtn">
+            <input type="button" id="editPassword_checkPhone" name="" class="modalYesBtn" value="다음"
+                   style="display: none" onclick="showNextModal()">
         </div>
     </form>
 </div>
@@ -138,11 +143,44 @@
             <span id="changePasswordText"></span>
         </div>
         <div id="modalBtn">
-            <input type="button"  class="modalNoBtn" value="변경 취소" id="cancelPwd">
-            <input type="submit" id = "changePwdBtn" class="finishModalBtn" value="변경">
+            <input type="button" class="modalNoBtn" value="변경 취소" id="cancelPwd">
+            <input type="submit" id="changePwdBtn" style="display: none" class="finishModalBtn" value="변경">
         </div>
     </form>
 </div>
+
+<%--챌린지 모달--%>
+<div class="modalPage" id="challengeModal">
+    <form>
+        <div class="modalContent" style="width: 400px">
+            <p class="modalP">
+                <span class="modalSpan">참여 챌린지</span>&nbsp;&nbsp;내역<br>
+            </p>
+            <hr class="modalHr">
+            <div>
+                <table>
+                    <tr>
+                        <th>날짜</th>
+                        <th>이름</th>
+                        <th>결과</th>
+                        <th>받은포인트</th>
+                    </tr>
+                    <c:forEach var="list" items="${list}">
+                    <tr ><!--반복분 부분-->
+                        <td>${list.stardDateTime}</td>
+                        <td >${list.challenge_title}</td>
+                        <td>${list.result? "성공":"실패"}</td>
+                        <td>${list.rewardPoint}</td>
+                    </tr>
+                    </c:forEach>
+                </table>
+            </div>
+        </div>
+    </form>
+    <input type="button" class="modalNoBtn" value="닫기" id="cancelChallenge" style="float:right ">
+</div>
+
+
 <%--<script src="<c:url value="/js/jsencrypt.min.js"/>"></script>--%>
 <script src="<c:url value="/js/modal.js"/>"></script>
 

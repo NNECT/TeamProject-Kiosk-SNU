@@ -8,9 +8,9 @@ let buttonStateHandler = {
     set: function (target, key, value){
         target[key] = value;
         if(target.checkCode && target.checkPhoneNumber && target.checkPassword)
-            document.getElementById('changePhone').style.display = 'block';
+            document.getElementById('phoneNumberChangeBtn').style.display = 'block';
         else
-            document.getElementById('changePhone').style.display = 'none';
+            document.getElementById('phoneNumberChangeBtn').style.display = 'none';
         return true;
     }
 };
