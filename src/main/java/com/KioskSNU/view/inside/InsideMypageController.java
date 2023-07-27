@@ -40,15 +40,15 @@ public class InsideMypageController {
         try {
 //            System.out.println("accountDTO.getPassword() = " + sha.encrypt(rsa.decrypt(accountDTO.getPassword())));
             //현재의 세션 객체
-            AccountDTO currentUser = (AccountDTO)session.getAttribute("author");
+            AccountDTO currentUser = (AccountDTO) session.getAttribute("author");
             //현재 객체에서 정보를 가져옴
             AccountDTO getUser = accountService.getByUsername(currentUser.getUsername());
             sha.encrypt(rsa.decrypt(accountDTO.getPassword()));
 
             //그것의 비밀번호 수정
             getUser.setPassword(sha.encrypt(rsa.decrypt(accountDTO.getPassword())));
-            System.out.println(getUser.getPassword());
-//            accountService.update(getUser);
+            accountService.update(getUser);
+            session.setAttribute("author", getUser);
             mav.addObject(getUser);
         } catch (Exception e) {
             e.printStackTrace();
@@ -57,8 +57,9 @@ public class InsideMypageController {
         mav.setViewName("redirect:/inside/mypage");
         return mav;
     }
+
     @PostMapping("/mypage/changephone")
-    public ModelAndView changePhoneNumber(@RequestParam String phoneNumber, HttpSession session){
+    public ModelAndView changePhoneNumber(@RequestParam String phoneNumber, HttpSession session) {
         ModelAndView mav = new ModelAndView();
         AccountDTO accountDTO;
         System.out.println(phoneNumber);
@@ -68,8 +69,9 @@ public class InsideMypageController {
             AccountDTO getUser = accountService.getByUsername(accountDTO.getUsername());
             getUser.setPhoneNumber(phoneNumber);
             accountService.update(getUser);
+            session.setAttribute("author", getUser);
             mav.addObject(getUser);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         mav.setViewName("redirect:/inside/mypage");
