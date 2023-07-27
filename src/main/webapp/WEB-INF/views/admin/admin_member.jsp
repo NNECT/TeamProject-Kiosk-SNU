@@ -20,10 +20,10 @@
             <div class="card">
                 <div class="card-body text-center">
                     <h2 class="card-title">회원목록</h2>
-                    <table id="example" class="display" style="width:100%">
+                    <table id="memberTable" class="display" style="width:100%">
                         <thead>
                         <tr style="background-color: lightblue;">
-                            <th style="text-align: center">번호</th>
+                            <th style="text-align: center">회원번호</th>
                             <th style="text-align: center">아이디</th>
                             <th style="text-align: center">전화번호</th>
                         </tr>
@@ -107,7 +107,20 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <script>
-    new DataTable('#example');
+    new DataTable('#memberTable',{
+        info: false,
+        responsive: false,
+
+        language: {
+            zeroRecords: '검색 결과가 없습니다.',
+            "lengthMenu" : "_MENU_ 개씩 보기",
+            search: "검색 : ",
+            paginate: {
+                "next": "다음",
+                "previous": "이전"
+            }
+        }
+    });
 
     function showMemberDetails(button) {
         const memberID = button.id;

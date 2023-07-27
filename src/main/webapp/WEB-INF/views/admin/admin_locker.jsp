@@ -3,19 +3,9 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1,minimum-scale=1,max-mun-scale=1">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="<c:url value="/css/admin/admin_locker.css"/>">
-	<c:import url="../headerFooterForm/headerFooterForm_adminHeader.jsp"/>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/adminHome.css">
-	<link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
-	<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-	<script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
-
-	<title>스터디카페 관리자 페이지</title>
+<c:import url="../headerFooterForm/headerFooterForm_adminHeader.jsp"/>
+<link rel="stylesheet" href="<c:url value="/css/admin/admin_locker.css"/>">
+<title>스터디카페 관리자 페이지</title>
 </head>
 
 <body>
@@ -73,27 +63,26 @@
 </div>
 
 <%-- 메뉴 선택 모달 창 --%>
-<div id="menuModal" class="modal" style="display: none; margin-top: 160px;">
+<div id="menuModal" class="modal" style="display: none; margin-top: 120px;">
 	<div class="modal-dialog">
-	<h5 class="modal-title">사물함 정보</h5>
-	<div class="modal-content">
-		<div class="modal-header">
-		<table class="table">
-			<tr>
-				<th colspan="2" style="text-align: center">원하는 메뉴를 선택해주세요</th>
-			</tr>
-			<tr>
-				<td style="text-align: center;"><button type="button" id="realTimeStatus">실시간 현황</button></td>
-				<td style="text-align: center"><button type="button" id="previousRecord">이전 기록</button></td>
-			</tr>
-		</table>
-	</div>
-	</div>
+		<div class="modal-content">
+			<div class="modal-header">
+				<table class="table">
+					<tr>
+						<th colspan="2" style="text-align: center">메뉴를 선택해주세요</th>
+					</tr>
+					<tr>
+						<td style="text-align: center;"><button type="button" id="realTimeStatus">실시간 현황</button></td>
+						<td style="text-align: center"><button type="button" id="previousRecord">사용기록</button></td>
+					</tr>
+				</table>
+			</div>
+		</div>
 	</div>
 </div>
 
 <!-- 실시간 현황 모달 창 -->
-<div id="lockerModal" class="modal" style="display: none; margin-top: 130px;">
+<div id="lockerModal" class="modal" style="display: none; margin-top: 105px;">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -136,7 +125,7 @@
 </div>
 
 <%-- 이전 기록 모달 창 --%>
-<div id="previousModal" class="modal" style="display: none; margin-top: 130px;">
+<div id="previousModal" class="modal" style="display: none; margin-top: 105px;">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -182,9 +171,6 @@
 <!-- 부트스트랩 및 jQuery 스크립트 -->
 <script src="<c:url value="/js/jquery-3.7.0.min.js"/>"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script>
-	new DataTable('#example');
-</script>
 <script src="<c:url value="/js/radioBox.js"/>"></script>
 <script>
 	window.addEventListener('DOMContentLoaded', (event) => {
@@ -298,35 +284,9 @@
 		}
 
 		// 이전 기록
-		function previousRecord(lockerId){
-/*			location.href = "<c:url value='/admin/adminLockerRecord'/>?id=" + lockerId;*/
-
-			$.ajax({
-				type: "GET",
-				url: "../ajax/adminLockerRecord",
-				data: JSON.stringify({ lockerId: lockerId }),
-				dataType: "json",
-				async: false,
-				contentType: "application/json; charset=utf-8",
-				success: function (response) {
-					if (response.result === "success") {
-						$("#rLockerId").text(LockerId);
-						for(var i=0; i<response.length; i++){
-							$("#rMemberId").text(response.rMemberId);
-							$("#rMemberName").text(response.rMemberName);
-							$("#rMemberPhone").text(response.rMemberPhone);
-							$("#rLockerStart").text(response.rLockerStart);
-							$("#rLockerEnd").text(response.rLockerEnd);
-						}
-						$("#previousModal").modal("show");
-					}
-				},
-				error: function (request, status, error) {
-					alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-				}
-			});
+		function previousRecord(lockerId) {
+			location.href = "<c:url value='/admin/adminLockerRecord'/>?id=" + lockerId;
 		}
-
 	});
 </script>
 

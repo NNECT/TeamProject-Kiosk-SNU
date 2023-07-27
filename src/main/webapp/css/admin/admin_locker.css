@@ -4,12 +4,11 @@ body{
 }
 #whiteWrap{
     width: 900px;
-    height: 785px;
+    height: 350px;
     position: absolute;
-    top: 160px;
+    top: 90px;
     left: 50%;
     transform: translate(-50%,0);
-
 }
 section{
     margin: 0 120px;
@@ -22,13 +21,14 @@ section{
     text-align: center;
 }
 #locker{
-    border-spacing: 10px 3px;
-    margin-left: 60px;
+    margin-top: 60px;
+    border-collapse: separate;
+    border-spacing: 10px 5px;
 }
 .locker{
     /*background-color: gray;*/
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     border-radius: 0;
     border: 0px solid rebeccapurple;
 }
@@ -41,8 +41,8 @@ section{
     width: 350px;
     height: 15px;
     border: 0px solid blue;
-    margin-top: 10px;
-    margin-left: 57px;
+    margin-top: 20px;
+    margin-left: -25px;
 }
 .box{
     display: inline-block;

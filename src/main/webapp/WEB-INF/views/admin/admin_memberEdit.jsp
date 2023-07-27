@@ -24,8 +24,7 @@
                             </tr>
                             <tr>
                                 <th>비밀번호:</th>
-                                <td><input type="password" name="password" value="${member.password}"></td>
-                                <td><button type="submit" id="passwordReset">비밀번호 초기화</button></td>
+                                <td><button type="submit" name="password" id="passwordReset">비밀번호 초기화</button></td>
                             </tr>
                             <tr>
                                 <th>전화번호:</th>
@@ -54,6 +53,7 @@
                         </table>
                         <button id="edit" type="submit">수정</button>
                     </form>
+                    <a href="<c:url value="/admin/adminmember"/>" style="float: right">돌아가기</a>
                 </div>
             </div>
         </div>

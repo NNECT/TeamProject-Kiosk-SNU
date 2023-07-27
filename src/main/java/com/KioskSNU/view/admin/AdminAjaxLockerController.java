@@ -12,14 +12,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
-public class AdminAjaxGetLockerController {
+public class AdminAjaxLockerController {
     private final UsageLockerService usageLockerService;
     private final LockerService lockerService;
 
+    // 사물함 전체
     @RequestMapping("/ajax/getLocker")
     @AdminLoginRequired
     public ResponseEntity<Map<String,Object>> process(@RequestBody Map<String,String> map){
@@ -48,17 +50,19 @@ public class AdminAjaxGetLockerController {
         return ResponseEntity.ok(resultMap);
     }
 
-/*    @RequestMapping("/ajax/adminLockerRecord")
+    // 사물함 활성화
+    @RequestMapping("/ajax/updateLockerUsable")
     @AdminLoginRequired
-    public ResponseEntity<Map<String,Object>> lockerRecord(@RequestBody Map<String,String> map){
+    public ResponseEntity<Map<String,String>> lockerUsable(@RequestBody Map<String,String> map){
 
-        int id = Integer.parseInt(map.get("lockerId"));
-        UsageLockerDTO usageLockerDTO = usageLockerService.getById(id);
-        LockerDTO lockerDTO = lockerService.getById(id);
+        int lockerId = Integer.parseInt(map.get("lockerId"));
+        boolean usable = Boolean.parseBoolean(map.get("usable"));
 
-        Map<String, Object> resultMap = new HashMap<>();
+        LockerDTO lockerDTO = lockerService.getById(lockerId);
+        lockerDTO.setUsable(usable);
+        lockerService.update(lockerDTO);
 
-        return ResponseEntity.ok(resultMap);
-    }*/
+        return ResponseEntity.ok(Map.of("result","success"));
+    }
 
 }

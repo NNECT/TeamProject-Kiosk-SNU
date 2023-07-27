@@ -10,24 +10,36 @@
 <link href="https://cdn.jsdelivr.net/gh/sunn-us/SUITE/fonts/static/woff2/SUITE.css" rel="stylesheet">
 
 <!-- 메인 컨텐츠 -->
-<div id="seatWrap">
-    <div id="info"><!--자리설명-->
-        <div class="box b"></div>&nbsp;<span class="blue">사용 가능</span>&nbsp;&nbsp;
-        <div class="box g"></div>&nbsp;<span class="gray">사용중</span>
-        <div class="box r"></div>&nbsp;<span class="red">사용 불가능</span>
-    </div>
-    <section>
-        <form id="adminSeatForm">
-            <c:import url="../common/select.jsp"/>
-        </form>
-        <div id="door"><!--출입문-->
-            <p>출입문</p>
+<div class="container">
+    <div class="row justify-content-center align-items-center" style="height: 25vh;">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h2 class="card-title">자리현황</h2>
+                    <div id="seatWrap" style="margin-top: 30px;">
+                        <div id="info"><!--자리설명-->
+                            <div class="box b"></div>&nbsp;<span class="blue">사용 가능</span>&nbsp;&nbsp;
+                            <div class="box g"></div>&nbsp;<span class="gray">사용중</span>
+                            <div class="box r"></div>&nbsp;<span class="red">사용 불가능</span>
+                        </div>
+                        <section>
+                            <form id="adminSeatForm">
+                                <c:import url="../common/select.jsp"/>
+                            </form>
+                            <div id="door"><!--출입문-->
+                                <p>출입문</p>
+                            </div>
+                        </section>
+                        <div id="locker"><!--사물함-->
+                            <p>사물함</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </section>
-    <div id="locker"><!--사물함-->
-        <p>사물함</p>
     </div>
 </div>
+
 <%--모달창--%>
 <div id="myModal" class="modal">
     <div class="modal-content">
