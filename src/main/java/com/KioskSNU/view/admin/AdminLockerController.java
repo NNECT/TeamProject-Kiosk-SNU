@@ -1,6 +1,9 @@
 package com.KioskSNU.view.admin;
 
 import com.KioskSNU.interceptor.AdminLoginRequired;
+import com.KioskSNU.snu.dto.LockerDTO;
+import com.KioskSNU.snu.dto.UsageLockerDTO;
+import com.KioskSNU.snu.service.LockerService;
 import com.KioskSNU.snu.service.UsageLockerService;
 import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +19,9 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class AdminLockerController {
     private final UsageLockerService usageLockerService;
+    private final LockerService lockerService;
 
+    // 사물함 전체
     @RequestMapping("/admin/adminlocker")
     @AdminLoginRequired
     public ModelAndView getProcess(){
@@ -26,5 +31,15 @@ public class AdminLockerController {
         mav.setViewName("admin/admin_locker");
         return mav;
     }
+
+/*    @RequestMapping("/admin/adminLockerRecord")
+    @AdminLoginRequired
+    public ModelAndView previousRecord(UsageLockerDTO usageLockerDTO){
+
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("record",lockerService.getByLockerNumber(usageLockerDTO.getLocker_lockerNumber()));
+        mav.setViewName("admin/admin_locker");
+        return mav;
+    }*/
 
 }
