@@ -6,6 +6,7 @@ import com.KioskSNU.snu.dto.ParticipationChallengeDTO;
 import com.KioskSNU.snu.service.ChallengeService;
 import com.KioskSNU.snu.service.ParticipationChallengeService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
@@ -79,9 +83,6 @@ public class OutsideChallengeController {
     public boolean isActive(ParticipationChallengeDTO participationChallengeDTO) {
         return participationChallengeService.challengeSuccessCheck(participationChallengeDTO) == 0;
     }
-
-
-
 
     public LocalDateTime calTime(ChallengeDTO challengeDTO){
         LocalDateTime endTime = LocalDateTime.now().plusDays(challengeDTO.getPeriodDays()).plusHours(challengeDTO.getPeriodHours());

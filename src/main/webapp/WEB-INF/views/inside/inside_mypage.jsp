@@ -8,16 +8,17 @@
     <meta name="viewport" content="width=deevice-width, initial-scale=1,minimum-scale=1,maxmun-scale=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<c:url value="/css/inside/inside_mypage.css"/>">
-    <link rel="stylesheet" href="<c:url value="/css/inside/modalCommon.css"/>">
+    <link rel="stylesheet" href="<c:url value="/css/inside/modalMyPagePassword.css"/>">
     <link href="https://cdn.jsdelivr.net/gh/sunn-us/SUITE/fonts/static/woff2/SUITE.css" rel="stylesheet">
-
     <style>
-        body {font-family: 'SUITE', sans-serif;}
+        body {
+            font-family: 'SUITE', sans-serif;
+        }
     </style>
     <title>snu_mypage_page</title>
 </head>
 <body>
-<div id="body">
+<div class="body">
     <a href="inside_menu.jsp"><img src="<c:url value="/img/inside/beforBtn.png"/>" alt=""></a>
 
     <section id="allWrap"><!--전체 감싸는 박스-->
@@ -25,120 +26,100 @@
 
         <hr>
         <div id="contentBox">
-            <div id="tr">
+            <div class="tr">
                 <p class="content id">아이디</p>
-                <div id="border">
-                    <span class="showText">aaaaa</span>
+                <div class="border">
+                    <span class="showText">${sessionScope.author.username}</span>
                 </div>
             </div>
-            <div id="tr">
+            <div class="tr">
                 <p class="content tel">전화번호</p>
-                <div id="border">
-                    <span class="showText">aaaa-a-a-a-a-a-a</span>
-                    <input type="button" class="btn telBtn"  id="opeanModal"  onclick="showModal()" value="변경">
+                <div class="border">
+                    <span class="showText">${phoneNumber}</span>
+                    <input type="button" class="btn telBtn" id="openModal" onclick="showModal('modalPage')" value="변경">
                 </div>
-                <script src="<c:url value="/js/modal.js"/>"></script>
             </div>
-
-            <div id="tr">
-                <div id="fullborder">
+            <div class="tr">
+                <div class="fullborder">
                     <p class="content pass">비밀번호</p>
-                    <input type="button" class="btn passBtn" id="reOpeanModal" onclick="rePasswordModal()" value="재설정">
+                    <!-- 수정된 부분: onclick 함수에 모달 ID를 전달하도록 수정 -->
+                    <input type="button" class="btn passBtn" id="reOpenModal" onclick="showModal('rePasswordModal')"
+                           value="재설정">
                 </div>
             </div>
-
-            <div id="tr">
+            <div class="tr">
                 <p class="content ticket">사용권</p>
-                <div id="border">
+                <div class="border">
                     <span class="showText"></span>
                     <a href="inside_paymentList.jsp"><input type="button" class="btn ticketBtn" value="결제내역"></a>
                 </div>
             </div>
-            <div id="tr">
-                <p class="content challenge">첼린지</p>
-                <div id="border">
+            <div class="tr">
+                <p class="content challenge">챌린지</p>
+                <div class="border">
                     <span class="showText"></span>
                     <a href=""><input type="button" class="btn challBtn" value="참여내역"></a>
                 </div>
             </div>
-            <div id="tr">
-                <div id="fullborder">
+            <div class="tr">
+                <div class="fullborder">
                     <p class="content point">보유포인트</p>
-                    <span class="showText"></span>
+                    <span class="showText">${sessionScope.author.point}</span>
                 </div>
             </div>
         </div>
-    </section>
+    </section>s
 </div>
 
 <!--전화번호 변경 모달영역-->
-<div id="modalBg"></div>
+<div class="modalBg"></div>
 <div id="modalPage">
-    <form id="inside-changeTel-form">
-        <div id="modalContent">
-            <p id="modalP">
-                00님의 회원정보 <span id="modalSpan">전화번호</span>를<br>
+    <form id="changeTel">
+        <div class="modalContent">
+            <p class="modalP">
+                ${sessionScope.author.username}님의 회원정보 <span class="modalSpan">전화번호</span>를<br>
                 수정하기 위해 인증절차가 필요합니다.
             </p>
-            <hr id="modalHr">
-            <input type="password" name="" id="modelPassword" class="first" placeholder="비밀번호를 입력해주세요">
-            <input type="button" id="modalCheckBtn" value="확인"><br>
+            <hr class="modalHr">
+            <input type="password" name="" id="passwordInput" class="first" placeholder="비밀번호를 입력해주세요">
+            <input type="button" class="modalCheckBtn" id=password value="확인" onclick="passwordCheck_phone()"><br>
+            <span id="passwordCheck"></span>
             <!--페스워드 확인이 되야 전화번호 변경가능-->
-            <input type="text" id="modalTel"  class="second" placeholder="변경할 전화번호를 입력해주세요">
-            <div id="inputText1"></div>
+            <input type="text" id="phoneNumberInput" class="first" placeholder="변경할 전화번호를 입력해주세요">
+            <input type="button" class="modalCheckBtn" id=phoneNumber value="전송" onclick="codeSend()"><br>
+            <span id="codeSendCheck"></span>
+            <input type="text" id="codeInput" class="first" placeholder="인증번호를 입력해주세요">
+            <input type="button" class="modalCheckBtn" id=code value="확인" onclick="codeCheck()"><br>
+            <span id="codeCheck"></span>
         </div>
-        <div id="modalBtn">
-            <input type="button" id="modalNoBtn" value="취소">
-            <input type="submit" name="" id="modalYesBtn" value="변경">
+        <div class="modalBtn" id="changePhone">
+            <input type="button" class="modalNoBtn" value="취소" id ="cancelTel">
+            <input type="submit" id="phoneNumberChangeBtn" name="" class="modalYesBtn" value="변경">
         </div>
     </form>
 </div>
 <!--모달영역-->
-<script>
-    window.addEventListener("DOMContentLoaded", (event) => {
-        document.getElementById("inside-changeTel-form").addEventListener("submit", function (e) {
-            e.preventDefault();
-
-            const crypt = new JSEncrypt();
-            crypt.setPublicKey("${publicKey}");
-
-            const password = crypt.encrypt(document.getElementById("password").value); //?
-
-            const form = document.createElement("form");
-            form.setAttribute("method", "post");
-            form.setAttribute("action", "<c:url value="/inside/password" />");
-            form.setAttribute("charset", "UTF-8");
-            form.setAttribute("hidden", "true");
-
-            const passwordInput = document.createElement("input");
-            passwordInput.setAttribute("type", "password");
-            passwordInput.setAttribute("name", "password");
-            passwordInput.setAttribute("value", password);
-            form.appendChild(passwordInput);
-
-            document.body.appendChild(form);
-            form.submit();
-        });
-    });
-</script>
 <!--비밀번호변경_모달영역1-->
 <div id="rePasswordModal">
     <form>
-        <div id="modalContent">
-            <p id="modalP">
-                <span id="modalSpan">비밀번호</span>를 변경하려면 전화번호<br>
+        <div class="modalContent">
+            <p class="modalP">
+                <span class="modalSpan">비밀번호</span>를 변경하려면 전화번호<br>
                 인증이 필요합니다.
             </p>
-            <hr id="modalHr">
-            <input type="text" name="" id="modelTel" class="first" placeholder="전화번호를 입력해주세요">
-            <input type="button" id="modalCheckBtn" value="인증"><br>
+            <hr class="modalHr">
+            <input type="text" name="" id="changePwdPhone" class="first" placeholder="전화번호를 입력해주세요">
+            <input type="button" class="modalCheckBtn" value="인증" onclick="changePwdCodeSend()"><br>
+            <span id="changePwdText1"></span>
+
             <!--인증번호 확인이 되야 전화번호 변경가능-->
-            <input type="text" id="checkNum" class="second" placeholder="인증번호를 입력해주세요">
-            <div id="inputText"></div>
+            <input type="text" id="checkCode" class="first" placeholder="인증번호를 입력해주세요">
+            <input type="button" class="modalCheckBtn" value="인증" onclick="changePwdCodeCheck()"><br>
+            <span id="changePwdText2"></span>
         </div>
-        <div id="modalBtn">
-            <input type="button" id="reModalNoBtn" value="취소">
-            <input type="submit" name="" id="modalYesBtn" value="다음">
+        <div class="modalBtn">
+            <input type="button" class="modalNoBtn" value="취소"  id = "cancelBtn">
+            <input type="button" id="editPassword_checkPhone" name="" class="modalYesBtn" value="다음" onclick="showNextModal()">
         </div>
     </form>
 </div>
@@ -146,19 +127,57 @@
 
 <!-- 비밀번호변경 모달-->
 <div id="newPasswordModal">
-    <form>
-        <div id="modalContent">
-            <p id="modalP">
-                <span id="modalSpan">변경할 비밀번호</span>를 입력해주세요<br>
+    <form id="finish">
+        <div class="modalContent">
+            <p class="modalP">
+                <span class="modalSpan">변경할 비밀번호</span>를 입력해주세요<br>
             </p>
-            <hr id="modalHr">
-            <input type="text" name="" id="modelPassword"  class="third" placeholder="새 비밀번호"><br>
-            <input type="text" name="" id="modelPassword" class="third" placeholder="비밀번호 확인">
+            <hr class="modalHr">
+            <input type="password" name="" id="changePassword1" class="third" placeholder="새 비밀번호"><br>
+            <input type="password" name="" id="changePassword2" class="third" placeholder="비밀번호 확인">
+            <span id="changePasswordText"></span>
         </div>
         <div id="modalBtn">
-            <input type="button" id="newModalNoBtn" value="변경 취소">
-            <input type="submit" name="" id="finishModalBtn" value="변경">
+            <input type="button"  class="modalNoBtn" value="변경 취소" id="cancelPwd">
+            <input type="submit" id = "changePwdBtn" class="finishModalBtn" value="변경">
         </div>
     </form>
 </div>
+<%--<script src="<c:url value="/js/jsencrypt.min.js"/>"></script>--%>
+<script src="<c:url value="/js/modal.js"/>"></script>
+
+<%--
+<script src="<c:url value="/js/modalNewPass.js"/>"></script>
+<script src="<c:url value="/js/newPassword.js"/>"></script>
+--%>
+<script src="<c:url value="/js/jsencrypt.min.js"/>"></script>
+<script>
+    const crypt = new JSEncrypt();
+    crypt.setPublicKey("${publicKey}");
+    window.addEventListener("DOMContentLoaded", (event) => {
+        document.getElementById("finish").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const form = document.createElement("form");
+            form.setAttribute("method", "post");
+            form.setAttribute("action", "<c:url value="/inside/mypage/changepwd" />");
+            form.setAttribute("charset", "UTF-8");
+            form.setAttribute("hidden", "true");
+
+            const passwordInput = document.createElement("input");
+            passwordInput.setAttribute("type", "password");
+            passwordInput.setAttribute("name", "password");
+            passwordInput.setAttribute("value", crypt.encrypt(document.getElementById("changePassword2").value));
+            form.appendChild(passwordInput);
+
+            document.body.appendChild(form);
+            form.submit();
+        });
+    })
+
+</script>
+<script src="<c:url value="/js/jquery-3.7.0.min.js"/>"></script>
+<script src="<c:url value="/js/editPhoneNumber.js"/>"></script>
+<script src="<c:url value="/js/insideEditPassword_checkPhone.js"/>"></script>
+</body>
 </html>
