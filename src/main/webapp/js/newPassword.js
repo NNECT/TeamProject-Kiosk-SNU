@@ -5,6 +5,14 @@ function checkPasswordMatch() {
     var passwordConfirm = document.getElementById("password_confirm").value;
     var passwordCheck = document.getElementById("passwordCheck");
 
+    //비밀번호 최소 6자리이상 입력
+    if (password.length < 6) {
+        passwordCheck.innerHTML = "6자리 이상 입력해주세요";
+        passwordCheck.style.color = "red";
+        passwordCheck.style.display = "block";
+        return;
+    }
+
     if (password === passwordConfirm && password !== "" && passwordConfirm !== "") {
         passwordCheck.innerHTML = "비밀번호 일치";
         passwordCheck.style.color = "blue";
