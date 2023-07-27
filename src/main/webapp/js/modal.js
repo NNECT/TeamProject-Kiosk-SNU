@@ -14,6 +14,10 @@ function showModal(modalId) {
     });
 }
 
+
+
+
+
 function showNextModal() {
     const currentModal = document.getElementById("rePasswordModal");
     const nextModal = document.getElementById("newPasswordModal");
@@ -28,7 +32,7 @@ function showNextModal() {
     modalBg.style.display = "block";
 
     // 다음 모달창 닫기 버튼 이벤트 설정
-    const closeModalBtn = nextModal.querySelector(".newModalNoBtn");
+    const closeModalBtn = nextModal.querySelector(".modalNoBtn");
     closeModalBtn.addEventListener("click", () => {
         nextModal.style.display = "none";
         modalBg.style.display = "none";

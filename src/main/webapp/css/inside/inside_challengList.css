@@ -58,22 +58,22 @@ table{
 }
 th{font-weight: normal; color: #383838;}
 #date{
-    width: 250px;
+    width: 90px;
     height: 60px;
     padding: 0 10px;
 }
 #name{
-    width: 100px;
+    width: 50px;
     height: 60px;
-    padding: 0 10px;
+    padding: 0 2px;
 }
 #result{
-    width: 100px;
+    width: 50px;
     height: 60px;
     padding: 0 10px;
 }
 #point{
-    width: 170px;
+    width: 50px;
     height: 60px;
     padding: 0 10px;
 }
