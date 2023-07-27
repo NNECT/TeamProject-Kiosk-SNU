@@ -43,7 +43,7 @@
                     </table>
                     <!-- 공지사항 작성 버튼 -->
                     <div style="padding-right: 20px">
-                        <a href="${pageContext.request.contextPath}/admin/adminnotificationwrite" class="btn btn-primary mt-3 float-right">공지 작성</a>
+                        <a href="${pageContext.request.contextPath}/admin/adminnotificationwrite" class="btn btn-primary mt-3 float-center">공지 작성</a>
                     </div>
                 </div>
             </div>
@@ -56,16 +56,6 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="<c:url value="/js/deleteNotice.js"/>"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script>
-    new DataTable('#example');
-</script>
-<script>
-    <c:if test="${noticeRegistered}">
-    window.addEventListener('DOMContentLoaded', (event) => {
-        window.alert("등록되었습니다.");
-    });
-    </c:if>
-</script>
+<script src="<c:url value="/js/adminNotice.js"/>"></script>
 </body>
 </html>

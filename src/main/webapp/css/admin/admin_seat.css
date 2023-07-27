@@ -1,14 +1,15 @@
 body{
-    background-color: #EDF2FF;
     position: relative;
     text-align: center;
 }
 
 #info {
-    width: 270px;
-    height: 15px;
+    /*width: 270px;*/
+    /*height: 15px;*/
+    background: #ffffff;
     border: 0px solid blue;
     float: left;
+    margin-left: 100px;
 }
 
 .box {

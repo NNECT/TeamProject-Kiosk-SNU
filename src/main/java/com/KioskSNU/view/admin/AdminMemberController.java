@@ -35,7 +35,7 @@ public class AdminMemberController {
     @RequestMapping("/admin/adminmember")
     @AdminLoginRequired
     //전체 회원목록
-    public ModelAndView getMemberList(Integer page, Integer pageSize) {
+    public ModelAndView getMemberList() {
         ModelAndView mav = new ModelAndView();
         mav.addObject("list", accountService.getAll());
         mav.setViewName("admin/admin_member");

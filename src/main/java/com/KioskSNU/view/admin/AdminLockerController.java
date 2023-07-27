@@ -32,14 +32,14 @@ public class AdminLockerController {
         return mav;
     }
 
-/*    @RequestMapping("/admin/adminLockerRecord")
+    @RequestMapping("/admin/adminLockerRecord")
     @AdminLoginRequired
     public ModelAndView previousRecord(UsageLockerDTO usageLockerDTO){
 
         ModelAndView mav = new ModelAndView();
-        mav.addObject("record",lockerService.getByLockerNumber(usageLockerDTO.getLocker_lockerNumber()));
-        mav.setViewName("admin/admin_locker");
+        mav.addObject("record",usageLockerService.getAll());
+        mav.setViewName("admin/admin_lockerReport");
         return mav;
-    }*/
+    }
 
 }
