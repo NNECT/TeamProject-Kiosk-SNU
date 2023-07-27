@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -17,6 +18,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class OutsideLogoutController {
     private final ConcurrentHashMap<Integer, UsageSeatDTO> seatMap;
     private final ConcurrentHashMap<Integer, UsageRoomDTO> roomMap;
+    private final HashMap<String, Object> ticketMap;
     private final Set<Integer> lockerSet;
 
     @RequestMapping("/outside/logout")
@@ -33,9 +35,8 @@ public class OutsideLogoutController {
                 break;
         }
 
-        LockerDTO lockerDTO = (LockerDTO) session.getAttribute("locker");
-        if (lockerDTO != null) {
-            lockerSet.remove(lockerDTO.getLockerNumber());
+        if (ticketMap.containsKey("locker")) {
+            lockerSet.remove(((LockerDTO) ticketMap.get("locker")).getLockerNumber());
         }
 
         session.invalidate();
