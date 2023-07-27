@@ -14,6 +14,7 @@ public interface AccountCommutationTicketCheck {
 
     /**
      * 유효 정기권 Get 메소드
+     * 유효 정기권이 없을 경우 null 반환
      *
      * @param accountDTO 사용자
      * @return 유효 정기권

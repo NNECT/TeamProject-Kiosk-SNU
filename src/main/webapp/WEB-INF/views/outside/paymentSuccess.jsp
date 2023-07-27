@@ -29,19 +29,20 @@
 
     <%--<img src="../snu/img/endIcon.png" alt="">--%>
 
-    <p id="title">입실완료!</p><!--입실완료면 '입실완료!'-->
-    <p id="time"><span id="MyTimer">10</span>초뒤 홈화면으로 이동합니다.</p>
+    <p id="title">결제완료!</p><!--입실완료면 '입실완료!'-->
+    <p id="time"><span id="MyTimer">3</span></p>
+    <p id="introduce"><strong>챌린지 참여</strong>하고 <strong>최대 500point</strong>받으세요!</p>
     <a href="<c:url value='/outside'/>"><input type="button" id="moveBtn" value="홈화면으로 이동"></a>
 </section>
 
 <script>
-    let time = 10;
+    let time = 3;
     let timer = setInterval(function () {
         time--;
-        document.getElementById('MyTimer').innerText = String(time).padStart(2, '0');
+        document.getElementById('MyTimer').innerText = String(time).padStart(1, '0');
         if (time === 0) {
             clearInterval(timer);
-            location.href = "<c:url value="/outside"/>";
+            location.href = "<c:url value="/outside/challenge/list"/>";//chelleng화면으로 이동하도록 만들기
         }
     }, 1000);
 </script>
