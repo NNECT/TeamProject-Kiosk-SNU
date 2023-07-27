@@ -18,3 +18,4 @@ function checkPasswordMatch() {
         passwordCheck.style.display = "none"; // 숨김 처리
     }
 }
+
