@@ -80,7 +80,7 @@
 
             const form = document.createElement("form");
             form.setAttribute("method", "post");
-            form.setAttribute("action", "${pageContext.request.contextPath}/admin/adminmypage");
+            form.setAttribute("action", "${pageContext.request.contextPath}/admin/adminChangePassword");
             form.setAttribute("charset", "UTF-8");
             form.setAttribute("hidden", "true");
 

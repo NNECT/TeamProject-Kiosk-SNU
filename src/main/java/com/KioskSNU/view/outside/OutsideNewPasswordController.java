@@ -36,13 +36,25 @@ public class OutsideNewPasswordController {
 
 
     @PostMapping("/outside/newPassword")
-    public ModelAndView postProcess(AccountDTO accountDTO,HttpSession session) throws NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
+    public ModelAndView postProcess(AccountDTO accountDTO, HttpSession session) throws NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
         ModelAndView mav = new ModelAndView();
 
         AccountDTO getUser = accountService.getByUsername(accountDTO.getUsername());
+        String prePassword = getUser.getPassword();
+        String newPassword = sha.encrypt(rsa.decrypt(accountDTO.getPassword()));
+
+        //기존 비밀번호와 새로운 비밀번호 동일하면
+        if(prePassword.equals(newPassword)){
+            //username은 이미 session값으로 등록되어 있으니 newPassword 과정 다시 진행하도록 보내기
+            mav.addObject("publicKey", rsa.getPublicKey());
+            mav.addObject("equalPW", "equalPW");
+            mav.setViewName("/outside/newPassword");
+            return mav;
+        }
+
         //rsa로 넘어온 비밀번호를 decrypt
         //sha로 다시 암호화
-        getUser.setPassword(sha.encrypt(rsa.decrypt(accountDTO.getPassword())));
+        getUser.setPassword(newPassword);
         //비밀번호 변경 db
         accountService.update(getUser);
 

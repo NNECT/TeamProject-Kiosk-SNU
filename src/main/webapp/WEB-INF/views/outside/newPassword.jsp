@@ -22,6 +22,7 @@
         body {
             font-family: 'SUITE', sans-serif;
         }
+
     </style>
     <title>snu_newPassword_page</title>
 </head>
@@ -56,11 +57,27 @@
             <input type="button" id="loginBtn" value="로그인페이지로 이동">
         </div>
     </div>
+    <!-- 이전비밀번호와 동일 비밀번호 입력으로 실패 모달 -->
+    <div id="changePWfail">
+        <div id="modalContent">
+            <p id="modalP">
+                비밀번호 변경 실패<br>
+                동일한 <strong>비밀번호</strong> 를
+                <br>사용하실 수 없습니다
+            </p>
+        </div>
+        <div id="modalBtn">
+            <input type="button" id="modalCheckBtn" value="확인">
+        </div>
+    </div>
+    <!-- 모달 -->
 
 </section>
 <script src="<c:url value="/js/jsencrypt.min.js"/>"></script>
 <script src="<c:url value="/js/newPassword.js"/>"></script>
 <script>
+
+
     window.addEventListener("DOMContentLoaded", (event) => {
         document.getElementById("loginBtn").addEventListener("click", newPasswordConfirm);
     });
@@ -99,6 +116,20 @@
         }
     }
 
+    /*이전 비밀번호와 동일 비번 입력한 경우*/
+    var equalPW = "${equalPW}";
+
+    if (equalPW === "equalPW") {
+        console.log(equalPW);
+        //fail
+        var changePWfailModal = document.getElementById("changePWfail");
+        changePWfailModal.style.display = "block";
+        //확인 눌러주면 다시 비활성화
+        var modalCheckBtn = document.getElementById("modalCheckBtn");
+        modalCheckBtn.addEventListener("click", function () {
+            changePWfailModal.style.display = "none";
+        });
+    }
 </script>
 </body>
 </html>
