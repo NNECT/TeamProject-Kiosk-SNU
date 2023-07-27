@@ -71,6 +71,10 @@ public class OutsidePaymentController {
     @RequestMapping("/outside/paymentSuccess")
     public ModelAndView successProcess(HttpSession session) {
         ModelAndView mav = new ModelAndView();
+
+        session.removeAttribute("selectType");
+        session.removeAttribute("selectNumber");
+
         mav.setViewName("outside/paymentSuccess");
         return mav;
     }
