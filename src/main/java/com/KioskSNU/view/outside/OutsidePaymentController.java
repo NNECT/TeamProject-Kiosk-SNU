@@ -1,5 +1,6 @@
 package com.KioskSNU.view.outside;
 
+import com.KioskSNU.secure.RSA;
 import com.KioskSNU.snu.dto.*;
 import com.KioskSNU.snu.service.RoomService;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 public class OutsidePaymentController {
+    private final RSA rsa;
     private final HashMap<String, Object> ticketMap;
     private final RoomService roomService;
 
@@ -56,11 +58,20 @@ public class OutsidePaymentController {
             }
         });
 
+        mav.addObject("publicKey", rsa.getPublicKey());
+
         mav.addObject("ticketList", ticketList);
         mav.addObject("timeList", timeList);
         mav.addObject("priceList", priceList);
 		mav.addObject("totalPrice", priceList.stream().mapToInt(Integer::intValue).sum());
         mav.setViewName("outside/payment");
+        return mav;
+    }
+
+    @RequestMapping("/outside/paymentSuccess")
+    public ModelAndView successProcess(HttpSession session) {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("outside/paymentSuccess");
         return mav;
     }
 }

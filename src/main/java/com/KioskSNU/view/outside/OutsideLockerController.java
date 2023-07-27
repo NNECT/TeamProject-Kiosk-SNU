@@ -3,6 +3,7 @@ package com.KioskSNU.view.outside;
 import com.KioskSNU.snu.dto.AccountDTO;
 import com.KioskSNU.snu.dto.LockerDTO;
 import com.KioskSNU.snu.dto.LockerTicketDTO;
+import com.KioskSNU.snu.dto.UsageLockerDTO;
 import com.KioskSNU.snu.service.LockerService;
 import com.KioskSNU.snu.service.LockerTicketService;
 import com.KioskSNU.snu.service.UsageLockerService;
@@ -17,11 +18,13 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 @Controller
 @RequiredArgsConstructor
 public class OutsideLockerController {
     private final HashMap<String, Object> ticketMap;
+    private final Set<Integer> lockerSet;
     private final LockerService lockerService;
     private final UsageLockerService usageLockerService;
     private final LockerTicketService lockerTicketService;
@@ -31,7 +34,7 @@ public class OutsideLockerController {
         ModelAndView mav = new ModelAndView();
 
         // 사용자 확인
-        AccountDTO accountDTO = (AccountDTO) session.getAttribute("accountDTO");
+        AccountDTO accountDTO = (AccountDTO) session.getAttribute("author");
 
         // 사용자 사물함 보유 여부 확인
         boolean hasLocker = usageLockerService.hasLocker(accountDTO);
@@ -53,9 +56,6 @@ public class OutsideLockerController {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("redirect:/outside/payment");
 
-        System.out.println(ticket);
-        System.out.println(lockerNumber);
-
         // 사용자 확인
         AccountDTO accountDTO = (AccountDTO) session.getAttribute("author");
         if (accountDTO == null) {
@@ -63,14 +63,14 @@ public class OutsideLockerController {
             return mav;
         }
 
-        // 사용자 사물함 보유 여부 확인
-        boolean hasLocker = usageLockerService.hasLocker(accountDTO);
-
         // 사용권 선택 여부 확인
         if (ticket == 0) return mav;
 
+        // 사용자 사물함 보유 여부 확인
+        UsageLockerDTO usageLockerDTO = usageLockerService.getLocker(accountDTO);
+
         // 사물함 선택 여부 확인
-        if (!hasLocker) {
+        if (usageLockerDTO == null) {
             if (lockerNumber == null) {
                 mav.setViewName("redirect:/outside/locker");
                 return mav;
@@ -78,11 +78,15 @@ public class OutsideLockerController {
 
             // 선택된 사물함 확인
             LockerDTO lockerDTO = lockerService.getByLockerNumber(Integer.parseInt(lockerNumber));
-            if (lockerDTO == null || !lockerDTO.isUsable()) {
+            if (lockerDTO == null || !lockerDTO.isUsable() || lockerSet.contains(lockerDTO.getLockerNumber())) {
                 mav.setViewName("redirect:/outside/locker");
                 return mav;
             }
             ticketMap.put("locker", lockerDTO);
+
+            // 사물함 정보 등록
+            usageLockerDTO = new UsageLockerDTO();
+            usageLockerDTO.setLockerDTO(lockerDTO);
         }
 
         // 선택된 사용권 확인
@@ -92,6 +96,9 @@ public class OutsideLockerController {
             return mav;
         }
         ticketMap.put("lockerTicket", lockerTicketDTO);
+
+        // 사물함 결제중 정보 등록
+        lockerSet.add(usageLockerDTO.getLocker_lockerNumber());
 
         return mav;
     }

@@ -51,6 +51,9 @@
         </constructor-arg>
     </bean>
 
+<!--    사물함 결제 준비중 관리-->
+    <bean id="lockerSet" class="com.KioskSNU.config.ConcurrentHashSetFactoryBean"/>
+
 	<!-- 외부 키오스크 장바구니 세션 관리 -->
     <bean id="ticketMap" class="java.util.HashMap" scope="session">
         <constructor-arg>
