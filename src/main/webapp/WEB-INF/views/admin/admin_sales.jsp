@@ -27,13 +27,21 @@
                         <div class="col-md-6">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">정기권 사용자</h5>
-                                    <canvas id="commutationTicketChart"></canvas>
+                                    <h5 class="card-title">매출 현황</h5>
+                                    <canvas id="paymentChart"></canvas>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row mt-4">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">정기권 사용자</h5>
+                                    <canvas id="commutationTicketChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-md-6">
                             <div class="card">
                                 <div class="card-body">
@@ -58,6 +66,7 @@
     const toRadians = (val) => val * Math.PI / 180;
 
     const timeCanvas = document.getElementById('timeChart');
+    const paymentCanvas = document.getElementById('paymentChart');
     const commutationTicketCanvas = document.getElementById('commutationTicketChart');
     const challengeCanvas = document.getElementById('challengeChart');
 
@@ -68,6 +77,26 @@
             datasets: [{
                 label: '누적사용시간',
                 data: ${seatTimesData},
+                fill: false,
+                tension: 0.1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    const paymentChart = new Chart(paymentCanvas, {
+        type: 'line',
+        data: {
+            labels: ${paymentLabels},
+            datasets: [{
+                label: '매출 현황',
+                data: ${paymentData},
                 fill: false,
                 tension: 0.1
             }]
