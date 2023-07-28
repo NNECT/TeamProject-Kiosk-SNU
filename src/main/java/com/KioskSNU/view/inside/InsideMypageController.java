@@ -25,9 +25,13 @@ public class InsideMypageController {
     private final AccountService accountService;
 
     @RequestMapping("/mypage") // 새로 추가된 메서드
-    public ModelAndView insideMypage() {
+    public ModelAndView insideMypage(@RequestParam(required = false) String checkPW) {
         ModelAndView mav = new ModelAndView();
         mav.addObject("publicKey", rsa.getPublicKey());
+
+        if(checkPW != null && checkPW.equals("fail")){
+            mav.addObject("checkPWfail","checkPWfail");
+        }
         mav.setViewName("inside/inside_mypage");
         return mav;
     }
@@ -36,14 +40,20 @@ public class InsideMypageController {
     @PostMapping("/mypage/changepwd")
     public ModelAndView changePassword(AccountDTO accountDTO, HttpSession session) throws NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
         ModelAndView mav = new ModelAndView();
-
         try {
 //            System.out.println("accountDTO.getPassword() = " + sha.encrypt(rsa.decrypt(accountDTO.getPassword())));
             //현재의 세션 객체
             AccountDTO currentUser = (AccountDTO) session.getAttribute("author");
             //현재 객체에서 정보를 가져옴
             AccountDTO getUser = accountService.getByUsername(currentUser.getUsername());
-            sha.encrypt(rsa.decrypt(accountDTO.getPassword()));
+
+            //session 정보의 비번과 새로 들어온 비밀번호가 동일하면
+            if(sha.encrypt(rsa.decrypt(accountDTO.getPassword())).equals(getUser.getPassword())) {
+                mav.addObject("publicKey", rsa.getPublicKey());
+                mav.setViewName("redirect:/inside/mypage?checkPW=fail");
+                return mav;
+
+            }
 
             //그것의 비밀번호 수정
             getUser.setPassword(sha.encrypt(rsa.decrypt(accountDTO.getPassword())));
