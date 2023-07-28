@@ -1,6 +1,7 @@
 package com.KioskSNU.view.admin;
 
 
+import com.KioskSNU.interceptor.AdminLoginRequired;
 import com.KioskSNU.snu.dto.*;
 import com.KioskSNU.snu.service.*;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +29,7 @@ public class AdminAjaxRoomActivationController {
 
 
     @RequestMapping("/ajax/roomActivation")
+    @AdminLoginRequired
     public ResponseEntity<Map<String, String>> sendProcess(@RequestBody Map<String, String> map, HttpSession session) {
 
         String purpose = map.get("codePurpose");

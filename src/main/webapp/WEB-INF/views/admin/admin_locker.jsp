@@ -62,26 +62,9 @@
 	</div>
 </div>
 
-<%-- 메뉴 선택 모달 창 --%>
-<%--<div id="menuModal" class="modal" style="display: none; margin-top: 160px;">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<table class="table">
-					<tr>
-						<th colspan="2" style="text-align: center">메뉴를 선택해주세요</th>
-					</tr>
-					<tr>
-						<td style="text-align: center;"><button type="button" id="realTimeStatus">실시간 현황</button></td>
-						<td style="text-align: center"><button type="button" id="previousRecord">사용기록</button></td>
-					</tr>
-				</table>
-			</div>
-		</div>
-	</div>
-</div>--%>
-<div id="menuModal" class="modal" style="display: none; margin-top: 160px; margin-left: 35%;">
-	<div class="modal-content" style="max-width: 400px; padding: 20px; text-align: center;">
+<%--메뉴 선택 모달 창--%>
+<div id="menuModal" class="modal" style="display: none;">
+	<div class="modal-content" style="max-width: 400px; padding: 20px; text-align: center; position: relative; margin-left: 40%; margin-top: 220px;">
 		<h3 style="margin-bottom: 30px;">메뉴를 선택해 주세요</h3>
 		<button type="button" id="realTimeStatus">실시간 현황</button>
 		<button type="button" id="previousRecord">사용기록</button>
@@ -170,10 +153,10 @@
 				showLockerModal(lockerId);
 			});
 
-			// "이전 기록" 버튼 클릭 이벤트
+			// "사용기록" 버튼 클릭 이벤트
 			$("#previousRecord").off("click").on("click", function() {
 				$("#menuModal").modal("hide");
-				previousRecord(lockerId);
+				location.href = "<c:url value='/admin/adminLockerRecord'/>?id=" + lockerId;
 			});
 		}
 
@@ -245,11 +228,6 @@
 					alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
 				}
 			});
-		}
-
-		// 이전 기록
-		function previousRecord(lockerId) {
-			location.href = "<c:url value='/admin/adminLockerRecord'/>?id=" + lockerId;
 		}
 	});
 </script>
