@@ -12,11 +12,9 @@ function showModal(modalId) {
         modal.style.display = "none";
         modalBg.style.display = "none";
     });
+
+
 }
-
-
-
-
 
 function showNextModal() {
     const currentModal = document.getElementById("rePasswordModal");
@@ -38,6 +36,13 @@ function showNextModal() {
         modalBg.style.display = "none";
     });
 }
+
+
+
+
+
+
+
 
 
 
