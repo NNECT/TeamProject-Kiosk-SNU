@@ -1,6 +1,7 @@
 package com.KioskSNU.view.admin;
 
 
+import com.KioskSNU.interceptor.AdminLoginRequired;
 import com.KioskSNU.snu.dto.AccountDTO;
 import com.KioskSNU.snu.dto.SeatDTO;
 import com.KioskSNU.snu.dto.UsageCommutationTicketDTO;
@@ -34,6 +35,7 @@ public class AdminAjaxSeatActivationController {
 
 
     @RequestMapping("/ajax/seatActivation")
+    @AdminLoginRequired
     public ResponseEntity<Map<String, String>> sendProcess(@RequestBody Map<String, String> map, HttpSession session) {
 
         String purpose = map.get("codePurpose");

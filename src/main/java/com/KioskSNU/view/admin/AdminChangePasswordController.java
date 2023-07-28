@@ -38,6 +38,7 @@ public class AdminChangePasswordController {
 
 
     @PostMapping("/admin/adminChangePassword")
+    @AdminLoginRequired
     public ModelAndView postProcess(AdminDTO adminDTO,HttpSession session, String prePassword) throws NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("admin/admin_main");

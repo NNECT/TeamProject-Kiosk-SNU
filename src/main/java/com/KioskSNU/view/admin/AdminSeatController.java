@@ -1,5 +1,6 @@
 package com.KioskSNU.view.admin;
 
+import com.KioskSNU.interceptor.AdminLoginRequired;
 import com.KioskSNU.snu.dto.*;
 import com.KioskSNU.snu.service.*;
 import com.google.gson.Gson;
@@ -29,6 +30,7 @@ public class AdminSeatController {
     private final RoomService roomService;
 
     @RequestMapping("/admin/adminseat")
+    @AdminLoginRequired
     public ModelAndView process(String type, Integer number) {
         ModelAndView mav = new ModelAndView();
 

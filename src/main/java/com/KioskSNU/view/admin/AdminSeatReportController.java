@@ -1,5 +1,6 @@
 package com.KioskSNU.view.admin;
 
+import com.KioskSNU.interceptor.AdminLoginRequired;
 import com.KioskSNU.snu.dto.UsageSeatDTO;
 import com.KioskSNU.snu.service.UsageRoomService;
 import com.KioskSNU.snu.service.UsageSeatService;
@@ -21,6 +22,7 @@ public class AdminSeatReportController {
     private final UsageRoomService usageRoomService;
 
     @RequestMapping("/admin/adminseatreport")
+    @AdminLoginRequired
     public ModelAndView process(String type, Integer number){
         ModelAndView mav = new ModelAndView();
 

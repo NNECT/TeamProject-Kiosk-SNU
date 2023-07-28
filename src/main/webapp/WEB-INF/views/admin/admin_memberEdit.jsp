@@ -12,7 +12,7 @@
                 <div class="card-body text-center">
                     <h2 class="card-title">회원정보 수정</h2>
                     <hr>
-                    <form id ="form" action="${pageContext.request.contextPath}/admin/adminmemberedit?id=${member.id}" method="post">
+                    <form id ="form" action="${pageContext.request.contextPath}/admin/adminmemberedit?id=${member.id}" method="post" onsubmit="return showNotificationOnSubmit()">
                         <table class="table">
                             <tr>
                                 <th>회원번호:</th>
@@ -25,6 +25,7 @@
                             <tr>
                                 <th>비밀번호:</th>
                                 <td><button type="submit" name="password" id="passwordReset">비밀번호 초기화</button></td>
+                                <input type="hidden" name="password" value="${member.password}">
                             </tr>
                             <tr>
                                 <th>전화번호:</th>
@@ -65,14 +66,14 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
 
-    // 수정이 완료되었을 때 알림 창 띄우기
-    function showNotification() {
-        alert("수정되었습니다");
+    function showNotificationOnSubmit() {
+        if (confirm("수정하시겠습니까?")) {
+            alert("수정되었습니다.");
+            return true; // 폼 제출 진행
+        } else {
+            return false; // 폼 제출 중단
+        }
     }
-
-    // 수정 버튼을 눌렀을 때 알림 창 띄우기
-    const submitButton = document.querySelector("button[type='submit']");
-    submitButton.addEventListener("click", showNotification);
 
     // "비밀번호 리셋" 버튼 클릭 이벤트
     $('#passwordReset').off("click").on("click", function () {
