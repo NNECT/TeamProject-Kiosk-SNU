@@ -118,14 +118,14 @@ public class OutsideAjaxPaymentController {
 
         // 결제 내역 로그
         StringBuilder logBuilder = new StringBuilder("{");
-        logBuilder.append("'result':'결제 성공',");
-        logBuilder.append("'type':'").append(paymentType).append("',");
-        logBuilder.append("'code':'").append(paymentCode).append("',");
-        logBuilder.append("'amount':").append(totalPrice).append(",");
-        logBuilder.append("'point':").append(payPoint).append(",");
-        logBuilder.append("'pay':").append(paymentPrice).append(",");
+        logBuilder.append("\"result\":\"결제 성공\",");
+        logBuilder.append("\"type\":\"").append(paymentType).append("\",");
+        logBuilder.append("\"code\":\"").append(paymentCode).append("\",");
+        logBuilder.append("\"amount\":").append(totalPrice).append(",");
+        logBuilder.append("\"point\":").append(payPoint).append(",");
+        logBuilder.append("\"pay\":").append(paymentPrice).append(",");
 
-        logBuilder.append("'breakdown':[");
+        logBuilder.append("\"breakdown\":[");
 
         // 실제 결과 처리 시작
         for (int i = 0; i < ticketList.size(); i++) {
@@ -140,10 +140,10 @@ public class OutsideAjaxPaymentController {
                 case "시간권": {
                     // 잔여 시간 추가
                     accountDTO.setRemainTime(accountDTO.getRemainTime() + time * 60);
-                    logBuilder.append("'type':'Time Ticket',");
-                    logBuilder.append("'time':").append(time).append(",");
-                    logBuilder.append("'unit':'hour',");
-                    logBuilder.append("'price':").append(price);
+                    logBuilder.append("\"type\":\"Time Ticket\",");
+                    logBuilder.append("\"time\":").append(time).append(",");
+                    logBuilder.append("\"unit\":\"hour\",");
+                    logBuilder.append("\"price\":").append(price);
                     break;
                 }
 
@@ -164,10 +164,10 @@ public class OutsideAjaxPaymentController {
                         usageCommutationTicketDTO.setEndDate(startDate.plusDays(time));
                         usageCommutationTicketService.insert(usageCommutationTicketDTO);
                     }
-                    logBuilder.append("'type':'Commutation Ticket',");
-                    logBuilder.append("'time':").append(time).append(",");
-                    logBuilder.append("'unit':'day',");
-                    logBuilder.append("'price':").append(price);
+                    logBuilder.append("\"type\":\"Commutation Ticket\",");
+                    logBuilder.append("\"time\":").append(time).append(",");
+                    logBuilder.append("\"unit\":\"day\",");
+                    logBuilder.append("\"price\":").append(price);
                     break;
                 }
 
@@ -175,10 +175,10 @@ public class OutsideAjaxPaymentController {
                     // 선택된 룸 정보 확인
                     int roomNumber = (int) session.getAttribute("selectNumber");
                     UsageRoomDTO usageRoomDTO = roomMap.get(roomNumber);
-                    logBuilder.append("'type':'Room Ticket',");
-                    logBuilder.append("'time':").append(time).append(",");
-                    logBuilder.append("'unit':'hour',");
-                    logBuilder.append("'price':").append(price);
+                    logBuilder.append("\"type\":\"Room Ticket\",");
+                    logBuilder.append("\"time\":").append(time).append(",");
+                    logBuilder.append("\"unit\":\"hour\",");
+                    logBuilder.append("\"price\":").append(price);
                     break;
                 }
 
@@ -208,10 +208,10 @@ public class OutsideAjaxPaymentController {
                         // 사물함 결제중 정보 삭제
                         lockerSet.remove(lockerDTO.getLockerNumber());
                     }
-                    logBuilder.append("'type':'Locker Ticket',");
-                    logBuilder.append("'time':").append(time).append(",");
-                    logBuilder.append("'unit':'day',");
-                    logBuilder.append("'price':").append(price);
+                    logBuilder.append("\"type\":\"Locker Ticket\",");
+                    logBuilder.append("\"time\":").append(time).append(",");
+                    logBuilder.append("\"unit\":\"day\",");
+                    logBuilder.append("\"price\":").append(price);
                     break;
                 }
             }
