@@ -42,12 +42,12 @@ public class InsideIndexController {
         }
 
         //테스트코드
-        session.setAttribute("author", accountService.getById(1));
-        UsageSeatDTO usageDTO = new UsageSeatDTO();
-        usageDTO.setAccount_id(1);
-        usageDTO.setSeat_id((Integer) session.getAttribute("insideNumber"));
-        usageDTO.setStartDateTime(LocalDateTime.now());
-        seatMap.put(usageDTO.getSeat_id(), usageDTO);
+//        session.setAttribute("author", accountService.getById(1));
+//        UsageSeatDTO usageDTO = new UsageSeatDTO();
+//        usageDTO.setAccount_id(1);
+//        usageDTO.setSeat_id((Integer) session.getAttribute("insideNumber"));
+//        usageDTO.setStartDateTime(LocalDateTime.now());
+//        seatMap.put(usageDTO.getSeat_id(), usageDTO);
 
         modelAndView.setViewName("inside/index");
         return modelAndView;
@@ -57,53 +57,52 @@ public class InsideIndexController {
     public ModelAndView start(HttpSession session) {
         ModelAndView modelAndView = new ModelAndView();
 
-//        switch ((String) session.getAttribute("insideType")) {
-//            case "seat": {
-//                // 사용자가 등록되지 않았거나 사용 시작이 되지 않았으면 인덱스 페이지에서 대기
-//                if (!seatMap.containsKey((Integer) session.getAttribute("insideNumber"))
-//                        || seatMap.get((Integer) session.getAttribute("insideNumber")).getStartDateTime() == null) {
-//                    modelAndView.setViewName("redirect:/inside/index");
-//                    return modelAndView;
-//                }
-//
-//                // 사용자가 등록되어있는데, 사용자 정보가 없으면 인덱스 페이지에서 대기
-//                AccountDTO accountDTO = accountService.getById(seatMap.get((Integer) session.getAttribute("insideNumber")).getAccount_id());
-//                if (accountDTO == null) {
-//                    System.out.println(session.getAttribute("insideNumber") + "번 자리에 등록된 사용자ID " + seatMap.get((Integer) session.getAttribute("insideNumber")).getAccount_id() + "에 해당하는 사용자가 없습니다.");
-//                    modelAndView.setViewName("redirect:/inside/index");
-//                    return modelAndView;
-//                }
-//
-//                session.setAttribute("author", accountDTO);
-//                break;
-//            }
-//
-//            case "room": {
-//                // 사용자가 등록되지 않았거나 사용 시작이 되지 않았으면 인덱스 페이지에서 대기
-//                if (!roomMap.containsKey((Integer) session.getAttribute("insideNumber"))
-//                        || roomMap.get((Integer) session.getAttribute("insideNumber")).getStartDateTime() == null) {
-//                    modelAndView.setViewName("redirect:/inside/index");
-//                    return modelAndView;
-//                }
-//
-//                // 사용자가 등록되어있는데, 사용자 정보가 없으면 인덱스 페이지에서 대기
-//                AccountDTO accountDTO = accountService.getById(roomMap.get((Integer) session.getAttribute("insideNumber")).getAccount_id());
-//                if (accountDTO == null) {
-//                    System.out.println(session.getAttribute("insideNumber") + "번 방에 등록된 사용자ID " + roomMap.get((Integer) session.getAttribute("insideNumber")).getAccount_id() + "에 해당하는 사용자가 없습니다.");
-//                    modelAndView.setViewName("redirect:/inside/index");
-//                    return modelAndView;
-//                }
-//
-//                session.setAttribute("author", accountDTO);
-//                break;
-//            }
-//
-//            default: {
-//                modelAndView.setViewName("redirect:/inside");
-//                return modelAndView;
-//            }
-//        }
+        switch ((String) session.getAttribute("insideType")) {
+            case "seat": {
+                // 사용자가 등록되지 않았거나 사용 시작이 되지 않았으면 인덱스 페이지에서 대기
+                if (!seatMap.containsKey((Integer) session.getAttribute("insideNumber"))
+                        || seatMap.get((Integer) session.getAttribute("insideNumber")).getStartDateTime() == null) {
+                    modelAndView.setViewName("redirect:/inside/index");
+                    return modelAndView;
+                }
 
+                // 사용자가 등록되어있는데, 사용자 정보가 없으면 인덱스 페이지에서 대기
+                AccountDTO accountDTO = accountService.getById(seatMap.get((Integer) session.getAttribute("insideNumber")).getAccount_id());
+                if (accountDTO == null) {
+                    System.out.println(session.getAttribute("insideNumber") + "번 자리에 등록된 사용자ID " + seatMap.get((Integer) session.getAttribute("insideNumber")).getAccount_id() + "에 해당하는 사용자가 없습니다.");
+                    modelAndView.setViewName("redirect:/inside/index");
+                    return modelAndView;
+                }
+
+                session.setAttribute("author", accountDTO);
+                break;
+            }
+
+            case "room": {
+                // 사용자가 등록되지 않았거나 사용 시작이 되지 않았으면 인덱스 페이지에서 대기
+                if (!roomMap.containsKey((Integer) session.getAttribute("insideNumber"))
+                        || roomMap.get((Integer) session.getAttribute("insideNumber")).getStartDateTime() == null) {
+                    modelAndView.setViewName("redirect:/inside/index");
+                    return modelAndView;
+                }
+
+                // 사용자가 등록되어있는데, 사용자 정보가 없으면 인덱스 페이지에서 대기
+                AccountDTO accountDTO = accountService.getById(roomMap.get((Integer) session.getAttribute("insideNumber")).getAccount_id());
+                if (accountDTO == null) {
+                    System.out.println(session.getAttribute("insideNumber") + "번 방에 등록된 사용자ID " + roomMap.get((Integer) session.getAttribute("insideNumber")).getAccount_id() + "에 해당하는 사용자가 없습니다.");
+                    modelAndView.setViewName("redirect:/inside/index");
+                    return modelAndView;
+                }
+
+                session.setAttribute("author", accountDTO);
+                break;
+            }
+
+            default: {
+                modelAndView.setViewName("redirect:/inside");
+                return modelAndView;
+            }
+        }
 
         modelAndView.setViewName("redirect:/inside/login");
         return modelAndView;

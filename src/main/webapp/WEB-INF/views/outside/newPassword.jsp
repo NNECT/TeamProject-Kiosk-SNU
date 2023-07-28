@@ -120,7 +120,6 @@
     var equalPW = "${equalPW}";
 
     if (equalPW === "equalPW") {
-        console.log(equalPW);
         //fail
         var changePWfailModal = document.getElementById("changePWfail");
         changePWfailModal.style.display = "block";

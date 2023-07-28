@@ -88,7 +88,7 @@
             <input type="button" class="modalCheckBtn" id=password value="확인" onclick="passwordCheck_phone()"><br>
             <span id="passwordCheck"></span>
             <!--페스워드 확인이 되야 전화번호 변경가능-->
-            <input type="text" id="phoneNumberInput" class="first" placeholder="변경할 전화번호를 입력해주세요">
+            <input type="text" id="phoneNumberInput" class="first" placeholder="변경할 전화번호를 입력해주세요" maxlength="13">
             <input type="button" class="modalCheckBtn" id=phoneNumber value="전송" onclick="codeSend()"><br>
             <span id="codeSendCheck"></span>
             <input type="text" id="codeInput" class="first" placeholder="인증번호를 입력해주세요">
@@ -111,7 +111,7 @@
                 인증이 필요합니다.
             </p>
             <hr class="modalHr">
-            <input type="text" name="" id="changePwdPhone" class="first" placeholder="전화번호를 입력해주세요">
+            <input type="text" name="" id="changePwdPhone" class="first" placeholder="전화번호를 입력해주세요" maxlength="13">
             <input type="button" class="modalCheckBtn" value="인증" onclick="changePwdCodeSend()"><br>
             <span id="changePwdText1"></span>
 
@@ -137,6 +137,7 @@
                 <span class="modalSpan">변경할 비밀번호</span>를 입력해주세요<br>
             </p>
             <hr class="modalHr">
+            <%--최소 6자리, 이전 비번과 동일비번 불가능--%>
             <input type="password" name="" id="changePassword1" class="third" placeholder="새 비밀번호"><br>
             <input type="password" name="" id="changePassword2" class="third" placeholder="비밀번호 확인">
             <span id="changePasswordText"></span>
@@ -219,6 +220,10 @@
 --%>
 <script src="<c:url value="/js/jsencrypt.min.js"/>"></script>
 <script>
+    var checkPWfail = "${checkPWfail}";
+    if (checkPWfail === "checkPWfail") {
+        alert("이전 비밀번호와 동일한 비밀번호를 사용하실 수 없습니다.")
+    }
 
     const crypt = new JSEncrypt();
     crypt.setPublicKey("${publicKey}");

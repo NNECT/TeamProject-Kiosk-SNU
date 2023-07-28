@@ -32,7 +32,7 @@
     <p id="title">결제완료!</p><!--입실완료면 '입실완료!'-->
     <p id="time"><span id="MyTimer">3</span></p>
     <p id="introduce"><strong>챌린지 참여</strong>하고 <strong>최대 500point</strong>받으세요!</p>
-    <a href="<c:url value='/outside'/>"><input type="button" id="moveBtn" value="홈화면으로 이동"></a>
+    <a href="<c:url value='/outside/end'/>"><input type="button" id="moveBtn" value="바로 입실"></a>
 </section>
 
 <script>

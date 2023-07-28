@@ -117,15 +117,15 @@ public class OutsideAjaxPaymentController {
         accountDTO.setPoint(accountDTO.getPoint() - payPoint);
 
         // 결제 내역 로그
-        StringBuilder logBuilder = new StringBuilder();
-        logBuilder.append("결제 성공; ");
-        logBuilder.append("결제 방법: ").append(paymentType).append("; ");
-        logBuilder.append("결제 코드: ").append(paymentCode).append("; ");
-        logBuilder.append("전체 금액: ").append(totalPrice).append("원; ");
-        logBuilder.append("사용 포인트: ").append(payPoint).append("원; ");
-        logBuilder.append("결제 금액: ").append(paymentPrice).append("원; ");
+        StringBuilder logBuilder = new StringBuilder("{");
+        logBuilder.append("\"result\":\"결제 성공\",");
+        logBuilder.append("\"type\":\"").append(paymentType).append("\",");
+        logBuilder.append("\"code\":\"").append(paymentCode).append("\",");
+        logBuilder.append("\"amount\":").append(totalPrice).append(",");
+        logBuilder.append("\"point\":").append(payPoint).append(",");
+        logBuilder.append("\"pay\":").append(paymentPrice).append(",");
 
-        logBuilder.append("---결제 내역--- ");
+        logBuilder.append("\"breakdown\":[");
 
         // 실제 결과 처리 시작
         for (int i = 0; i < ticketList.size(); i++) {
@@ -133,11 +133,17 @@ public class OutsideAjaxPaymentController {
             int time = timeList.get(i);
             int price = priceList.get(i);
 
+            if (i > 0) logBuilder.append(",");
+            logBuilder.append("{");
+
             switch (ticket) {
                 case "시간권": {
                     // 잔여 시간 추가
                     accountDTO.setRemainTime(accountDTO.getRemainTime() + time * 60);
-                    logBuilder.append("시간권: ").append(time).append("시간, ").append(price).append("원; ");
+                    logBuilder.append("\"type\":\"Time Ticket\",");
+                    logBuilder.append("\"time\":").append(time).append(",");
+                    logBuilder.append("\"unit\":\"hour\",");
+                    logBuilder.append("\"price\":").append(price);
                     break;
                 }
 
@@ -158,7 +164,10 @@ public class OutsideAjaxPaymentController {
                         usageCommutationTicketDTO.setEndDate(startDate.plusDays(time));
                         usageCommutationTicketService.insert(usageCommutationTicketDTO);
                     }
-                    logBuilder.append("정기권: ").append(time).append("일, ").append(price).append("원; ");
+                    logBuilder.append("\"type\":\"Commutation Ticket\",");
+                    logBuilder.append("\"time\":").append(time).append(",");
+                    logBuilder.append("\"unit\":\"day\",");
+                    logBuilder.append("\"price\":").append(price);
                     break;
                 }
 
@@ -166,12 +175,10 @@ public class OutsideAjaxPaymentController {
                     // 선택된 룸 정보 확인
                     int roomNumber = (int) session.getAttribute("selectNumber");
                     UsageRoomDTO usageRoomDTO = roomMap.get(roomNumber);
-
-                    // 룸 사용 시간 설정
-                    LocalDateTime startDateTime = LocalDateTime.now();
-                    usageRoomDTO.setStartDateTime(startDateTime);
-                    usageRoomDTO.setEndDateTime(startDateTime.plusHours(time));
-                    logBuilder.append("룸").append(roomNumber).append(": ").append(time).append("시간, ").append(price).append("원; ");
+                    logBuilder.append("\"type\":\"Room Ticket\",");
+                    logBuilder.append("\"time\":").append(time).append(",");
+                    logBuilder.append("\"unit\":\"hour\",");
+                    logBuilder.append("\"price\":").append(price);
                     break;
                 }
 
@@ -201,26 +208,24 @@ public class OutsideAjaxPaymentController {
                         // 사물함 결제중 정보 삭제
                         lockerSet.remove(lockerDTO.getLockerNumber());
                     }
-                    logBuilder.append("사물함: ").append(time).append("일, ").append(price).append("원; ");
+                    logBuilder.append("\"type\":\"Locker Ticket\",");
+                    logBuilder.append("\"time\":").append(time).append(",");
+                    logBuilder.append("\"unit\":\"day\",");
+                    logBuilder.append("\"price\":").append(price);
                     break;
                 }
             }
+
+            logBuilder.append("}");
         }
+
+        logBuilder.append("]}");
 
         // 결제 정보 저장
         accountService.update(accountDTO);
         paymentDTO.setAccountDTO(accountDTO);
         paymentDTO.setLog(logBuilder.toString());
         paymentService.insert(paymentDTO);
-
-        // 좌석 사용 시작
-        if (Objects.equals(session.getAttribute("selectType"), "seat")) {
-            int seatNumber = (int) session.getAttribute("selectNumber");
-            seatMap.get(seatNumber).setStartDateTime(LocalDateTime.now());
-        }
-
-        // 장바구니 정보 삭제
-        ticketMap.clear();
 
         return ResponseEntity.ok(Map.of("result", "success"));
     }

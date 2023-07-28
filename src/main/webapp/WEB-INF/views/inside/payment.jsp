@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: hongsuji
@@ -12,7 +13,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=deevice-width, initial-scale=1,minimum-scale=1,maxmun-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1,minimum-scale=1,maximum-scale=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<c:url value="/css/inside/inside_payment.css"/>">
     <link rel="stylesheet" href="<c:url value="/css/inside/inside_payModal.css"/>">
@@ -25,39 +26,35 @@
 </head>
 <body>
 <div id="body">
-    <a href="../inside/snu_seat.html"><img id="beforBtn" src="<c:url value="/img/inside/beforBtn.png"/>" alt=""></a>
+    <a href="<c:url value="/inside/payment/cancel"/>"><img id="beforBtn" src="<c:url value="/img/inside/beforBtn.png"/>" alt=""></a>
     <div id="whiteWrap">
         <section>
-            <ul>
+            <ul><!--메뉴-->
                 <li id="pay">결제내역</li>
             </ul>
-            <hr id="line">
-
-            <div class="payBox">
-                <span class="product">상품</span>
-                <span class="time">시간</span>
-                <span class="price">가격</span>
-            </div>
-            <div class="payBox">
-                <span class="product">상품</span>
-                <span class="time">시간</span>
-                <span class="price">가격</span>
-            </div>
-            <div name="dot"><img src="<c:url value="/img/dotted.png"/>"></div>
+            <hr id="line"><!--선-->
+            <c:forEach var="i" begin="0" end="${ticketList.size() - 1}" step="1">
+                <div class="payBox"><!--선택항목-->
+                    <span class="product">${ticketList[i]}</span>
+                    <span class="time">${timeList[i]}</span>
+                    <span class="price"><fmt:formatNumber value="${priceList[i]}" pattern="#,##0"/>원</span>
+                </div>
+            </c:forEach>
+            <div name="dot"><img src="<c:url value="/img/dotted.png"/>"></div><!--선-->
             <div class="resultBox">
-                <span class="text">주문 금액</span>
+                <span class="text">총금액</span>
                 <span></span>
-                <span class="result price">가격</span>
+                <span class="result price"><fmt:formatNumber value="${totalPrice}" pattern="#,##0"/>원</span>
             </div>
             <div class="resultBox">
                 <span class="text">보유포인트</span>
                 <span ></span>
-                <span class="result point">가격</span>
+                <span class="result point"><fmt:formatNumber value="${sessionScope.author.point}" pattern="#,##0"/></span>
             </div>
             <div class="resultBox">
                 <span class="text">총결제금액</span>
                 <span ></span>
-                <span class="result point">가격</span>
+                <span class="result point"><fmt:formatNumber value="${totalPrice < sessionScope.author.point ? 0 : totalPrice - sessionScope.author.point}" pattern="#,##0"/>원</a></span>
             </div>
             <div name="dot"><img src="<c:url value="/img/dotted.png"/>"></div>
         </section>
@@ -88,19 +85,21 @@
                     </div>
                 </label>
             </div><!--결제선택 radio-->
-            <script src="<c:url value="/js/payRadioBox.js"/>"></script>
         </section>
     </div>
-    <input type="button" value="결제하기" id="payChooseBtn" onclick="selectedCheck()"><!--결제버튼-->
+    <input type="button" value="결제하기" id="payChooseBtn" onclick="selectedCheck('${publicKey}', '../inside/paymentSuccess')"><!--결제버튼-->
     <div id="cardModal">
         <img class="img" src="<c:url value="/img/card/card.gif"/>" alt="">
-        <a href="snu_start.html"><input type="button" value="취소" class="cancel"></a>
+        <a href="<c:url value="/inside/payment/cancel"/>"><input type="button" value="취소" class="cancel"></a>
     </div>
     <div id="barCodeModal">
         <img class="img" src="<c:url value="/img/card/barCode.gif"/>" alt="">
-        <a href="snu_start.html"><input type="button" value="취소" class="cancel"></a>
+        <a href="<c:url value="/inside/payment/cancel"/>"><input type="button" value="취소" class="cancel"></a>
     </div>
-    <script src="<c:url value="/js/inside_paymentModal.js"/>"></script>
 </div>
+<script src="<c:url value="/js/jquery-3.7.0.min.js"/>"></script>
+<script src="<c:url value="/js/jsencrypt.min.js"/>"></script>
+<script src="<c:url value="/js/payRadioBox.js"/>"></script>
+<script src="<c:url value="/js/paymentModal.js"/>"></script>
 </body>
 </html>

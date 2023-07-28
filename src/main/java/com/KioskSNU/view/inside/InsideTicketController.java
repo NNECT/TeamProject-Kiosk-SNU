@@ -1,9 +1,7 @@
 package com.KioskSNU.view.inside;
 
-import com.KioskSNU.snu.dto.AccountDTO;
-import com.KioskSNU.snu.dto.CommutationTicketDTO;
-import com.KioskSNU.snu.dto.RoomDTO;
-import com.KioskSNU.snu.dto.TimeTicketDTO;
+import com.KioskSNU.interceptor.InsideLoginRequired;
+import com.KioskSNU.snu.dto.*;
 import com.KioskSNU.snu.service.*;
 import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
@@ -11,24 +9,31 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/inside/ticket")
 public class InsideTicketController {
+    private final HashMap<String, Object> ticketMap;
+    private final Set<Integer> lockerSet;
     private final TimeTicketService timeTicketService;
     private final CommutationTicketService commutationTicketService;
     private final RoomService roomService;
     private final UsageLockerService usageLockerService;
+    private final LockerService lockerService;
     private final LockerTicketService lockerTicketService;
 
     @RequestMapping("")
-    public ModelAndView process(HttpSession session){
+    @InsideLoginRequired
+    public ModelAndView process(HttpSession session) {
         ModelAndView mav = new ModelAndView();
 
         String type = (String) session.getAttribute("insideType");
@@ -49,7 +54,8 @@ public class InsideTicketController {
     }
 
     @GetMapping({"/seat", "/seat/timeTicket"})
-    public ModelAndView timeTicketGetProcess(){
+    @InsideLoginRequired
+    public ModelAndView timeTicketGetProcess() {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("inside/timeTicket");
 
@@ -60,15 +66,25 @@ public class InsideTicketController {
     }
 
     @PostMapping("/seat/timeTicket")
-    public ModelAndView timeTicketPostProcess(HttpSession session){
+    @InsideLoginRequired
+    public ModelAndView timeTicketPostProcess(@RequestParam("radio-button") int ticket) {
         ModelAndView mav = new ModelAndView();
-        // 프로세스 추가 필요
-        mav.setViewName("redirect:/inside/menu");
+        // 티켓 확인
+        TimeTicketDTO timeTicket = timeTicketService.getById(ticket);
+        if (timeTicket == null) {
+            mav.setViewName("redirect:/inside/ticket/seat");
+            return mav;
+        }
+
+        ticketMap.put("timeTicket", timeTicket);
+
+        mav.setViewName("redirect:/inside/payment");
         return mav;
     }
 
     @GetMapping("/seat/commutationTicket")
-    public ModelAndView commutationTicketGetProcess(){
+    @InsideLoginRequired
+    public ModelAndView commutationTicketGetProcess() {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("inside/commutationTicket");
 
@@ -79,15 +95,25 @@ public class InsideTicketController {
     }
 
     @PostMapping("/seat/commutationTicket")
-    public ModelAndView commutationTicketPostProcess(HttpSession session){
+    @InsideLoginRequired
+    public ModelAndView commutationTicketPostProcess(@RequestParam("radio-button") int ticket) {
         ModelAndView mav = new ModelAndView();
-        // 프로세스 추가 필요
-        mav.setViewName("redirect:/inside/menu");
+        // 티켓 확인
+        CommutationTicketDTO commutationTicket = commutationTicketService.getById(ticket);
+        if (commutationTicket == null) {
+            mav.setViewName("redirect:/inside/ticket/seat/commutationTicket");
+            return mav;
+        }
+
+        ticketMap.put("commutationTicket", commutationTicket);
+
+        mav.setViewName("redirect:/inside/payment");
         return mav;
     }
 
     @GetMapping("/room")
-    public ModelAndView roomGetProcess(HttpSession session){
+    @InsideLoginRequired
+    public ModelAndView roomGetProcess(HttpSession session) {
         ModelAndView mav = new ModelAndView();
 
         // 등록이 되지 않은 경우
@@ -122,23 +148,23 @@ public class InsideTicketController {
     }
 
     @PostMapping("/room")
-    public ModelAndView roomPostProcess(HttpSession session){
+    @InsideLoginRequired
+    public ModelAndView roomPostProcess(@RequestParam("radio-button") int ticket) {
         ModelAndView mav = new ModelAndView();
-        // 프로세스 추가 필요
-        mav.setViewName("redirect:/inside/menu");
+
+        ticketMap.put("roomTicket", ticket);
+
+        mav.setViewName("redirect:/inside/payment");
         return mav;
     }
 
-    @RequestMapping("/locker")
+    @GetMapping("/locker")
+    @InsideLoginRequired
     public ModelAndView lockerGetProcess(HttpSession session) {
         ModelAndView mav = new ModelAndView();
 
         // 사용자 확인
         AccountDTO accountDTO = (AccountDTO) session.getAttribute("author");
-        if (accountDTO == null) {
-            mav.setViewName("redirect:/inside");
-            return mav;
-        }
 
         // 사물함 보유 여부 확인
         boolean hasLocker = usageLockerService.hasLocker(accountDTO);
@@ -153,5 +179,55 @@ public class InsideTicketController {
 
         mav.setViewName("inside/lockerTicket");
         return mav;
+    }
+
+    @PostMapping("/inside/locker")
+    @InsideLoginRequired
+    public ModelAndView lockerPostProcess(
+            @RequestParam("radio-button") int ticket,
+            @RequestParam(value = "locker-radio", required = false) String lockerNumber,
+            HttpSession session
+    ) {
+        ModelAndView mav = new ModelAndView();
+
+        // 사용자 확인
+        AccountDTO accountDTO = (AccountDTO) session.getAttribute("author");
+
+        // 사용자 사물함 보유 여부 확인
+        UsageLockerDTO usageLockerDTO = usageLockerService.getLocker(accountDTO);
+
+        // 사물함 선택 여부 확인
+        if (usageLockerDTO == null) {
+            if (lockerNumber == null) {
+                mav.setViewName("redirect:/inside/ticket/locker");
+                return mav;
+            }
+
+            // 선택된 사물함 확인
+            LockerDTO lockerDTO = lockerService.getByLockerNumber(Integer.parseInt(lockerNumber));
+            if (lockerDTO == null || !lockerDTO.isUsable() || lockerSet.contains(lockerDTO.getLockerNumber())) {
+                mav.setViewName("redirect:/inside/ticket/locker");
+                return mav;
+            }
+            ticketMap.put("locker", lockerDTO);
+
+            // 사물함 결제중 정보 등록
+            lockerSet.add(lockerDTO.getLockerNumber());
+
+            // 사물함 정보 등록
+            usageLockerDTO = new UsageLockerDTO();
+            usageLockerDTO.setLockerDTO(lockerDTO);
+        }
+
+        // 선택된 사용권 확인
+        LockerTicketDTO lockerTicketDTO = lockerTicketService.getById(ticket);
+        if (lockerTicketDTO == null) {
+            mav.setViewName("redirect:/inside/ticket/locker");
+            return mav;
+        }
+        ticketMap.put("lockerTicket", lockerTicketDTO);
+
+        mav.setViewName("redirect:/inside/payment");
+		return mav;
     }
 }

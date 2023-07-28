@@ -15,7 +15,7 @@ function selectedCheck() {
                     time--;
                     if (time === 0) {
                         clearInterval(timer);
-                        location.href = "/inside/inside_payment.jsp";
+                        location.href = "/inside/payment.jsp";
                     }
                 }, 800);
             }else if(elm.value === "kakaoPay" || elm.value === "naverPay"){
@@ -27,7 +27,7 @@ function selectedCheck() {
                     time--;
                     if (time === 0) {
                         clearInterval(timer);
-                        location.href = "/inside/inside_payment.jsp";
+                        location.href = "/inside/payment.jsp";
                     }
                 }, 800);
             }

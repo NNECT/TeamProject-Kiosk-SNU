@@ -16,8 +16,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<c:url value="/css/snu_common_bg.css"/>">
     <link rel="stylesheet" href="<c:url value="/css/snu_challenge.css"/>">
-    <script src="hiddenBtn.js"></script>
-    <script src="alertBtn.js"></script>
     <link href="https://cdn.jsdelivr.net/gh/sunn-us/SUITE/fonts/static/woff2/SUITE.css" rel="stylesheet">
     <%--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">--%>
     <style>

@@ -28,7 +28,7 @@
                 <li class="otherTicketButton"><a href="<c:url value="/inside/ticket/locker"/>">사물함</a></li>
             </ul>
             <hr>
-            <form>
+            <form action="<c:url value="/inside/ticket/seat/timeTicket"/>" method="post">
                 <table>
                     <tr>
                         <c:forEach var="i" begin="0" end="2" step="1">

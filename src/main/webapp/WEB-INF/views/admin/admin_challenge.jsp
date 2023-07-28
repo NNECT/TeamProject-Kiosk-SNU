@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <c:import url="../headerFooterForm/headerFooterForm_adminHeader.jsp" />
     <title>챌린지 목록</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
@@ -27,7 +28,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-body text-center">
-                    <h2 class="card-title">스터디카페 관리자 페이지</h2>
+                    <h2 class="card-title">챌린지</h2>
                     <hr>
                     <table class="table table-bordered">
                         <thead>

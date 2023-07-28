@@ -52,4 +52,10 @@ public class PaymentDAO extends SqlSessionDaoSupport implements PaymentMapper {
     public List<PaymentDTO> getAllByAccount(AccountDTO accountDTO) {
         return getSqlSession().selectList("com.KioskSNU.snu.mapper.PaymentMapper.getAllByAccount", accountDTO);
     }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<PaymentDTO> getAllBy1Year() {
+        return getSqlSession().selectList("com.KioskSNU.snu.mapper.PaymentMapper.getAllBy1Year");
+    }
 }

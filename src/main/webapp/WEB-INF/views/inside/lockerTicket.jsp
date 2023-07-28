@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=deevice-width, initial-scale=1,minimum-scale=1,maxmun-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1,minimum-scale=1,maximum-scale=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<c:url value="/css/inside/inside_lockerTicket.css"/>">
     <link href="https://cdn.jsdelivr.net/gh/sunn-us/SUITE/fonts/static/woff2/SUITE.css" rel="stylesheet">
@@ -29,7 +29,7 @@
             </ul>
             <hr>
 
-            <form id="lockerFrm">
+            <form id="lockerFrm" action="<c:url value="/inside/ticket/locker"/>" method="post">
                 <p>사물함을 선택해주세요</p>
                 <table id="locker">
                     <tr>
@@ -87,11 +87,11 @@
                                 <p class="p rText btn-text"><fmt:formatNumber value="${lockerTicket.price}" pattern="#,##0"/>원</p>
                             </td>
                         </c:forEach>
-                        <td class="radio-box">
-                            <input type="radio" name="radio-button" class="radio-input" value="0">
-                            <p class="t btn-text">사용X</p>
-                            <p class="p btn-text"></p>
-                        </td>
+<%--                        <td class="radio-box">--%>
+<%--                            <input type="radio" name="radio-button" class="radio-input" value="0">--%>
+<%--                            <p class="t btn-text">사용X</p>--%>
+<%--                            <p class="p btn-text"></p>--%>
+<%--                        </td>--%>
                     </tr>
                 </table>
 

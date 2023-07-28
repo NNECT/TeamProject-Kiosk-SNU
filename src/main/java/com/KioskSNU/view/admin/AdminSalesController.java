@@ -2,6 +2,7 @@ package com.KioskSNU.view.admin;
 
 import com.KioskSNU.common.Scaler;
 import com.KioskSNU.snu.dto.ParticipationChallengeDTO;
+import com.KioskSNU.snu.dto.PaymentDTO;
 import com.KioskSNU.snu.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,7 @@ public class AdminSalesController {
     private final UsageSeatService usageSeatService;
     private final UsageRoomService usageRoomService;
     private final UsageLockerService usageLockerService;
+    private final PaymentService paymentService;
     private final UsageCommutationTicketService usageCommutationTicketService;
     private final ParticipationChallengeService participationChallengeService;
     private final Scaler scaler;
@@ -38,6 +40,17 @@ public class AdminSalesController {
         });
         mav.addObject("seatTimesLabels", seatTimesLabels);
         mav.addObject("seatTimesData", seatTimesData);
+
+        // 최근 1년간 월별 매출 현황
+        Map<LocalDate, List<PaymentDTO>> payments = paymentService.get1YearPayment();
+        List<String> paymentLabels = new ArrayList<>();
+        List<Integer> paymentData = new ArrayList<>();
+        payments.forEach((date, paymentList) -> {
+            paymentLabels.add(date.format(DateTimeFormatter.ofPattern("yyyy.MM")));
+            paymentData.add(paymentList.stream().mapToInt(p -> p.getAmount() - p.getUsedPoint()).sum());
+        });
+        mav.addObject("paymentLabels", paymentLabels);
+        mav.addObject("paymentData", paymentData);
 
         // 최근 1년간 월별 정기권 사용자 수 현황
         Map<LocalDate, Integer> commutationTicketUsers = usageCommutationTicketService.get1YearCommutationTicketUsers();

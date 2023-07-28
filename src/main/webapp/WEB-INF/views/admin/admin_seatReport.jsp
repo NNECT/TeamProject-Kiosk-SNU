@@ -21,7 +21,7 @@
         <div class="col-md-10">
             <div class="card">
                 <div class="card-body text-center">
-                    <h2 class="card-title">좌석현황</h2>
+                    <h2 class="card-title" style="margin-bottom: 30px;">좌석현황</h2>
                     <table id="seatReportTable" class="display">
                         <thead>
                         <tr style="background-color: lightblue;">
@@ -49,6 +49,7 @@
                         </tr>
                         </tfoot>
                     </table>
+                    <a href="<c:url value='/admin/adminseat' />">돌아가기</a>
                 </div>
             </div>
         </div>

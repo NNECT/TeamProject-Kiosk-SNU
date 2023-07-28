@@ -14,4 +14,5 @@ public interface PaymentMapper {
     PaymentDTO getById(int id);
     List<PaymentDTO> getAll();
     List<PaymentDTO> getAllByAccount(AccountDTO accountDTO);
+    List<PaymentDTO> getAllBy1Year();
 }

@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=deevice-width, initial-scale=1,minimum-scale=1,maxmun-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1,minimum-scale=1,maximum-scale=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<c:url value="/css/snu_end.css"/>">
     <link href="https://cdn.jsdelivr.net/gh/sunn-us/SUITE/fonts/static/woff2/SUITE.css" rel="stylesheet">
@@ -31,7 +31,7 @@
 
     <p id="title">입실완료!</p><!--입실완료면 '입실완료!'-->
     <p id="time"><span id="MyTimer">10</span>초뒤 홈화면으로 이동합니다.</p>
-    <a href="<c:url value='/outside'/>"><input type="button" id="moveBtn" value="홈화면으로 이동"></a>
+    <a href="<c:url value='/outside/logout'/>"><input type="button" id="moveBtn" value="홈화면으로 이동"></a>
 </section>
 
 <script>
@@ -41,7 +41,7 @@
         document.getElementById('MyTimer').innerText = String(time).padStart(2, '0');
         if (time === 0) {
             clearInterval(timer);
-            location.href = "<c:url value="/outside"/>";
+            location.href = "<c:url value="/outside/logout"/>";
         }
     }, 1000);
 </script>

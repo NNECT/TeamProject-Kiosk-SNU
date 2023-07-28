@@ -1,5 +1,6 @@
 package com.KioskSNU.view.outside;
 
+import com.KioskSNU.interceptor.OutsideLoginRequired;
 import com.KioskSNU.snu.dto.AccountDTO;
 import com.KioskSNU.snu.dto.LockerDTO;
 import com.KioskSNU.snu.dto.LockerTicketDTO;
@@ -30,6 +31,7 @@ public class OutsideLockerController {
     private final LockerTicketService lockerTicketService;
 
     @GetMapping("/outside/locker")
+    @OutsideLoginRequired
     public ModelAndView getProcess(HttpSession session) {
         ModelAndView mav = new ModelAndView();
 
@@ -52,7 +54,12 @@ public class OutsideLockerController {
     }
 
     @PostMapping("/outside/locker")
-    public ModelAndView postProcess(@RequestParam("radio-button") int ticket, @RequestParam(value = "locker-radio", required = false) String lockerNumber, HttpSession session) {
+    @OutsideLoginRequired
+    public ModelAndView postProcess(
+            @RequestParam("radio-button") int ticket,
+            @RequestParam(value = "locker-radio", required = false) String lockerNumber,
+            HttpSession session
+    ) {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("redirect:/outside/payment");
 
@@ -84,6 +91,9 @@ public class OutsideLockerController {
             }
             ticketMap.put("locker", lockerDTO);
 
+            // 사물함 결제중 정보 등록
+            lockerSet.add(lockerDTO.getLockerNumber());
+
             // 사물함 정보 등록
             usageLockerDTO = new UsageLockerDTO();
             usageLockerDTO.setLockerDTO(lockerDTO);
@@ -96,9 +106,6 @@ public class OutsideLockerController {
             return mav;
         }
         ticketMap.put("lockerTicket", lockerTicketDTO);
-
-        // 사물함 결제중 정보 등록
-        lockerSet.add(usageLockerDTO.getLocker_lockerNumber());
 
         return mav;
     }

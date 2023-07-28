@@ -1,13 +1,13 @@
 let buttonState = {
-    checkPassword :false,
-    checkPhoneNumber :false,
-    checkCode : false
+    checkPassword: false,
+    checkPhoneNumber: false,
+    checkCode: false
 };
 
 let buttonStateHandler = {
-    set: function (target, key, value){
+    set: function (target, key, value) {
         target[key] = value;
-        if(target.checkCode && target.checkPhoneNumber && target.checkPassword)
+        if (target.checkCode && target.checkPhoneNumber && target.checkPassword)
             document.getElementById('phoneNumberChangeBtn').style.display = 'block';
         else
             document.getElementById('phoneNumberChangeBtn').style.display = 'none';
@@ -18,40 +18,39 @@ let buttonStateHandler = {
 let proxyButtonState = new Proxy(buttonState, buttonStateHandler);
 
 document.getElementById("password").addEventListener("input", e => {
-    document.getElementById("passwordCheck").innerHTML ="";
+    document.getElementById("passwordCheck").innerHTML = "";
     proxyButtonState.checkPassword = false;
 });
 document.getElementById("phoneNumber").addEventListener("input", e => {
-    document.getElementById("codeSendCheck").innerHTML ="";
+    document.getElementById("codeSendCheck").innerHTML = "";
     proxyButtonState.checkPhoneNumber = false;
 });
 document.getElementById("code").addEventListener("input", e => {
-    document.getElementById("codeCheck").innerHTML ="";
+    document.getElementById("codeCheck").innerHTML = "";
     proxyButtonState.checkCode = false;
 });
 
 
-
-function codeCheck(){
+function codeCheck() {
     let codeInput = document.getElementById('codeInput').value;
     const codeCheck = document.getElementById('codeCheck');
     let phoneNumber = document.getElementById('phoneNumberInput').value;
     $.ajax({
-        type:"post",
-        url : "../ajax/checkCode",
-        data : JSON.stringify({
-            "code" : codeInput,
-            "phoneNumber" : phoneNumber
+        type: "post",
+        url: "../ajax/checkCode",
+        data: JSON.stringify({
+            "code": codeInput,
+            "phoneNumber": phoneNumber
         }),
-        dataType :"JSON",
-        async:false,
-        contentType : "application/json; charset=utf-8",
-        success:function (response){
+        dataType: "JSON",
+        async: false,
+        contentType: "application/json; charset=utf-8",
+        success: function (response) {
             if (response.result === "success") {
                 codeCheck.innerHTML = "인증 성공";
                 codeCheck.style.color = "blue";
                 proxyButtonState.checkCode = true;
-            }else {
+            } else {
                 codeCheck.innerHTML = "인증 실패";
                 codeCheck.style.color = "red";
                 proxyButtonState.checkCode = false;
@@ -76,7 +75,7 @@ function codeCheck(){
 function codeSend() {
     let phoneNumber = document.getElementById("phoneNumberInput").value;
     const codeSendCheck = document.getElementById('codeSendCheck');
-    if (phoneNumber.length < 11 || phoneNumber.length > 12) {
+    if (phoneNumber.length < 12 || phoneNumber.length > 13) {
         codeSendCheck.innerHTML = "다시 입력해주세요";
         codeSendCheck.style.color = "red";
         return;
@@ -88,7 +87,8 @@ function codeSend() {
         type: "POST",
         url: "../ajax/changePhcodeSend",
         data: JSON.stringify({
-            "phoneNumber": phoneNumber
+            "phoneNumber": phoneNumber,
+            "codePurpose" : "phoneNumberChange"
         }),
         dataType: "json",
         async: false,
