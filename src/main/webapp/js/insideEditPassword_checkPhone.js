@@ -1,23 +1,23 @@
 let buttonState2 = {
-    checkPhoneNumber :false,
-    checkCode : false
+    checkPhoneNumber: false,
+    checkCode: false
 };
 
 document.getElementById("changePwdPhone").addEventListener("input", e => {
-    document.getElementById("changePwdText1").innerHTML ="";
+    document.getElementById("changePwdText1").innerHTML = "";
     proxyButtonState.checkPhoneNumber = false;
 });
 document.getElementById("checkCode").addEventListener("input", e => {
-    document.getElementById("changePwdText2").innerHTML ="";
+    document.getElementById("changePwdText2").innerHTML = "";
     proxyButtonState.checkCode = false;
 });
 
 let buttonStateHandler2 = {
-    set: function (target, key, value){
+    set: function (target, key, value) {
         target[key] = value;
         console.log(target.checkPhoneNumber)
         console.log(target.checkCode)
-        if(target.checkCode && target.checkPhoneNumber)
+        if (target.checkCode && target.checkPhoneNumber)
             document.getElementById('editPassword_checkPhone').style.display = 'block';
         else
             document.getElementById('editPassword_checkPhone').style.display = 'none';
@@ -26,30 +26,29 @@ let buttonStateHandler2 = {
 };
 
 
-
 //비밀번호 변경 첫번째 모달창 - 전화번호 체크
 let proxyButtonState2 = new Proxy(buttonState2, buttonStateHandler2);
 
-function changePwdCodeCheck(){
+function changePwdCodeCheck() {
     let codeInput = document.getElementById('checkCode').value;
     const codeCheck = document.getElementById('changePwdText2');
 
     $.ajax({
-        type:"post",
-        url : "../ajax/checkCode",
-        data : JSON.stringify({
-            "code" : codeInput,
-            "phoneNumber" : document.getElementById('changePwdPhone').value
+        type: "post",
+        url: "../ajax/checkCode",
+        data: JSON.stringify({
+            "code": codeInput,
+            "phoneNumber": document.getElementById('changePwdPhone').value
         }),
-        dataType :"JSON",
-        async:false,
-        contentType : "application/json; charset=utf-8",
-        success:function (response){
+        dataType: "JSON",
+        async: false,
+        contentType: "application/json; charset=utf-8",
+        success: function (response) {
             if (response.result === "success") {
                 codeCheck.innerHTML = "인증 성공";
                 codeCheck.style.color = "blue";
                 proxyButtonState2.checkCode = true;
-            }else {
+            } else {
                 codeCheck.innerHTML = "인증 실패";
                 codeCheck.style.color = "red";
                 proxyButtonState2.checkCode = false;
@@ -64,15 +63,18 @@ function changePwdCodeCheck(){
 function changePwdCodeSend() {
     let phoneNumber = document.getElementById("changePwdPhone").value;
     const codeSendCheck = document.getElementById('changePwdText1');
-    if (phoneNumber.length < 11 || phoneNumber.length > 12) {
+
+    if (phoneNumber.length < 12 || phoneNumber.length > 13) {
         codeSendCheck.innerHTML = "다시 입력해주세요";
         codeSendCheck.style.color = "red";
         return;
     }
+
     $.ajax({
         type: "POST",
         url: "../ajax/changePhcodeSend",
         data: JSON.stringify({
+            "codePurpose": "phoneNumberCheck",
             "phoneNumber": phoneNumber
         }),
         dataType: "json",
@@ -83,6 +85,9 @@ function changePwdCodeSend() {
                 codeSendCheck.innerHTML = "전송됨";
                 codeSendCheck.style.color = "green";
                 proxyButtonState2.checkPhoneNumber = true;
+            } else if (response.result === "wrongNumber") {
+                codeSendCheck.innerHTML = "잘못된 번호";
+                codeSendCheck.style.color = "red";
             } else {
                 codeSendCheck.innerHTML = "전송 실패";
                 codeSendCheck.style.color = "red";
@@ -97,14 +102,14 @@ function changePwdCodeSend() {
 
 //비밀번호 변경 두 번째 모달창 - 바꿀 패스워드 체크
 let buttonState3 = {
-    checkPassword :false
+    checkPassword: false
 };
 
 let buttonStateHandler3 = {
-    set: function (target, key, value){
+    set: function (target, key, value) {
         target[key] = value;
         console.log(target.checkPassword)
-        if(target.checkPassword)
+        if (target.checkPassword)
             document.getElementById('changePwdBtn').style.display = 'block';
         else
             document.getElementById('changePwdBtn').style.display = 'none';
@@ -121,6 +126,16 @@ function passwordCheck() {
     let password = document.getElementById("changePassword1").value;
     let password_confirm = document.getElementById("changePassword2").value;
     const passwordCheck = document.getElementById("changePasswordText");
+
+    //비밀번호 최소 6자리이상 입력
+    if (password.length < 6) {
+        passwordCheck.innerHTML = "6자리 이상 입력해주세요";
+        passwordCheck.style.color = "red";
+        passwordCheck.style.display = "block";
+        proxyButtonState3.checkPassword = false;
+        return;
+    }
+
     if (password === "" || password_confirm === "") {
         passwordCheck.innerHTML = "";
         proxyButtonState3.checkPassword = false;
@@ -135,7 +150,19 @@ function passwordCheck() {
     }
 }
 
+//전화번호 입력 - 설정
+function formatPhoneNumber(input) {
+    let x = input.replace(/\D/g, '').match(/(\d{0,3})(\d{0,4})(\d{0,4})/);
+    return !x[2] ? x[1] : x[1] + '-' + x[2] + (x[3] ? '-' + x[3] : '');
+}
 
+document.getElementById("changePwdPhone").addEventListener("input", e => {
+    e.target.value = formatPhoneNumber(e.target.value);
+});
+
+document.getElementById("phoneNumberInput").addEventListener("input", e => {
+    e.target.value = formatPhoneNumber(e.target.value);
+});
 
 // function changePassword() {
 //     const password = document.getElementById("changePassword1").value;

@@ -41,27 +41,38 @@ public class InsideAjaxPasswordController {
 //        System.out.println(password);
 //        System.out.println(accountDTO.getPassword());
 
-        if(sha.encrypt(decryptedPassword).equals(accountDTO.getPassword()))
+        if (sha.encrypt(decryptedPassword).equals(accountDTO.getPassword()))
             return ResponseEntity.ok(Map.of("result", "success"));
         else
             return ResponseEntity.ok(Map.of("result", "fail"));
     }
+
     @RequestMapping("/ajax/changePhcodeSend")
     public ResponseEntity<Map<String, String>> checkPhone(@RequestBody Map<String, String> map, HttpSession session) {
-       String phoneNumber = map.get("phoneNumber");
-       session.setAttribute("phoneNumber", phoneNumber);
-       session.setAttribute("codeTime", LocalDateTime.now());
-       session.setAttribute("code", String.format("%04d", new Random().nextInt(10000)));
-       System.out.println(session.getAttribute("code"));
+        String phoneNumber = map.get("phoneNumber");
+        String purpose = map.get("codePurpose");
+        
+        AccountDTO sessionUser = (AccountDTO) session.getAttribute("author");
+        String sessionUserPhone = sessionUser.getPhoneNumber();
+        //연락처와 동일하지 않은경우 잘못된 번호 반환
+        if(purpose.equals("phoneNumberCheck") && !sessionUserPhone.equals(phoneNumber)){
+            return ResponseEntity.ok(Map.of("result", "wrongNumber"));
+        }
 
-       return ResponseEntity.ok(Map.of("result", "success"));
+        session.setAttribute("phoneNumber", phoneNumber);
+        session.setAttribute("codeTime", LocalDateTime.now());
+        session.setAttribute("code", String.format("%04d", new Random().nextInt(10000)));
+        System.out.println(session.getAttribute("code"));
+
+        return ResponseEntity.ok(Map.of("result", "success"));
     }
+
     @RequestMapping("/ajax/checkCode")
-    public ResponseEntity<Map<String, String>> checkCode(@RequestBody Map<String,String>map, HttpSession session){
+    public ResponseEntity<Map<String, String>> checkCode(@RequestBody Map<String, String> map, HttpSession session) {
         String code = map.get("code");
-        if(session.getAttribute("code").equals(code)){
+        if (session.getAttribute("code").equals(code)) {
             return ResponseEntity.ok(Map.of("result", "success"));
-        }else {
+        } else {
 
             return ResponseEntity.ok(Map.of("result", "fail"));
         }
