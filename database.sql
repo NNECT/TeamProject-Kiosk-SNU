@@ -145,7 +145,7 @@ create table payment (
     dateTime            datetime        not null default now(),
     amount              int             not null,
     usedPoint           int             not null default 0,
-    log                 varchar(200)    not null,
+    log                 text            not null,
     foreign key (account_id) references account(id)
 );
 
