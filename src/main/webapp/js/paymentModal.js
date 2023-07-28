@@ -2,7 +2,7 @@
 let cardModal = document.getElementById("cardModal");
 let barcodeModal = document.getElementById("barCodeModal");
 
-function selectedCheck(publicKey) {
+function selectedCheck(publicKey, successUrl) {
     for (const elm of document.getElementsByName("radio-button")) {
         if (!elm.checked) continue;
 
@@ -37,8 +37,9 @@ function selectedCheck(publicKey) {
             dataType: "json",
             contentType: "application/json; charset=utf-8",
             success: function (response) {
+                console.log(response);
                 if (response.result === "success") {
-                    window.location.href = "../outside/paymentSuccess";
+                    window.location.href = successUrl;
                 } else {
                     alert("결제에 실패하였습니다.");
                 }
