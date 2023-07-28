@@ -1,11 +1,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=deevice-width, initial-scale=1,minimum-scale=1,maxmun-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1,minimum-scale=1,maximum-scale=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<c:url value="/css/inside/inside_commutationTicket.css"/>">
     <link href="https://cdn.jsdelivr.net/gh/sunn-us/SUITE/fonts/static/woff2/SUITE.css" rel="stylesheet">
@@ -17,7 +18,8 @@
 </head>
 <body>
 <div id="body">
-    <a href="/inside/inside_select.jsp"><img src="<c:url value="/img/inside/beforBtn.png"/>" alt=""></a>
+    <a href="<c:url value="/inside/menu"/>"><img src="<c:url value="/img/inside/beforBtn.png"/>" alt=""></a>
+
     <div id="whiteWrap">
         <section>
             <ul>
@@ -26,40 +28,46 @@
                 <li class="otherTicketButton"><a href="<c:url value="/inside/ticket/locker"/>">사물함</a></li>
             </ul>
             <hr>
-            <form>
+            <form action="<c:url value="/inside/ticket/seat/commutationTicket"/>" method="post">
                 <table>
                     <tr>
-                        <td class="radio-box">
-                            <input type="radio" name="radio-button" class="radio-input" value="">
-                            <p class="t btn-text">3일</p>
-                            <p class="p btn-text">30,000원</p>
-                        </td>
-                        <td class="radio-box">
-                            <input type="radio" name="radio-button" class="radio-input" value="">
-                            <p class="t btn-text">7일</p>
-                            <p class="p btn-text">50,000원</p>
-                        </td>
-                        <td class="radio-box">
-                            <input type="radio" name="radio-button" class="radio-input" value="">
-                            <p class="t btn-text">15일</p>
-                            <p class="p btn-text">90,000원</p>
-                        </td>
+                        <c:forEach var="i" begin="0" end="2" step="1">
+                            <c:choose>
+                                <c:when test="${commutationTicketList.size() > i}">
+                                    <td class="radio-box">
+                                        <input type="radio" name="radio-button" class="radio-input" value="${commutationTicketList[i].id}">
+                                        <p class="t btn-text">${commutationTicketList[i].day}일</p>
+                                        <p class="p btn-text"><fmt:formatNumber value="${commutationTicketList[i].price}" pattern="#,##0"/>원</p>
+                                    </td>
+                                </c:when>
+                                <c:otherwise>
+                                    <td class="radio-box"></td>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:forEach>
                     </tr>
                     <tr>
-                        <td class="radio-box">
-                            <input type="radio" name="radio-button" class="radio-input" value="">
-                            <p class="t btn-text">30일</p>
-                            <p class="p btn-text">160,000원</p>
-                        </td>
-
+                        <c:forEach var="i" begin="3" end="5" step="1">
+                            <c:choose>
+                                <c:when test="${commutationTicketList.size() > i}">
+                                    <td class="radio-box">
+                                        <input type="radio" name="radio-button" class="radio-input" value="${commutationTicketList[i].id}">
+                                        <p class="t btn-text">${commutationTicketList[i].day}일</p>
+                                        <p class="p btn-text"><fmt:formatNumber value="${commutationTicketList[i].price}" pattern="#,##0"/>원</p>
+                                    </td>
+                                </c:when>
+                                <c:otherwise>
+                                    <td class="radio-box"></td>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:forEach>
                     </tr>
                 </table>
                 <input id="nextBtn" type="submit" value="다음">
             </form>
         </section>
     </div>
-    <script src="/js/radioBox.js"></script>
+    <script src="<c:url value="/js/radioBox.js"/>"></script>
 </div>
 </body>
-
 </html>

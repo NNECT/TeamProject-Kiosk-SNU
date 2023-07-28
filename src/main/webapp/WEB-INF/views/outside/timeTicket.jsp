@@ -30,7 +30,7 @@
     <ul>
       <li id="selectedTicket">시간권</li>
       <li id="unselectedTicket"><a href="<c:url value="/outside/ticket/seat/commutationTicket"/>">정기권</a></li>
-      <li id="homeLi"><a href="start.jsp"><img id="homeImg" src="<c:url value="/img/bluehome.png"/>"></a></li>
+      <li id="homeLi"><a href="<c:url value="/outside/logout"/>"><img id="homeImg" src="<c:url value="/img/bluehome.png"/>"></a></li>
     </ul>
     <hr>
     <form action="<c:url value="/outside/ticket/seat/timeTicket"/>" method="post" onsubmit="return selectedCheck()">

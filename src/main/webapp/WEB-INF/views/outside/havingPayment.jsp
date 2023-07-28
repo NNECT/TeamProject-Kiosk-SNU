@@ -27,7 +27,7 @@
   <section>
     <ul>
       <li id="pay">보유포인트</li>
-      <li id="homeLi"><a href="start.jsp"><img id="homeImg" src="<c:url value="/img/bluehome.png"/>"></a></li>
+      <li id="homeLi"><a href="<c:url value="/outside/logout"/>"><img id="homeImg" src="<c:url value="/img/bluehome.png"/>"></a></li>
     </ul>
     <hr id="line">
     <form id="payFrm">
@@ -60,10 +60,17 @@
 
       <button id="payBtn" onclick="window.location.href='<c:url value="/outside/ticket/seat"/>'; return false;"> 이용권 구매하기</button><!--추가결제시 바로 결제페이지로 이동 -->
       <c:if test="${remainDays > 0 or remainTime > 0}">
-        <a href="<c:url value="/outside/paymentSuccess"/>"><button id="nextBtn"> 다음</button></a>
+        <button id="nextBtn">다음</button>
       </c:if>
     </form>
   </section>
 </div>
+<script>
+  window.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("nextBtn").addEventListener("click", function () {
+      location.href='<c:url value="/outside/paymentSuccess"/>';
+    })
+  });
+</script>
 </body>
 </html>

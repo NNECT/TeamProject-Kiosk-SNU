@@ -123,3 +123,15 @@ img{
     font-weight: lighter;
     color: #285FF5;
 }
+/*btn*/
+#moveBtn{
+    margin-top: 100px;
+    width: 290px;
+    height: 50px;
+    background-color: #ffffff;
+    color: #285FF5;
+    font-size: 25px;
+    font-weight: 350;
+    border: none;
+    border-radius: 30px;
+}

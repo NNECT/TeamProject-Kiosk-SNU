@@ -13,7 +13,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=deevice-width, initial-scale=1,minimum-scale=1,maxmun-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1,minimum-scale=1,maximum-scale=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<c:url value="/css/snu_payment.css"/>">
     <link rel="stylesheet" href="<c:url value="/css/payModal.css"/>">
@@ -29,7 +29,7 @@
     <section>
         <ul><!--메뉴-->
             <li id="pay">결제내역</li>
-            <li id="homeLi"><a href="start.jsp"><img id="homeImg" src="<c:url value="/img/bluehome.png"/>"></a></li>
+            <li id="homeLi"><a href="<c:url value="/outside/logout"/>"><img id="homeImg" src="<c:url value="/img/bluehome.png"/>"></a></li>
         </ul>
         <hr id="line"><!--선-->
         <c:forEach var="i" begin="0" end="${ticketList.size() - 1}" step="1">
@@ -100,7 +100,7 @@
             <span ></span>
             <span class="finalP point">가격</span>
         </div><!--결제내역-->
-        <input type="button" value="결제하기" id="payChooseBtn" onclick="selectedCheck('${publicKey}')"><!--결제버튼-->
+        <input type="button" value="결제하기" id="payChooseBtn" onclick="selectedCheck('${publicKey}', '../outside/paymentSuccess')"><!--결제버튼-->
     </section>
     <div id="cardModal">
         <img class="img" src="<c:url value="/img/card/card.gif"/>" alt="">

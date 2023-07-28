@@ -66,12 +66,10 @@ public class UsageLockerServiceImpl implements UsageLockerService {
     public boolean hasLocker(AccountDTO accountDTO) {
         // 사용자 확인
         if (accountDTO == null) return false;
-        System.out.println("사용자 통과");
 
         // 사용 기록 확인
         List<UsageLockerDTO> usageLockerDTOList = this.getAllByAccount(accountDTO);
         if (usageLockerDTOList.isEmpty()) return false;
-        System.out.println("사용 기록 통과");
 
         // 사용 기록 유효기간 확인
         UsageLockerDTO usageLockerDTO = usageLockerDTOList.get(0);

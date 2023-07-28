@@ -1,13 +1,15 @@
 package com.KioskSNU.snu.impl;
 
-import com.KioskSNU.snu.dto.AccountDTO;
-import com.KioskSNU.snu.dto.PaymentDTO;
+import com.KioskSNU.snu.dto.*;
 import com.KioskSNU.snu.mapper.PaymentMapper;
 import com.KioskSNU.snu.service.PaymentService;
+import com.KioskSNU.snu.service.RoomService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.ModelMap;
 
+import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -16,6 +18,8 @@ import java.util.*;
 public class PaymentServiceImpl implements PaymentService {
     @Qualifier("paymentDAO")
     private final PaymentMapper paymentDAO;
+    private final HashMap<String, Object> ticketMap;
+    private final RoomService roomService;
 
     @Override
     public int insert(PaymentDTO paymentDTO) {
@@ -77,5 +81,47 @@ public class PaymentServiceImpl implements PaymentService {
         });
 
         return datesMap;
+    }
+
+    @Override
+    public void setTicketMap(ModelMap modelMap, HttpSession session) {
+        List<String> ticketList = new ArrayList<>();
+        List<String> timeList = new ArrayList<>();
+        List<Integer> priceList = new ArrayList<>();
+
+        ticketMap.forEach((key, value) -> {
+            switch (key) {
+                case "timeTicket":
+                    ticketList.add("시간권");
+                    TimeTicketDTO timeTicket = (TimeTicketDTO) value;
+                    timeList.add(timeTicket.getTime() + "시간");
+                    priceList.add(timeTicket.getPrice());
+                    break;
+                case "commutationTicket":
+                    ticketList.add("정기권");
+                    CommutationTicketDTO commutationTicket = (CommutationTicketDTO) value;
+                    timeList.add(commutationTicket.getDay() + "일");
+                    priceList.add(commutationTicket.getPrice());
+                    break;
+                case "room":
+                    ticketList.add("룸");
+                    timeList.add(value + "시간");
+                    int roomNumber = (int) session.getAttribute("selectNumber");
+                    RoomDTO roomDTO = roomService.getByRoomNumber(roomNumber);
+                    priceList.add(((Integer) value) * roomDTO.getRoomType_price());
+                    break;
+                case "lockerTicket":
+                    ticketList.add("사물함");
+                    LockerTicketDTO lockerTicket = (LockerTicketDTO) value;
+                    timeList.add(lockerTicket.getDay() + "일");
+                    priceList.add(lockerTicket.getPrice());
+                    break;
+            }
+        });
+
+        modelMap.addAttribute("ticketList", ticketList);
+        modelMap.addAttribute("timeList", timeList);
+        modelMap.addAttribute("priceList", priceList);
+        modelMap.addAttribute("totalPrice", priceList.stream().mapToInt(Integer::intValue).sum());
     }
 }
