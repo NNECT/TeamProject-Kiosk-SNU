@@ -26,6 +26,11 @@ public class OutsideLogoutController {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("redirect:/outside");
 
+        if (session.getAttribute("selectType") == null) {
+            session.invalidate();
+            return mav;
+        }
+
         switch ((String) session.getAttribute("selectType")) {
             case "seat":
                 seatMap.remove((int) session.getAttribute("selectNumber"));

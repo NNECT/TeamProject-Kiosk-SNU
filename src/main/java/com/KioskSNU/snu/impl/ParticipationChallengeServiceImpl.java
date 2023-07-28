@@ -73,6 +73,44 @@ public class ParticipationChallengeServiceImpl implements ParticipationChallenge
     }
 
     @Override
+    public boolean hasParticipationChallenge(AccountDTO accountDTO) {
+        // 사용자 확인
+        if (accountDTO == null) return false;
+
+        // 사용자 불러오기
+        accountDTO = accountService.getById(accountDTO.getId());
+        if (accountDTO == null) return false;
+
+        // 챌린지 이력 확인
+        List<ParticipationChallengeDTO> participationChallengeDTOList = getAllByAccount(accountDTO);
+        if (participationChallengeDTOList == null || participationChallengeDTOList.isEmpty()) return false;
+
+        // 진행중인 챌린지 확인
+        ParticipationChallengeDTO participationChallengeDTO = participationChallengeDTOList.get(0);
+        return participationChallengeDTO.isActive();
+    }
+
+    @Override
+    public ParticipationChallengeDTO getParticipationChallenge(AccountDTO accountDTO) {
+        // 사용자 확인
+        if (accountDTO == null) return null;
+
+        // 사용자 불러오기
+        accountDTO = accountService.getById(accountDTO.getId());
+        if (accountDTO == null) return null;
+
+        // 챌린지 이력 확인
+        List<ParticipationChallengeDTO> participationChallengeDTOList = getAllByAccount(accountDTO);
+        if (participationChallengeDTOList == null || participationChallengeDTOList.isEmpty()) return null;
+
+        // 진행중인 챌린지 확인
+        ParticipationChallengeDTO participationChallengeDTO = participationChallengeDTOList.get(0);
+        if (!participationChallengeDTO.isActive()) return null;
+
+        return participationChallengeDTO;
+    }
+
+    @Override
     public int getChallengeUsageMinutes(ParticipationChallengeDTO participationChallengeDTO) {
         // 사용자 확인
         AccountDTO accountDTO = accountService.getById(participationChallengeDTO.getAccount_id());

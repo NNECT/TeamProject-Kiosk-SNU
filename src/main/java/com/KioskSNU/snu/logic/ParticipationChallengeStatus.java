@@ -1,8 +1,23 @@
 package com.KioskSNU.snu.logic;
 
+import com.KioskSNU.snu.dto.AccountDTO;
 import com.KioskSNU.snu.dto.ParticipationChallengeDTO;
 
-public interface ChallengeSuccessCheck {
+public interface ParticipationChallengeStatus {
+    /**
+     * 참여중 챌린지가 있는지 확인
+     * @param accountDTO 해당 사용자 계정
+     * @return 참여중 챌린지 존재 여부
+     */
+    boolean hasParticipationChallenge(AccountDTO accountDTO);
+
+    /**
+     * 참여중 챌린지 정보 가져오기
+     * @param accountDTO 해당 사용자 계정
+     * @return 참여중 챌린지 정보
+     */
+    ParticipationChallengeDTO getParticipationChallenge(AccountDTO accountDTO);
+
     /**
      * 챌린지 기간 내 사용 시간 계산
      *
