@@ -30,6 +30,7 @@ new DataTable('#lockerReportTable',{
                 // Create input element
                 let input = document.createElement('input');
                 input.placeholder = title;
+                input.style.width = "100px";
                 column.footer().replaceChildren(input);
 
                 // Event listener for user input
