@@ -10,7 +10,7 @@
 
 <body>
 <div class="container">
-	<div class="row justify-content-center align-items-center" style="height: 30vh;">
+	<div class="row justify-content-center align-items-center" style="height: 45vh;">
 		<div class="col-md-8">
 			<div class="card">
 				<div class="card-body text-center">
@@ -63,7 +63,7 @@
 </div>
 
 <%-- 메뉴 선택 모달 창 --%>
-<div id="menuModal" class="modal" style="display: none; margin-top: 120px;">
+<%--<div id="menuModal" class="modal" style="display: none; margin-top: 160px;">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -79,10 +79,18 @@
 			</div>
 		</div>
 	</div>
+</div>--%>
+<div id="menuModal" class="modal" style="display: none; margin-top: 160px; margin-left: 35%;">
+	<div class="modal-content" style="max-width: 400px; padding: 20px; text-align: center;">
+		<h3 style="margin-bottom: 30px;">메뉴를 선택해 주세요</h3>
+		<button type="button" id="realTimeStatus">실시간 현황</button>
+		<button type="button" id="previousRecord">사용기록</button>
+	</div>
 </div>
 
+
 <!-- 실시간 현황 모달 창 -->
-<div id="lockerModal" class="modal" style="display: none; margin-top: 105px;">
+<div id="lockerModal" class="modal" style="display: none; margin-top: 110px;">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -119,50 +127,6 @@
 						</td>
 					</tr>
 				</table>
-			</div>
-		</div>
-	</div>
-</div>
-
-<%-- 이전 기록 모달 창 --%>
-<div id="previousModal" class="modal" style="display: none; margin-top: 105px;">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<div class="modal-body">
-					<table id="example" class="display" style="width:100%">
-						<thead>
-							<tr>
-								<th>사물함번호</th>
-								<th>회원번호</th>
-								<th>아이디</th>
-								<th>전화번호</th>
-								<th>시작일</th>
-								<th>종료일</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td id="rLockerId"></td>
-							</tr>
-							<tr>
-								<td id="rMemberId"></td>
-							</tr>
-							<tr>
-								<td id="rMemberName"></td>
-							</tr>
-							<tr>
-								<td id="rMemberPhone"></td>
-							</tr>
-							<tr>
-								<td id="rLockerStart"></td>
-							</tr>
-							<tr>
-								<td id="rLockerEnd"></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
 			</div>
 		</div>
 	</div>
@@ -211,7 +175,6 @@
 				$("#menuModal").modal("hide");
 				previousRecord(lockerId);
 			});
-
 		}
 
 		// 실시간 현황 모달 창
@@ -242,6 +205,7 @@
 								const confirmMsg = lockerActivation ? "해당 사물함을 비활성화하시겠습니까?" : "해당 사물함을 활성화하시겠습니까?";
 								if (confirm(confirmMsg)) {
 									updateLockerUsable(lockerId, !lockerActivation);
+									alert("처리되었습니다.");
 								}
 							});
 						} else {

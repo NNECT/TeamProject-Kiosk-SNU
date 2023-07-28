@@ -80,3 +80,11 @@ section{
     color: #707070;
     font-size: 15px;
 }
+
+/* 모달 */
+#menuModal{
+    padding: 30px;
+}
+.menuContent{
+    max-width: 400px;
+}
