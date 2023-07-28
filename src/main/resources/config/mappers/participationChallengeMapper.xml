@@ -196,6 +196,7 @@
         join        challenge
         on          participationChallenge.challenge_id = challenge.id
         where       participationChallenge.account_id = #{id}
+        order by    participationChallenge.startDateTime desc
     </select>
 
     <select id="getAllByChallenge" parameterType="challengeAlias" resultMap="participationChallengeResultMap">
@@ -235,6 +236,7 @@
         join        challenge
         on          participationChallenge.challenge_id = challenge.id
         where       participationChallenge.challenge_id = #{id}
+        order by    participationChallenge.startDateTime desc
     </select>
 
     <select id="getAllByActive" parameterType="boolean" resultMap="participationChallengeResultMap">
@@ -274,6 +276,7 @@
         join        challenge
         on          participationChallenge.challenge_id = challenge.id
         where       participationChallenge.active = #{active}
+        order by    participationChallenge.startDateTime desc
     </select>
 
     <select id="getAllByChallengeAndActive" resultType="com.KioskSNU.snu.dto.ParticipationChallengeDTO">
@@ -315,5 +318,8 @@
         where       participationChallenge.challenge_id = #{id}
                     and
             		participationChallenge.active = #{active}
+        order by    participationChallenge.challenge_id
+        			and
+                    participationChallenge.startDateTime desc
     </select>
 </mapper>

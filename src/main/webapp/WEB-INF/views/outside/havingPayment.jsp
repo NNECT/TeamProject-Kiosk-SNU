@@ -60,7 +60,7 @@
 
       <button id="payBtn" onclick="window.location.href='<c:url value="/outside/ticket/seat"/>'; return false;"> 이용권 구매하기</button><!--추가결제시 바로 결제페이지로 이동 -->
       <c:if test="${remainDays > 0 or remainTime > 0}">
-        <button id="nextBtn"> 다음</button><!--다음결제시 바로 마지막페이지로 이동 -->
+        <a href="<c:url value="/outside/paymentSuccess"/>"><button id="nextBtn"> 다음</button></a>
       </c:if>
     </form>
   </section>

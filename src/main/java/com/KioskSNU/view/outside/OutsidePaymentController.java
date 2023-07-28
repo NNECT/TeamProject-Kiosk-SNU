@@ -2,6 +2,8 @@ package com.KioskSNU.view.outside;
 
 import com.KioskSNU.secure.RSA;
 import com.KioskSNU.snu.dto.*;
+import com.KioskSNU.snu.service.AccountService;
+import com.KioskSNU.snu.service.ParticipationChallengeService;
 import com.KioskSNU.snu.service.RoomService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -18,7 +20,9 @@ import java.util.List;
 public class OutsidePaymentController {
     private final RSA rsa;
     private final HashMap<String, Object> ticketMap;
+    private final AccountService accountService;
     private final RoomService roomService;
+    private final ParticipationChallengeService participationChallengeService;
 
     @RequestMapping("/outside/payment")
     public ModelAndView process(HttpSession session) {
@@ -72,8 +76,32 @@ public class OutsidePaymentController {
     public ModelAndView successProcess(HttpSession session) {
         ModelAndView mav = new ModelAndView();
 
-        session.removeAttribute("selectType");
-        session.removeAttribute("selectNumber");
+        // 이미 챌린지가 있을 경우
+        AccountDTO accountDTO = (AccountDTO) session.getAttribute("author");
+        ParticipationChallengeDTO participationChallengeDTO = participationChallengeService.getParticipationChallenge(accountDTO);
+        if (participationChallengeDTO != null) {
+            // 성공 체크
+            int successCheck = participationChallengeService.challengeSuccessCheck(participationChallengeDTO);
+            if (successCheck == 1) {
+                // 성공 시
+                participationChallengeDTO.setResult(true);
+                participationChallengeDTO.setActive(false);
+                participationChallengeService.update(participationChallengeDTO);
+                // 포인트 적립
+                accountDTO = accountService.getById(accountDTO.getId());
+                accountDTO.setPoint(accountDTO.getPoint() + participationChallengeDTO.getRewardPoint());
+                accountService.update(accountDTO);
+            } else if (successCheck == -1) {
+                // 실패 시
+                participationChallengeDTO.setResult(false);
+                participationChallengeDTO.setActive(false);
+                participationChallengeService.update(participationChallengeDTO);
+            } else {
+                // 진행 중
+                mav.setViewName("redirect:/outside/end");
+                return mav;
+            }
+        }
 
         mav.setViewName("outside/paymentSuccess");
         return mav;
