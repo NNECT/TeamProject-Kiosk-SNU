@@ -71,7 +71,8 @@
                     payment.log                             as log
         from        payment
         join        account
-        on          payment.account_id = account.id;
+        on          payment.account_id = account.id
+        order by    payment.dateTime desc;
     </select>
 
     <select id="getAllByAccount" parameterType="accountAlias" resultMap="paymentResultMap">
@@ -89,6 +90,28 @@
         from        payment
         join        account
         on          payment.account_id = account.id
-        where       account.id = #{id};
+        where       account.id = #{id}
+        order by    payment.dateTime desc;
+    </select>
+
+    <select id="getAllBy1Year" resultType="com.KioskSNU.snu.dto.PaymentDTO">
+        select      payment.id                              as id,
+                    account.id                              as account_id,
+                    account.username                        as account_username,
+                    account.password                        as account_password,
+                    account.phoneNumber                     as account_phoneNumber,
+                    account.point                           as account_point,
+                    account.remainTime                      as account_remainTime,
+                    payment.dateTime                        as dateTime,
+                    payment.amount                          as amount,
+                    payment.usedPoint                       as usedPoint,
+                    payment.log                             as log
+        from        payment
+        join        account
+        on          payment.account_id = account.id
+		where		year(payment.dateTime) >= year(now()) - 1
+        	        and
+                    month(payment.dateTime) >= month(now())
+        order by    payment.dateTime desc;
     </select>
 </mapper>
