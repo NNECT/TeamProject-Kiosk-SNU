@@ -3,7 +3,11 @@ package com.KioskSNU.view.inside;
 import com.KioskSNU.secure.RSA;
 import com.KioskSNU.secure.SHA;
 import com.KioskSNU.snu.dto.AccountDTO;
+import com.KioskSNU.snu.dto.ParticipationChallengeDTO;
+import com.KioskSNU.snu.dto.PaymentDTO;
 import com.KioskSNU.snu.service.AccountService;
+import com.KioskSNU.snu.service.ParticipationChallengeService;
+import com.KioskSNU.snu.service.PaymentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +19,7 @@ import javax.crypto.NoSuchPaddingException;
 import javax.servlet.http.HttpSession;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -23,16 +28,32 @@ public class InsideMypageController {
     private final RSA rsa;
     private final SHA sha;
     private final AccountService accountService;
+    private final ParticipationChallengeService participationChallengeService;
+    private  final PaymentService paymentService;
 
     @RequestMapping("/mypage") // 새로 추가된 메서드
-    public ModelAndView insideMypage(@RequestParam(required = false) String checkPW) {
+    public ModelAndView insideMypage(@RequestParam(required = false) String checkPW, HttpSession session) {
         ModelAndView mav = new ModelAndView();
+        mav.setViewName("inside/inside_mypage");
         mav.addObject("publicKey", rsa.getPublicKey());
 
         if(checkPW != null && checkPW.equals("fail")){
             mav.addObject("checkPWfail","checkPWfail");
+            return mav;
         }
-        mav.setViewName("inside/inside_mypage");
+
+        AccountDTO accountDTO = (AccountDTO) session.getAttribute("author");
+        try{
+            //챌린지 리스트
+            List<ParticipationChallengeDTO> challengeList = participationChallengeService.getAllByAccount(accountDTO);
+            mav.addObject("challengeList", challengeList);
+
+            List<PaymentDTO> paymentList = paymentService.getAllByAccount(accountDTO);
+            mav.addObject("paymentList", paymentList);
+            //결제내역 리스트
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return mav;
     }
 

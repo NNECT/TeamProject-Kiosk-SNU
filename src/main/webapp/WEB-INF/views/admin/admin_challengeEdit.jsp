@@ -118,7 +118,7 @@
     });
 
     // 목록 버튼을 클릭하면 리스트 페이지로 이동합니다.
-    $("#list").on("click", function() {
+    $("#challengeList").on("click", function() {
         location.href = "<c:url value='/admin/challenge/list'/>";
     });
 

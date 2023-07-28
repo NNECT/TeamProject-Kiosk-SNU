@@ -46,27 +46,27 @@
 
 		$(document).ready(function () {
         // 자리관리 클릭 시
-        $(".list-group-item:eq(0)").click(function () {
+        $(".challengeList-group-item:eq(0)").click(function () {
             $("#content").load("realtime-seat-management.jsp");
         });
         // 회원관리 클릭 시
-        $(".list-group-item:eq(1)").click(function () {
+        $(".challengeList-group-item:eq(1)").click(function () {
             $("#content").load("member-management.jsp");
         });
         // 사물함관리 클릭 시
-        $(".list-group-item:eq(2)").click(function () {
+        $(".challengeList-group-item:eq(2)").click(function () {
             $("#content").load("realtime-locker-management.jsp");
         });
         // 매출현황 클릭 시
-        $(".list-group-item:eq(3)").click(function () {
+        $(".challengeList-group-item:eq(3)").click(function () {
             $("#content").load("seat-statistics.jsp");
         });
         // 공지기록 클릭 시
-        $(".list-group-item:eq(4)").click(function () {
+        $(".challengeList-group-item:eq(4)").click(function () {
             $("#content").load("notice-record.jsp");
         });
         // 채팅 클릭 시
-        $(".list-group-item:eq(5)").click(function () {
+        $(".challengeList-group-item:eq(5)").click(function () {
             $("#content").load("chat.jsp");
         });
     });

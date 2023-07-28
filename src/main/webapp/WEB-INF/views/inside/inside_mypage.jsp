@@ -54,7 +54,7 @@
                 <p class="content ticket">사용권</p>
                 <div class="border">
                     <span class="showText"></span>
-                    <a href="inside_paymentList.jsp"><input type="button" class="btn ticketBtn" value="결제내역"></a>
+                    <input type="button" class="btn ticketBtn" value="결제내역" onclick="showModal('paymentModal')">
                 </div>
             </div>
             <div class="tr">
@@ -72,7 +72,6 @@
             </div>
         </div>
     </section>
-    s
 </div>
 
 <!--전화번호 변경 모달영역-->
@@ -149,10 +148,40 @@
         </div>
     </form>
 </div>
-
-<%--챌린지 모달--%>
-<div class="modalPage" id="challengeModal">
+<%--결제내역 모달--%>
+<div class="modalPage" style="width: 600px;" id="paymentModal">
     <form>
+        <div class="modalContent" style="width: 500px; height:500px" >
+            <p class="modalP">
+                <span class="modalSpan">결제</span>&nbsp;&nbsp;내역<br>
+            </p>
+            <hr class="modalHr">
+            <div>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>결제일</th>
+                        <th>결제 방식</th>
+                        <th>결제금액</th>
+                        <th>결제정보</th>
+                    </tr>
+                    </thead>
+                    <c:forEach var="payment" items="${paymentList}">
+                        <input type="hidden" value='${payment.log}' class="paymentList">
+                        <input type="hidden" value="${payment.dateTime}" id="paymentDate">
+                        <tr id="p${payment.id}"><!--반복분 부분-->
+                            <tbody id="paymentTableBody"></tbody>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </div>
+        </div>
+    </form>
+    <input type="button" class="modalNoBtn" value="닫기" id="cancelPayment" style="float:right ">
+</div>
+<%--챌린지 모달--%>
+<div class="modalPage2" id="challengeModal">
+    <form>s
         <div class="modalContent" style="width: 400px">
             <p class="modalP">
                 <span class="modalSpan">참여 챌린지</span>&nbsp;&nbsp;내역<br>
@@ -162,16 +191,16 @@
                 <table>
                     <tr>
                         <th>날짜</th>
-                        <th>이름</th>
+                        <th>챌린지</th>
                         <th>결과</th>
                         <th>받은포인트</th>
                     </tr>
-                    <c:forEach var="list" items="${list}">
+                    <c:forEach var="challengeList" items="${challengeList}">
                         <tr><!--반복분 부분-->
-                            <td>${list.stardDateTime}</td>
-                            <td>${list.challenge_title}</td>
-                            <td>${list.result? "성공":"실패"}</td>
-                            <td>${list.rewardPoint}</td>
+                            <td>${challengeList.getStartDateTimeString()}</td>
+                            <td>${challengeList.challenge_title}</td>
+                            <td>${challengeList.result ? "성공":"실패"}</td>
+                            <td>${challengeList.rewardPoint}</td>
                         </tr>
                     </c:forEach>
                 </table>
@@ -223,5 +252,6 @@
 <script src="<c:url value="/js/jquery-3.7.0.min.js"/>"></script>
 <script src="<c:url value="/js/editPhoneNumber.js"/>"></script>
 <script src="<c:url value="/js/insideEditPassword_checkPhone.js"/>"></script>
+<script src="<c:url value='/js/inside_PaymentLog.js'/>"></script>
 </body>
 </html>
