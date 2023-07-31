@@ -116,5 +116,19 @@
     }
 
 </script>
+    <!--중복 자리선택시 모달-->
+    <div id="seatModal">
+        <div class="modalContent">
+            <p class="modalP">
+                이미<strong class="modalStrong">00번자리</strong>를 <strong class="modalStrong">선택</strong>하셨습니다.<br>
+                <strong class="modalStrong">진행버튼</strong>을 누르면 <strong class="modalStrong">00번자리</strong>에서<br>
+                <strong class="modalStrong">로그아웃되고 선택한 자리로 진행</strong>됩니다.
+            </p>
+        </div>
+        <div class="modalBtn">
+            <input type="button" id="modalNoBtn" value="취소">
+            <input type="button" id="modalYesBtn" value="진행">
+        </div>
+    </div>
 </body>
 </html>

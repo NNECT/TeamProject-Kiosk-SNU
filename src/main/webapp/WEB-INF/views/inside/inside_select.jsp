@@ -21,7 +21,7 @@
 <div id="body">
     <a href="<c:url value="/inside/menu"/>"><img src="<c:url value="/img/inside/beforBtn.png"/>" alt=""></a>
 
-    <p id="title">좌석을 선택해주세요</p>
+    <p id="title" style="border: none;">좌석을 선택해주세요</p>
     <div id="seatWrap">
         <div id="info"><!--자리설명-->
             <div class="box b"></div>&nbsp;<span class="blue">사용 가능</span>&nbsp;&nbsp;

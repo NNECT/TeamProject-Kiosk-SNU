@@ -43,7 +43,7 @@
                       clearInterval(timer);
                       location.href = "<c:url value="/outside/start"/>";
                   }
-              }, 500);
+              }, 1000);
             </script>
         </body>
  </html>

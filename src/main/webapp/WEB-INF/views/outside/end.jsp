@@ -27,7 +27,7 @@
 
 <section id="allWrap"><!--전체 감싸는 박스-->
 
-    <%--<img src="../snu/img/endIcon.png" alt="">--%>
+    <img src="<c:url value="/img/check.png"/>" alt="">
 
     <p id="title">입실완료!</p><!--입실완료면 '입실완료!'-->
     <p id="time"><span id="MyTimer">10</span>초뒤 홈화면으로 이동합니다.</p>
