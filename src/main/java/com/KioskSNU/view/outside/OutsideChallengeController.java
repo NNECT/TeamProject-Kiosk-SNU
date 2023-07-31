@@ -66,7 +66,8 @@ public class OutsideChallengeController {
 
             // 챌린지 시작, 종료 시간 설정
             participationChallengeDTO.setStartDateTime(LocalDateTime.now());
-            participationChallengeDTO.setEndDateTime(calTime(challengeDTO));
+//            participationChallengeDTO.setEndDateTime(calTime(challengeDTO));
+            participationChallengeService.setEndDateTime(participationChallengeDTO);
 
             // 챌린지 목표 정보 설정
             participationChallengeDTO.setGoalDay(challengeDTO.getGoalDay());
@@ -108,13 +109,13 @@ public class OutsideChallengeController {
 //        return participationChallengeService.challengeSuccessCheck(participationChallengeDTO) == 0;
 //    }
 
-    /**
-     * 챌린지 종료 시간 계산.
-     * 현재 시간 + 챌린지 기간.
-     * @param challengeDTO 챌린지 정보 DTO
-     * @return 챌린지 종료 시간
-     */
-    public LocalDateTime calTime(ChallengeDTO challengeDTO){
-        return LocalDateTime.now().plusDays(challengeDTO.getPeriodDays()).plusHours(challengeDTO.getPeriodHours());
-    }
+//    /**
+//     * 챌린지 종료 시간 계산.
+//     * 현재 시간 + 챌린지 기간.
+//     * @param challengeDTO 챌린지 정보 DTO
+//     * @return 챌린지 종료 시간
+//     */
+//    public LocalDateTime calTime(ChallengeDTO challengeDTO){
+//        return LocalDateTime.now().plusDays(challengeDTO.getPeriodDays()).plusHours(challengeDTO.getPeriodHours());
+//    }
 }
