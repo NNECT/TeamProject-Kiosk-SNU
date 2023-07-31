@@ -88,17 +88,17 @@
         <div class="resultLastBox"><!--결제내역-->
             <span class="text">주문금액</span>
             <span></span>
-            <span class="result price">가격</span>
+            <span class="result price"><fmt:formatNumber value="${totalPrice}" pattern="#,##0"/>원</span>
         </div>
         <div class="resultLastBox">
             <span class="text">사용 포인트</span>
             <span ></span>
-            <span class="result point">가격</span>
+            <span class="result point"><fmt:formatNumber value="${sessionScope.author.point}" pattern="#,##0"/></span>
         </div>
         <div class="resultLastBox">
             <span class="final">결제 금액</span>
             <span ></span>
-            <span class="finalP point">가격</span>
+            <span class="finalP point"><fmt:formatNumber value="${totalPrice < sessionScope.author.point ? 0 : totalPrice - sessionScope.author.point}" pattern="#,##0"/>원</span>
         </div><!--결제내역-->
         <input type="button" value="결제하기" id="payChooseBtn" onclick="selectedCheck('${publicKey}', '../outside/paymentSuccess')"><!--결제버튼-->
     </section>
