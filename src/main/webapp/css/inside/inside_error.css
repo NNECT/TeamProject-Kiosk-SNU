@@ -1,0 +1,120 @@
+@media only screen and (min-device-width : 768px) and (max-device-width : 1023px) {
+
+}
+#body{
+    margin: 0; padding: 0;
+    background-color: #ffffff ;
+    position: relative;
+    width: 1024px;
+    height: 768px;
+    border:1px solid rebeccapurple;
+}
+
+/*움직이는 원*/
+#circleWrap1{
+    float: right;
+    width: 200px;
+}
+#bigCircle1{
+    width: 290px;
+    height: 290px;
+    border-radius: 400px;
+    background-color: #F52828;
+    opacity: 10%;
+    position: relative;
+    top: 10px;
+    left: 10px;
+
+    animation-duration: 5s;
+    animation-name: slidein;
+    animation-name: upDown;
+    animation-duration: 3s;
+    animation-delay: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-out;
+    animation-direction:reverse;
+}
+
+#smallCircle1{
+    width: 90px;
+    height: 90px;
+    border-radius: 400px;
+    background-color: #F52828;
+    opacity: 10%;
+    position: relative;
+    top: 70px;
+    left: -40px;
+}
+
+#circleWrap2{
+    float: left;
+}
+#bigCircle2{
+    width: 290px;
+    height: 290px;
+    border-radius: 400px;
+    background-color: #F52828;
+    opacity: 10%;
+    position: relative;
+    top: 400px;
+    left: -100px;
+
+    animation-duration: 3s;
+    animation-name: slidein;
+    animation-name: upDown;
+    animation-duration: 2s;
+    animation-delay: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-out;
+    animation-direction:reverse;
+}
+
+#smallCircle2{
+    width: 90px;
+    height: 90px;
+    border-radius: 400px;
+    background-color: #F52828;
+    opacity: 10%;
+    position: relative;
+    top: -10px;
+    left: 150px;
+}
+/**/
+#allWrap{
+    width: 500px;
+    height: 500px;
+    border: 0px solid red;
+    position: absolute;
+    border-radius: 20px;
+    top: 100px;
+    left: 50%;
+    transform: translate(-50%,0);
+    text-align: center;
+}
+
+/**/
+img{
+    margin-top: 100px;
+    width: 150px;
+    height: 150px;
+    margin-bottom: -20px;
+
+}
+#title{
+
+    font-size: 45px;
+    font-weight: lighter;
+    color: #F52828;
+}
+#time{
+    margin-top: -30px;
+    font-size: 25px;
+    font-weight: lighter;
+    color: #383838;
+}
+#introduce{
+    margin-top: -20px;
+    font-size: 15px;
+    font-weight: lighter;
+    color: #F52828;
+}
