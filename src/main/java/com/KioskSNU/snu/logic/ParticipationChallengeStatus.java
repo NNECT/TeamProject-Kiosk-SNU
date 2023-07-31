@@ -3,7 +3,15 @@ package com.KioskSNU.snu.logic;
 import com.KioskSNU.snu.dto.AccountDTO;
 import com.KioskSNU.snu.dto.ParticipationChallengeDTO;
 
+import java.time.LocalDateTime;
+
 public interface ParticipationChallengeStatus {
+    /**
+     * 챌린지 종료 시간을 계산하여 설정
+     * @param participationChallengeDTO 챌린지 참여 정보 DTO
+     */
+    void setEndDateTime(ParticipationChallengeDTO participationChallengeDTO);
+
     /**
      * 참여중 챌린지가 있는지 확인
      * @param accountDTO 해당 사용자 계정

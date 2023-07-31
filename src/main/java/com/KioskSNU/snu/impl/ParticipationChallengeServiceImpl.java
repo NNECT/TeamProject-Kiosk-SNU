@@ -73,6 +73,13 @@ public class ParticipationChallengeServiceImpl implements ParticipationChallenge
     }
 
     @Override
+    public void setEndDateTime(ParticipationChallengeDTO participationChallengeDTO) {
+        LocalDateTime startDateTime = participationChallengeDTO.getStartDateTime();
+        LocalDateTime endDateTime = startDateTime.plusDays(participationChallengeDTO.getChallenge_periodDays()).plusHours(participationChallengeDTO.getChallenge_periodHours());
+        participationChallengeDTO.setEndDateTime(endDateTime);
+    }
+
+    @Override
     public boolean hasParticipationChallenge(AccountDTO accountDTO) {
         // 사용자 확인
         if (accountDTO == null) return false;
