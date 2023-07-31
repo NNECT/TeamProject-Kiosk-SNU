@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<c:url value="/css/inside/inside_mypage.css"/>">
     <link rel="stylesheet" href="<c:url value="/css/inside/modalMyPagePassword.css"/>">
+    <link rel="stylesheet" href="<c:url value="/css/inside/modalMyPageList.css"/>">
     <%--    <link rel="stylesheet" href="<c:url value="/css/inside/inside_challengList.css"/>">--%>
     <link href="https://cdn.jsdelivr.net/gh/sunn-us/SUITE/fonts/static/woff2/SUITE.css" rel="stylesheet">
     <style>
@@ -77,6 +78,8 @@
 <!--전화번호 변경 모달영역-->
 <div class="modalBg"></div>
 <div id="modalPage">
+<%--    <img src="<c:url value="/img/inside/xIcon.png"/>" alt="x" class="xIcon" >--%>
+    <img src="../img/inside/xIcon.png" alt="x" class="modalNoBtn" id="cancelTel">
     <form id="changeTel">
         <div class="modalContent">
             <p class="modalP">
@@ -90,13 +93,13 @@
             <!--페스워드 확인이 되야 전화번호 변경가능-->
             <input type="text" id="phoneNumberInput" class="first" placeholder="변경할 전화번호를 입력해주세요" maxlength="13">
             <input type="button" class="modalCheckBtn" id=phoneNumber value="전송" onclick="codeSend()"><br>
-            <span id="codeSendCheck"></span>
+            <span id="codeSendCheck"></span><!--안내문구-->
             <input type="text" id="codeInput" class="first" placeholder="인증번호를 입력해주세요">
             <input type="button" class="modalCheckBtn" id=code value="확인" onclick="codeCheck()"><br>
-            <span id="codeCheck"></span>
+            <span id="codeCheck"></span><!--안내문구-->
         </div>
         <div class="modalBtn" id="changePhone">
-            <input type="button" class="modalNoBtn" value="취소" id="cancelTel">
+<%--            <input type="button" class="modalNoBtn" value="취소" id="cancelTel">--%>
             <input type="submit" id="phoneNumberChangeBtn" name="" style="display: none" class="modalYesBtn" value="변경">
         </div>
     </form>
@@ -104,6 +107,7 @@
 <!--모달영역-->
 <!--비밀번호변경_모달영역1-->
 <div id="rePasswordModal">
+    <img src="../img/inside/xIcon.png" alt="x" class="modalNoBtn" id="cancelBtn">
     <form>
         <div class="modalContent">
             <p class="modalP">
@@ -113,15 +117,14 @@
             <hr class="modalHr">
             <input type="text" name="" id="changePwdPhone" class="first" placeholder="전화번호를 입력해주세요" maxlength="13">
             <input type="button" class="modalCheckBtn" value="인증" onclick="changePwdCodeSend()"><br>
-            <span id="changePwdText1"></span>
+            <span id="changePwdText1"></span><!--안내문구-->
 
             <!--인증번호 확인이 되야 전화번호 변경가능-->
             <input type="text" id="checkCode" class="first" placeholder="인증번호를 입력해주세요">
             <input type="button" class="modalCheckBtn" value="인증" onclick="changePwdCodeCheck()"><br>
-            <span id="changePwdText2"></span>
+            <span id="changePwdText2"></span><!--안내문구-->
         </div>
         <div class="modalBtn">
-            <input type="button" class="modalNoBtn" value="취소" id="cancelBtn">
             <input type="button" id="editPassword_checkPhone" name="" class="modalYesBtn" value="다음"
                    style="display: none" onclick="showNextModal()">
         </div>
@@ -131,6 +134,7 @@
 
 <!-- 비밀번호변경 모달-->
 <div id="newPasswordModal">
+    <img src="../img/inside/xIcon.png" alt="x" class="modalNoBtn">
     <form id="finish">
         <div class="modalContent">
             <p class="modalP">
@@ -140,22 +144,23 @@
             <%--최소 6자리, 이전 비번과 동일비번 불가능--%>
             <input type="password" name="" id="changePassword1" class="third" placeholder="새 비밀번호"><br>
             <input type="password" name="" id="changePassword2" class="third" placeholder="비밀번호 확인">
-            <span id="changePasswordText"></span>
+            <span id="changePasswordText"></span><!--안내문구-->
         </div>
         <div id="modalBtn">
-            <input type="button" class="modalNoBtn" value="변경 취소" id="cancelPwd">
-            <input type="submit" id="changePwdBtn" style="display: none" class="finishModalBtn" value="변경">
+        <input type="submit" id="changePwdBtn" style="display: none" class="finishModalBtn" value="변경">
+
         </div>
     </form>
 </div>
 <%--결제내역 모달--%>
-<div class="modalPage" style="width: 600px;" id="paymentModal">
+<div class="modalPage" id="paymentModal">
+    <img src="../img/inside/xIcon.png" alt="x" class="modalNoBtn">
     <form>
-        <div class="modalContent" style="width: 500px; height:500px" >
+        <div class="modalContent2" style="border: 1px solid #ffffff">
             <p class="modalP">
-                <span class="modalSpan">결제</span>&nbsp;&nbsp;내역<br>
+                <span class="modalSpan">결제 내역</span><br>
             </p>
-            <hr class="modalHr">
+<%--            <hr class="modalHr">--%>
             <div>
                 <table>
                     <thead>
@@ -177,16 +182,17 @@
             </div>
         </div>
     </form>
-    <input type="button" class="modalNoBtn" value="닫기" id="cancelPayment" style="float:right ">
+<%--    <input type="button" class="modalCloseBtn" value="닫기" id="cancelPayment">--%>
 </div>
 <%--챌린지 모달--%>
 <div class="modalPage2" id="challengeModal">
-    <form>s
-        <div class="modalContent" style="width: 400px">
+    <img src="../img/inside/xIcon.png" alt="x" class="modalNoBtn" id="cancelPwd">
+    <form>
+        <div class="modalContent2" style="border: 1px solid #ffffff">
             <p class="modalP">
-                <span class="modalSpan">참여 챌린지</span>&nbsp;&nbsp;내역<br>
+                <span class="modalSpan">참여 챌린지 내역</span>
             </p>
-            <hr class="modalHr">
+<%--            <hr class="modalHr">--%>
             <div>
                 <table>
                     <tr>
@@ -207,7 +213,7 @@
             </div>
         </div>
     </form>
-    <input type="button" class="modalNoBtn" value="닫기" id="cancelChallenge" style="float:right ">
+<%--    <input type="button"  class="modalCloseBtn" value="닫기" id="cancelChallenge">--%>
 </div>
 
 
