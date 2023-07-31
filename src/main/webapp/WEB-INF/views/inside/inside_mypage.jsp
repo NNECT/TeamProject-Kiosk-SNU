@@ -5,11 +5,10 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=deevice-width, initial-scale=1,minimum-scale=1,maxmun-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1,minimum-scale=1,maxmun-scale=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<c:url value="/css/inside/inside_mypage.css"/>">
     <link rel="stylesheet" href="<c:url value="/css/inside/modalMyPagePassword.css"/>">
-    <link rel="stylesheet" href="<c:url value="/css/inside/modalMyPageList.css"/>">
     <%--    <link rel="stylesheet" href="<c:url value="/css/inside/inside_challengList.css"/>">--%>
     <link href="https://cdn.jsdelivr.net/gh/sunn-us/SUITE/fonts/static/woff2/SUITE.css" rel="stylesheet">
     <style>
@@ -17,9 +16,7 @@
             font-family: 'SUITE', sans-serif;
         }
     </style>
-
-    </style>
-    <title>snu_mypage_page</title>
+    <title>snu_myPage</title>
 </head>
 <body>
 <div class="body">
@@ -79,7 +76,7 @@
 <div class="modalBg"></div>
 <div id="modalPage">
 <%--    <img src="<c:url value="/img/inside/xIcon.png"/>" alt="x" class="xIcon" >--%>
-    <img src="../img/inside/xIcon.png" alt="x" class="modalNoBtn" id="cancelTel">
+    <img src="<c:url value="/img/inside/xIcon.png"/>" alt="x" class="modalNoBtn" id="cancelTel">
     <form id="changeTel">
         <div class="modalContent">
             <p class="modalP">
@@ -107,7 +104,7 @@
 <!--모달영역-->
 <!--비밀번호변경_모달영역1-->
 <div id="rePasswordModal">
-    <img src="../img/inside/xIcon.png" alt="x" class="modalNoBtn" id="cancelBtn">
+    <img src="<c:url value="/img/inside/xIcon.png"/>" alt="x" class="modalNoBtn" id="cancelBtn">
     <form>
         <div class="modalContent">
             <p class="modalP">
@@ -134,7 +131,7 @@
 
 <!-- 비밀번호변경 모달-->
 <div id="newPasswordModal">
-    <img src="../img/inside/xIcon.png" alt="x" class="modalNoBtn">
+    <img src="<c:url value="/img/inside/xIcon.png"/>" alt="x" class="modalNoBtn">
     <form id="finish">
         <div class="modalContent">
             <p class="modalP">
@@ -154,9 +151,9 @@
 </div>
 <%--결제내역 모달--%>
 <div class="modalPage" id="paymentModal">
-    <img src="../img/inside/xIcon.png" alt="x" class="modalNoBtn">
+    <img src="<c:url value="/img/inside/xIcon.png"/>" alt="x" class="modalNoBtn">
     <form>
-        <div class="modalContent2" style="border: 1px solid #ffffff">
+        <div class="modalContent2">
             <p class="modalP">
                 <span class="modalSpan">결제 내역</span><br>
             </p>
@@ -186,9 +183,9 @@
 </div>
 <%--챌린지 모달--%>
 <div class="modalPage2" id="challengeModal">
-    <img src="../img/inside/xIcon.png" alt="x" class="modalNoBtn" id="cancelPwd">
+    <img src="<c:url value="/img/inside/xIcon.png"/>" alt="x" class="modalNoBtn" id="cancelPwd">
     <form>
-        <div class="modalContent2" style="border: 1px solid #ffffff">
+        <div class="modalContent2">
             <p class="modalP">
                 <span class="modalSpan">참여 챌린지 내역</span>
             </p>
