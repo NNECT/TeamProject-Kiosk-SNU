@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=deevice-width, initial-scale=1,minimum-scale=1,maxmun-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1,minimum-scale=1,maximum-scale=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<c:url value="/css/snu_lockerTicket.css"/>">
     <link href="https://cdn.jsdelivr.net/gh/sunn-us/SUITE/fonts/static/woff2/SUITE.css" rel="stylesheet">
@@ -110,7 +110,7 @@
                 locker.innerHTML = locker.id;
                 </c:when>
                 <c:otherwise>
-                locker.innerHTML = '<label>' + locker.id + '<input type="radio" name="locker-radio" class="locket-radio-input" value="' + locker.id + '"></label>';
+                locker.innerHTML = '<label>' + locker.id + '<input type="radio" name="locker-radio" class="locker-radio-input" value="' + locker.id + '"></label>';
                 </c:otherwise>
                 </c:choose>
             } else if (status[Number(locker.id)] === 0) {
@@ -152,23 +152,43 @@
     });
 
     function selectedLockerCheck() {
-        <c:if test="${not hasLocker}">
-        let check = false;
-		for (const elm of document.getElementsByClassName("locket-radio-input")) {
+        // 사용권 버튼이 선택되었는지 확인
+        let chk = false;
+
+        // 각각의 사용권 버튼을 확인
+        for (const elm of document.getElementsByName("radio-button")) {
             if (elm.checked) {
-                check = true;
+                // 선택된 사용권 버튼의 값이 0이면 사용X를 선택한 것이므로 즉시 true를 반환
+                if (elm.value === "0") return true;
+
+                // 이외의 버튼은 자리 선택 여부를 확인해야 하므로 chk를 true로 변경
+                chk = true;
                 break;
             }
         }
-        if (!check) return false;
-        </c:if>
 
-        for (const elm of document.getElementsByName("radio-button")) {
-            if (elm.checked) {
-                return true;
+        // 사용권이 선택되지 않았으면 false를 반환
+        if (!chk) return false;
+
+        // 자리 존재 여부 확인
+        const lockerRadios = document.getElementsByClassName("locker-radio-input");
+        if (lockerRadios.length > 0) {
+            for (const elm of lockerRadios) {
+                // 자리가 선택되었으면 true를 반환
+                if (elm.checked) return true;
             }
+            return false;
         }
-        return false;
+
+        // 자리가 선택되지 않았을 때,
+        <c:choose>
+        <c:when test="${hasLocker}">
+        return true; // 이미 사물함을 사용 중이므로 true를 반환
+        </c:when>
+        <c:otherwise>
+        return false; // 자리가 선택되지 않았으므로 false를 반환
+        </c:otherwise>
+        </c:choose>
     }
 </script>
 </body>
