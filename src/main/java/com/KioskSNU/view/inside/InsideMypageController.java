@@ -1,5 +1,6 @@
 package com.KioskSNU.view.inside;
 
+import com.KioskSNU.interceptor.InsideLoginRequired;
 import com.KioskSNU.secure.RSA;
 import com.KioskSNU.secure.SHA;
 import com.KioskSNU.snu.dto.AccountDTO;
@@ -32,6 +33,7 @@ public class InsideMypageController {
     private  final PaymentService paymentService;
 
     @RequestMapping("/mypage") // 새로 추가된 메서드
+    @InsideLoginRequired
     public ModelAndView insideMypage(@RequestParam(required = false) String checkPW, HttpSession session) {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("inside/inside_mypage");
@@ -59,6 +61,7 @@ public class InsideMypageController {
 
     //비밀번호 수정
     @PostMapping("/mypage/changepwd")
+    @InsideLoginRequired
     public ModelAndView changePassword(AccountDTO accountDTO, HttpSession session) throws NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
         ModelAndView mav = new ModelAndView();
         try {
@@ -90,6 +93,7 @@ public class InsideMypageController {
     }
 
     @PostMapping("/mypage/changephone")
+    @InsideLoginRequired
     public ModelAndView changePhoneNumber(@RequestParam String phoneNumber, HttpSession session) {
         ModelAndView mav = new ModelAndView();
         AccountDTO accountDTO;

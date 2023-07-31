@@ -1,5 +1,6 @@
 package com.KioskSNU.view.outside;
 
+import com.KioskSNU.interceptor.OutsideLoginRequired;
 import com.KioskSNU.snu.dto.AccountDTO;
 import com.KioskSNU.snu.dto.ChallengeDTO;
 import com.KioskSNU.snu.dto.ParticipationChallengeDTO;
@@ -29,6 +30,7 @@ public class OutsideChallengeController {
     private final ParticipationChallengeService participationChallengeService;
 
     @RequestMapping("/list")
+    @OutsideLoginRequired
     public ModelAndView list(){
         ModelAndView mav = new ModelAndView();
 
@@ -43,12 +45,14 @@ public class OutsideChallengeController {
     }
 
     @GetMapping("/add")
+    @OutsideLoginRequired
     public String getAdd() {
         return "outside/end";
     }
 
 
     @PostMapping("/add")
+    @OutsideLoginRequired
     public ModelAndView addChallenge(@RequestParam("selectedChallengeId") Integer selectedChallengeId, HttpSession session) {
         ModelAndView mav = new ModelAndView();
         try {

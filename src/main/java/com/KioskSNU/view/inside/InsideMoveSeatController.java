@@ -1,5 +1,6 @@
 package com.KioskSNU.view.inside;
 
+import com.KioskSNU.interceptor.InsideLoginRequired;
 import com.KioskSNU.snu.dto.AccountDTO;
 import com.KioskSNU.snu.dto.UsageCommutationTicketDTO;
 import com.KioskSNU.snu.dto.UsageSeatDTO;
@@ -29,6 +30,7 @@ public class InsideMoveSeatController {
     private final UsageCommutationTicketService usageCommutationTicketService;
 
     @RequestMapping("/inside/move")
+    @InsideLoginRequired
     public ModelAndView getProcess(String type, Integer number, HttpSession session) {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("inside/inside_moveSeat");

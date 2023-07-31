@@ -1,5 +1,6 @@
 package com.KioskSNU.view.outside;
 
+import com.KioskSNU.interceptor.OutsideLoginRequired;
 import com.KioskSNU.secure.RSA;
 import com.KioskSNU.snu.dto.AccountDTO;
 import com.KioskSNU.snu.dto.ParticipationChallengeDTO;
@@ -22,6 +23,7 @@ public class OutsidePaymentController {
     private final ParticipationChallengeService participationChallengeService;
 
     @RequestMapping("/outside/payment")
+    @OutsideLoginRequired
     public ModelAndView process(HttpSession session) {
         ModelAndView mav = new ModelAndView();
 
@@ -33,6 +35,7 @@ public class OutsidePaymentController {
     }
 
     @RequestMapping("/outside/paymentSuccess")
+    @OutsideLoginRequired
     public ModelAndView successProcess(HttpSession session) {
         ModelAndView mav = new ModelAndView();
 
