@@ -12,6 +12,7 @@ public class OutsideLoginInterceptor implements HandlerInterceptor {
 
     /**
      * 외부 사용자 로그인 확인 인터셉터
+     * 선택된 자리가 있는지 확인
      * 해당 컨트롤러가 OutsideLoginRequired 어노테이션을 가지고 있는지 확인
      * @return 로그인이 되어있으면, 혹은 로그인이 필요하지 않으면 true, 아니면 false
      */
@@ -21,10 +22,17 @@ public class OutsideLoginInterceptor implements HandlerInterceptor {
         if (((HandlerMethod) handler).getMethodAnnotation(OutsideLoginRequired.class) == null) return true;
 
         HttpSession session = request.getSession();
+
+        if (session.getAttribute("selectNumber") == null) {
+            response.sendRedirect("/outside/logout");
+            return false;
+        }
+
         if (session.getAttribute("author") == null) {
             response.sendRedirect(LOGIN_URI);
             return false;
         }
+
         return true;
     }
 }
