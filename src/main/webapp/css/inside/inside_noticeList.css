@@ -86,5 +86,8 @@ tr{
     color: #383838;
 }
 td{
-    font-size: 20px;
+    font-size: 18px;
+}
+.date{
+    font-size: 15px;
 }
