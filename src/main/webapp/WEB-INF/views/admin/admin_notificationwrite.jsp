@@ -15,9 +15,9 @@
                     <h4>공지사항 작성</h4>
                     <form action="${pageContext.request.contextPath}/admin/adminnotificationwrite" method="post">
                         <div class="form-group">
-						    <label for="title">제목</label>
-						    <textarea class="form-control form-control-lg" id="title" name="title" rows="1"></textarea>
-						</div>
+                            <label for="title">제목</label>
+                            <textarea class="form-control form-control-lg" id="title" name="title" rows="1"></textarea>
+                        </div>
 
                         <div class="form-group">
                             <label for="notice">공지 내용</label>
@@ -35,10 +35,6 @@
         </div>
     </div>
 </div>
-   	
-
-
-
 
 
 <!-- 부트스트랩 및 jQuery 스크립트 -->
@@ -54,15 +50,6 @@
     }else {
         outsideCheckbox.checked = false;
     }
-
-    // 등록이 완료되었을 때 알림 창 띄우기
-    function showNotification() {
-        alert("등록되었습니다");
-    }
-
-    // 등록 버튼을 눌렀을 때 알림 창 띄우기
-    const submitButton = document.querySelector("button[type='submit']");
-    submitButton.addEventListener("click", showNotification);
 
 </script>
 

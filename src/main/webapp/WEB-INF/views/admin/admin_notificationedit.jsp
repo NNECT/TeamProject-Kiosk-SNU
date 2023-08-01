@@ -24,7 +24,7 @@
                             <textarea class="form-control form-control-lg" id="notice" name="content" rows="5">${notice.content}</textarea>
                         </div>
                         <div class="text-center">
-                            <button type="submit" class="btn btn-primary ">수정</button>
+                            <button type="submit" id="editNotice" class="btn btn-primary ">수정</button>
                         </div>
                         <div class="float-right">
                             <span><em>외부 키오스크 공지시 체크</em></span>
@@ -54,14 +54,15 @@
         outsideCheckbox.checked = false;
     }
 
-    // 수정이 완료되었을 때 알림 창 띄우기
-    function showNotification() {
-        alert("수정되었습니다");
-    }
-
     // 수정 버튼을 눌렀을 때 알림 창 띄우기
-    const submitButton = document.querySelector("button[type='submit']");
-    submitButton.addEventListener("click", showNotification);
+    $('#editNotice').off("click").on("click", function (e) {
+        const confirmed = confirm("수정하시겠습니까?");
+        if (!confirmed){
+            e.preventDefault();
+        }else{
+            alert("수정되었습니다.");
+        }
+    });
 
 </script>
 
