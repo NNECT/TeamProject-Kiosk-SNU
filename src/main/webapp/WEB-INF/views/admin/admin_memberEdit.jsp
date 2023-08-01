@@ -12,7 +12,7 @@
                 <div class="card-body text-center">
                     <h2 class="card-title">회원정보 수정</h2>
                     <hr>
-                    <form id ="form" action="${pageContext.request.contextPath}/admin/adminmemberedit?id=${member.id}" method="post" onsubmit="return showNotificationOnSubmit()">
+                    <form id ="form" action="${pageContext.request.contextPath}/admin/adminmemberedit?id=${member.id}" method="post">
                         <table class="table">
                             <tr>
                                 <th>회원번호:</th>
@@ -37,7 +37,7 @@
                             </tr>
                             <tr>
                                 <th>남은 시간:</th>
-                                <td><input type="text" name="usageTicket" value="${member.remainTime}" readonly></td>
+                                <td><input type="text" name="usageTicket" value="${member.remainTime}"></td>
                             </tr>
                             <tr>
                                 <th>사용중인 사물함 번호:</th>
@@ -49,7 +49,7 @@
                             </tr>
                             <tr>
                                 <th>포인트:</th>
-                                <td><input type="text" name="point" value="${member.point}" readonly></td>
+                                <td><input type="text" name="point" value="${member.point}"></td>
                             </tr>
                         </table>
                         <button id="edit" type="submit">수정</button>
@@ -66,18 +66,25 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
 
-    function showNotificationOnSubmit() {
-        if (confirm("수정하시겠습니까?")) {
+    // 수정 버튼을 눌렀을 때 알림 창 띄우기
+    $('#edit').on("click", function (e) {
+        const confirmed = confirm("수정하시겠습니까?");
+        if (confirmed){
             alert("수정되었습니다.");
-            return true; // 폼 제출 진행
-        } else {
-            return false; // 폼 제출 중단
+        }else{
+            e.preventDefault();
         }
-    }
+    });
 
     // "비밀번호 리셋" 버튼 클릭 이벤트
-    $('#passwordReset').off("click").on("click", function () {
-        location.href = "<c:url value='/admin/memberPasswordReset'/>?id=${member.id}";
+    $('#passwordReset').on("click", function (e) {
+        const confirmed = confirm("비밀번호를 초기화하시겠습니까?");
+        if (confirmed){
+            location.href = "<c:url value='/admin/memberPasswordReset'/>?id=${member.id}";
+            alert("비밀번호가 초기화되었습니다.");
+        }else{
+            e.preventDefault();
+        }
     });
 
 </script>

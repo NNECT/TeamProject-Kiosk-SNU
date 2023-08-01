@@ -19,8 +19,8 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-body text-center">
-                     <h2 class="card-title" style="margin-bottom: 20px">공지사항</h2>
-                     <!-- 공지사항 목록 -->
+                    <h2 class="card-title" style="margin-bottom: 20px">공지사항</h2>
+                    <!-- 공지사항 목록 -->
                     <table id="example" class="display" style="width:100%;">
                         <thead>
                         <tr style="background-color: lightblue;">
@@ -57,5 +57,10 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="<c:url value="/js/deleteNotice.js"/>"></script>
 <script src="<c:url value="/js/adminNotice.js"/>"></script>
+<script>
+    if(${noticeRegistered}){
+        alert("등록되었습니다.");
+    }
+</script>
 </body>
 </html>

@@ -3,9 +3,9 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<c:import url="../headerFooterForm/headerFooterForm_adminHeader.jsp"/>
-<link rel="stylesheet" href="<c:url value="/css/admin/admin_locker.css"/>">
-<title>스터디카페 관리자 페이지</title>
+	<c:import url="../headerFooterForm/headerFooterForm_adminHeader.jsp"/>
+	<link rel="stylesheet" href="<c:url value="/css/admin/admin_locker.css"/>">
+	<title>스터디카페 관리자 페이지</title>
 </head>
 
 <body>
@@ -181,8 +181,9 @@
 						const lockerActivationBtn = $("#lockerActivationBtn");
 						lockerActivationBtn.text(response.lockerActivation ? '비활성화' : '활성화');
 						lockerActivationBtn.val(response.lockerActivation ? '비활성화' : '활성화');
+						// 사용하지 않는 사물함만 버튼 활성화
 						if (response.memberRemainTime==="") {
-							lockerActivationBtn.show(); // 활성화 상태인 경우 보여줍니다.
+							lockerActivationBtn.show();
 							lockerActivationBtn.off("click").on("click", function () {
 								const lockerActivation = response.lockerActivation;
 								const confirmMsg = lockerActivation ? "해당 사물함을 비활성화하시겠습니까?" : "해당 사물함을 활성화하시겠습니까?";
@@ -192,7 +193,7 @@
 								}
 							});
 						} else {
-							lockerActivationBtn.hide(); // 비활성화 상태인 경우 숨깁니다.
+							lockerActivationBtn.hide();
 						}
 
 						// 모달 창을 띄웁니다.

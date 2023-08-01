@@ -93,7 +93,7 @@
                             <button type="button" id="edit" class="float-right updateMember">수정</button>
                         </td>
                         <td>
-                            <button type="button" id="delete" class="deleteMember">삭제</button>
+                            <button type="button" id="delete" class="deleteMember">탈퇴</button>
                         </td>
                     </tr>
                 </table>

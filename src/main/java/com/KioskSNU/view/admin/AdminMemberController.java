@@ -118,7 +118,7 @@ public class AdminMemberController {
     @AdminLoginRequired
     public ModelAndView passwordReset(AccountDTO accountDTO) throws NoSuchAlgorithmException {
         ModelAndView mav = new ModelAndView();
-        
+
         //넘어온 id로 유저 찾기
         AccountDTO getUser = accountService.getById(accountDTO.getId());
 
@@ -129,7 +129,7 @@ public class AdminMemberController {
         getUser.setPassword(sha.encrypt(modifiedPhoneNum));
         accountService.update(getUser);
 
-        mav.setViewName("admin/admin_member");
+        mav.setViewName("redirect:/admin/adminmember");
 
         return mav;
     }
