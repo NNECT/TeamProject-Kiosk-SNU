@@ -6,7 +6,9 @@
   * IntelliJ
   * Java JDK 11.0.18
   * Apache Tomcat 8.5.88
-  * MySQL 8.0
+  * MySQL 8.0.33
+  * Spring 5.3.28
+    
 * Git 미포함 파일
   * src\main\resources\config\database.properties
     * 데이터베이스 연결을 위한 프로퍼티 파일
