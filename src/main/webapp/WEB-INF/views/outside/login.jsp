@@ -64,11 +64,14 @@
             <input type="button" id="modalCheckBtn" value="확인">
         </div>
     </div>
+
     <!--중복 자리선택시 모달-->
     <div id="seatModal">
         <div class="modalContent">
             <p class="modalP">
+
                 이미<strong class="modalStrong">${duplicatedNum}번자리</strong>를 <strong class="modalStrong">사용중</strong>입니다.<br>
+
                 현재 선택하신 자리를 사용하고 싶으시면 <br>
                 <strong class="modalStrong">내부키오스크에서 로그아웃 후 진행</strong><br>해주세요.
             </p>
