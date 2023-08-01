@@ -48,7 +48,7 @@
     display: none;
     position: absolute;
     top: 200px;
-    left: 412px;
+    left: 100px;
     z-index: 10;
 }
 .modalContent{
@@ -69,7 +69,7 @@
 }
 .modalBtn{
     position: relative;
-    top: 20px;
+    top: 28px;
 }
 #modalNoBtn{
     width: 150px;
