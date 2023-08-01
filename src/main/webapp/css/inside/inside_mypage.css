@@ -1,120 +1,285 @@
-
-@media only screen and (min-device-width : 768px) and (max-device-width : 1023px) {
-
-}
-.body{
-    background-color: #ffffff ;
-    position: relative;
+.modalBg{
     width: 1024px;
     height: 768px;
-    border: 1px solid red;
-}
-/*before*/
-img{
+    background-color: rgba(195, 195, 195, 40%);
+    display: none;
     position: relative;
-    top: 40px;
-    left: 70px;
-    width: 30px;
-    height: 30px;
+    z-index: 4;
+    top: -769px;
 }
-/**/
-#allWrap{
-    width: 700px;
-    height: 768px;
-    border: 0px solid red;
-    position: absolute;
 
-    top: 0px;
-    left: 50%;
-    transform: translate(-50%,0);
+/*modal 1*/
+#modalPage{
+    width: 400px;
+    height: 420px;
+    background-color: #ffffff;
+    box-shadow: 0 3px 10px 3px #7C7D7D;
+    border-radius: 25px;
+    display: none;
+    position: relative;
+    z-index: 5;
+    top: -1400px;
+    left: 312px;
+}
 
-    text-align: center;
+.modalContent{
+    margin: 0 50px;
+    width: 300px;
+    height: 300px;
+    border: 1px solid #ffffff ;
 }
-#title{
-    font-size: 25px;
-    margin-top: 40px;
-}
-/**/
-.tr{
-    margin: auto; padding: 0;
-    width: 500px;
-    height: 50px;
-    border: 0px solid green;
-    margin-bottom: 15px;
-}
-/**/
-#contentBox{
-    width: 500px;
-    height: 600px;
-    margin:0 100px;
-    border: 0px solid blue;
-    text-align: left;
-}
-.content{
-    display: inline-block;
+.modalP{
+    margin-top: 60px;
     font-size: 20px;
     color: #383838;
-    line-height: 25px;
-    float: left;
+}
+.modalSpan{
+    font-weight: bold;
+    color: #285FF5;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+#modalHr{
+    border: 1px solid #707070;
+}
+/*input*/
+.first{
+    margin-top: 15px;
+    padding-left: 10px;
+    width: 200px;
+    height: 36px;
+    border: 1px solid #285FF5;
+    border-radius: 7px;
 
 }
-
-.border{
-    width: 410px;
-    height: 50px;
-    display: inline-block;
-    border: 0px solid gray;
-    border-bottom: 1.5px solid #E4E4E4;
-    margin-left: 15px;
-    float: left;
+.modalCheckBtn{
+    width: 80px;
+    height: 39px;
+    background-color: #285FF5;
+    border-radius: 7px;
+    border: none;
+    font-size: 18px;
+    color: white;
 }
-.fullborder{
-    width: 480px;
-    height: 50px;
-    display: inline-block;
-    border: 0px solid gray;
-    border-bottom: 1.5px solid #E4E4E4;
-    margin-left: 0px;
+.second{
+    margin-top: 10px;
+    padding-left: 10px;
+    width: 283px;
+    height: 36px;
+    border: 1px solid #285FF5;
+    border-radius: 7px;
 }
-/*span*/
-.showText{
-    margin-top: 13px;
-    font-size: 23px;
-    display: inline-block;
-    color: #383838;
-    width: 300px;
-    height: 20px;
-    border: 0px solid brown;
-    text-align: center;
-
+.third{
+    margin-top: 10px;
+    padding-left: 10px;
+    width: 283px;
+    height: 36px;
+    border: 1px solid #285FF5;
+    border-radius: 7px;
 }
 /*btn*/
-.btn{
+.modalBtn{
+    margin-top: 39px;
+    width: 400px;
+    height: 80px;
+    /*border: 0 solid red;*/
+}
+.modalNoBtn{
+    width: 20px;
+    height: 20px;
+    position: relative;
+    top: 20px;
+    margin-left: -50px;
+}
+.modalYesBtn{
+    width: 400px;
+    height: 60px;
     border: none;
+    border-radius: 0 0 25px 25px;
     background-color: #285FF5;
+    position: relative;
+    font-size: 20px;
     color: #ffffff;
-    font-size: 17px;
-    float: right;
-    margin-top: 10px;
-}
-.telBtn{
-    width: 80px;
-    height: 35px;
-    border-radius: 10px;
-}
-.passBtn{
-    width: 80px;
-    height: 35px;
-    border-radius: 10px;
-}
-.ticketBtn{
-    width: 90px;
-    height: 35px;
-    border-radius: 10px;
-}
-.challBtn{
-    width: 90px;
-    height: 35px;
-    border-radius: 10px;
 }
 
+/*modal2*/
+#rePasswordModal{
+    width: 400px;
+    height: 420px;
+    background-color: #ffffff;
+    box-shadow: 0 3px 10px 3px #7C7D7D;
+    border-radius: 25px;
+    display: none;
+    position: relative;
+    z-index: 5;
+    top: -1400px;
+    left: 312px;
+}
+.reModalNoBtn{
+    width: 150px;
+    height: 80px;
+    border: none;
+    border-radius: 0 0 0 25px;
+    background-color: #C3C3C3;
+    float: left;
+    font-size: 20px;
+    color: #ffffff;
+}
+#modalNextBtn{
+    width: 250px;
+    height: 80px;
+    border: none;
+    border-radius: 0 0 25px 0;
+    background-color: #285FF5;
+    float: right;
+    font-size: 20px;
+    color: #ffffff;
+}
+
+/*modal3*/
+#newPasswordModal{
+    width: 400px;
+    height: 420px;
+    background-color: #ffffff;
+    box-shadow: 0 3px 10px 3px #7C7D7D;
+    border-radius: 25px;
+    display: none;
+    position: relative;
+    z-index: 5;
+    top: -1400px;
+    left: 312px;
+}
+/*modal4*/
+
+.finishModalBtn{
+    width: 400px;
+    height: 60px;
+    border: none;
+    border-radius: 0 0 25px 25px;
+    background-color: #285FF5;
+    position: relative;
+    margin-top: 15px;
+    font-size: 20px;
+    color: #ffffff;
+}
+
+/*payment*/
+#paymentModal{
+    width: 600px;
+    height: 500px;
+    background-color: #ffffff;
+    box-shadow: 0 3px 10px 3px #7C7D7D;
+    border-radius: 25px;
+    display: none;
+    position: relative;
+    z-index: 5;
+    top: -1400px;
+    left: 200px;
+}
+
+.modalContent2{
+    margin: 0 50px;
+    width: 500px;
+    height: 400px;
+    border: 1px solid #ffffff;
+}
+.modalP{
+    margin-top: 30px;
+    font-size: 20px;
+    color: #383838;
+}
+.modalSpan{
+    font-weight: bold;
+    color: #285FF5;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+#modalHr{
+    border: 1px solid #707070;
+}
+
+
+/*btn*/
+
+#cancelPayment{
+    width: 600px;
+    height: 60px;
+    border: none;
+    border-radius: 0 0 25px 25px;
+    background-color: #285FF5;
+    position: relative;
+    top: 38px;
+    font-size: 20px;
+    color: #ffffff;
+}
+
+
+/*challenge*/
+#challengeModal{
+    width: 600px;
+    height: 500px;
+    background-color: #ffffff;
+    box-shadow: 0 3px 10px 3px #7C7D7D;
+    border-radius: 25px;
+    display: none;
+    position: relative;
+    z-index: 5;
+    top: -1400px;
+    left: 200px;
+}
+#cancelChallenge{
+    width: 600px;
+    height: 60px;
+    border: none;
+    border-radius: 0 0 25px 25px;
+    background-color: #285FF5;
+    position: relative;
+    top: 38px;
+    font-size: 20px;
+    color: #ffffff;
+}
+
+
+/*#challengeModal td, #challengeModal th {*/
+/*    !* 원하는 스타일을 지정하세요 *!*/
+/*    padding: 10px;*/
+/*    text-align: center;*/
+/*    border: 1px solid #ccc;*/
+/*}*/
+th {
+    padding: 10px;
+    text-align: center;
+    background-color: #285FF5; /* 날짜, 이름, 결과 열의 배경색 설정 */
+    color: white; /* 텍스트 색상 설정 */
+    width: 150px; /* 날짜 열의 너비 설정 */
+    border: 1px solid #ccc;
+}
+
+/* 테이블 데이터 스타일 */
+td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+
+#changePwdPhone{
+    letter-spacing: 6px;
+    text-align: center;
+}
+#changePwdPhone::placeholder {
+    letter-spacing: normal;
+    text-align: left;
+}
+
+#phoneNumberInput{
+    letter-spacing: 6px;
+    text-align: center;
+}
+#phoneNumberInput::placeholder {
+    letter-spacing: normal;
+    text-align: left;
+}
