@@ -37,3 +37,55 @@
     background-color: #F52828;
     color: #ffffff;
 }
+
+/*사리선택 중복 모달*/
+#seatModal{
+    width: 300px;
+    height: 188px;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 3px 40px 5px #707070;
+    display: none;
+    position: absolute;
+    top: 200px;
+    left: 412px;
+    z-index: 10;
+}
+.modalContent{
+    width: 280px;
+    height: 100px;
+    border :0px solid red;
+    margin-left: 10px;
+    text-align: center;
+    position: relative;
+    top: 20px;
+}
+.modalP{
+    font-size: 18px;
+    color: #707070;
+}
+.modalStrong{
+    color: #285FF5;
+}
+.modalBtn{
+    position: relative;
+    top: 20px;
+}
+#modalNoBtn{
+    width: 150px;
+    height: 50px;
+    border: none;
+    border-radius: 0 0 0 20px ;
+    background-color: #C3C3C3;
+    color: #ffffff;
+    float: left;
+}
+#modalYesBtn{
+    width: 150px;
+    height: 50px;
+    border: none;
+    border-radius: 0 0  20px 0;
+    background-color: #285FF5;
+    color: #ffffff;
+    float: right;
+}

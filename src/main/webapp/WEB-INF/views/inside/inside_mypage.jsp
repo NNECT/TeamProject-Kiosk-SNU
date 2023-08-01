@@ -90,7 +90,7 @@
             <!--페스워드 확인이 되야 전화번호 변경가능-->
             <input type="text" id="phoneNumberInput" class="first" placeholder="변경할 전화번호를 입력해주세요" maxlength="13">
             <input type="button" class="modalCheckBtn" id=phoneNumber value="전송" onclick="codeSend()"><br>
-            <span id="codeSendCheck"></span><!--안내문구-->
+            <span id="codeSendCheck"></span><!--안내문구--><br>
             <input type="text" id="codeInput" class="first" placeholder="인증번호를 입력해주세요">
             <input type="button" class="modalCheckBtn" id=code value="확인" onclick="codeCheck()"><br>
             <span id="codeCheck"></span><!--안내문구-->
@@ -114,7 +114,7 @@
             <hr class="modalHr">
             <input type="text" name="" id="changePwdPhone" class="first" placeholder="전화번호를 입력해주세요" maxlength="13">
             <input type="button" class="modalCheckBtn" value="인증" onclick="changePwdCodeSend()"><br>
-            <span id="changePwdText1"></span><!--안내문구-->
+            <span id="changePwdText1"></span><!--안내문구--><br>
 
             <!--인증번호 확인이 되야 전화번호 변경가능-->
             <input type="text" id="checkCode" class="first" placeholder="인증번호를 입력해주세요">
@@ -144,7 +144,7 @@
             <span id="changePasswordText"></span><!--안내문구-->
         </div>
         <div id="modalBtn">
-        <input type="submit" id="changePwdBtn" style="display: none" class="finishModalBtn" value="변경">
+        <input type="submit" id="changePwdBtn" class="finishModalBtn" value="변경">
 
         </div>
     </form>
