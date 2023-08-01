@@ -13,6 +13,11 @@ public class GlobalExceptionHandler {
     public ModelAndView handleAllErrors(HttpServletRequest request, HttpServletResponse response, Exception ex) {
         int status = response.getStatus();
         String path = request.getRequestURI();
+        String contextPath = request.getContextPath();
+
+        if (path.startsWith(contextPath)) {
+            path = path.substring(contextPath.length());  // application context 제거
+        }
 
         ModelAndView mav = new ModelAndView();
         mav.addObject("errorCode", status);
