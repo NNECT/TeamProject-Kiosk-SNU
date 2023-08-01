@@ -65,6 +65,19 @@
         </div>
     </div>
     <!-- 모달 -->
+    <!--중복 자리선택시 모달-->
+    <div id="seatModal">
+        <div class="modalContent">
+            <p class="modalP">
+                이미<strong class="modalStrong">00번자리</strong>를 <strong class="modalStrong">사용중</strong>입니다.<br>
+                현재 선택하신 자리를 사용하고 싶으시면 <br>
+                <strong class="modalStrong">내부키오스크에서 로그아웃 후 진행</strong><br>해주세요.
+            </p>
+        </div>
+        <div class="modalBtn">
+            <input type="button" id="modalYesBtn" value="확인">
+        </div>
+    </div>
 </section>
 <script src="<c:url value="/js/jsencrypt.min.js"/>"></script>
 <script>
@@ -116,18 +129,6 @@
     }
 
 </script>
-    <!--중복 자리선택시 모달-->
-    <div id="seatModal">
-        <div class="modalContent">
-            <p class="modalP">
-                이미<strong class="modalStrong">00번자리</strong>를 <strong class="modalStrong">사용중</strong>입니다.<br>
-                현재 선택하신 자리를 사용하고 싶으시면 <br>
-                <strong class="modalStrong">내부키오스크에서 로그아웃 후 진행</strong><br>해주세요.
-            </p>
-        </div>
-        <div class="modalBtn">
-            <input type="button" id="modalYesBtn" value="확인">
-        </div>
-    </div>
+
 </body>
 </html>
