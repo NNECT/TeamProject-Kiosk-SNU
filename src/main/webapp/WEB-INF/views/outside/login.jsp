@@ -64,12 +64,14 @@
             <input type="button" id="modalCheckBtn" value="확인">
         </div>
     </div>
-    <!-- 모달 -->
+
     <!--중복 자리선택시 모달-->
     <div id="seatModal">
         <div class="modalContent">
             <p class="modalP">
-                이미<strong class="modalStrong">00번자리</strong>를 <strong class="modalStrong">사용중</strong>입니다.<br>
+
+                이미<strong class="modalStrong">${duplicatedNum}번자리</strong>를 <strong class="modalStrong">사용중</strong>입니다.<br>
+
                 현재 선택하신 자리를 사용하고 싶으시면 <br>
                 <strong class="modalStrong">내부키오스크에서 로그아웃 후 진행</strong><br>해주세요.
             </p>
@@ -78,6 +80,7 @@
             <input type="button" id="modalYesBtn" value="확인">
         </div>
     </div>
+
 </section>
 <script src="<c:url value="/js/jsencrypt.min.js"/>"></script>
 <script>
@@ -128,7 +131,19 @@
         });
     }
 
+    var duplicatedID = "${duplicatedID}";
+    if (duplicatedID === "duplicatedID") {
+        //중복로그인 check
+        var seatModal = document.getElementById("seatModal");
+        seatModal.style.display = "block";
+        //모달창 확인버튼 눌러주면 다시 비활성화
+        var modalBtn = document.getElementById("modalYesBtn");
+        modalBtn.addEventListener("click", function () {
+            seatModal.style.display = "none";
+        });
+    }
 </script>
+
 
 </body>
 </html>
