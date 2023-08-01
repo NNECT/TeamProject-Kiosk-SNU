@@ -20,7 +20,9 @@ import javax.crypto.NoSuchPaddingException;
 import javax.servlet.http.HttpSession;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Controller
 @RequiredArgsConstructor
@@ -86,7 +88,7 @@ public class OutsideLoginController {
         //회원목록에서 username없으면 로그인 화면으로
         if (accountService.getByUsername(accountDTO.getUsername()) == null) {
             mav.addObject("publicKey", rsa.getPublicKey());
-            mav.addObject("loginFail","loginFail");
+            mav.addObject("loginFail", "loginFail");
             mav.setViewName("/outside/login");
             return mav;
         }
@@ -94,20 +96,60 @@ public class OutsideLoginController {
         //비밀번호가 틀리면
         if (!accountService.getByUsername(accountDTO.getUsername()).getPassword().equals(sha.encrypt(rsa.decrypt(accountDTO.getPassword())))) {
             mav.addObject("publicKey", rsa.getPublicKey());
-            mav.addObject("loginFail","loginFail");
+            mav.addObject("loginFail", "loginFail");
             mav.setViewName("/outside/login");
             return mav;
         }
 
-        //로그인성공 (세션에 author 이름으로 account 정보 저장)
+
+        //로그인과정 (세션에 author 이름으로 account 정보 저장)
         AccountDTO getUser = accountService.getByUsername(accountDTO.getUsername());
-        session.setAttribute("author", getUser);
+        boolean isDuplicatedID = false;
         switch ((String) session.getAttribute("selectType")) {
             case "seat":
+                //중복로그인 확인
+                for(Map.Entry<Integer, UsageSeatDTO> entry : seatMap.entrySet()){
+                    int num = entry.getKey();
+                    UsageSeatDTO info = entry.getValue();
+                    if(info.getAccount_id() == getUser.getId()){
+                        isDuplicatedID = true;
+                        mav.addObject("duplicatedNum",num);
+                        break;
+                    }
+                }
+                //이미 로그인되어 있는 정보가 있으면 login 페이지로 다시 이동
+                if(isDuplicatedID){
+                    mav.addObject("duplicatedID","duplicatedID");
+                    mav.addObject("publicKey", rsa.getPublicKey());
+                    mav.setViewName("/outside/login");
+                    return mav;
+                }
+                //로그인성공 (세션에 author 이름으로 account 정보 저장)
+                session.setAttribute("author", getUser);
                 mav.setViewName("redirect:/outside/having");
                 seatMap.get((int) session.getAttribute("selectNumber")).setAccountDTO(getUser);
                 break;
+
             case "room":
+                //중복로그인 확인
+                for(Map.Entry<Integer, UsageRoomDTO> entry : roomMap.entrySet()){
+                    int num = entry.getKey();
+                    UsageRoomDTO info = entry.getValue();
+                    if(info.getAccount_id() == getUser.getId()){
+                        isDuplicatedID = true;
+                        mav.addObject("duplicatedNum",num);
+                        break;
+                    }
+                }
+                //이미 로그인되어 있는 정보가 있으면 login 페이지로 다시 이동
+                if(isDuplicatedID){
+                    mav.addObject("duplicatedID","duplicatedID");
+                    mav.addObject("publicKey", rsa.getPublicKey());
+                    mav.setViewName("/outside/login");
+                    return mav;
+                }
+                //로그인 성공
+                session.setAttribute("author", getUser);
                 mav.setViewName("redirect:/outside/ticket/room");
                 roomMap.get((int) session.getAttribute("selectNumber")).setAccountDTO(getUser);
                 break;
