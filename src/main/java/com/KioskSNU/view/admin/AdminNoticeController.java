@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -59,12 +60,16 @@ public class AdminNoticeController {
     public ModelAndView insertNotice(@RequestParam(name = "outside", required = false) String outside, NoticeDTO noticeDTO){
 
         ModelAndView mav = new ModelAndView();
+        List<NoticeDTO> list = noticeService.getAllByOutside(true);
 
         if ("on".equals(outside)) {
-            // 체크박스가 체크되었을 때
+            // 새로운 공지가 외부공지로 선택되면 이전 외부공지를 모두 해제
+            list.forEach(notice -> {
+                notice.setOutside(false);
+                noticeService.update(notice);
+            });
             noticeDTO.setOutside(true);
         } else {
-            // 체크박스가 체크되지 않았을 때
             noticeDTO.setOutside(false);
         }
 
@@ -83,15 +88,21 @@ public class AdminNoticeController {
     @PostMapping("/admin/adminnotification")
     @AdminLoginRequired
     public ModelAndView updateNotice(@RequestParam(name = "outside", required = false) String outside, NoticeDTO noticeDTO){
+
         ModelAndView mav = new ModelAndView();
+        List<NoticeDTO> list = noticeService.getAllByOutside(true);
 
         if ("on".equals(outside)) {
-            // 체크박스가 체크되었을 때
+            // 새로운 공지가 외부공지로 선택되면 이전 외부공지를 모두 해제
+            list.forEach(notice -> {
+                notice.setOutside(false);
+                noticeService.update(notice);
+            });
             noticeDTO.setOutside(true);
         } else {
-            // 체크박스가 체크되지 않았을 때
             noticeDTO.setOutside(false);
         }
+
         noticeDTO.setDateTime(LocalDateTime.now());
         noticeService.update(noticeDTO);
 
