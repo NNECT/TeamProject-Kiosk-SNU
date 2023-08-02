@@ -25,7 +25,7 @@
     </head>
         <body>
             <div id="body">
-                <a href="inside_noticeList.jsp"><img src="<c:url value="/img/inside/beforBtn.png"/>" alt=""></a>
+                <a href="<c:url value="/inside/notice"/>"><img src="<c:url value="/img/inside/beforBtn.png"/>" alt=""></a>
 
                 <section id="allWrap"><!--전체 감싸는 박스-->
                     <p id="title">공지사항</p>
@@ -33,10 +33,10 @@
                     <div id="tableWrap">
                         <table>
                             <div id="trTitle">
-                                <div id="noticeTitle">23번자리 사용금지</div><div id="writer"><span>작성자:</span>관리자</div><div id="date"><span>등록일:</span>2023-03-15</div>
+                                <div id="noticeTitle">${notice.title}</div><div id="writer"><span>작성자:</span>관리자</div><div id="date" style="font-size: 15px; margin-left: 20px"><span>등록일:</span>${notice.dateTime}</div>
                             </div>
-                            <div id="content"><!--반복분 부분-->
-                                <p>ddddddddddddddd</p>
+                            <div id="content">
+                                <p>${notice.content}</p>
                             </div>
                         </table>
                     </div>
