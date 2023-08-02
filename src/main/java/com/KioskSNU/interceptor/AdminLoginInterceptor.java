@@ -22,7 +22,7 @@ public class AdminLoginInterceptor implements HandlerInterceptor {
 
         HttpSession session = request.getSession();
         if (session.getAttribute("admin") == null) {
-            response.sendRedirect(LOGIN_URI);
+            response.sendRedirect(request.getContextPath() + LOGIN_URI);
             return false;
         }
         return true;

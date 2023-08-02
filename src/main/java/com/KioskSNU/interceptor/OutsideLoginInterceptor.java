@@ -24,12 +24,12 @@ public class OutsideLoginInterceptor implements HandlerInterceptor {
         HttpSession session = request.getSession();
 
         if (session.getAttribute("selectNumber") == null) {
-            response.sendRedirect("/outside/logout");
+            response.sendRedirect(request.getContextPath() + "/outside/logout");
             return false;
         }
 
         if (session.getAttribute("author") == null) {
-            response.sendRedirect(LOGIN_URI);
+            response.sendRedirect(request.getContextPath() + LOGIN_URI);
             return false;
         }
 
