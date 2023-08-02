@@ -6,7 +6,7 @@ import com.KioskSNU.snu.dto.AccountDTO;
 import com.KioskSNU.snu.dto.ParticipationChallengeDTO;
 import com.KioskSNU.snu.service.AccountService;
 import com.KioskSNU.snu.service.ParticipationChallengeService;
-import com.KioskSNU.snu.service.PaymentService;
+import com.KioskSNU.snu.service.TicketMapService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,16 +18,16 @@ import javax.servlet.http.HttpSession;
 @RequiredArgsConstructor
 public class OutsidePaymentController {
     private final RSA rsa;
-    private final PaymentService paymentService;
     private final AccountService accountService;
     private final ParticipationChallengeService participationChallengeService;
+    private final TicketMapService ticketMapService;
 
     @RequestMapping("/outside/payment")
     @OutsideLoginRequired
     public ModelAndView process(HttpSession session) {
         ModelAndView mav = new ModelAndView();
 
-        paymentService.setTicketMap(mav.getModelMap(), session);
+        ticketMapService.setTicketModel(mav.getModelMap(), session);
 
         mav.addObject("publicKey", rsa.getPublicKey());
         mav.setViewName("outside/payment");
@@ -67,6 +67,35 @@ public class OutsidePaymentController {
         }
 
         mav.setViewName("outside/paymentSuccess");
+        return mav;
+    }
+
+    @RequestMapping("/outside/payment/cancel")
+    @OutsideLoginRequired
+    public ModelAndView cancelProcess(HttpSession session) {
+        ModelAndView mav = new ModelAndView();
+
+        // 사용권 선택 초기화
+        ticketMapService.clear();
+
+        // 선택 타입에 따라 페이지 이동
+        String selectType = (String) session.getAttribute("selectType");
+        if (selectType == null) {
+            mav.setViewName("redirect:/outside/logout");
+            return mav;
+        }
+        switch (selectType) {
+            case "seat":
+                mav.setViewName("redirect:/outside/ticket/seat");
+                break;
+            case "room":
+                mav.setViewName("redirect:/outside/ticket/room");
+                break;
+            default:
+                mav.setViewName("redirect:/outside/logout");
+                break;
+        }
+
         return mav;
     }
 }

@@ -3,30 +3,28 @@ package com.KioskSNU.view.inside;
 import com.KioskSNU.interceptor.InsideLoginRequired;
 import com.KioskSNU.secure.RSA;
 import com.KioskSNU.snu.dto.UsageRoomDTO;
-import com.KioskSNU.snu.service.PaymentService;
+import com.KioskSNU.snu.service.TicketMapService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
-import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Controller
 @RequiredArgsConstructor
 public class InsidePaymentController {
     private final RSA rsa;
-    private final Map<String, Object> ticketMap;
     private final ConcurrentHashMap<Integer, UsageRoomDTO> roomMap;
-    private final PaymentService paymentService;
+    private final TicketMapService ticketMapService;
 
     @RequestMapping("/inside/payment")
     @InsideLoginRequired
     public ModelAndView process(HttpSession session) {
         ModelAndView mav = new ModelAndView();
 
-        paymentService.setTicketMap(mav.getModelMap(), session);
+        ticketMapService.setTicketModel(mav.getModelMap(), session);
 
         mav.addObject("publicKey", rsa.getPublicKey());
         mav.setViewName("inside/payment");
@@ -38,20 +36,19 @@ public class InsidePaymentController {
     public ModelAndView successProcess(HttpSession session) {
         ModelAndView mav = new ModelAndView();
 
+        int roomTicket = ticketMapService.getRoomTicket();
         // 룸 이용권이면 이용권 정보 업데이트
-        if (ticketMap.containsKey("room")) {
-            int time = (Integer) ticketMap.get("room");
-
+        if (roomTicket > 0) {
             // 자리 번호로 이용권 정보 가져오기
             int insideNumber = (Integer) session.getAttribute("insideNumber");
             UsageRoomDTO usageRoomDTO = roomMap.get(insideNumber);
 
             // 이용권 정보 업데이트
-            usageRoomDTO.setEndDateTime(usageRoomDTO.getStartDateTime().plusHours(time));
+            usageRoomDTO.setEndDateTime(usageRoomDTO.getStartDateTime().plusHours(roomTicket));
         }
 
         // 장바구니 정보 삭제
-        ticketMap.clear();
+        ticketMapService.clear();
 
         mav.setViewName("inside/paymentSuccess");
         return mav;
@@ -59,11 +56,11 @@ public class InsidePaymentController {
 
     @RequestMapping("/inside/cancel")
     @InsideLoginRequired
-    public ModelAndView cancelProcess(HttpSession session) {
+    public ModelAndView cancelProcess() {
         ModelAndView mav = new ModelAndView();
 
         // 장바구니 정보 삭제
-        ticketMap.clear();
+        ticketMapService.clear();
 
         mav.setViewName("redirect:/inside/menu");
         return mav;

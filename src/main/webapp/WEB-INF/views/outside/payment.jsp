@@ -52,7 +52,7 @@
         </div>
         <div name="dot"><img src="<c:url value="/img/dotted.png"/>"></div><!--선-->
         <!--버튼영역-->
-        <button id="beforeBtn">이전</button>
+        <button id="beforeBtn"><a href="<c:url value="/outside/payment/cancel"/>">이전</a></button>
         <button id="payBtn"> <a href="#payChoose"><fmt:formatNumber value="${totalPrice < sessionScope.author.point ? 0 : totalPrice - sessionScope.author.point}" pattern="#,##0"/>원 결제하기</a></button><!--누르면 밑으로 이동-->
     </section>
     <!--다음페이지-->
