@@ -6,6 +6,7 @@ import com.KioskSNU.snu.dto.RoomDTO;
 import com.KioskSNU.snu.dto.TimeTicketDTO;
 import com.KioskSNU.snu.service.CommutationTicketService;
 import com.KioskSNU.snu.service.RoomService;
+import com.KioskSNU.snu.service.TicketMapService;
 import com.KioskSNU.snu.service.TimeTicketService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -16,14 +17,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
 import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/outside/ticket")
 public class OutsideTicketController {
-    private final HashMap<String, Object> ticketMap;
+    private final TicketMapService ticketMapService;
     private final TimeTicketService timeTicketService;
     private final CommutationTicketService commutationTicketService;
     private final RoomService roomService;
@@ -51,7 +51,7 @@ public class OutsideTicketController {
             return mav;
         }
 
-        ticketMap.put("timeTicket", timeTicket);
+        ticketMapService.putTimeTicket(timeTicket);
 
         mav.setViewName("redirect:/outside/locker");
         return mav;
@@ -80,7 +80,7 @@ public class OutsideTicketController {
             return mav;
         }
 
-        ticketMap.put("commutationTicket", commutationTicket);
+        ticketMapService.putCommutationTicket(commutationTicket);
 
         mav.setViewName("redirect:/inside/locker");
         return mav;
@@ -118,7 +118,7 @@ public class OutsideTicketController {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("redirect:/outside/payment");
 
-        ticketMap.put("roomTicket", time);
+        ticketMapService.putRoomTicket(time);
 
         return mav;
     }

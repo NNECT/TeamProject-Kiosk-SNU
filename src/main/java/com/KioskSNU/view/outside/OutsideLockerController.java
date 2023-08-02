@@ -7,6 +7,7 @@ import com.KioskSNU.snu.dto.LockerTicketDTO;
 import com.KioskSNU.snu.dto.UsageLockerDTO;
 import com.KioskSNU.snu.service.LockerService;
 import com.KioskSNU.snu.service.LockerTicketService;
+import com.KioskSNU.snu.service.TicketMapService;
 import com.KioskSNU.snu.service.UsageLockerService;
 import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
@@ -17,14 +18,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
 @Controller
 @RequiredArgsConstructor
 public class OutsideLockerController {
-    private final HashMap<String, Object> ticketMap;
+    private final TicketMapService ticketMapService;
     private final Set<Integer> lockerSet;
     private final LockerService lockerService;
     private final UsageLockerService usageLockerService;
@@ -89,7 +89,7 @@ public class OutsideLockerController {
                 mav.setViewName("redirect:/outside/locker");
                 return mav;
             }
-            ticketMap.put("locker", lockerDTO);
+            ticketMapService.putSelectedLocker(lockerDTO);
 
             // 사물함 결제중 정보 등록
             lockerSet.add(lockerDTO.getLockerNumber());
@@ -105,7 +105,7 @@ public class OutsideLockerController {
             mav.setViewName("redirect:/outside/locker");
             return mav;
         }
-        ticketMap.put("lockerTicket", lockerTicketDTO);
+        ticketMapService.putLockerTicket(lockerTicketDTO);
 
         return mav;
     }
