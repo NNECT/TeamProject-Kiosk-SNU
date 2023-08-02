@@ -109,9 +109,7 @@
         from        payment
         join        account
         on          payment.account_id = account.id
-		where		year(payment.dateTime) >= year(now()) - 1
-        	        and
-                    month(payment.dateTime) >= month(now())
+        where		date(payment.dateTime) >= date_add(now(), interval -1 year)
         order by    payment.dateTime desc;
     </select>
 </mapper>
