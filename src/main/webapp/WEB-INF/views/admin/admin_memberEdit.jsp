@@ -37,7 +37,7 @@
                             </tr>
                             <tr>
                                 <th>남은 시간:</th>
-                                <td><input type="text" name="usageTicket" value="${member.remainTime}"></td>
+                                <td><input type="text" name="remainTime" value="${member.remainTime}"></td>
                             </tr>
                             <tr>
                                 <th>포인트:</th>
