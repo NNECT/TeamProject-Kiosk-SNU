@@ -6,7 +6,7 @@
 
 <!-- 메인 컨텐츠 -->
 <div class="container">
-    <div class="row justify-content-center align-items-center" style="height: 100vh;">
+    <div class="row justify-content-center align-items-center" style="height: 90vh;">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-body text-center">
@@ -37,15 +37,7 @@
                             </tr>
                             <tr>
                                 <th>남은 시간:</th>
-                                <td><input type="text" name="usageTicket" value="${member.remainTime}"></td>
-                            </tr>
-                            <tr>
-                                <th>사용중인 사물함 번호:</th>
-                                <td><input type="text" name="usageLocker" value="${memberLockerStatus}" readonly></td>
-                            </tr>
-                            <tr>
-                                <th>참여중인 챌린지:</th>
-                                <td><input type="text" name="participationChallenge" value="${memberChallengeProgress}" readonly></td>
+                                <td><input type="text" name="remainTime" value="${member.remainTime}"></td>
                             </tr>
                             <tr>
                                 <th>포인트:</th>
