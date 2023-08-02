@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class InsideLoginInterceptor implements HandlerInterceptor {
-    private static final String LOGIN_URI = "/inside/login";
+    private static final String LOGIN_URI = "/inside/index";
 
     /**
      * 내부 사용자 로그인 확인 인터셉터
@@ -21,15 +21,17 @@ public class InsideLoginInterceptor implements HandlerInterceptor {
         if (!(handler instanceof HandlerMethod)) return true;
         if (((HandlerMethod) handler).getMethodAnnotation(InsideLoginRequired.class) == null) return true;
 
+        System.out.println("인터셉터 대상" + handler.getClass().getName());
+
         HttpSession session = request.getSession();
 
         if (session.getAttribute("insideNumber") == null) {
-            response.sendRedirect("/inside");
+            response.sendRedirect(request.getContextPath() + "/inside");
             return false;
         }
 
         if (session.getAttribute("author") == null) {
-            response.sendRedirect(LOGIN_URI);
+            response.sendRedirect(request.getContextPath() + LOGIN_URI);
             return false;
         }
 
