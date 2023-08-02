@@ -82,7 +82,7 @@ public class OutsideTicketController {
 
         ticketMapService.putCommutationTicket(commutationTicket);
 
-        mav.setViewName("redirect:/inside/locker");
+        mav.setViewName("redirect:/outside/locker");
         return mav;
     }
 
