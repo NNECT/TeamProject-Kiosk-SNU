@@ -12,7 +12,7 @@
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=deevice-width, initial-scale=1,minimum-scale=1,maxmun-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1,minimum-scale=1, maxmun-scale=1">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="<c:url value="/css/inside/inside_notice.css"/>">
         
@@ -32,12 +32,14 @@
                     <hr>
                     <div id="tableWrap">
                         <table>
-                            <div id="trTitle">
-                                <div id="noticeTitle">${notice.title}</div><div id="writer"><span>작성자:</span>관리자</div><div id="date" style="font-size: 15px; margin-left: 20px"><span>등록일:</span>${notice.dateTime}</div>
-                            </div>
-                            <div id="content">
-                                <p>${notice.content}</p>
-                            </div>
+                            <tr id="trTitle">
+                                <td id="noticeTitle">제목 : ${notice.title}</td>
+                                <td id="writer">작성자 : 관리자</td>
+                                <td id="date" >등록일 : ${notice.dateTimeString}</td>
+                            </tr>
+                            <tr>
+                                <td id="content" colspan="3">내용 : ${notice.content}</td>
+                            </tr>
                         </table>
                     </div>
                 </section>
