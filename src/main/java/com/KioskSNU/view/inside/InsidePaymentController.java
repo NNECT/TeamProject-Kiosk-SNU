@@ -54,7 +54,7 @@ public class InsidePaymentController {
         return mav;
     }
 
-    @RequestMapping("/inside/cancel")
+    @RequestMapping("/inside/payment/cancel")
     @InsideLoginRequired
     public ModelAndView cancelProcess() {
         ModelAndView mav = new ModelAndView();
