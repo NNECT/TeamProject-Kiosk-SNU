@@ -62,16 +62,6 @@
 	</div>
 </div>
 
-<%--메뉴 선택 모달 창--%>
-<div id="menuModal" class="modal" style="display: none;">
-	<div class="modal-content" style="max-width: 400px; padding: 20px; text-align: center; position: relative; margin-left: 40%; margin-top: 220px;">
-		<h3 style="margin-bottom: 30px;">메뉴를 선택해 주세요</h3>
-		<button type="button" id="realTimeStatus">실시간 현황</button>
-		<button type="button" id="previousRecord">사용기록</button>
-	</div>
-</div>
-
-
 <!-- 실시간 현황 모달 창 -->
 <div id="lockerModal" class="modal" style="display: none; margin-top: 110px;">
 	<div class="modal-dialog">
@@ -106,7 +96,8 @@
 					</tr>
 					<tr>
 						<td colspan="2" style="text-align: center">
-							<button type="button" id="lockerActivationBtn" class="lockerActivationBtn"></button>
+							<button type="button" id="lockerActivationBtn" class="lockerActivationBtn" style="margin-right: 10px;"></button>
+							<button type="button" id="previousRecord">사용기록</button>
 						</td>
 					</tr>
 				</table>
@@ -138,30 +129,12 @@
 
 			locker.addEventListener('click', (e) => {
 				const lockerId = e.target.id;
-				menuModal(lockerId);
+				lockerModal(lockerId);
 			});
 		});
 
-		// 메뉴 모달 창
-		function menuModal(lockerId){
-
-			$("#menuModal").modal("show");
-
-			// "실시간 현황" 버튼 클릭 이벤트
-			$("#realTimeStatus").off("click").on("click", function() {
-				$("#menuModal").modal("hide");
-				showLockerModal(lockerId);
-			});
-
-			// "사용기록" 버튼 클릭 이벤트
-			$("#previousRecord").off("click").on("click", function() {
-				$("#menuModal").modal("hide");
-				location.href = "<c:url value='/admin/adminLockerRecord'/>?id=" + lockerId;
-			});
-		}
-
 		// 실시간 현황 모달 창
-		function showLockerModal(lockerId) {
+		function lockerModal(lockerId) {
 			$.ajax({
 				type: "POST",
 				url: "../ajax/getLocker",
@@ -203,6 +176,11 @@
 				error: function (request, status, error) {
 					alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
 				}
+			});
+			// "사용기록" 버튼 클릭 이벤트
+			$("#previousRecord").off("click").on("click", function() {
+				$("#menuModal").modal("hide");
+				location.href = "<c:url value='/admin/adminLockerRecord'/>?id=" + lockerId;
 			});
 		}
 

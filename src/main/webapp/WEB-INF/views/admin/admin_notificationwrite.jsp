@@ -25,7 +25,7 @@
                         </div>
 
                         <div class="float-right">
-                            <span><em>외부 키오스크 공지시 체크</em></span>
+                            <label for="OutsideNotification">외부 키오스크 공지시 체크</label>
                             <input type="checkbox" id="OutsideNotification" name="outside">
                         </div>
                         <button type="submit" id="insertBtn" class="btn btn-primary">등록</button>
