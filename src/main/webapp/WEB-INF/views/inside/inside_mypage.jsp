@@ -20,7 +20,7 @@
 </head>
 <body>
 <div class="body">
-    <a href="inside_menu.jsp"><img src="<c:url value="/img/inside/beforBtn.png"/>" alt=""></a>
+    <a href="<c:url value="/inside/menu"/>"><img src="<c:url value="/img/inside/beforBtn.png"/>" alt=""></a>
 
     <section id="allWrap"><!--전체 감싸는 박스-->
         <p id="title">마이페이지</p>
