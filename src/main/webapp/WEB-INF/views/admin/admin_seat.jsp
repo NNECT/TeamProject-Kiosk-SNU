@@ -6,8 +6,6 @@
 <c:import url="../headerFooterForm/headerFooterForm_adminHeader.jsp"/>
 <%--admin_seat CSS--%>
 <link rel="stylesheet" href="<c:url value="/css/admin/admin_seat.css"/>">
-<%--폰트--%>
-<link href="https://cdn.jsdelivr.net/gh/sunn-us/SUITE/fonts/static/woff2/SUITE.css" rel="stylesheet">
 
 <!-- 메인 컨텐츠 -->
 <div class="container">

@@ -24,10 +24,10 @@
                     <table id="example" class="display" style="width:100%;">
                         <thead>
                         <tr style="background-color: lightblue;">
-                            <th style="text-align: center">번호</th>
-                            <th style="text-align: center">제목</th>
-                            <th style="text-align: center">외부공지 체크여부</th>
-                            <th style="text-align: center">공지삭제</th>
+                            <th style="text-align: center" class="col-2">번호</th>
+                            <th style="text-align: center" class="col-6">제목</th>
+                            <th style="text-align: center" class="col-2">외부공지 체크여부</th>
+                            <th style="text-align: center" class="col-2">공지삭제</th>
                         </tr>
                         </thead>
                         <tbody>
