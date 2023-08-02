@@ -57,35 +57,28 @@
         </div>
     </div>
     <script>
+        const modalBg = document.getElementById('modalbg');
+        const seatModal = document.getElementById('seatModal');
+        const modalNoBtn = document.getElementById('modalNoBtn')
+        const modalYesBtn = document.getElementById('modalYesBtn')
+        const modalStrong = document.getElementById("modalStrong")
+        
+        let number = 0;
+
         window.addEventListener('DOMContentLoaded', (event) => {
             const seats = document.querySelectorAll('.seat');
             const status = ${seatStatusMap};
+
+
             seats.forEach((seat, index) => {
                 if(status[Number(seat.id)] === 1) {
-                    var modalBg = document.getElementById('modalbg');
-                    var seatModal = document.getElementById('seatModal');
-                    var modalNoBtn = document.getElementById('modalNoBtn')
-                    var modalYesBtn = document.getElementById('modalYesBtn')
-                    var modalStrong = document.getElementById("modalStrong")
 
                     //번호 클릭하면 modal창 나옴
                     seat.addEventListener('click',() => {
                         modalStrong.textContent = seat.id+"번 자리";
                         modalBg.style.display = 'block';
                         seatModal.style.display = 'block';
-                    });
-
-                    //모달창에서 취소 누르면 다시 뒤로
-                    modalNoBtn.addEventListener('click', () => {
-                        modalBg.style.display = 'none';
-                        seatModal.style.display = 'none';
-                    });
-
-                    //이동 누르면 다음으로
-                    modalYesBtn.addEventListener('click', () => {
-                        // modalBg.style.display = 'none';
-                        // seatModal.style.display = 'none';
-                        location.href = "<c:url value="/inside/move"/>?type=seat&number=" + seat.id;
+                        number = seat.id;
                     });
 
                     seat.classList.remove('r');
@@ -105,12 +98,25 @@
                     seat.innerHTML = seat.id;
                 }
             });
+
+            //모달창에서 취소 누르면 다시 뒤로
+            modalNoBtn.addEventListener('click', () => {
+                modalBg.style.display = 'none';
+                seatModal.style.display = 'none';
+            });
+
+            //이동 누르면 다음으로
+            modalYesBtn.addEventListener('click', modalYesFunction);
        });
 
+        function modalYesFunction(e) {
+            modalYesProcess(number);
+        }
 
+        function modalYesProcess(n) {
+            location.href = "<c:url value="/inside/move"/>?type=seat&number=" + n;
+        }
     </script>
-
 </div>
 </body>
-
 </html>

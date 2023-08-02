@@ -2,9 +2,11 @@ package com.KioskSNU.view.inside;
 
 import com.KioskSNU.interceptor.InsideLoginRequired;
 import com.KioskSNU.snu.dto.AccountDTO;
-import com.KioskSNU.snu.dto.UsageCommutationTicketDTO;
 import com.KioskSNU.snu.dto.UsageSeatDTO;
-import com.KioskSNU.snu.service.*;
+import com.KioskSNU.snu.service.AccountService;
+import com.KioskSNU.snu.service.SeatService;
+import com.KioskSNU.snu.service.UsageRoomService;
+import com.KioskSNU.snu.service.UsageSeatService;
 import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -12,10 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -27,7 +27,6 @@ public class InsideMoveSeatController {
     private final SeatService seatService;
     private final UsageSeatService usageSeatService;
     private final UsageRoomService usageRoomService;
-    private final UsageCommutationTicketService usageCommutationTicketService;
 
     @RequestMapping("/inside/move")
     @InsideLoginRequired
@@ -59,9 +58,9 @@ public class InsideMoveSeatController {
         //자리이동에서 이동할 좌석 선택 이후 변경처리 진행
         UsageSeatDTO usage = new UsageSeatDTO();
         //usage.seatId에 / 들어온 number로 조회한 좌석의 id값 넣어주기
-        usage.setSeat_id(seatService.getBySeatNumber(number).getId());
+        usage.setSeatDTO(seatService.getBySeatNumber(number));
         //usage.accountID 넣어주기
-        usage.setAccount_id(accountDTO.getId());
+        usage.setAccountDTO(accountDTO);
         //현재 사용시간 넣어주기
         usage.setStartDateTime(LocalDateTime.now());
         //들어온 number 번호에 usage정보 넣어주기
@@ -85,17 +84,14 @@ public class InsideMoveSeatController {
         else usageSeatService.update(usageSeatDTO);
 
         // 정기권 처리
-        List<UsageCommutationTicketDTO> commutationTicketDTOList = usageCommutationTicketService.getAllByAccount(accountDTO);
-        if (
-                !commutationTicketDTOList.isEmpty()
-                        && !commutationTicketDTOList.get(0).getEndDate().isBefore(LocalDate.now())
-        ) return mav;
+        if (accountService.hasCommutationTicket(accountDTO)) {
+            return mav;
+        }
 
         // 사용 시간 차감
         int usedTime = (int) ChronoUnit.MINUTES.between(usageSeatDTO.getStartDateTime(), usageSeatDTO.getEndDateTime());
         accountDTO.setRemainTime(Math.max(accountDTO.getRemainTime() - usedTime, 0));
         accountService.update(accountDTO);
-
 
         return mav;
     }

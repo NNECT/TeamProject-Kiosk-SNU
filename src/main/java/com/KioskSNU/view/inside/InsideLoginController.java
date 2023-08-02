@@ -31,7 +31,7 @@ public class InsideLoginController {
         this.sha = sha;
     }
 
-    @GetMapping("inside/login")
+    @GetMapping("/inside/login")
     public ModelAndView getProcess(){
         ModelAndView mav = new ModelAndView();
         mav.addObject("publicKey", rsa.getPublicKey());
@@ -39,7 +39,7 @@ public class InsideLoginController {
         return mav;
     }
 
-    @PostMapping("inside/login")
+    @PostMapping("/inside/login")
     public ModelAndView postProcess(String password, HttpSession session) throws NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
         ModelAndView mav = new ModelAndView();
 
