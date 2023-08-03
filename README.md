@@ -2,6 +2,8 @@
 #### Study Cafe and U : 중앙정보처리학원 401호 팀 프로젝트
 
 * 프로젝트 개요
+  * 프로젝트 프레젠테이션 [링크](https://docs.google.com/presentation/d/e/2PACX-1vTu4oToQbzVPA8zW4qt6ZVcFCFWSkIGhRTDyNLz2-ySAlMbe5AynfeNr4oTqCj4Gg/pub?start=false&loop=false&delayms=10000)
+
 * 사용 툴
   * IntelliJ
   * Java JDK 11.0.18
