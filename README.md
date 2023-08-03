@@ -13,8 +13,9 @@ Study Cafe and U: 중앙정보처리학원 401호 팀프로젝트
 * Spring 5.3.28
 
 ## 3. Git 미포함 파일
-### 3.1. src\main\resources\config\database.properties
+### 3.1. database.properties
 ```properties
+# src\main\resources\config\database.properties
 jdbc.driverClassName=<DriverClassName>
 jdbc.url=<URL>
 jdbc.username=<Username>
