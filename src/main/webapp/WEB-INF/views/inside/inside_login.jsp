@@ -46,7 +46,7 @@
                 <p id="userName">${sessionScope.author.username}님</p>
 
                 <div id="Timer"><!--남은시간 나타내는 곳-->
-                    <span id="saveTime">남은시간:</span>
+                    <span id="saveTime">남은 시간:</span>
                     <span id="time">-</span>
                 </div>
 
@@ -72,6 +72,7 @@
 </div>
 <script src="<c:url value="/js/jquery-3.7.0.min.js"/>"></script>
 <script src="<c:url value="/js/jsencrypt.min.js"/>"></script>
+<script src="<c:url value="/js/insideTimeChecker.js"/>"></script>
 <script>
     window.addEventListener("DOMContentLoaded", (event) => {
         document.getElementById("inside-login-form").addEventListener("submit", function (e) {
@@ -98,59 +99,8 @@
             form.submit();
         });
 
-        setRemainTime();
-        if (commutationTicket) {
-            document.getElementById("saveTime").innerHTML = "정기권 기한:"
-            clearInterval(timer);
-        }
+        new InsideTimeChecker("${sessionScope.author.id}", "${sessionScope.insideType}", "${sessionScope.insideNumber}", document.getElementById("saveTime"), document.getElementById("time"), "<c:url value="/inside/logout" />");
     });
-
-    let timer = setInterval(setRemainTime, 20000);
-    let commutationTicket = false;
-
-    function setRemainTime() {
-        const remainTime = remainTimeCheck();
-        if (remainTime === null) {
-            return;
-        }
-        document.getElementById("time").innerHTML = remainTime;
-        if (remainTime === "00:00") {
-            clearInterval(timer);
-            location.href = "<c:url value="/inside/logout"/>";
-        }
-    }
-
-    function remainTimeCheck() {
-        let value = null;
-
-        $.ajax({
-            type: "POST",
-            url: "../ajax/remainTime",
-            data: JSON.stringify({
-                "authorId": "${sessionScope.author.id}",
-                "insideType": "${sessionScope.insideType}",
-                "insideNumber": "${sessionScope.insideNumber}"
-            }),
-            dataType: "json",
-            async: false,
-            contentType: "application/json; charset=UTF-8",
-            success: function (response) {
-                if (response.result === "fail") {
-                    alert("남은 시간을 불러오는데 실패했습니다.");
-                    return;
-                }
-                if (response.commutationTicket === "true") {
-                    commutationTicket = true;
-                }
-                value = response.remainTime;
-            },
-            error: function (request, status, error) {
-                alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-            }
-        });
-
-        return value;
-    }
 
     //로그인 실패 모달창
     var loginFail = "${loginFail}";
@@ -165,7 +115,5 @@
         });
     }
 </script>
-
 </body>
-
 </html>

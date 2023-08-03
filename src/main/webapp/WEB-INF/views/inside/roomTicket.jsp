@@ -44,5 +44,10 @@
     </div>
 </div>
 <script src="<c:url value="/js/radioBox.js"/>"></script>
+<script src="<c:url value="/js/jquery-3.7.0.min.js"/>"></script>
+<script src="<c:url value="/js/insideTimeChecker.js"/>"></script>
+<script>
+    new InsideTimeChecker("${sessionScope.author.id}", "${sessionScope.insideType}", "${sessionScope.insideNumber}", null, null, "<c:url value="/inside/logout" />");
+</script>
 </body>
 </html>

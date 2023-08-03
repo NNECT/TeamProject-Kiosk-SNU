@@ -212,17 +212,16 @@
     </form>
 <%--    <input type="button"  class="modalCloseBtn" value="닫기" id="cancelChallenge">--%>
 </div>
-
-
-<%--<script src="<c:url value="/js/jsencrypt.min.js"/>"></script>--%>
-<script src="<c:url value="/js/modal.js"/>"></script>
-
 <%--
 <script src="<c:url value="/js/modalNewPass.js"/>"></script>
 <script src="<c:url value="/js/newPassword.js"/>"></script>
 --%>
-<script src="<c:url value="/js/jsencrypt.min.js"/>"></script>
+<script src="<c:url value="/js/jquery-3.7.0.min.js"/>"></script>
+<script src="<c:url value="/js/modal.js"/>"></script>
+<script src="<c:url value="/js/insideTimeChecker.js"/>"></script>
 <script>
+    new InsideTimeChecker("${sessionScope.author.id}", "${sessionScope.insideType}", "${sessionScope.insideNumber}", null, null, "<c:url value="/inside/logout" />");
+
     var checkPWfail = "${checkPWfail}";
     if (checkPWfail === "checkPWfail") {
         alert("이전 비밀번호와 동일한 비밀번호를 사용하실 수 없습니다.")
@@ -252,7 +251,6 @@
     })
 
 </script>
-<script src="<c:url value="/js/jquery-3.7.0.min.js"/>"></script>
 <script src="<c:url value="/js/editPhoneNumber.js"/>"></script>
 <script src="<c:url value="/js/insideEditPassword_checkPhone.js"/>"></script>
 <script src="<c:url value='/js/inside_PaymentLog.js'/>"></script>
