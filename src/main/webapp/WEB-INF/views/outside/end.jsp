@@ -34,16 +34,9 @@
     <a href="<c:url value='/outside/logout'/>"><input type="button" id="moveBtn" value="홈화면으로 이동"></a>
 </section>
 
+<script src="<c:url value="/js/timeoutRedirect.js"/>"></script>
 <script>
-    let time = 10;
-    let timer = setInterval(function () {
-        time--;
-        document.getElementById('MyTimer').innerText = String(time).padStart(2, '0');
-        if (time === 0) {
-            clearInterval(timer);
-            location.href = "<c:url value="/outside/logout"/>";
-        }
-    }, 1000);
+    timeoutRedirect(10, "<c:url value="/outside/logout"/>", document.getElementById('MyTimer'), 2);
 </script>
 </body>
 </html>

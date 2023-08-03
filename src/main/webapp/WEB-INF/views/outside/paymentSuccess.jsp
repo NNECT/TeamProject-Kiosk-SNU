@@ -35,16 +35,9 @@
     <a href="<c:url value='/outside/end'/>"><input type="button" id="moveBtn" value="바로 입실"></a>
 </section>
 
+<script src="<c:url value="/js/timeoutRedirect.js"/>"></script>
 <script>
-    let time = 3;
-    let timer = setInterval(function () {
-        time--;
-        document.getElementById('MyTimer').innerText = String(time).padStart(1, '0');
-        if (time === 0) {
-            clearInterval(timer);
-            location.href = "<c:url value="/outside/challenge/list"/>";//chelleng화면으로 이동하도록 만들기
-        }
-    }, 1000);
+    timeoutRedirect(3, "<c:url value="/outside/challenge/list"/>", document.getElementById('MyTimer'), 1);
 </script>
 </body>
 </html>
