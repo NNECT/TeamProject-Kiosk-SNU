@@ -101,5 +101,9 @@
 <script src="<c:url value="/js/jsencrypt.min.js"/>"></script>
 <script src="<c:url value="/js/payRadioBox.js"/>"></script>
 <script src="<c:url value="/js/paymentModal.js"/>"></script>
+<script src="<c:url value="/js/insideTimeChecker.js"/>"></script>
+<script>
+    new InsideTimeChecker("${sessionScope.author.id}", "${sessionScope.insideType}", "${sessionScope.insideNumber}", null, null, "<c:url value="/inside/logout" />");
+</script>
 </body>
 </html>
