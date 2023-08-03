@@ -75,8 +75,9 @@
 </section>
 <script src="<c:url value="/js/jsencrypt.min.js"/>"></script>
 <script src="<c:url value="/js/newPassword.js"/>"></script>
+<script src="<c:url value="/js/timeoutRedirect.js"/>"></script>
 <script>
-
+    timeoutRedirect(60, "<c:url value="/outside/logout"/>");
 
     window.addEventListener("DOMContentLoaded", (event) => {
         document.getElementById("loginBtn").addEventListener("click", newPasswordConfirm);

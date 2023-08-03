@@ -78,8 +78,10 @@
 
 <script src="<c:url value="/js/jquery-3.7.0.min.js"/>"></script>
 <script src="<c:url value="/js/findUsername.js"/>"></script>
-
+<script src="<c:url value="/js/timeoutRedirect.js"/>"></script>
 <script>
+    timeoutRedirect(60, "<c:url value="/outside/logout"/>");
+
     document.getElementById("newBtn").addEventListener("click", findUsernameSubmit);
     function findUsernameSubmit(){
 
@@ -98,9 +100,6 @@
         document.body.appendChild(form);
         form.submit();
     }
-
-
 </script>
-
 </body>
 </html>
