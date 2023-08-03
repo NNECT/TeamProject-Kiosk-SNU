@@ -65,7 +65,10 @@
     </form>
   </section>
 </div>
+<script src="<c:url value="/js/timeoutRedirect.js"/>"></script>
 <script>
+  timeoutRedirect(60, "<c:url value="/outside/logout"/>");
+
   window.addEventListener("DOMContentLoaded", function () {
     const nextBtn = document.getElementById("nextBtn");
     if (nextBtn) nextBtn.addEventListener("click", function () {

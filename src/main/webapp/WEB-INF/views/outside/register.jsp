@@ -77,7 +77,10 @@
 <script src="<c:url value="/js/jquery-3.7.0.min.js"/>"></script>
 <script src="<c:url value="/js/jsencrypt.min.js"/>"></script>
 <script src="<c:url value="/js/register.js"/>"></script>
+<script src="<c:url value="/js/timeoutRedirect.js"/>"></script>
 <script>
+    timeoutRedirect(60, "<c:url value="/outside/logout"/>");
+
     const crypt = new JSEncrypt();
     crypt.setPublicKey("${publicKey}");
 

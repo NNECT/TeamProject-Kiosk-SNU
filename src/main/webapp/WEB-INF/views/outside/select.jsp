@@ -35,7 +35,10 @@
     <p>사물함</p>
   </div>
 </div>
+<script src="<c:url value="/js/timeoutRedirect.js"/>"></script>
 <script>
+  timeoutRedirect(60, "<c:url value="/outside/logout"/>");
+
   window.addEventListener('DOMContentLoaded', (event) => {
     const seats = document.querySelectorAll('.seat');
     const seatStatus = ${seatStatusMap};

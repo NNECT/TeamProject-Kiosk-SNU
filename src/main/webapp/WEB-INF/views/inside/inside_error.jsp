@@ -34,16 +34,9 @@
         <p id="introduce">*에러가 반복적으로 발생하면 02-1111-1111로 연락바랍니다.</p>
     </section>
 </div>
+<script src="<c:url value="/js/timeoutRedirect.js"/>"></script>
 <script>
-    let time = 5;
-    let timer = setInterval(function () {
-        time--;
-        document.getElementById('MyTimer').innerText = String(time).padStart(2, '0');
-        if (time === 0) {
-            clearInterval(timer);
-            location.href = "<c:url value="/inside"/>";
-        }
-    }, 1000);
+    timeoutRedirect(5, "<c:url value="/inside"/>", document.getElementById('MyTimer'), 2);
 </script>
 </body>
 </html>

@@ -80,7 +80,10 @@
     </div>
 </form>
 
+<script src="<c:url value="/js/timeoutRedirect.js"/>"></script>
 <script>
+    timeoutRedirect(60, "<c:url value="/outside/logout"/>");
+
     console.log();
     let selectedChallengeId = null;
 
@@ -116,8 +119,6 @@
         document.forms[0].action = url;
         document.forms[0].submit();
     }
-
-
 </script>
 </body>
 </html>

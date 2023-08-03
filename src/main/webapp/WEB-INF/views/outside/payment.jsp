@@ -115,5 +115,9 @@
 <script src="<c:url value="/js/jsencrypt.min.js"/>"></script>
 <script src="<c:url value="/js/payRadioBox.js"/>"></script>
 <script src="<c:url value="/js/paymentModal.js"/>"></script>
+<script src="<c:url value="/js/timeoutRedirect.js"/>"></script>
+<script>
+    timeoutRedirect(60, "<c:url value="/outside/logout"/>");
+</script>
 </body>
 </html>

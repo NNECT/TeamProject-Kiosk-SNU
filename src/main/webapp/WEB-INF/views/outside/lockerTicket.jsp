@@ -97,7 +97,10 @@
     </section>
 </div>
 <script src="<c:url value="/js/radioBox.js"/>"></script>
+<script src="<c:url value="/js/timeoutRedirect.js"/>"></script>
 <script>
+    timeoutRedirect(60, "<c:url value="/outside/logout"/>");
+
     window.addEventListener('DOMContentLoaded', (event) => {
         const lockers = document.querySelectorAll('.locker');
         const status = ${lockerStatusMap};

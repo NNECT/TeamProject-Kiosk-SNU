@@ -44,5 +44,9 @@
             <a href="<c:url value="/outside/login?type=${sessionScope.selectType}&number=${sessionScope.selectNumber}" />"><input type="button"  id="loginBtn" value="로그인하러가기" ></a>
         </form>
     </section>
+<script src="<c:url value="/js/timeoutRedirect.js"/>"></script>
+<script>
+    timeoutRedirect(60, "<c:url value="/outside/logout"/>");
+</script>
 </body>
 </html>
